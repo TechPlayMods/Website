@@ -1196,22 +1196,17 @@ footer {
 }
 
 .gratis-disclaimer {
-    margin-top: 12px !important;
-    font-size: 0.82rem !important;
+    margin-top: 14px !important;
+    font-size: 0.85rem !important;
     color: #64748b !important;
     border-top: 1px solid var(--border);
-    padding-top: 12px;
-    display: flex;
-    align-items: flex-start;
-    gap: 7px;
-    line-height: 1.55;
+    padding-top: 14px;
+    line-height: 1.6;
 }
 
 .gratis-disclaimer i {
     color: #ffaa00;
-    font-size: 0.8rem;
-    margin-top: 2px;
-    flex-shrink: 0;
+    margin-right: 6px;
 }
 
 .gratis-disclaimer strong { color: var(--text-muted) !important; font-weight: 600; }
