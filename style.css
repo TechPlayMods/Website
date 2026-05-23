@@ -1119,3 +1119,78 @@ footer {
 
 /* Oranje kruis voor nadeel */
 .fa-times.oker { color: #ffaa00 !important; }
+
+/* ===========================
+   GRATIS SERVICE SECTIE
+=========================== */
+.gratis-service {
+    background: linear-gradient(135deg, rgba(0,255,136,0.06) 0%, rgba(0,255,136,0.02) 100%);
+    border-top: 1px solid rgba(0,255,136,0.15);
+    border-bottom: 1px solid rgba(0,255,136,0.15);
+    padding: 50px 0;
+}
+
+.gratis-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: var(--bg-card);
+    border: 1px solid rgba(0,255,136,0.25);
+    border-radius: var(--radius);
+    padding: 40px 44px;
+    box-shadow: 0 0 40px rgba(0,255,136,0.05);
+}
+
+.gratis-icon {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    background: var(--primary-dim);
+    border: 2px solid rgba(0,255,136,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.gratis-content { text-align: left; }
+
+.gratis-label {
+    display: inline-block;
+    background: var(--primary);
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.gratis-content h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.gratis-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.gratis-content strong { color: var(--primary); font-weight: 600; }
+
+@media (max-width: 600px) {
+    .gratis-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 24px;
+    }
+    .gratis-content { text-align: center; }
+}
