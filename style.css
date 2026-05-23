@@ -1210,3 +1210,61 @@ footer {
 }
 
 .gratis-disclaimer strong { color: var(--text-muted) !important; font-weight: 600; }
+
+/* ===========================
+   KAMIKAZE KAART — ROOD
+=========================== */
+.card-kamikaze {
+    background: linear-gradient(145deg, #1a0808, #1f0d0d);
+    border: 2px solid #cc2200 !important;
+    box-shadow: 0 0 35px rgba(204, 34, 0, 0.15);
+}
+
+.card-kamikaze:hover {
+    border-color: #ff3300 !important;
+    box-shadow: 0 12px 40px rgba(255, 51, 0, 0.2) !important;
+    transform: translateY(-6px);
+}
+
+.card-kamikaze h3 { color: #f5f6f8; }
+
+.card-kamikaze .price { color: #f5f6f8; }
+
+.card-kamikaze .price-sub { color: rgba(255,255,255,0.4); }
+
+.card-kamikaze .method-tag.method-premium {
+    background: rgba(204, 34, 0, 0.15);
+    color: #ff6644;
+    border: 1px solid rgba(204, 34, 0, 0.4);
+}
+
+.card-kamikaze ul li {
+    color: rgba(255,255,255,0.6);
+}
+
+.card-kamikaze ul li i.fa-check {
+    color: var(--primary) !important;
+}
+
+.card-kamikaze ul li i.fa-times {
+    color: #ff4422 !important;
+}
+
+.card-kamikaze .badge-premium {
+    background: linear-gradient(135deg, #cc2200, #ff3300) !important;
+}
+
+.card-kamikaze .btn-card-premium {
+    background: linear-gradient(135deg, #cc2200, #ff3300);
+    border-color: #cc2200;
+    color: #fff !important;
+}
+
+.card-kamikaze .btn-card-premium:hover {
+    background: linear-gradient(135deg, #dd3300, #ff4411);
+    border-color: #dd3300;
+}
+
+.card-kamikaze .card-icon i {
+    color: #ff4422;
+}
