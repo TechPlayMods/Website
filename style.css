@@ -201,9 +201,122 @@ h2 {
     margin-right: 8px;
 }
 
+/* Portfolio Carousel Section */
+.portfolio {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-slider {
+    position: relative;
+    height: 480px; /* Hoogte aangepast voor macro-foto's */
+    width: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Zorgt dat de volledige soldeerfoto onvervormd zichtbaar blijft */
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--primary);
+    padding: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-top: 1px solid var(--border);
+    z-index: 2;
+}
+
+/* Carousel Navigatie Knoppen */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(24, 27, 34, 0.8);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+}
+
+.carousel-btn:hover {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+}
+
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+
+/* Carousel Stipjes (Dots) */
+.carousel-dots {
+    padding: 15px 0;
+    background: var(--bg-card);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #334155;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+}
+
 /* Werkwijze */
 .werkwijze {
     padding: 80px 0;
+    background-color: #12141a;
     text-align: center;
 }
 
@@ -244,7 +357,6 @@ h2 {
 /* Contact Formulier */
 .contact {
     padding: 80px 0;
-    background-color: #12141a;
     text-align: center;
 }
 
@@ -352,5 +464,6 @@ footer {
     header .container { flex-direction: column; gap: 15px; }
     nav a { margin: 0 10px; }
     .hero h1 { font-size: 2.2rem; }
+    .carousel-slider { height: 320px; } /* Iets compacter op mobiel */
     form { padding: 20px; }
 }
