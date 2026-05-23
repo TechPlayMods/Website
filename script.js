@@ -1,8 +1,82 @@
+// --- CAROUSEL LOGICA ---
+const slides = document.querySelectorAll('.carousel-slide');
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+const dotsContainer = document.getElementById('carouselDots');
+
+let currentSlide = 0;
+const slideIntervalTime = 5000; // Switcht automatisch elke 5 seconden
+let slideInterval;
+
+// Genereer dynamisch de indicator stipjes onderaan
+slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+        goToSlide(index);
+        resetTimer();
+    });
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function updateSliders() {
+    slides.forEach((slide, index) => {
+        if (index === currentSlide) {
+            slide.classList.add('active');
+            dots[index].classList.add('active');
+        } else {
+            slide.classList.remove('active');
+            dots[index].classList.remove('active');
+        }
+    });
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSliders();
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSliders();
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateSliders();
+}
+
+function startTimer() {
+    slideInterval = setInterval(nextSlide, slideIntervalTime);
+}
+
+function resetTimer() {
+    clearInterval(slideInterval);
+    startTimer();
+}
+
+// Event Listeners voor de knoppen
+nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetTimer();
+});
+
+prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetTimer();
+});
+
+// Start de automatische slider
+startTimer();
+
+
+// --- INTAKE FORMULIER LOGICA ---
 document.getElementById('modForm').addEventListener('submit', function(e) {
-    // Voorkom dat de pagina herlaadt
     e.preventDefault();
 
-    // Haal de ingevulde waarden op (handig als je dit ooit nog naar een anonieme API wilt loggen)
     const gekozenConsole = document.getElementById('console').value;
     const opmerking = document.getElementById('msg').value;
 
