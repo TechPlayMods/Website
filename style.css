@@ -1098,3 +1098,24 @@ footer {
 .tooltip-wrap:focus-within .tooltip-box {
     display: block;
 }
+
+/* ===========================
+   SERVICES NOTES (dubbel)
+=========================== */
+.services-notes {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.services-notes .services-note {
+    margin-top: 0;
+    flex: 1;
+    min-width: 260px;
+    max-width: 500px;
+}
+
+/* Oranje kruis voor nadeel */
+.fa-times.oker { color: #ffaa00 !important; }
