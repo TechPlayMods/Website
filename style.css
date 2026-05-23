@@ -953,8 +953,8 @@ footer {
     .hero-stats { gap: 24px; }
     .stat-divider { display: none; }
 
-    .trust-items { gap: 16px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 0 5%; }
-    .trust-bar .container { width: 100%; max-width: 100%; }
+    .trust-items { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; justify-items: start; }
+    .trust-item { white-space: normal; font-size: 0.82rem; }
 
     .carousel-slider { height: 300px; }
 
