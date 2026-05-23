@@ -1,0 +1,469 @@
+/* Algemene Reset & Kleuren */
+:root {
+    --bg-dark: #0f1115;
+    --bg-card: #181b22;
+    --primary: #00ff88;
+    --primary-hover: #00cc6e;
+    --text-main: #f5f6f8;
+    --text-muted: #94a3b8;
+    --border: #262b35;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.small-container {
+    max-width: 650px;
+}
+
+/* Header */
+header {
+    background-color: rgba(15, 17, 21, 0.95);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.btn-nav {
+    border: 1px solid var(--primary);
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+/* Hero Section */
+.hero {
+    padding: 180px 0 100px 0;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.08) 0%, transparent 50%);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #000;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Services / Grid */
+.services {
+    padding: 80px 0;
+    background-color: #12141a;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 50px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px 30px;
+    border-radius: 8px;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.card.popular {
+    border: 2px solid var(--primary);
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary);
+    color: #000;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.card ul {
+    list-style: none;
+    text-align: left;
+}
+
+.card ul li {
+    margin-bottom: 12px;
+    color: var(--text-muted);
+}
+
+.card ul li i {
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+/* Portfolio Carousel Section */
+.portfolio {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-slider {
+    position: relative;
+    height: 480px; /* Hoogte aangepast voor macro-foto's */
+    width: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Zorgt dat de volledige soldeerfoto onvervormd zichtbaar blijft */
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--primary);
+    padding: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-top: 1px solid var(--border);
+    z-index: 2;
+}
+
+/* Carousel Navigatie Knoppen */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(24, 27, 34, 0.8);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+}
+
+.carousel-btn:hover {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+}
+
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+
+/* Carousel Stipjes (Dots) */
+.carousel-dots {
+    padding: 15px 0;
+    background: var(--bg-card);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #334155;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+}
+
+/* Werkwijze */
+.werkwijze {
+    padding: 80px 0;
+    background-color: #12141a;
+    text-align: center;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.step {
+    position: relative;
+}
+
+.step-num {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: var(--bg-card);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.step h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.step p {
+    color: var(--text-muted);
+}
+
+/* Contact Formulier */
+.contact {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.contact p {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+form {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+select, textarea {
+    width: 100%;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+}
+
+select:focus, textarea:focus {
+    border-color: var(--primary);
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--primary);
+    color: #000;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Succes Box & Telegram */
+.hidden {
+    display: none !important;
+}
+
+.success-box {
+    background-color: rgba(0, 255, 136, 0.05);
+    border: 2px solid var(--primary);
+    padding: 40px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.success-box h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.btn-telegram {
+    display: inline-block;
+    background-color: #0088cc;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: background 0.3s;
+}
+
+.btn-telegram:hover {
+    background-color: #006699;
+}
+
+/* Footer */
+footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header .container { flex-direction: column; gap: 15px; }
+    nav a { margin: 0 10px; }
+    .hero h1 { font-size: 2.2rem; }
+    .carousel-slider { height: 320px; } /* Iets compacter op mobiel */
+    form { padding: 20px; }
+}
