@@ -1268,3 +1268,15 @@ footer {
 .card-kamikaze .card-icon i {
     color: #ff4422;
 }
+
+/* ===========================
+   ICONIFY ICONS IN CARDS
+=========================== */
+.card-icon iconify-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.card-kamikaze .card-icon iconify-icon {
+    color: #ff4422;
+}
