@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPlay Mods | Professionele Nintendo Switch Modchip Service</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome voor vette icoontjes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigatie -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-microchip"></i> TechPlay<span>Mods</span>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu openen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="mainNav">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Ons Werk</a>
+                <a href="#werkwijze" class="nav-link">Werkwijze</a>
+                <a href="#contact" class="btn-nav nav-link">Aanvraag Doen</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Haal Alles uit je Nintendo Switch</h1>
+            <p>Professionele micro-soldeerservice voor het installeren van hardware-modificaties (RP2040/Picofly). Haal de maximale potentie uit jouw console voor Homebrew en back-ups.</p>
+            <a href="#services" class="btn-primary">Bekijk Mogelijkheden</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Onze Modding Services</h2>
+            <p class="section-subtitle">Wij modificeren elk model met uiterste precisie onder de microscoop.</p>
+            
+            <div class="grid">
+                <!-- V1/V2 Card -->
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Switch V1 / V2</h3>
+                    <p class="price">€ 85,-</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Inclusief RP2040/Picofly chip</li>
+                        <li><i class="fa-solid fa-check"></i> Professioneel soldeerwerk</li>
+                        <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND/EmuNAND)</li>
+                    </ul>
+                </div>
+
+                <!-- OLED Card -->
+                <div class="card popular">
+                    <div class="badge">Meest Gekozen</div>
+                    <div class="card-icon"><i class="fa-solid fa-tv"></i></div>
+                    <h3>Switch OLED</h3>
+                    <p class="price">€ 110,-</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> High-end micro-soldering</li>
+                        <li><i class="fa-solid fa-check"></i> Datall/CMD bypass via deskundige fix</li>
+                        <li><i class="fa-solid fa-check"></i> Ultramoderne RP2040 hardware</li>
+                        <li><i class="fa-solid fa-check"></i> Volledige reiniging & nieuwe koelpasta</li>
+                    </ul>
+                </div>
+
+                <!-- Lite Card -->
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h3>Switch Lite</h3>
+                    <p class="price">€ 85,-</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Compacte hardware modificatie</li>
+                        <li><i class="fa-solid fa-check"></i> Perfect weggewerkte chip-installatie</li>
+                        <li><i class="fa-solid fa-check"></i> Behoud van alle handheld functies</li>
+                        <li><i class="fa-solid fa-check"></i> Schone software-installatie op SD-kaart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Carousel Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Kwaliteit Onder De Microscoop</h2>
+            <p class="section-subtitle">Geen prunswerk. Wij leveren uitsluitend high-end micro-soldeerwerk.</p>
+            
+            <div class="carousel-container">
+                <div class="carousel-slider" id="carouselSlider">
+                    <!-- Foto 1 -->
+                    <div class="carousel-slide active">
+                        <img src="images/frontside.jpg" alt="Modchip voorkant">
+                        <div class="slide-caption">Modchip voorkant</div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="carousel-slide">
+                        <img src="images/backside.jpg" alt="Modchip achterkant">
+                        <div class="slide-caption">Modchip achterkant</div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="carousel-slide">
+                        <img src="images/sp1sp2flex.jpg" alt="Flex kabel - SP1 en SP2">
+                        <div class="slide-caption">Flex kabel - SP1 en SP2</div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="carousel-slide">
+                        <img src="images/wirecpuflex.jpg" alt="Flex kabel - soldeerverbinding">
+                        <div class="slide-caption">Flex kabel - soldeerverbinding</div>
+                    </div>
+                    <!-- Foto 5 -->
+                    <div class="carousel-slide">
+                        <img src="images/dat0wire.jpg" alt="DAT0-soldeerverbinding">
+                        <div class="slide-caption">DAT0-soldeerverbinding</div>
+                    </div>
+                    <!-- Foto 6 -->
+                    <div class="carousel-slide">
+                        <img src="images/wirewithoutsoldermask.jpg" alt="CLK-soldeerverbinding zonder soldermask">
+                        <div class="slide-caption">CLK-soldeerverbinding zonder soldermask</div>
+                    </div>
+                    <!-- Foto 7 -->
+                    <div class="carousel-slide">
+                        <img src="images/wirewithsoldermask.jpg" alt="CLK-soldeerverbinding met soldermask">
+                        <div class="slide-caption">CLK-soldeerverbinding met soldermask</div>
+                    </div>
+                    <!-- Foto 8 -->
+                    <div class="carousel-slide">
+                        <img src="images/3v3wire.jpg" alt="3V3-soldeerverbinding">
+                        <div class="slide-caption">3V3-soldeerverbinding</div>
+                    </div>
+                    <!-- Foto 9 -->
+                    <div class="carousel-slide">
+                        <img src="images/rstwire.jpg" alt="RST-soldeerverbinding">
+                        <div class="slide-caption">RST-soldeerverbinding</div>
+                    </div>
+                </div>
+
+                <!-- Knoppen voor handmatige bediening -->
+                <button class="carousel-btn prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-btn next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+
+                <!-- Indicator stipjes onderaan -->
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Werkwijze Section -->
+    <section id="werkwijze" class="werkwijze">
+        <div class="container">
+            <h2>Hoe het werkt</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <h4>Aanvraag</h4>
+                    <p>Vul het formulier hieronder in met jouw type console.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <h4>Inplannen</h4>
+                    <p>We verplaatsen het gesprek direct naar Telegram voor veilige verzendinstructies.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <h4>Modding & Testen</h4>
+                    <p>Je console wordt professioneel gemodificeerd en uitgebreid getest op werking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Intake Section -->
+    <section id="contact" class="contact">
+        <div class="container small-container">
+            <h2>Start Je Aanvraag</h2>
+            <p>Vul je gegevens in om de intake te starten. Om je privacy en anonimiteit te waarborgen, sturen wij **geen** e-mails terug. Na het verzenden ontvang je direct de link naar onze beveiligde Telegram-chat.</p>
+            
+            <form id="modForm">
+                <div class="form-group">
+                    <label for="console">Welke Switch heb je?</label>
+                    <select id="console" required>
+                        <option value="" disabled selected>Kies je model...</option>
+                        <option value="V1/V2">Nintendo Switch V1 / V2</option>
+                        <option value="OLED">Nintendo Switch OLED</option>
+                        <option value="Lite">Nintendo Switch Lite</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="msg">Eventuele vragen of opmerkingen:</label>
+                    <textarea id="msg" rows="4" placeholder="Bijvoorbeeld welke SD-kaart je wilt gaan gebruiken..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Aanvraag Verzenden <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+
+            <div id="successMessage" class="success-box hidden">
+                <h3><i class="fa-solid fa-circle-check"></i> Aanvraag Ontvangen!</h3>
+                <p>Je aanvraag is succesvol geregistreerd in ons systeem.</p>
+                <p>Klik op de onderstaande knop om direct je chat te openen met de technicus op Telegram om de verzending af te spreken:</p>
+                <a href="https://t.me/techplaymods" target="_blank" class="btn-telegram"><i class="fa-brands fa-telegram"></i> Open TechPlay Mods op Telegram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 TechPlay Mods. Alle rechten voorbehouden. Wij leveren uitsluitend hardware-modificaties voor homebrew en eigen back-ups.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
