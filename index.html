@@ -18,6 +18,7 @@
             </div>
             <nav>
                 <a href="#services">Services</a>
+                <a href="#portfolio">Ons Werk</a>
                 <a href="#werkwijze">Werkwijze</a>
                 <a href="#contact" class="btn-nav">Aanvraag Doen</a>
             </nav>
@@ -83,6 +84,71 @@
         </div>
     </section>
 
+    <!-- Portfolio Carousel Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Kwaliteit Onder De Microscoop</h2>
+            <p class="section-subtitle">Geen prunswerk. Wij leveren uitsluitend high-end micro-soldeerwerk.</p>
+            
+            <div class="carousel-container">
+                <div class="carousel-slider" id="carouselSlider">
+                    <!-- Foto 1 -->
+                    <div class="carousel-slide active">
+                        <img src="images/RP 2040 Zero - Frontside.jpg" alt="RP2040 Zero Frontside">
+                        <div class="slide-caption">RP2040 Zero - Frontside</div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="carousel-slide">
+                        <img src="images/RP 2040 Zero - Backside.jpg" alt="RP2040 Zero Backside">
+                        <div class="slide-caption">RP2040 Zero - Backside Modification</div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - SP1 & SP2 - CPU Flex Cable.jpg" alt="Switch Oled SP1 SP2">
+                        <div class="slide-caption">Switch OLED - SP1 & SP2 CPU Flex Cable</div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - CPU Flex Cable - Wire Center .jpg" alt="Switch Oled CPU Flex Wire">
+                        <div class="slide-caption">Switch OLED - CPU Flex Cable (Wire Center)</div>
+                    </div>
+                    <!-- Foto 5 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - DAT0 - Wire.jpg" alt="Switch Oled DAT0 Wire">
+                        <div class="slide-caption">Switch OLED - DAT0 Micro-soldering Trace</div>
+                    </div>
+                    <!-- Foto 6 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - CLK - Wire With Soldermask .jpg" alt="Switch Oled CLK Soldermask">
+                        <div class="slide-caption">Switch OLED - CLK Wire (Met UV Soldermask hersteld)</div>
+                    </div>
+                    <!-- Foto 7 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - CLK - Wire Without Soldermask.jpg" alt="Switch Oled CLK Clean">
+                        <div class="slide-caption">Switch OLED - CLK Wire (Schoon soldeerwerk)</div>
+                    </div>
+                    <!-- Foto 8 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - 3V3 - Wire.jpg" alt="Switch Oled 3V3">
+                        <div class="slide-caption">Switch OLED - 3V3 Voedingslijn</div>
+                    </div>
+                    <!-- Foto 9 -->
+                    <div class="carousel-slide">
+                        <img src="images/Switch Oled - RST - Wire.jpg" alt="Switch Oled RST">
+                        <div class="slide-caption">Switch OLED - RST Reset Point Wire</div>
+                    </div>
+                </div>
+
+                <!-- Knoppen voor handmatige bediening -->
+                <button class="carousel-btn prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-btn next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+
+                <!-- Indicator stipjes onderaan -->
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Werkwijze Section -->
     <section id="werkwijze" class="werkwijze">
         <div class="container">
@@ -113,7 +179,6 @@
             <h2>Start Je Aanvraag</h2>
             <p>Vul je gegevens in om de intake te starten. Om je privacy en anonimiteit te waarborgen, sturen wij **geen** e-mails terug. Na het verzenden ontvang je direct de link naar onze beveiligde Telegram-chat.</p>
             
-            <!-- Dit formulier gebruikt FormSubmit om je e-mailadres te maskeren -->
             <form id="modForm">
                 <div class="form-group">
                     <label for="console">Welke Switch heb je?</label>
@@ -133,7 +198,6 @@
                 <button type="submit" class="btn-submit">Aanvraag Verzenden <i class="fa-solid fa-paper-plane"></i></button>
             </form>
 
-            <!-- Verborgen succesmelding die na verzenden opspringt -->
             <div id="successMessage" class="success-box hidden">
                 <h3><i class="fa-solid fa-circle-check"></i> Aanvraag Ontvangen!</h3>
                 <p>Je aanvraag is succesvol geregistreerd in ons systeem.</p>
