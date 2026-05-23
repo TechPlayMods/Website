@@ -1,92 +1,94 @@
-// --- CAROUSEL LOGICA ---
-const slides = document.querySelectorAll('.carousel-slide');
-const nextBtn = document.getElementById('nextBtn');
-const prevBtn = document.getElementById('prevBtn');
-const dotsContainer = document.getElementById('carouselDots');
+document.addEventListener('DOMContentLoaded', () => {
 
-let currentSlide = 0;
-const slideIntervalTime = 5000; // Switcht automatisch elke 5 seconden
-let slideInterval;
+    // --- CAROUSEL LOGICA ---
+    const slides = document.querySelectorAll('.carousel-slide');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const dotsContainer = document.getElementById('carouselDots');
 
-// Genereer dynamisch de indicator stipjes onderaan
-slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-        goToSlide(index);
-        resetTimer();
-    });
-    dotsContainer.appendChild(dot);
-});
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        const slideIntervalTime = 5000;
+        let slideInterval;
 
-const dots = document.querySelectorAll('.dot');
+        // Genereer stipjes
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetTimer();
+            });
+            dotsContainer.appendChild(dot);
+        });
 
-function updateSliders() {
-    slides.forEach((slide, index) => {
-        if (index === currentSlide) {
-            slide.classList.add('active');
-            dots[index].classList.add('active');
-        } else {
-            slide.classList.remove('active');
-            dots[index].classList.remove('active');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSliders() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+                dots[index].classList.toggle('active', index === currentSlide);
+            });
         }
-    });
-}
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSliders();
-}
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSliders();
+        }
 
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSliders();
-}
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSliders();
+        }
 
-function goToSlide(index) {
-    currentSlide = index;
-    updateSliders();
-}
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSliders();
+        }
 
-function startTimer() {
-    slideInterval = setInterval(nextSlide, slideIntervalTime);
-}
+        function startTimer() {
+            slideInterval = setInterval(nextSlide, slideIntervalTime);
+        }
 
-function resetTimer() {
-    clearInterval(slideInterval);
-    startTimer();
-}
+        function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+        }
 
-// Event Listeners voor de knoppen
-nextBtn.addEventListener('click', () => {
-    nextSlide();
-    resetTimer();
-});
+        nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
+        prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
 
-prevBtn.addEventListener('click', () => {
-    prevSlide();
-    resetTimer();
-});
+        startTimer();
 
-// Start de automatische slider
-startTimer();
+        // --- OPTIONEEL: Swipe ondersteuning voor mobiel ---
+        let touchStartX = 0;
+        document.querySelector('.carousel-container').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        document.querySelector('.carousel-container').addEventListener('touchend', e => {
+            let touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+            resetTimer();
+        });
+    }
 
+    // --- INTAKE FORMULIER LOGICA ---
+    const modForm = document.getElementById('modForm');
+    if (modForm) {
+        modForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-// --- INTAKE FORMULIER LOGICA ---
-document.getElementById('modForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+            // Verberg het invoerformulier
+            modForm.classList.add('hidden');
 
-    const gekozenConsole = document.getElementById('console').value;
-    const opmerking = document.getElementById('msg').value;
-
-    // Verberg het invoerformulier
-    document.getElementById('modForm').classList.add('hidden');
-
-    // Toon de verborgen succesbox met de anonieme Telegram link
-    const successBox = document.getElementById('successMessage');
-    successBox.classList.remove('hidden');
-    
-    // Scroll automatisch soepel naar de geopende succesbox
-    successBox.scrollIntoView({ behavior: 'smooth' });
+            // Toon succesbox
+            const successBox = document.getElementById('successMessage');
+            successBox.classList.remove('hidden');
+            
+            // Scroll soepel
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 });
