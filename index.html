@@ -66,7 +66,7 @@
             <h2>Onze Modding Services</h2>
             <p class="section-subtitle">Elk model, elk budget — wij leveren altijd hetzelfde hoge niveau van precisie.</p>
             
-            <div class="grid">
+            <div class="grid grid-4">
                 <!-- V1/V2 Card -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
@@ -78,40 +78,83 @@
                         <li><i class="fa-solid fa-check"></i> Professioneel micro-soldeerwerk</li>
                         <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
                         <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND/EmuNAND)</li>
-                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                        <li>
+                            <i class="fa-solid fa-check"></i> Gratis software-configuratie
+                            <span class="tooltip-wrap">
+                                <i class="fa-solid fa-circle-info tooltip-icon"></i>
+                                <span class="tooltip-box">Stuur je microSD-kaartje mee en wij installeren Atmosphere, Hekate en sigpatches gratis voor je.</span>
+                            </span>
+                        </li>
                     </ul>
                     <a href="#contact" class="btn-card">Direct Aanvragen</a>
                 </div>
 
-                <!-- OLED Card -->
+                <!-- OLED DAT0 Card -->
                 <div class="card popular">
                     <div class="badge"><i class="fa-solid fa-fire"></i> Meest Gekozen</div>
                     <div class="card-icon"><i class="fa-solid fa-tv"></i></div>
                     <h3>Switch OLED</h3>
+                    <div class="method-tag method-standard">DAT0 Adapter</div>
                     <p class="price">€ 110,-</p>
                     <p class="price-sub">Chip inbegrepen</p>
                     <ul>
-                        <li><i class="fa-solid fa-check"></i> High-end micro-soldering</li>
-                        <li><i class="fa-solid fa-check"></i> DAT0/CMD bypass — deskundige fix</li>
+                        <li><i class="fa-solid fa-check"></i> Installatie via DAT0 adapter</li>
+                        <li><i class="fa-solid fa-check"></i> Betrouwbare & bewezen methode</li>
                         <li><i class="fa-solid fa-check"></i> Ultramoderne RP2040 hardware</li>
                         <li><i class="fa-solid fa-check"></i> Volledige reiniging & nieuwe koelpasta</li>
-                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                        <li>
+                            <i class="fa-solid fa-check"></i> Gratis software-configuratie
+                            <span class="tooltip-wrap">
+                                <i class="fa-solid fa-circle-info tooltip-icon"></i>
+                                <span class="tooltip-box">Stuur je microSD-kaartje mee en wij installeren Atmosphere, Hekate en sigpatches gratis voor je.</span>
+                            </span>
+                        </li>
                     </ul>
                     <a href="#contact" class="btn-card btn-card-primary">Direct Aanvragen</a>
+                </div>
+
+                <!-- OLED Kamikaze Card -->
+                <div class="card card-premium">
+                    <div class="badge badge-premium"><i class="fa-solid fa-bolt"></i> Meest Geavanceerd</div>
+                    <div class="card-icon"><i class="fa-solid fa-tv"></i></div>
+                    <h3>Switch OLED</h3>
+                    <div class="method-tag method-premium">Kamikaze</div>
+                    <p class="price">€ 130,-</p>
+                    <p class="price-sub">Chip inbegrepen</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Directe CPU-soldeerverbinding</li>
+                        <li><i class="fa-solid fa-check"></i> Geen adapter — cleaner resultaat</li>
+                        <li><i class="fa-solid fa-check"></i> Ultramoderne RP2040 hardware</li>
+                        <li><i class="fa-solid fa-check"></i> Volledige reiniging & nieuwe koelpasta</li>
+                        <li>
+                            <i class="fa-solid fa-check"></i> Gratis software-configuratie
+                            <span class="tooltip-wrap">
+                                <i class="fa-solid fa-circle-info tooltip-icon"></i>
+                                <span class="tooltip-box">Stuur je microSD-kaartje mee en wij installeren Atmosphere, Hekate en sigpatches gratis voor je.</span>
+                            </span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn-card btn-card-premium">Direct Aanvragen</a>
                 </div>
 
                 <!-- Lite Card -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
                     <h3>Switch Lite</h3>
-                    <p class="price">€ 85,-</p>
+                    <p class="price">€ 90,-</p>
                     <p class="price-sub">Chip inbegrepen</p>
                     <ul>
                         <li><i class="fa-solid fa-check"></i> Compacte hardware modificatie</li>
                         <li><i class="fa-solid fa-check"></i> Perfect weggewerkte chip-installatie</li>
                         <li><i class="fa-solid fa-check"></i> Behoud van alle handheld functies</li>
-                        <li><i class="fa-solid fa-check"></i> Schone software-installatie op SD-kaart</li>
-                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND/EmuNAND)</li>
+                        <li>
+                            <i class="fa-solid fa-check"></i> Gratis software-configuratie
+                            <span class="tooltip-wrap">
+                                <i class="fa-solid fa-circle-info tooltip-icon"></i>
+                                <span class="tooltip-box">Stuur je microSD-kaartje mee en wij installeren Atmosphere, Hekate en sigpatches gratis voor je.</span>
+                            </span>
+                        </li>
                     </ul>
                     <a href="#contact" class="btn-card">Direct Aanvragen</a>
                 </div>
@@ -123,6 +166,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Portfolio Carousel Section -->
     <section id="portfolio" class="portfolio">
@@ -301,8 +345,9 @@
                     <select id="console" required>
                         <option value="" disabled selected>Kies je model...</option>
                         <option value="V1/V2">Nintendo Switch V1 / V2 — € 85,-</option>
-                        <option value="OLED">Nintendo Switch OLED — € 110,-</option>
-                        <option value="Lite">Nintendo Switch Lite — € 85,-</option>
+                        <option value="OLED-DAT0">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
+                        <option value="OLED-Kamikaze">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
+                        <option value="Lite">Nintendo Switch Lite — € 90,-</option>
                     </select>
                 </div>
                 
