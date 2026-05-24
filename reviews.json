@@ -1,0 +1,22 @@
+{
+  "reviews": [
+    {
+      "naam": "Daan V.",
+      "console": "Switch OLED",
+      "score": 5,
+      "tekst": "Mijn OLED werkt perfect. Netjes verpakt teruggestuurd, alles uitgelegd via Telegram. Echt een vakman."
+    },
+    {
+      "naam": "Kevin M.",
+      "console": "Switch Lite",
+      "score": 5,
+      "tekst": "Super snelle service. Binnen 2 dagen mijn Lite teruggestuurd met alles erop. Atmosphere werkte direct."
+    },
+    {
+      "naam": "Sander R.",
+      "console": "Switch V2",
+      "score": 5,
+      "tekst": "Twijfelde eerst, maar de foto's van het soldeerwerk overtuigden me. Chip zit er netjes in en alles werkt."
+    }
+  ]
+}
