@@ -21,7 +21,6 @@
             </button>
             <nav id="mainNav">
                 <a href="#services" class="nav-link">Services</a>
-                <a href="#vergelijking" class="nav-link">DAT0 vs Kamikaze</a>
                 <a href="#garantie" class="nav-link">Garantie</a>
                 <a href="#portfolio" class="nav-link">Ons Werk</a>
                 <a href="#werkwijze" class="nav-link">Werkwijze</a>
@@ -356,8 +355,8 @@
     <section id="reviews" class="reviews">
         <div class="container">
             <h2>Wat Klanten Zeggen</h2>
-            <p class="section-subtitle">Meer dan 200 tevreden klanten gingen je voor.</p>
-            <div class="reviews-grid">
+            <p class="section-subtitle">Eerlijke ervaringen van klanten die je voorgingen.</p>
+            <div class="reviews-grid" id="reviewsGrid">
                 <div class="review-card">
                     <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <p>"Mijn OLED werkt perfect. Netjes verpakt teruggestuurd, alles uitgelegd via Telegram. Echt een vakman."</p>
@@ -372,6 +371,49 @@
                     <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <p>"Twijfelde eerst, maar de foto's van het soldeerwerk overtuigden me. Chip zit er netjes in en alles werkt."</p>
                     <div class="review-author"><span class="review-name">Sander R.</span><span class="review-model">Switch V2</span></div>
+                </div>
+            </div>
+
+            <!-- Review Formulier -->
+            <div class="review-form-wrap">
+                <h3><i class="fa-solid fa-pen-to-square"></i> Laat een review achter</h3>
+                <p>Heb je je console laten modden door TechPlay Mods? Deel je ervaring!</p>
+                <form id="reviewForm" class="review-form">
+                    <div class="review-form-row">
+                        <div class="form-group">
+                            <label for="reviewNaam">Naam (of initialen)</label>
+                            <input type="text" id="reviewNaam" placeholder="Bijv. Thomas K." required maxlength="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewConsole">Console</label>
+                            <select id="reviewConsole" required>
+                                <option value="" disabled selected>Kies je model...</option>
+                                <option value="Switch V1/V2">Switch V1 / V2</option>
+                                <option value="Switch OLED (DAT0)">Switch OLED — DAT0</option>
+                                <option value="Switch OLED (Kamikaze)">Switch OLED — Kamikaze</option>
+                                <option value="Switch Lite">Switch Lite</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Beoordeling</label>
+                        <div class="star-picker" id="starPicker">
+                            <i class="fa-regular fa-star" data-star="1"></i>
+                            <i class="fa-regular fa-star" data-star="2"></i>
+                            <i class="fa-regular fa-star" data-star="3"></i>
+                            <i class="fa-regular fa-star" data-star="4"></i>
+                            <i class="fa-regular fa-star" data-star="5"></i>
+                        </div>
+                        <input type="hidden" id="reviewScore" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewTekst">Jouw ervaring</label>
+                        <textarea id="reviewTekst" rows="3" placeholder="Vertel kort over je ervaring..." required maxlength="300"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Review Plaatsen <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <div id="reviewSuccess" class="review-success hidden">
+                    <i class="fa-solid fa-circle-check"></i> Bedankt voor je review! Hij is direct zichtbaar.
                 </div>
             </div>
         </div>
