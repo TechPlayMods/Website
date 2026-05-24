@@ -1625,13 +1625,10 @@ footer {
     margin-top: 14px;
     font-size: 0.8rem !important;
     color: #475569 !important;
-    display: flex;
-    align-items: center;
-    gap: 7px;
     margin-bottom: 0 !important;
+    line-height: 1.6;
+    text-align: left;
 }
-
-.review-disclaimer i { color: var(--text-muted); font-size: 0.78rem; }
 
 @media (max-width: 600px) {
     .review-cta-inner {
