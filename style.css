@@ -1494,3 +1494,96 @@ footer {
     .verg-vs { padding: 14px 0; }
     .garantie-grid { grid-template-columns: 1fr; }
 }
+
+/* ===========================
+   REVIEW FORMULIER
+=========================== */
+.review-form-wrap {
+    margin-top: 50px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    text-align: left;
+}
+
+.review-form-wrap h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-form-wrap h3 i { color: var(--primary); }
+
+.review-form-wrap > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+.review-form { display: flex; flex-direction: column; gap: 0; }
+
+.review-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.review-form .form-group { margin-bottom: 22px; }
+.review-form-row .form-group { margin-bottom: 0; }
+
+.review-form input[type="text"] {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    outline: none;
+    font-family: inherit;
+    transition: border-color var(--transition);
+}
+
+.review-form input[type="text"]:focus { border-color: var(--primary); }
+
+/* Sterren picker */
+.star-picker {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.star-picker i {
+    font-size: 1.6rem;
+    color: #334155;
+    cursor: pointer;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.star-picker i:hover,
+.star-picker i.active {
+    color: #f59e0b;
+    transform: scale(1.15);
+}
+
+.review-success {
+    margin-top: 16px;
+    background: rgba(0,255,136,0.07);
+    border: 1px solid rgba(0,255,136,0.25);
+    color: var(--primary);
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .review-form-row { grid-template-columns: 1fr; }
+    .review-form-wrap { padding: 24px 20px; }
+}
