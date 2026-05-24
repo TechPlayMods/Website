@@ -97,3 +97,33 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 fadeEls.forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
+
+// --- REVIEWS LADEN UIT reviews.json ---
+async function loadReviews() {
+    try {
+        const res = await fetch('reviews.json');
+        const data = await res.json();
+        const grid = document.getElementById('reviewsGrid');
+        grid.innerHTML = '';
+        data.reviews.forEach(r => {
+            const stars = Array.from({length: 5}, (_, i) =>
+                `<i class="fa-solid fa-star" style="color:${i < r.score ? '#f59e0b' : '#334155'}"></i>`
+            ).join('');
+            const card = document.createElement('div');
+            card.classList.add('review-card', 'fade-in');
+            card.innerHTML = `
+                <div class="review-stars">${stars}</div>
+                <p>"${r.tekst}"</p>
+                <div class="review-author">
+                    <span class="review-name">${r.naam}</span>
+                    <span class="review-model">${r.console}</span>
+                </div>`;
+            grid.appendChild(card);
+            setTimeout(() => card.classList.add('visible'), 50);
+        });
+    } catch(e) {
+        console.log('Reviews laden mislukt:', e);
+    }
+}
+
+loadReviews();
