@@ -575,6 +575,17 @@
                         <option value="Lite">Nintendo Switch Lite — € 90,-</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label>Via welk kanaal wil je contact?</label>
+                    <div class="kanaal-keuze">
+                        <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram"><i class="fa-brands fa-telegram"></i> Telegram</button>
+                        <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                        <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit"><i class="fa-brands fa-reddit"></i> Reddit</button>
+                        <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord"><i class="fa-brands fa-discord"></i> Discord</button>
+                    </div>
+                    <input type="hidden" id="gekozenKanaal" value="">
+                </div>
                 
                 <div class="form-group">
                     <label for="msg">Vragen of opmerkingen (optioneel):</label>
@@ -587,7 +598,7 @@
             <div id="successMessage" class="success-box hidden">
                 <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
                 <h3>Aanvraag Ontvangen!</h3>
-                <p>Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen via Telegram — daar regelen we de verdere details.</p>
+                <p>Je aanvraag is geregistreerd. Klik hieronder op jouw gekozen kanaal om de verdere details te regelen.</p>
                 <div class="contact-btns contact-btns-center">
                     <a href="https://t.me/JOUW_TELEGRAM" target="_blank" class="btn-contact btn-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
                     <a href="https://wa.me/JOUW_WHATSAPP" target="_blank" class="btn-contact btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
