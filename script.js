@@ -47,10 +47,35 @@ startTimer();
 
 
 // --- INTAKE FORMULIER ---
+const kanaalLinks = {
+    telegram: 'https://t.me/JOUW_TELEGRAM',
+    whatsapp: 'https://wa.me/JOUW_WHATSAPP',
+    reddit:   'https://reddit.com/u/JOUW_REDDIT',
+    discord:  'https://discord.com/users/JOUW_DISCORD'
+};
+
+// Kanaal keuze knoppen
+document.querySelectorAll('.kanaal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.kanaal-btn').forEach(b => b.classList.remove('geselecteerd'));
+        btn.classList.add('geselecteerd');
+        document.getElementById('gekozenKanaal').value = btn.dataset.kanaal;
+    });
+});
+
 document.getElementById('modForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    const kanaal = document.getElementById('gekozenKanaal').value;
+    if (!kanaal) { alert('Kies eerst via welk kanaal je contact wilt opnemen.'); return; }
+
     document.getElementById('modForm').classList.add('hidden');
     const successBox = document.getElementById('successMessage');
+
+    // Highlight gekozen kanaal knop in success box
+    successBox.querySelectorAll('.btn-contact').forEach(btn => {
+        btn.style.opacity = btn.classList.contains('btn-' + kanaal.slice(0,2)) ? '1' : '0.4';
+    });
+
     successBox.classList.remove('hidden');
     successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
