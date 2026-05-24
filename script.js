@@ -103,7 +103,7 @@ fadeEls.forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
 const GITHUB_USER = 'TechPlayMods';
 const GITHUB_REPO = 'Website';
 const GITHUB_FILE = 'reviews.json';
-const GITHUB_TOKEN = 'JOUW_TOKEN_HIER';
+const GITHUB_TOKEN = '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';
 const API_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
 const starPicker = document.getElementById('starPicker');
