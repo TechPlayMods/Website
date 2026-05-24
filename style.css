@@ -1280,3 +1280,54 @@ footer {
 .card-kamikaze .card-icon iconify-icon {
     color: #ff4422;
 }
+
+/* ===========================
+   REVIEW CTA
+=========================== */
+.review-cta {
+    margin-top: 40px;
+}
+
+.review-cta-inner {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background: linear-gradient(135deg, rgba(0,255,136,0.06), transparent);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+}
+
+.review-cta-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(0,255,136,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.review-cta-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.review-cta-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .review-cta-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px 20px;
+    }
+}
