@@ -1638,3 +1638,39 @@ footer {
     }
     .review-disclaimer { justify-content: center; }
 }
+
+/* ===========================
+   MULTI-PLATFORM CONTACT KNOPPEN
+=========================== */
+.contact-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.contact-btns-center { justify-content: center; margin-top: 20px; }
+
+.btn-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
+.btn-tg  { background: #0088cc; color: #fff; }
+.btn-wa  { background: #25d366; color: #fff; }
+.btn-rd  { background: #ff4500; color: #fff; }
+.btn-dc  { background: #5865f2; color: #fff; }
+
+@media (max-width: 480px) {
+    .contact-btns { flex-direction: column; }
+    .btn-contact { justify-content: center; }
+}
