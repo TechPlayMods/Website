@@ -200,4 +200,16 @@ async function loadReviews() {
     }
 }
 
+// --- MODEL VOORINVULLEN VIA SERVICE KNOPPEN ---
+document.querySelectorAll('.aanvragen-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const model = btn.dataset.model;
+        const select = document.getElementById('console');
+        if (select && model) {
+            select.value = model;
+        }
+    });
+});
+
+
 loadReviews();
