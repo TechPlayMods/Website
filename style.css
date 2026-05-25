@@ -1642,28 +1642,23 @@ footer {
 =========================== */
 .kanaal-keuze {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 8px;
 }
 
-.kanaal-rij {
-    display: flex;
-    gap: 8px;
-}
-
 .kanaal-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex: 1;
-    padding: 11px 10px;
+    gap: 8px;
+    padding: 11px 20px;
     border-radius: var(--radius);
-    font-size: 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
-    opacity: 0.6;
+    opacity: 0.65;
     color: #fff;
 }
 
@@ -1671,14 +1666,19 @@ footer {
 
 .kanaal-btn.geselecteerd {
     opacity: 1;
-    transform: translateY(-1px);
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
 }
 
 .kanaal-btn.btn-tg { background: #0088cc; }
 .kanaal-btn.btn-wa { background: #25d366; }
 .kanaal-btn.btn-rd { background: #ff4500; }
 .kanaal-btn.btn-dc { background: #5865f2; }
+
+@media (max-width: 480px) {
+    .kanaal-keuze { flex-direction: column; }
+    .kanaal-btn { justify-content: center; }
+}
 
 /* ===========================
    REVIEW CTA & CONTACT KNOPPEN
@@ -1715,7 +1715,7 @@ footer {
 
 .contact-btns {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 16px;
 }
@@ -1725,19 +1725,17 @@ footer {
 .btn-contact {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    flex: 1;
-    min-width: 0;
-    padding: 11px 8px;
+    gap: 7px;
+    padding: 10px 18px;
     border-radius: var(--radius);
-    font-size: 1.4rem;
+    font-weight: 600;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: transform var(--transition), opacity var(--transition);
     color: #fff !important;
-    opacity: 0.85;
 }
 
-.btn-contact:hover { transform: translateY(-2px); opacity: 1; }
+.btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
 .btn-contact.btn-tg { background: #0088cc; }
 .btn-contact.btn-wa { background: #25d366; }
