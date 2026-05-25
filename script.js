@@ -79,12 +79,11 @@ document.querySelectorAll('.kanaal-btn').forEach(btn => {
         document.getElementById('gekozenKanaal').value = btn.dataset.kanaal;
         document.getElementById('gekozenUrl').value = btn.dataset.url;
 
-        // Activeer de verzendknop + update kleur
+        // Activeer de verzendknop + kleur wisselen
         submitBtn.disabled = false;
         submitBtn.classList.remove('btn-submit-disabled');
         submitHint.classList.add('hidden');
 
-        // Kleur wisselen op basis van gekozen kanaal
         submitBtn.classList.remove('kleur-tg', 'kleur-wa', 'kleur-rd', 'kleur-dc');
         submitBtn.classList.add('kleur-' + kanaalKlassen[btn.dataset.kanaal]);
     });
