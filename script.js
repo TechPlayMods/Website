@@ -47,9 +47,78 @@ startTimer();
 
 
 // --- INTAKE FORMULIER ---
+const kanaalIcons = {
+    telegram: 'fa-brands fa-telegram',
+    whatsapp: 'fa-brands fa-whatsapp',
+    reddit:   'fa-brands fa-reddit',
+    discord:  'fa-brands fa-discord'
+};
+
+const kanaalNamen = {
+    telegram: 'Verder via Telegram',
+    whatsapp: 'Verder via WhatsApp',
+    reddit:   'Verder via Reddit',
+    discord:  'Verder via Discord'
+};
+
+const kanaalKlassen = {
+    telegram: 'tg',
+    whatsapp: 'wa',
+    reddit:   'rd',
+    discord:  'dc'
+};
+
+const submitBtn = document.getElementById('submitBtn');
+const submitHint = document.getElementById('submitHint');
+
+// Kanaal keuze — knop activeren
+document.querySelectorAll('.kanaal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.kanaal-btn').forEach(b => b.classList.remove('geselecteerd'));
+        btn.classList.add('geselecteerd');
+        document.getElementById('gekozenKanaal').value = btn.dataset.kanaal;
+        document.getElementById('gekozenUrl').value = btn.dataset.url;
+
+        // Activeer de verzendknop
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('btn-submit-disabled');
+        submitHint.classList.add('hidden');
+    });
+});
+
 document.getElementById('modForm').addEventListener('submit', function(e) {
     e.preventDefault();
+
+    const kanaal = document.getElementById('gekozenKanaal').value;
+    const url = document.getElementById('gekozenUrl').value;
+    const console_keuze = document.getElementById('console').value;
+    const opmerking = document.getElementById('msg').value;
+
+    // Bouw bericht op
+    let bericht = `Hoi! Ik wil een modchip laten installeren 🎮
+
+Console: ${console_keuze}`;
+    if (opmerking) bericht += `
+Opmerking: ${opmerking}`;
+
+    // Maak de link met vooraf ingevuld bericht waar mogelijk
+    let finalUrl = url;
+    if (kanaal === 'telegram') {
+        finalUrl = url + '?text=' + encodeURIComponent(bericht);
+    } else if (kanaal === 'whatsapp') {
+        finalUrl = url + '?text=' + encodeURIComponent(bericht);
+    }
+
+    // Verberg formulier
     document.getElementById('modForm').classList.add('hidden');
+
+    // Update success box met gekozen kanaal
+    const successLink = document.getElementById('successLink');
+    successLink.href = finalUrl;
+    successLink.className = 'btn-contact-large ' + kanaalKlassen[kanaal];
+    document.getElementById('successIcon').className = kanaalIcons[kanaal];
+    document.getElementById('successKanaal').textContent = kanaalNamen[kanaal];
+
     const successBox = document.getElementById('successMessage');
     successBox.classList.remove('hidden');
     successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -106,34 +175,76 @@ const reviewForm = document.getElementById('reviewForm');
 const reviewsGrid = document.getElementById('reviewsGrid');
 const reviewSuccess = document.getElementById('reviewSuccess');
 
-// --- REVIEWS LADEN UIT reviews.json ---
-async function loadReviews() {
-    try {
-        const res = await fetch('reviews.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        const grid = document.getElementById('reviewsGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
-        data.reviews.forEach(r => {
-            const stars = Array.from({length: 5}, (_, i) =>
-                `<i class="fa-solid fa-star" style="color:${i < r.score ? '#f59e0b' : '#334155'}"></i>`
-            ).join('');
-            const card = document.createElement('div');
-            card.classList.add('review-card', 'fade-in');
-            card.innerHTML = `
-                <div class="review-stars">${stars}</div>
-                <p>"${r.tekst}"</p>
-                <div class="review-author">
-                    <span class="review-name">${r.naam}</span>
-                    <span class="review-model">${r.console}</span>
-                </div>`;
-            grid.appendChild(card);
-            setTimeout(() => card.classList.add('visible'), 50);
-        });
-    } catch(e) {
-        console.log('Reviews laden mislukt:', e);
-    }
+// Laad opgeslagen reviews uit localStorage
+function loadReviews() {
+    const saved = JSON.parse(localStorage.getItem('techplayReviews') || '[]');
+    saved.forEach(r => renderReview(r));
 }
+
+function renderReview(r) {
+    const stars = Array.from({length: 5}, (_, i) =>
+        `<i class="fa-solid fa-star" style="color:${i < r.score ? '#f59e0b' : '#334155'}"></i>`
+    ).join('');
+    const card = document.createElement('div');
+    card.classList.add('review-card');
+    card.innerHTML = `
+        <div class="review-stars">${stars}</div>
+        <p>"${r.tekst}"</p>
+        <div class="review-author">
+            <span class="review-name">${r.naam}</span>
+            <span class="review-model">${r.console}</span>
+        </div>`;
+    reviewsGrid.appendChild(card);
+}
+
+// Sterren interactie
+let selectedScore = 0;
+starPicker.querySelectorAll('i').forEach(star => {
+    star.addEventListener('mouseover', () => {
+        const val = parseInt(star.dataset.star);
+        starPicker.querySelectorAll('i').forEach((s, i) => {
+            s.className = i < val ? 'fa-solid fa-star active' : 'fa-regular fa-star';
+        });
+    });
+    star.addEventListener('mouseout', () => {
+        starPicker.querySelectorAll('i').forEach((s, i) => {
+            s.className = i < selectedScore ? 'fa-solid fa-star active' : 'fa-regular fa-star';
+        });
+    });
+    star.addEventListener('click', () => {
+        selectedScore = parseInt(star.dataset.star);
+        reviewScore.value = selectedScore;
+    });
+});
+
+// Formulier submit
+reviewForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (selectedScore === 0) { alert('Geef een beoordeling met sterren.'); return; }
+
+    const review = {
+        naam: document.getElementById('reviewNaam').value.trim(),
+        console: document.getElementById('reviewConsole').value,
+        score: selectedScore,
+        tekst: document.getElementById('reviewTekst').value.trim()
+    };
+
+    // Sla op in localStorage
+    const saved = JSON.parse(localStorage.getItem('techplayReviews') || '[]');
+    saved.push(review);
+    localStorage.setItem('techplayReviews', JSON.stringify(saved));
+
+    // Render direct
+    renderReview(review);
+
+    // Reset formulier
+    reviewForm.reset();
+    selectedScore = 0;
+    starPicker.querySelectorAll('i').forEach(s => s.className = 'fa-regular fa-star');
+
+    // Toon succes
+    reviewSuccess.classList.remove('hidden');
+    setTimeout(() => reviewSuccess.classList.add('hidden'), 4000);
+});
 
 loadReviews();
