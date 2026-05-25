@@ -83,7 +83,7 @@
                         <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                     </ul>
-                    <a href="#contact" class="btn-card">Direct Aanvragen</a>
+                    <a href="#contact" class="btn-card aanvragen-btn" data-model="V1/V2">Direct Aanvragen</a>
                 </div>
 
                 <div class="card popular">
@@ -103,7 +103,7 @@
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                         <li><i class="fa-solid fa-check"></i> DAT0-adapter onder de eMMC-chip</li>
                     </ul>
-                    <a href="#contact" class="btn-card btn-card-primary">Direct Aanvragen</a>
+                    <a href="#contact" class="btn-card btn-card-primary aanvragen-btn" data-model="OLED-DAT0">Direct Aanvragen</a>
                 </div>
 
                 <div class="card card-kamikaze card-orange">
@@ -123,7 +123,7 @@
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                         <li><i class="fa-solid fa-check"></i> DAT0-punt direct verbonden</li>
                     </ul>
-                    <a href="#contact" class="btn-card btn-card-premium">Direct Aanvragen</a>
+                    <a href="#contact" class="btn-card btn-card-premium aanvragen-btn" data-model="OLED-Kamikaze">Direct Aanvragen</a>
                 </div>
 
                 <div class="card">
@@ -140,7 +140,7 @@
                         <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                     </ul>
-                    <a href="#contact" class="btn-card">Direct Aanvragen</a>
+                    <a href="#contact" class="btn-card aanvragen-btn" data-model="Lite">Direct Aanvragen</a>
                 </div>
             </div>
 
@@ -352,10 +352,10 @@
                         <h3>Tevreden over onze service?</h3>
                         <p>Stuur je review via jouw voorkeurskanaal — wij plaatsen hem handmatig op de website.</p>
                         <div class="contact-btns">
-                            <a href="https://t.me/JOUW_TELEGRAM" target="_blank" class="btn-contact btn-tg" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                            <a href="https://wa.me/JOUW_WHATSAPP" target="_blank" class="btn-contact btn-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                            <a href="https://reddit.com/u/JOUW_REDDIT" target="_blank" class="btn-contact btn-rd" title="Reddit"><i class="fa-brands fa-reddit"></i></a>
-                            <a href="https://discord.com/users/JOUW_DISCORD" target="_blank" class="btn-contact btn-dc" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                            <a href="https://t.me/JOUW_TELEGRAM" target="_blank" class="btn-contact btn-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                            <a href="https://wa.me/JOUW_WHATSAPP" target="_blank" class="btn-contact btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://reddit.com/u/JOUW_REDDIT" target="_blank" class="btn-contact btn-rd"><i class="fa-brands fa-reddit"></i> Reddit</a>
+                            <a href="https://discord.com/users/JOUW_DISCORD" target="_blank" class="btn-contact btn-dc"><i class="fa-brands fa-discord"></i> Discord</a>
                         </div>
                         <p class="review-disclaimer">Reviews worden handmatig geverifieerd en geplaatst. Wij publiceren uitsluitend eerlijke ervaringen van echte klanten. Bij een negatieve beoordeling nemen wij eerst contact op om te kijken of wij het probleem gezamenlijk kunnen oplossen. Indien de klant na overleg nog steeds niet tevreden is, wordt de review ongewijzigd gepubliceerd.</p>
                     </div>
@@ -489,14 +489,10 @@
                 <div class="form-group">
                     <label>Via welk kanaal wil je contact?</label>
                     <div class="kanaal-keuze">
-                        <div class="kanaal-rij">
-                            <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM" title="Telegram"><i class="fa-brands fa-telegram"></i></button>
-                            <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
-                        </div>
-                        <div class="kanaal-rij">
-                            <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT" title="Reddit"><i class="fa-brands fa-reddit"></i></button>
-                            <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD" title="Discord"><i class="fa-brands fa-discord"></i></button>
-                        </div>
+                        <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM"><i class="fa-brands fa-telegram"></i> Telegram</button>
+                        <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                        <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT"><i class="fa-brands fa-reddit"></i> Reddit</button>
+                        <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD"><i class="fa-brands fa-discord"></i> Discord</button>
                     </div>
                     <input type="hidden" id="gekozenKanaal" value="">
                     <input type="hidden" id="gekozenUrl" value="">
@@ -508,7 +504,7 @@
                 </div>
 
                 <button type="submit" class="btn-submit btn-submit-disabled" id="submitBtn" disabled>
-                    <i id="submitIcon" class="fa-solid fa-lock"></i> Aanvraag Verzenden
+                    Aanvraag Verzenden
                 </button>
                 <p class="submit-hint" id="submitHint">Kies eerst een contactkanaal hierboven</p>
             </form>
