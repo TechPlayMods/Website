@@ -171,34 +171,50 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
 
-// --- REVIEWS LADEN UIT reviews.json ---
-async function loadReviews() {
-    try {
-        const res = await fetch('reviews.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        const grid = document.getElementById('reviewsGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
-        data.reviews.forEach(r => {
-            const stars = Array.from({length: 5}, (_, i) =>
-                `<i class="fa-solid fa-star" style="color:${i < r.score ? '#f59e0b' : '#334155'}"></i>`
-            ).join('');
-            const card = document.createElement('div');
-            card.classList.add('review-card', 'fade-in');
-            card.innerHTML = `
-                <div class="review-stars">${stars}</div>
-                <p>"${r.tekst}"</p>
-                <div class="review-author">
-                    <span class="review-name">${r.naam}</span>
-                    <span class="review-model">${r.console}</span>
-                </div>`;
-            grid.appendChild(card);
-            setTimeout(() => card.classList.add('visible'), 50);
-        });
-    } catch(e) {
-        console.log('Reviews laden mislukt:', e);
-    }
+// --- REVIEWS (inline data, geen fetch nodig) ---
+function loadReviews() {
+    const data = {
+        reviews: [
+            {
+                naam: "Daan V.",
+                console: "Switch OLED",
+                score: 5,
+                tekst: "Mijn OLED werkt perfect. Netjes verpakt teruggestuurd, alles uitgelegd via Telegram. Echt een vakman."
+            },
+            {
+                naam: "Kevin M.",
+                console: "Switch Lite",
+                score: 5,
+                tekst: "Super snelle service. Binnen 2 dagen mijn Lite teruggestuurd met alles erop. Atmosphere werkte direct."
+            },
+            {
+                naam: "Sander R.",
+                console: "Switch V2",
+                score: 5,
+                tekst: "Twijfelde eerst, maar de foto's van het soldeerwerk overtuigden me. Chip zit er netjes in en alles werkt."
+            }
+        ]
+    };
+
+    const grid = document.getElementById('reviewsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    data.reviews.forEach(r => {
+        const stars = Array.from({length: 5}, (_, i) =>
+            `<i class="fa-solid fa-star" style="color:${i < r.score ? '#f59e0b' : '#334155'}"></i>`
+        ).join('');
+        const card = document.createElement('div');
+        card.classList.add('review-card', 'fade-in');
+        card.innerHTML = `
+            <div class="review-stars">${stars}</div>
+            <p>"${r.tekst}"</p>
+            <div class="review-author">
+                <span class="review-name">${r.naam}</span>
+                <span class="review-model">${r.console}</span>
+            </div>`;
+        grid.appendChild(card);
+        setTimeout(() => card.classList.add('visible'), 50);
+    });
 }
 
 loadReviews();
