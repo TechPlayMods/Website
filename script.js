@@ -79,16 +79,14 @@ document.querySelectorAll('.kanaal-btn').forEach(btn => {
         document.getElementById('gekozenKanaal').value = btn.dataset.kanaal;
         document.getElementById('gekozenUrl').value = btn.dataset.url;
 
-        // Activeer de verzendknop + update icoon + kleur
+        // Activeer de verzendknop + update icoon
         submitBtn.disabled = false;
         submitBtn.classList.remove('btn-submit-disabled');
         submitHint.classList.add('hidden');
 
-        // Verwijder oude kleur-klassen
+        // Kleur + icoon updaten
         submitBtn.classList.remove('kleur-tg', 'kleur-wa', 'kleur-rd', 'kleur-dc');
         submitBtn.classList.add('kleur-' + kanaalKlassen[btn.dataset.kanaal]);
-
-        // Zet kanaal-icoon in de knop
         const submitIcon = document.getElementById('submitIcon');
         submitIcon.className = kanaalIcons[btn.dataset.kanaal];
     });
