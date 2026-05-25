@@ -787,21 +787,17 @@ select:focus, textarea:focus { border-color: var(--primary); }
     gap: 8px;
 }
 
+.btn-submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.88);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
 /* Submit knop kanaal-kleuren */
 .btn-submit.kleur-tg { background: #0088cc; color: #fff; }
 .btn-submit.kleur-wa { background: #25d366; color: #fff; }
 .btn-submit.kleur-rd { background: #ff4500; color: #fff; }
 .btn-submit.kleur-dc { background: #5865f2; color: #fff; }
-.btn-submit.kleur-tg:hover { background: #006fa8; }
-.btn-submit.kleur-wa:hover { background: #1db954; }
-.btn-submit.kleur-rd:hover { background: #d93a00; }
-.btn-submit.kleur-dc:hover { background: #4752c4; }
-
-.btn-submit:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0,255,136,0.25);
-}
 
 /* Success Box */
 .hidden { display: none !important; }
@@ -1647,7 +1643,7 @@ footer {
 =========================== */
 .kanaal-keuze {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 10px;
     margin-top: 8px;
 }
@@ -1656,23 +1652,24 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius);
-    font-size: 1.4rem;
+    flex: 1;
+    min-width: 0;
+    padding: 15px 10px;
+    border-radius: 50px;
+    font-size: 1.7rem;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
-    opacity: 0.65;
+    opacity: 0.6;
     color: #fff;
 }
 
-.kanaal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.kanaal-btn:hover { opacity: 0.85; transform: translateY(-2px); }
 
 .kanaal-btn.geselecteerd {
     opacity: 1;
     transform: translateY(-2px);
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
 }
 
 .kanaal-btn.btn-tg { background: #0088cc; }
@@ -1681,8 +1678,7 @@ footer {
 .kanaal-btn.btn-dc { background: #5865f2; }
 
 @media (max-width: 480px) {
-    .kanaal-keuze { flex-direction: column; }
-    .kanaal-btn { justify-content: center; }
+    .kanaal-btn { padding: 13px 8px; font-size: 1.5rem; }
 }
 
 /* ===========================
@@ -1731,13 +1727,13 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius);
-    font-size: 1.3rem;
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-size: 1.5rem;
     text-decoration: none;
     transition: transform var(--transition), opacity var(--transition);
     color: #fff !important;
+    opacity: 0.85;
 }
 
 .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
