@@ -790,10 +790,9 @@ select:focus, textarea:focus { border-color: var(--primary); }
 .btn-submit:hover {
     transform: translateY(-1px);
     filter: brightness(0.88);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Submit knop kanaal-kleuren */
 .btn-submit.kleur-tg { background: #0088cc; color: #fff; }
 .btn-submit.kleur-wa { background: #25d366; color: #fff; }
 .btn-submit.kleur-rd { background: #ff4500; color: #fff; }
@@ -1654,9 +1653,9 @@ footer {
     justify-content: center;
     flex: 1;
     min-width: 0;
-    padding: 15px 10px;
-    border-radius: 50px;
-    font-size: 1.7rem;
+    padding: 14px 12px;
+    border-radius: var(--radius);
+    font-size: 1.6rem;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
@@ -1678,7 +1677,7 @@ footer {
 .kanaal-btn.btn-dc { background: #5865f2; }
 
 @media (max-width: 480px) {
-    .kanaal-btn { padding: 13px 8px; font-size: 1.5rem; }
+    .kanaal-btn { padding: 12px 8px; font-size: 1.4rem; }
 }
 
 /* ===========================
@@ -1727,9 +1726,9 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 22px;
-    border-radius: 50px;
-    font-size: 1.5rem;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 1.4rem;
     text-decoration: none;
     transition: transform var(--transition), opacity var(--transition);
     color: #fff !important;
