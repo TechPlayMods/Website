@@ -780,7 +780,7 @@ select:focus, textarea:focus { border-color: var(--primary); }
     font-weight: 700;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: background var(--transition), transform var(--transition), box-shadow var(--transition), color var(--transition);
+    transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1647,12 +1647,17 @@ footer {
     margin-top: 8px;
 }
 
+.kanaal-rij {
+    display: flex;
+    gap: 8px;
+}
+
 .kanaal-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 10px 16px;
+    flex: 1;
+    padding: 10px;
     border-radius: var(--radius);
     font-size: 1.5rem;
     cursor: pointer;
