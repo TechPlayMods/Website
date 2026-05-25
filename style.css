@@ -1642,20 +1642,19 @@ footer {
 =========================== */
 .kanaal-keuze {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 8px;
 }
 
 .kanaal-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    min-width: 0;
-    padding: 14px 12px;
+    width: 100%;
+    padding: 10px 16px;
     border-radius: var(--radius);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
@@ -1663,11 +1662,11 @@ footer {
     color: #fff;
 }
 
-.kanaal-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.kanaal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
 .kanaal-btn.geselecteerd {
     opacity: 1;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
 }
 
@@ -1675,10 +1674,6 @@ footer {
 .kanaal-btn.btn-wa { background: #25d366; }
 .kanaal-btn.btn-rd { background: #ff4500; }
 .kanaal-btn.btn-dc { background: #5865f2; }
-
-@media (max-width: 480px) {
-    .kanaal-btn { padding: 12px 8px; font-size: 1.4rem; }
-}
 
 /* ===========================
    REVIEW CTA & CONTACT KNOPPEN
@@ -1715,7 +1710,7 @@ footer {
 
 .contact-btns {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 10px;
     margin-bottom: 16px;
 }
@@ -1726,7 +1721,9 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px;
+    flex: 1;
+    min-width: 0;
+    padding: 11px 8px;
     border-radius: var(--radius);
     font-size: 1.4rem;
     text-decoration: none;
@@ -1735,7 +1732,7 @@ footer {
     opacity: 0.85;
 }
 
-.btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+.btn-contact:hover { transform: translateY(-2px); opacity: 1; }
 
 .btn-contact.btn-tg { background: #0088cc; }
 .btn-contact.btn-wa { background: #25d366; }
