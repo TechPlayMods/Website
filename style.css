@@ -1670,6 +1670,11 @@ footer {
 .kanaal-btn.btn-rd { background: #ff4500; }
 .kanaal-btn.btn-dc { background: #5865f2; }
 
+.kanaal-btn i { font-size: 1.1rem; }
+.btn-contact i { font-size: 1.1rem; }
+.btn-contact-large i { font-size: 1.2rem; }
+.btn-submit i { font-size: 1rem; }
+
 @media (max-width: 480px) {
     .kanaal-keuze { flex-direction: column; }
     .kanaal-btn { justify-content: center; }
