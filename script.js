@@ -1,3 +1,25 @@
+// --- MODDING SERVICES ACCORDION ---
+document.querySelectorAll('.mod-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const details = btn.nextElementSibling;
+        const isOpen = btn.classList.contains('open');
+        btn.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', !isOpen);
+        details.classList.toggle('hidden', isOpen);
+    });
+});
+
+// --- REPARATIE ACCORDION ---
+document.querySelectorAll('.rep-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const body = btn.nextElementSibling;
+        const isOpen = btn.classList.contains('open');
+        btn.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', !isOpen);
+        body.classList.toggle('hidden', isOpen);
+    });
+});
+
 // --- CAROUSEL ---
 const slides = document.querySelectorAll('.carousel-slide');
 const nextBtn = document.getElementById('nextBtn');
