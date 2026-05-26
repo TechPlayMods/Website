@@ -70,10 +70,11 @@ header .container {
     width: 44px;
     height: 44px;
     flex-shrink: 0;
+    overflow: visible;
 }
 
 .logo-chip {
-    font-size: 44px;
+    font-size: 38px;
     color: var(--primary);
     position: absolute;
     top: 0;
@@ -81,12 +82,13 @@ header .container {
 }
 
 .logo-iron {
-    font-size: 34px;
+    font-size: 42px;
     color: #fff;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-40deg);
+    left: 55%;
+    transform: translate(-20%, -50%) rotate(-40deg);
+    filter: drop-shadow(0 0 1.5px #fff);
 }
 
 .logo-text {
@@ -98,9 +100,9 @@ header .container {
 
 .logo-accent { color: var(--primary); }
 
-.footer-logo .logo-icon-wrap { width: 32px; height: 32px; }
-.footer-logo .logo-chip { font-size: 32px; }
-.footer-logo .logo-iron { font-size: 24px; }
+.footer-logo .logo-icon-wrap { width: 28px; height: 28px; }
+.footer-logo .logo-chip { font-size: 28px; }
+.footer-logo .logo-iron { font-size: 30px; top: 50%; left: 55%; transform: translate(-20%, -50%) rotate(-40deg); }
 .footer-logo .logo-text { font-size: 1.1rem; }
 
 nav a {
