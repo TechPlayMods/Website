@@ -65,7 +65,7 @@ header .container {
     color: var(--text-main);
 }
 
-.logo i { color: var(--primary); margin-right: 6px; }
+.logo-img { height: 36px; width: 36px; object-fit: contain; margin-right: 2px; vertical-align: middle; border-radius: 4px; }
 .logo span { color: var(--primary); }
 
 nav a {
@@ -873,7 +873,7 @@ footer {
     font-weight: 700;
 }
 
-.footer-logo i { color: var(--primary); margin-right: 6px; }
+.footer.logo-img { height: 36px; width: 36px; object-fit: contain; margin-right: 2px; vertical-align: middle; border-radius: 4px; }
 .footer-logo span { color: var(--primary); }
 
 .footer-tagline { color: var(--text-muted); font-size: 0.9rem; }
@@ -1641,26 +1641,25 @@ footer {
    KANAAL KEUZE KNOPPEN
 =========================== */
 .kanaal-keuze {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 8px;
 }
 
 .kanaal-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 18px;
+    gap: 8px;
+    padding: 11px 20px;
     border-radius: var(--radius);
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 0.9rem;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
     opacity: 0.65;
     color: #fff;
-    width: 100%;
 }
 
 .kanaal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
@@ -1677,7 +1676,8 @@ footer {
 .kanaal-btn.btn-dc { background: #5865f2; }
 
 @media (max-width: 480px) {
-    .kanaal-btn { font-size: 1.6rem; padding: 16px; }
+    .kanaal-keuze { flex-direction: column; }
+    .kanaal-btn { justify-content: center; }
 }
 
 /* ===========================
@@ -1714,8 +1714,8 @@ footer {
 .review-cta-content > p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
 
 .contact-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 16px;
 }
@@ -1723,13 +1723,13 @@ footer {
 .contact-btns-center { justify-content: center; margin-top: 20px; }
 
 .btn-contact {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 18px;
+    gap: 7px;
+    padding: 10px 18px;
     border-radius: var(--radius);
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: transform var(--transition), opacity var(--transition);
     color: #fff !important;
