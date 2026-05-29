@@ -8,49 +8,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     <style>
+        /* ── Sticky selection bar ── */
+        .sticky-selection {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(24, 27, 34, 0.97);
+            border-top: 1px solid #262b35;
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+        }
+        .sticky-selection.visible { transform: translateY(0); }
+        .sticky-selection-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .sticky-chips {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .sticky-chip {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #262b35;
+            color: #94a3b8;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.25s;
+        }
+        .sticky-chip.selected {
+            color: #0f1115;
+            border-color: transparent;
+        }
+        .sticky-chip-console.selected { background: #00ff88; color: #000; }
+        .sticky-chip-garantie.selected { background: #f59e0b; color: #000; }
+        .sticky-chip i { font-size: 0.8rem; }
+        .sticky-sep { color: #334155; font-size: 0.75rem; }
+        .sticky-total {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #00ff88;
+            white-space: nowrap;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        /* ── Garantie cards get flex column so button sits at bottom ── */
+        .garantie-card { display: flex; flex-direction: column; }
+        .garantie-card ul { flex: 1; }
+        .garantie-select-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px;
+            border-radius: 8px;
+            border: 1px solid #262b35;
+            color: #f5f6f8;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            transition: border-color 0.3s, color 0.3s, background 0.3s;
+        }
+        .garantie-select-btn:hover { border-color: #00ff88; color: #00ff88; }
+        .garantie-select-btn.geselecteerd {
+            background: #00ff88;
+            color: #000 !important;
+            border-color: #00ff88;
+        }
+        .garantie-premium .garantie-select-btn.geselecteerd {
+            background: #f59e0b;
+            border-color: #f59e0b;
+        }
+        .garantie-premium .garantie-select-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+
+        /* Highlight selected service card */
+        .card.geselecteerd {
+            border-color: #00ff88 !important;
+            box-shadow: 0 0 0 2px rgba(0,255,136,0.25) !important;
+        }
+        .card-orange.geselecteerd {
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 0 2px rgba(245,158,11,0.25) !important;
+        }
+        .aanvragen-btn.geselecteerd {
+            background: #00ff88;
+            color: #000 !important;
+            border-color: #00ff88;
+        }
+        .card-orange .aanvragen-btn.geselecteerd {
+            background: #f59e0b;
+            border-color: #f59e0b;
+        }
+
         /* ── Contact two-column layout ── */
         .contact-layout {
             display: grid;
-            grid-template-columns: 1fr 380px;
+            grid-template-columns: 1fr 360px;
             gap: 2rem;
             align-items: start;
         }
         .contact-form-col { min-width: 0; }
 
-        /* ── Garantie radio cards ── */
+        /* ── Garantie radio cards in form ── */
         .garantie-keuze {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-top: 0.5rem;
         }
-        .garantie-radio-label {
-            cursor: pointer;
-            display: block;
-        }
-        .garantie-radio-label input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .garantie-radio-label { cursor: pointer; display: block; }
+        .garantie-radio-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
         .garantie-radio-card {
-            border: 2px solid rgba(255,255,255,0.08);
+            border: 2px solid #262b35;
             border-radius: 12px;
             padding: 0.9rem 1rem;
             background: rgba(255,255,255,0.03);
             transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
         }
         .garantie-radio-label input:checked + .garantie-radio-card {
-            border-color: #6366f1;
-            background: rgba(99,102,241,0.12);
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+            border-color: #00ff88;
+            background: rgba(0,255,136,0.07);
+            box-shadow: 0 0 0 3px rgba(0,255,136,0.12);
         }
-        /* 180-day card gets gold accent when selected */
         #garantie-label-180 input:checked + .garantie-radio-card {
             border-color: #f59e0b;
-            background: rgba(245,158,11,0.10);
-            box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+            background: rgba(245,158,11,0.08);
+            box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
         }
         .garantie-radio-top {
             display: flex;
@@ -59,35 +155,16 @@
             gap: 0.5rem;
             margin-bottom: 0.3rem;
         }
-        .garantie-radio-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .garantie-radio-prijs {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            white-space: nowrap;
-        }
-        #garantie-label-180 input:checked ~ * .garantie-radio-prijs,
-        #garantie-label-180 input:checked + .garantie-radio-card .garantie-radio-prijs {
-            color: #f59e0b;
-            font-weight: 600;
-        }
-        .garantie-radio-desc {
-            font-size: 0.78rem;
-            color: #64748b;
-            margin: 0;
-            line-height: 1.4;
-        }
+        .garantie-radio-title { font-weight: 600; font-size: 0.9rem; }
+        .garantie-radio-prijs { font-size: 0.8rem; color: #94a3b8; white-space: nowrap; }
+        #garantie-label-180 input:checked + .garantie-radio-card .garantie-radio-prijs { color: #f59e0b; font-weight: 600; }
+        .garantie-radio-desc { font-size: 0.78rem; color: #64748b; margin: 0; line-height: 1.4; }
 
         /* ── Order Summary panel ── */
-        .order-summary {
-            position: sticky;
-            top: 90px;
-        }
+        .order-summary { position: sticky; top: 90px; }
         .order-summary-inner {
             background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid #262b35;
             border-radius: 16px;
             overflow: hidden;
         }
@@ -96,11 +173,11 @@
             align-items: center;
             gap: 0.6rem;
             padding: 1rem 1.25rem;
-            background: rgba(99,102,241,0.12);
+            background: rgba(0,255,136,0.07);
             border-bottom: 1px solid rgba(255,255,255,0.07);
             font-weight: 600;
             font-size: 0.95rem;
-            color: #a5b4fc;
+            color: #00ff88;
         }
         .order-placeholder {
             display: flex;
@@ -130,19 +207,10 @@
             font-size: 0.88rem;
             color: #cbd5e1;
         }
-        .order-row-label i { color: #6366f1; font-size: 0.85rem; }
+        .order-row-label i { color: #00ff88; font-size: 0.85rem; }
         .order-row-garantie .order-row-label i { color: #f59e0b; }
-        .order-row-prijs {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #e2e8f0;
-            white-space: nowrap;
-        }
-        .order-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.10);
-            margin: 0 1.25rem;
-        }
+        .order-row-prijs { font-size: 0.88rem; font-weight: 600; color: #e2e8f0; white-space: nowrap; }
+        .order-divider { height: 1px; background: rgba(255,255,255,0.10); margin: 0 1.25rem; }
         .order-total-wrap { padding: 0.75rem 0 0.25rem; }
         .order-total-row {
             display: flex;
@@ -150,77 +218,65 @@
             align-items: center;
             padding: 0.6rem 1.25rem;
         }
-        .order-total-label {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #f1f5f9;
-        }
-        .order-total-price {
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: #6366f1;
-            transition: color 0.25s;
-        }
-        .order-total-note {
-            font-size: 0.75rem;
-            color: #475569;
-            padding: 0 1.25rem 0.75rem;
-            margin: 0;
+        .order-total-label { font-weight: 700; font-size: 1rem; color: #f1f5f9; }
+        .order-total-price { font-weight: 700; font-size: 1.15rem; color: #00ff88; transition: color 0.25s; }
+        .order-total-note { font-size: 0.75rem; color: #475569; padding: 0 1.25rem 0.75rem; margin: 0; display: flex; align-items: center; gap: 0.4rem; }
+        .order-includes { padding: 0.75rem 1.25rem 1.1rem; border-top: 1px solid rgba(255,255,255,0.06); animation: summaryFadeIn 0.3s ease; }
+        .order-includes-title { font-size: 0.78rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 0.5rem; }
+        .order-includes ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+        .order-includes li { font-size: 0.8rem; color: #64748b; display: flex; align-items: center; gap: 0.5rem; }
+        .order-includes li i { color: #00ff88; font-size: 0.7rem; }
+
+        /* Waiting-for-garantie state in summary */
+        .order-row-garantie-pending {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-        }
-        .order-includes {
-            padding: 0.75rem 1.25rem 1.1rem;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            gap: 0.6rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.83rem;
+            color: #475569;
+            border-bottom: 1px dashed rgba(255,255,255,0.06);
             animation: summaryFadeIn 0.3s ease;
         }
-        .order-includes-title {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin: 0 0 0.5rem;
-        }
-        .order-includes ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .order-includes li {
-            font-size: 0.8rem;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .order-includes li i { color: #22c55e; font-size: 0.7rem; }
+        .order-row-garantie-pending i { color: #f59e0b; }
 
         @keyframes summaryFadeIn {
             from { opacity: 0; transform: translateY(-6px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Responsive: stack on mobile ── */
+        /* ── Responsive ── */
         @media (max-width: 900px) {
-            .contact-layout {
-                grid-template-columns: 1fr;
-            }
-            .order-summary {
-                position: static;
-                order: -1; /* Summary appears above form on mobile */
-            }
-            .garantie-keuze {
-                grid-template-columns: 1fr;
-            }
+            .contact-layout { grid-template-columns: 1fr; }
+            .order-summary { position: static; order: -1; }
+            .garantie-keuze { grid-template-columns: 1fr; }
+            .sticky-total { display: none; }
+        }
+        @media (max-width: 480px) {
+            .sticky-chips { gap: 6px; }
+            .sticky-chip { font-size: 0.78rem; padding: 6px 10px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Sticky Selection Bar -->
+    <div class="sticky-selection" id="stickySelection">
+        <div class="container sticky-selection-inner">
+            <div class="sticky-chips">
+                <div class="sticky-chip sticky-chip-console" id="stickyConsoleChip">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span id="stickyConsoleName">Console kiezen →</span>
+                </div>
+                <i class="fa-solid fa-chevron-right sticky-sep" id="stickySep"></i>
+                <div class="sticky-chip sticky-chip-garantie" id="stickyGarantieChip">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span id="stickyGarantieName">Garantie kiezen →</span>
+                </div>
+            </div>
+            <div class="sticky-total" id="stickyTotal"></div>
+        </div>
+    </div>
 
     <!-- Header / Navigatie -->
     <header>
@@ -295,7 +351,7 @@
                         <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                     </ul>
-                    <a href="#contact" class="btn-card aanvragen-btn" data-model="V1/V2" data-garantie="90">Direct Aanvragen</a>
+                    <a href="#garantie" class="btn-card aanvragen-btn" data-model="V1/V2" data-prijs="85" data-label="Switch V1 / V2">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="card popular">
@@ -315,7 +371,7 @@
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                         <li><i class="fa-solid fa-check"></i> DAT0-adapter onder de eMMC-chip</li>
                     </ul>
-                    <a href="#contact" class="btn-card btn-card-primary aanvragen-btn" data-model="OLED-DAT0" data-garantie="90">Direct Aanvragen</a>
+                    <a href="#garantie" class="btn-card btn-card-primary aanvragen-btn" data-model="OLED-DAT0" data-prijs="110" data-label="Switch OLED (DAT0)">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="card card-kamikaze card-orange">
@@ -335,7 +391,7 @@
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                         <li><i class="fa-solid fa-check"></i> DAT0-punt direct verbonden</li>
                     </ul>
-                    <a href="#contact" class="btn-card btn-card-premium aanvragen-btn" data-model="OLED-Kamikaze" data-garantie="180">Direct Aanvragen</a>
+                    <a href="#garantie" class="btn-card btn-card-premium aanvragen-btn" data-model="OLED-Kamikaze" data-prijs="130" data-label="Switch OLED (Kamikaze)">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="card">
@@ -352,7 +408,7 @@
                         <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
                         <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
                     </ul>
-                    <a href="#contact" class="btn-card aanvragen-btn" data-model="Lite" data-garantie="90">Direct Aanvragen</a>
+                    <a href="#garantie" class="btn-card aanvragen-btn" data-model="Lite" data-prijs="90" data-label="Switch Lite">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -451,6 +507,7 @@
                         <li><i class="fa-solid fa-check"></i> Geldig bij normaal gebruik</li>
                         <li><i class="fa-solid fa-check"></i> Snelle afhandeling via jouw voorkeurskanaal</li>
                     </ul>
+                    <a href="#contact" class="btn-card garantie-select-btn" data-garantie="90" data-garantie-label="90 Dagen Garantie" data-garantie-prijs="0">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div class="garantie-card garantie-premium">
                     <div class="garantie-populair">Aanbevolen</div>
@@ -464,7 +521,7 @@
                         <li><i class="fa-solid fa-check"></i> Prioriteit bij reparaties</li>
                         <li><i class="fa-solid fa-check"></i> Ideaal voor de Kamikaze-methode</li>
                     </ul>
-                    <p class="garantie-note">Selecteer deze optie bij je aanvraag.</p>
+                    <a href="#contact" class="btn-card garantie-select-btn" data-garantie="180" data-garantie-label="180 Dagen Garantie" data-garantie-prijs="20">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div class="garantie-card garantie-info">
                     <div class="garantie-icon"><i class="fa-solid fa-circle-info"></i></div>
@@ -785,13 +842,19 @@
                             <p>Selecteer je console om je overzicht te zien</p>
                         </div>
 
-                        <!-- Garantie row — hidden until console chosen -->
+                        <!-- Garantie row — hidden until garantie chosen -->
                         <div class="order-row order-row-garantie" id="summaryGarantieRow" style="display:none;">
                             <div class="order-row-label">
                                 <i class="fa-solid fa-shield-halved"></i>
                                 <span id="summaryGarantieName">90 Dagen Garantie</span>
                             </div>
                             <span class="order-row-prijs" id="summaryGarantiePrice">Inbegrepen</span>
+                        </div>
+
+                        <!-- Pending garantie prompt — shown after console chosen, before garantie chosen -->
+                        <div class="order-row-garantie-pending" id="summaryGarantiePending" style="display:none;">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Kies nog een garantie ↑
                         </div>
 
                         <!-- Divider + Total — hidden until console chosen -->
