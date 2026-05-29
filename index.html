@@ -127,11 +127,13 @@
         .timeline-tag-green i { color: #00ff88; }
 
         @media (max-width: 700px) {
-            .timeline::before { left: 24px; }
+            .timeline::before { left: 20px; }
             .timeline-item,
-            .timeline-item.timeline-item-right { flex-direction: column; padding-left: 64px; }
-            .timeline-icon { left: 24px; top: 0; transform: none; }
-            .timeline-card { width: 100%; margin: 0 !important; }
+            .timeline-item.timeline-item-right { flex-direction: column; padding-left: 56px; }
+            .timeline-icon { left: 0; top: 0; transform: none; width: 40px; height: 40px; font-size: 0.95rem; }
+            .timeline-card { width: 100%; margin: 0 !important; padding: 16px 18px; }
+            .timeline-card h4 { font-size: 0.97rem; }
+            .timeline-card p { font-size: 0.85rem; }
         }
 
         /* ── Sticky selection bar ── */
@@ -380,6 +382,7 @@
         @media (max-width: 480px) {
             .sticky-chips { gap: 6px; }
             .sticky-chip { font-size: 0.78rem; padding: 6px 10px; }
+            .sticky-sep { display: none; }
         }
     </style>
 </head>
