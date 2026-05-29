@@ -8,6 +8,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     <style>
+        /* ── microSD banner ── */
+        .microsd-banner {
+            background: linear-gradient(90deg, rgba(0,255,136,0.08) 0%, rgba(0,255,136,0.03) 100%);
+            border-top: 1px solid rgba(0,255,136,0.2);
+            border-bottom: 1px solid rgba(0,255,136,0.2);
+            padding: 18px 0;
+        }
+        .microsd-banner-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .microsd-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .microsd-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(0,255,136,0.12);
+            border: 1px solid rgba(0,255,136,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff88;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .microsd-text p {
+            margin: 0 0 2px;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+        .microsd-text span {
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+        .microsd-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #00ff88;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 7px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        @media (max-width: 600px) {
+            .microsd-banner-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .microsd-badge { align-self: flex-start; }
+        }
+
         /* ── Timeline (werkwijze) ── */
         .timeline {
             position: relative;
@@ -548,6 +606,20 @@
             </div>
         </div>
     </section>
+
+    <!-- microSD Banner -->
+    <div class="microsd-banner">
+        <div class="container microsd-banner-inner">
+            <div class="microsd-left">
+                <div class="microsd-icon"><i class="fa-solid fa-sd-card"></i></div>
+                <div class="microsd-text">
+                    <p><strong>Stuur je microSD-kaart mee</strong> — wij configureren hem gratis voor je.</p>
+                    <span>Wij raden minimaal 128GB (A1/A2) aan. 256GB of meer is nog fijner als je veel games wilt opslaan.</span>
+                </div>
+            </div>
+            <div class="microsd-badge"><i class="fa-solid fa-gift"></i> Gratis</div>
+        </div>
+    </div>
 
     <!-- DAT0 vs Kamikaze Vergelijking -->
     <section id="vergelijking" class="vergelijking">
