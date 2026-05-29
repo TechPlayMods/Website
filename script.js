@@ -294,12 +294,18 @@ function loadReviews() {
 // --- MODEL VOORINVULLEN VIA SERVICE KNOPPEN ---
 document.querySelectorAll('.aanvragen-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const model = btn.dataset.model;
-        const select = document.getElementById('console');
-        if (select && model) {
-            select.value = model;
-            updateSummary(); // Refresh the live summary
+        const model    = btn.dataset.model;
+        const garantie = btn.dataset.garantie;
+        const select   = document.getElementById('console');
+
+        if (select && model) select.value = model;
+
+        if (garantie) {
+            const radio = document.querySelector(`input[name="garantie"][value="${garantie}"]`);
+            if (radio) radio.checked = true;
         }
+
+        updateSummary();
     });
 });
 
