@@ -7,6 +7,218 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <style>
+        /* ── Contact two-column layout ── */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+        .contact-form-col { min-width: 0; }
+
+        /* ── Garantie radio cards ── */
+        .garantie-keuze {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        .garantie-radio-label {
+            cursor: pointer;
+            display: block;
+        }
+        .garantie-radio-label input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .garantie-radio-card {
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            background: rgba(255,255,255,0.03);
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        .garantie-radio-label input:checked + .garantie-radio-card {
+            border-color: #6366f1;
+            background: rgba(99,102,241,0.12);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+        }
+        /* 180-day card gets gold accent when selected */
+        #garantie-label-180 input:checked + .garantie-radio-card {
+            border-color: #f59e0b;
+            background: rgba(245,158,11,0.10);
+            box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+        }
+        .garantie-radio-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .garantie-radio-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .garantie-radio-prijs {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+        #garantie-label-180 input:checked ~ * .garantie-radio-prijs,
+        #garantie-label-180 input:checked + .garantie-radio-card .garantie-radio-prijs {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        .garantie-radio-desc {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* ── Order Summary panel ── */
+        .order-summary {
+            position: sticky;
+            top: 90px;
+        }
+        .order-summary-inner {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .order-summary-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 1.25rem;
+            background: rgba(99,102,241,0.12);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #a5b4fc;
+        }
+        .order-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 2.2rem 1.5rem;
+            color: #475569;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .order-placeholder i { font-size: 1.4rem; }
+        .order-placeholder p { margin: 0; }
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            gap: 0.5rem;
+            animation: summaryFadeIn 0.3s ease;
+        }
+        .order-row-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+        .order-row-label i { color: #6366f1; font-size: 0.85rem; }
+        .order-row-garantie .order-row-label i { color: #f59e0b; }
+        .order-row-prijs {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+        .order-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.10);
+            margin: 0 1.25rem;
+        }
+        .order-total-wrap { padding: 0.75rem 0 0.25rem; }
+        .order-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1.25rem;
+        }
+        .order-total-label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #f1f5f9;
+        }
+        .order-total-price {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #6366f1;
+            transition: color 0.25s;
+        }
+        .order-total-note {
+            font-size: 0.75rem;
+            color: #475569;
+            padding: 0 1.25rem 0.75rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .order-includes {
+            padding: 0.75rem 1.25rem 1.1rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            animation: summaryFadeIn 0.3s ease;
+        }
+        .order-includes-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 0 0 0.5rem;
+        }
+        .order-includes ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .order-includes li {
+            font-size: 0.8rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .order-includes li i { color: #22c55e; font-size: 0.7rem; }
+
+        @keyframes summaryFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Responsive: stack on mobile ── */
+        @media (max-width: 900px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+            .order-summary {
+                position: static;
+                order: -1; /* Summary appears above form on mobile */
+            }
+            .garantie-keuze {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -470,54 +682,141 @@
 
     <!-- Contact / Intake Section -->
     <section id="contact" class="contact">
-        <div class="container small-container">
+        <div class="container">
             <h2>Start Je Aanvraag</h2>
-            <p>Selecteer je consolemodel en kies via welk kanaal je contact wilt — dan wordt de aanvraagknop actief.</p>
+            <p class="section-subtitle">Selecteer je consolemodel en kies via welk kanaal je contact wilt — dan wordt de aanvraagknop actief.</p>
 
-            <form id="modForm">
-                <div class="form-group">
-                    <label for="console">Welke Switch heb je?</label>
-                    <select id="console" required>
-                        <option value="" disabled selected>Kies je model...</option>
-                        <option value="V1/V2">Nintendo Switch V1 / V2 — € 85,-</option>
-                        <option value="OLED-DAT0">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
-                        <option value="OLED-Kamikaze">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
-                        <option value="Lite">Nintendo Switch Lite — € 90,-</option>
-                    </select>
-                </div>
+            <div class="contact-layout">
+                <!-- LEFT: Form -->
+                <div class="contact-form-col">
+                    <form id="modForm">
+                        <div class="form-group">
+                            <label for="console">Welke Switch heb je?</label>
+                            <select id="console" required>
+                                <option value="" disabled selected>Kies je model...</option>
+                                <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
+                                <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
+                                <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
+                                <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
+                            </select>
+                        </div>
 
-                <div class="form-group">
-                    <label>Via welk kanaal wil je contact?</label>
-                    <div class="kanaal-keuze">
-                        <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM"><i class="fa-brands fa-telegram"></i></button>
-                        <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP"><i class="fa-brands fa-whatsapp"></i></button>
-                        <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT"><i class="fa-brands fa-reddit"></i></button>
-                        <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD"><i class="fa-brands fa-discord"></i></button>
+                        <div class="form-group">
+                            <label>Welke garantie wil je?</label>
+                            <div class="garantie-keuze">
+                                <label class="garantie-radio-label" id="garantie-label-90">
+                                    <input type="radio" name="garantie" value="90" data-extra="0" checked>
+                                    <div class="garantie-radio-card">
+                                        <div class="garantie-radio-top">
+                                            <span class="garantie-radio-title"><i class="fa-solid fa-shield-halved"></i> 90 Dagen</span>
+                                            <span class="garantie-radio-prijs">Inbegrepen</span>
+                                        </div>
+                                        <p class="garantie-radio-desc">Standaard garantie bij elke mod</p>
+                                    </div>
+                                </label>
+                                <label class="garantie-radio-label" id="garantie-label-180">
+                                    <input type="radio" name="garantie" value="180" data-extra="20">
+                                    <div class="garantie-radio-card">
+                                        <div class="garantie-radio-top">
+                                            <span class="garantie-radio-title"><i class="fa-solid fa-shield"></i> 180 Dagen</span>
+                                            <span class="garantie-radio-prijs">+ € 20,-</span>
+                                        </div>
+                                        <p class="garantie-radio-desc">Uitgebreide dekking — 6 maanden</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Via welk kanaal wil je contact?</label>
+                            <div class="kanaal-keuze">
+                                <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM"><i class="fa-brands fa-telegram"></i></button>
+                                <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT"><i class="fa-brands fa-reddit"></i></button>
+                                <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD"><i class="fa-brands fa-discord"></i></button>
+                            </div>
+                            <input type="hidden" id="gekozenKanaal" value="">
+                            <input type="hidden" id="gekozenUrl" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="msg">Vragen of opmerkingen (optioneel):</label>
+                            <textarea id="msg" rows="4" placeholder="Bijv. welke SD-kaart je gebruikt, of dat je vragen hebt over de procedure..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit btn-submit-disabled" id="submitBtn" disabled>
+                            <i id="submitIcon" class="fa-solid fa-lock"></i> Aanvraag Verzenden
+                        </button>
+                        <p class="submit-hint" id="submitHint">Kies eerst een contactkanaal hierboven</p>
+                    </form>
+
+                    <div id="successMessage" class="success-box hidden">
+                        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>Aanvraag Ontvangen!</h3>
+                        <p id="successText">Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen.</p>
+                        <a href="#" id="successLink" target="_blank" class="btn-contact-large">
+                            <i id="successIcon" class="fa-brands fa-telegram"></i>
+                            <span id="successKanaal">Open kanaal</span>
+                        </a>
+                        <p class="success-note"><i class="fa-solid fa-lock"></i> Volledig anoniem en beveiligd</p>
                     </div>
-                    <input type="hidden" id="gekozenKanaal" value="">
-                    <input type="hidden" id="gekozenUrl" value="">
                 </div>
 
-                <div class="form-group">
-                    <label for="msg">Vragen of opmerkingen (optioneel):</label>
-                    <textarea id="msg" rows="4" placeholder="Bijv. welke SD-kaart je gebruikt, of dat je vragen hebt over de procedure..."></textarea>
+                <!-- RIGHT: Live Order Summary -->
+                <div class="order-summary" id="orderSummary">
+                    <div class="order-summary-inner">
+                        <div class="order-summary-header">
+                            <i class="fa-solid fa-receipt"></i>
+                            <span>Jouw Overzicht</span>
+                        </div>
+
+                        <!-- Console row — hidden until chosen -->
+                        <div class="order-row" id="summaryConsoleRow" style="display:none;">
+                            <div class="order-row-label">
+                                <i class="fa-solid fa-gamepad"></i>
+                                <span id="summaryConsoleName">—</span>
+                            </div>
+                            <span class="order-row-prijs" id="summaryConsolePrice">€ —</span>
+                        </div>
+
+                        <!-- Placeholder when nothing chosen yet -->
+                        <div class="order-placeholder" id="summaryPlaceholder">
+                            <i class="fa-regular fa-hand-pointer"></i>
+                            <p>Selecteer je console om je overzicht te zien</p>
+                        </div>
+
+                        <!-- Garantie row — hidden until console chosen -->
+                        <div class="order-row order-row-garantie" id="summaryGarantieRow" style="display:none;">
+                            <div class="order-row-label">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span id="summaryGarantieName">90 Dagen Garantie</span>
+                            </div>
+                            <span class="order-row-prijs" id="summaryGarantiePrice">Inbegrepen</span>
+                        </div>
+
+                        <!-- Divider + Total — hidden until console chosen -->
+                        <div class="order-total-wrap" id="summaryTotalWrap" style="display:none;">
+                            <div class="order-divider"></div>
+                            <div class="order-total-row">
+                                <span class="order-total-label">Totaal</span>
+                                <span class="order-total-price" id="summaryTotal">€ —</span>
+                            </div>
+                            <p class="order-total-note"><i class="fa-solid fa-circle-info"></i> Betaling contant bij verzending</p>
+                        </div>
+
+                        <!-- What's included -->
+                        <div class="order-includes" id="summaryIncludes" style="display:none;">
+                            <p class="order-includes-title">Altijd inbegrepen:</p>
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>
+                                <li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>
+                                <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND + EmuNAND)</li>
+                                <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                                <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn-submit btn-submit-disabled" id="submitBtn" disabled>
-                    <i id="submitIcon" class="fa-solid fa-lock"></i> Aanvraag Verzenden
-                </button>
-                <p class="submit-hint" id="submitHint">Kies eerst een contactkanaal hierboven</p>
-            </form>
-
-            <div id="successMessage" class="success-box hidden">
-                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <h3>Aanvraag Ontvangen!</h3>
-                <p id="successText">Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen.</p>
-                <a href="#" id="successLink" target="_blank" class="btn-contact-large">
-                    <i id="successIcon" class="fa-brands fa-telegram"></i>
-                    <span id="successKanaal">Open kanaal</span>
-                </a>
-                <p class="success-note"><i class="fa-solid fa-lock"></i> Volledig anoniem en beveiligd</p>
             </div>
         </div>
     </section>
