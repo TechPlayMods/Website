@@ -71,6 +71,71 @@ const kanaalKlassen = {
 const submitBtn = document.getElementById('submitBtn');
 const submitHint = document.getElementById('submitHint');
 
+// --- LIVE ORDER SUMMARY ---
+const consoleSelect = document.getElementById('console');
+
+const summaryConsoleRow  = document.getElementById('summaryConsoleRow');
+const summaryConsoleName = document.getElementById('summaryConsoleName');
+const summaryConsolePrice= document.getElementById('summaryConsolePrice');
+const summaryPlaceholder = document.getElementById('summaryPlaceholder');
+const summaryGarantieRow = document.getElementById('summaryGarantieRow');
+const summaryGarantieName= document.getElementById('summaryGarantieName');
+const summaryGarantiePrice=document.getElementById('summaryGarantiePrice');
+const summaryTotalWrap   = document.getElementById('summaryTotalWrap');
+const summaryTotal       = document.getElementById('summaryTotal');
+const summaryIncludes    = document.getElementById('summaryIncludes');
+
+function getSelectedGarantie() {
+    const checked = document.querySelector('input[name="garantie"]:checked');
+    return checked ? { dagen: checked.value, extra: parseInt(checked.dataset.extra) } : { dagen: '90', extra: 0 };
+}
+
+function updateSummary() {
+    const selectedOption = consoleSelect.options[consoleSelect.selectedIndex];
+    const hasConsole = consoleSelect.value !== '';
+
+    if (!hasConsole) {
+        summaryPlaceholder.style.display = '';
+        summaryConsoleRow.style.display  = 'none';
+        summaryGarantieRow.style.display = 'none';
+        summaryTotalWrap.style.display   = 'none';
+        summaryIncludes.style.display    = 'none';
+        return;
+    }
+
+    const basisPrijs = parseInt(selectedOption.dataset.prijs);
+    const garantie   = getSelectedGarantie();
+    const totaal     = basisPrijs + garantie.extra;
+
+    // Console row
+    summaryPlaceholder.style.display  = 'none';
+    summaryConsoleRow.style.display   = '';
+    summaryConsoleName.textContent    = selectedOption.text.split(' — ')[0]; // just the model name
+    summaryConsolePrice.textContent   = `€ ${basisPrijs},-`;
+
+    // Garantie row
+    summaryGarantieRow.style.display  = '';
+    summaryGarantieName.textContent   = `${garantie.dagen} Dagen Garantie`;
+    summaryGarantiePrice.textContent  = garantie.extra === 0 ? 'Inbegrepen' : `+ € ${garantie.extra},-`;
+    // Gold colour for 180-day
+    summaryGarantiePrice.style.color  = garantie.extra > 0 ? '#f59e0b' : '';
+
+    // Total
+    summaryTotalWrap.style.display    = '';
+    summaryTotal.textContent          = `€ ${totaal},-`;
+
+    // Includes checklist
+    summaryIncludes.style.display     = '';
+}
+
+// Trigger on console change
+consoleSelect.addEventListener('change', updateSummary);
+
+// Trigger on warranty change
+document.querySelectorAll('input[name="garantie"]').forEach(radio => {
+    radio.addEventListener('change', updateSummary);
+});
+
 // Kanaal keuze — knop activeren
 document.querySelectorAll('.kanaal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -95,23 +160,20 @@ document.querySelectorAll('.kanaal-btn').forEach(btn => {
 document.getElementById('modForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const kanaal = document.getElementById('gekozenKanaal').value;
-    const url = document.getElementById('gekozenUrl').value;
-    const console_keuze = document.getElementById('console').value;
-    const opmerking = document.getElementById('msg').value;
+    const kanaal       = document.getElementById('gekozenKanaal').value;
+    const url          = document.getElementById('gekozenUrl').value;
+    const console_keuze= document.getElementById('console').value;
+    const opmerking    = document.getElementById('msg').value;
+    const garantie     = getSelectedGarantie();
 
     // Bouw bericht op
-    let bericht = `Hoi! Ik wil een modchip laten installeren 🎮
-
-Console: ${console_keuze}`;
-    if (opmerking) bericht += `
-Opmerking: ${opmerking}`;
+    let bericht = `Hoi! Ik wil een modchip laten installeren 🎮\n\nConsole: ${console_keuze}\nGarantie: ${garantie.dagen} dagen`;
+    if (garantie.extra > 0) bericht += ` (+ € ${garantie.extra},-)`;
+    if (opmerking) bericht += `\nOpmerking: ${opmerking}`;
 
     // Maak de link met vooraf ingevuld bericht waar mogelijk
     let finalUrl = url;
-    if (kanaal === 'telegram') {
-        finalUrl = url + '?text=' + encodeURIComponent(bericht);
-    } else if (kanaal === 'whatsapp') {
+    if (kanaal === 'telegram' || kanaal === 'whatsapp') {
         finalUrl = url + '?text=' + encodeURIComponent(bericht);
     }
 
@@ -234,7 +296,10 @@ document.querySelectorAll('.aanvragen-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const model = btn.dataset.model;
         const select = document.getElementById('console');
-        if (select && model) select.value = model;
+        if (select && model) {
+            select.value = model;
+            updateSummary(); // Refresh the live summary
+        }
     });
 });
 
