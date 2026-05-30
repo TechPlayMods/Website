@@ -69,32 +69,71 @@ document.querySelectorAll('.rep-tab').forEach(tab => {
 
 
 // ============================================================
-// REPARATIE KAART SELECTIE
+// REPARATIE KAART SELECTIE — multi-select, geen auto-scroll
 // ============================================================
+const selectedRepairs = new Map(); // key = naam, value = { model, naam, prijs }
+
+function updateRepairUI() {
+    const count = selectedRepairs.size;
+    const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
+
+    // Selected bar under the grid
+    const bar = document.getElementById('repSelectedBar');
+    if (count > 0) {
+        bar.style.display = '';
+        document.getElementById('repSelectedCount').textContent = count + (count === 1 ? ' reparatie geselecteerd' : ' reparaties geselecteerd');
+        document.getElementById('repSelectedTotal').textContent = '≈ € ' + total + ',-';
+
+        // Chips
+        const chips = document.getElementById('repSelectedChips');
+        chips.innerHTML = [...selectedRepairs.values()].map(r =>
+            `<span class="rep-chip">${r.naam.split('(')[0].trim()}</span>`
+        ).join('');
+    } else {
+        bar.style.display = 'none';
+    }
+
+    // Sticky bar
+    if (state.type === 'reparatie') {
+        if (count === 0) {
+            stickyBar.classList.remove('visible');
+        } else {
+            stickyBar.classList.add('visible');
+            const firstRepair = [...selectedRepairs.values()][0];
+            stickyConsoleChip.classList.add('selected');
+            stickyConsoleName.textContent = firstRepair.model;
+            stickyRepairChip.classList.add('selected');
+            stickyRepairName.textContent  = count === 1 ? firstRepair.naam.split('(')[0].trim() : count + ' reparaties';
+            stickyTotal.textContent       = '≈ € ' + total + ',-';
+        }
+    }
+
+    // Order summary panel
+    updateOrderSummary();
+    syncFormToState();
+}
+
 document.querySelectorAll('.rep-card').forEach(card => {
     card.addEventListener('click', () => {
-        // Deselect all
-        document.querySelectorAll('.rep-card').forEach(c => {
-            c.classList.remove('geselecteerd');
-            c.querySelector('.rep-select-btn').textContent = 'Selecteer';
-        });
+        const naam  = card.dataset.repNaam;
+        const model = card.dataset.repModel;
+        const prijs = parseInt(card.dataset.repPrijs);
 
-        // Select this
-        card.classList.add('geselecteerd');
-        card.querySelector('.rep-select-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
+        if (selectedRepairs.has(naam)) {
+            // Deselect
+            selectedRepairs.delete(naam);
+            card.classList.remove('geselecteerd');
+            card.querySelector('.rep-select-btn').innerHTML = 'Selecteer';
+        } else {
+            // Select — allow mixing but warn if different model
+            selectedRepairs.set(naam, { model, naam, prijs });
+            card.classList.add('geselecteerd');
+            card.querySelector('.rep-select-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
+        }
 
-        state.repair = {
-            model: card.dataset.repModel,
-            naam:  card.dataset.repNaam,
-            prijs: parseInt(card.dataset.repPrijs)
-        };
-
-        // Switch form to reparatie mode
+        // Switch form to reparatie mode (no scroll)
         setAanvraagType('reparatie');
-        refreshAll();
-
-        // Scroll to contact
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        updateRepairUI();
     });
 });
 
@@ -179,13 +218,15 @@ function updateStickyBar() {
             stickyTotal.textContent = '';
         }
     } else {
-        if (!state.repair) { stickyBar.classList.remove('visible'); return; }
+        if (selectedRepairs.size === 0) { stickyBar.classList.remove('visible'); return; }
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
         stickyBar.classList.add('visible');
-        stickyConsoleName.textContent = state.repair.model;
+        stickyConsoleName.textContent = repairs[0].model;
         stickyConsoleChip.classList.add('selected');
-        stickyRepairName.textContent = state.repair.naam;
+        stickyRepairName.textContent  = repairs.length === 1 ? repairs[0].naam.split('(')[0].trim() : repairs.length + ' reparaties';
         stickyRepairChip.classList.add('selected');
-        stickyTotal.textContent = '€ ' + state.repair.prijs + ',-';
+        stickyTotal.textContent       = '≈ € ' + total + ',-';
     }
 }
 
@@ -248,18 +289,33 @@ function updateOrderSummary() {
 
     } else {
         // Reparatie
-        if (!state.repair) return;
+        if (selectedRepairs.size === 0) return;
+
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
+        const model   = repairs[0].model;
 
         summaryPlaceholder.style.display = 'none';
         summaryConsoleRow.style.display  = '';
-        summaryConsoleName.textContent   = state.repair.model;
+        summaryConsoleName.textContent   = model;
         summaryConsolePrice.textContent  = '';
-        summaryRepairRow.style.display   = '';
-        summaryRepairName.textContent    = state.repair.naam;
-        summaryRepairPrice.textContent   = '€ ' + state.repair.prijs + ',-';
-        summaryTotalWrap.style.display   = '';
-        summaryTotal.textContent         = '€ ' + state.repair.prijs + ',-';
-        summaryIncludes.style.display    = '';
+
+        // Show each repair as a row
+        summaryRepairRow.style.display = 'none'; // hide the single-row element
+        // Insert dynamic rows before total
+        const existingDynRows = document.querySelectorAll('.summary-repair-dynamic');
+        existingDynRows.forEach(r => r.remove());
+
+        repairs.forEach(r => {
+            const row = document.createElement('div');
+            row.className = 'order-row order-row-repair summary-repair-dynamic';
+            row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
+            summaryTotalWrap.parentNode.insertBefore(row, summaryTotalWrap);
+        });
+
+        summaryTotalWrap.style.display  = '';
+        summaryTotal.textContent        = '≈ € ' + total + ',-';
+        summaryIncludes.style.display   = '';
         summaryIncludesList.innerHTML = `
             <li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>
             <li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>
@@ -279,12 +335,18 @@ function syncFormToState() {
     // Sync reparatie form display
     const repEmpty  = document.getElementById('repAanvraagEmpty');
     const repFilled = document.getElementById('repAanvraagFilled');
-    if (state.repair) {
+    if (selectedRepairs.size > 0) {
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
         repEmpty.style.display  = 'none';
         repFilled.style.display = '';
-        document.getElementById('repFormModel').textContent = state.repair.model;
-        document.getElementById('repFormNaam').textContent  = state.repair.naam;
-        document.getElementById('repFormPrijs').textContent = '€ ' + state.repair.prijs + ',-';
+        document.getElementById('repFormModel').textContent = repairs[0].model;
+        document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
+        // Render individual repair rows
+        const itemsEl = document.getElementById('repFormItems');
+        itemsEl.innerHTML = repairs.map(r =>
+            `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`
+        ).join('');
     } else {
         repEmpty.style.display  = '';
         repFilled.style.display = 'none';
@@ -299,11 +361,13 @@ function refreshAll() {
 
 // Clear repair selection
 document.getElementById('repAanvraagClear').addEventListener('click', () => {
-    state.repair = null;
+    selectedRepairs.clear();
     document.querySelectorAll('.rep-card').forEach(c => {
         c.classList.remove('geselecteerd');
         c.querySelector('.rep-select-btn').textContent = 'Selecteer';
     });
+    document.querySelectorAll('.summary-repair-dynamic').forEach(r => r.remove());
+    updateRepairUI();
     refreshAll();
 });
 
@@ -438,7 +502,11 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
         bericht = `Hoi! Ik wil een modchip laten installeren 🎮\n\nConsole: ${console_keuze}\nGarantie: ${garantie.label}`;
         if (garantie.prijs > 0) bericht += ` (+ € ${garantie.prijs},-)`;
     } else {
-        bericht = `Hoi! Ik wil een reparatie aanvragen 🔧\n\nConsole: ${state.repair.model}\nReparatie: ${state.repair.naam}\nIndicatieve prijs: € ${state.repair.prijs},-`;
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
+        const model   = repairs[0]?.model || '—';
+        const lijst   = repairs.map(r => `• ${r.naam} (€ ${r.prijs},-)`).join('\n');
+        bericht = `Hoi! Ik wil een reparatie aanvragen 🔧\n\nConsole: ${model}\nReparaties:\n${lijst}\n\nIndicatief totaal: ≈ € ${total},-`;
     }
 
     if (opmerking) bericht += `\nOpmerking: ${opmerking}`;
