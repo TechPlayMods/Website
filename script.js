@@ -146,6 +146,7 @@ document.querySelectorAll('.aanvraag-type-btn').forEach(btn => {
 const stickyBar          = document.getElementById('stickySelection');
 const stickyConsoleName  = document.getElementById('stickyConsoleName');
 const stickyGarantieName = document.getElementById('stickyGarantieName');
+const stickyGarantieIcon = document.getElementById('stickyGarantieIcon');
 const stickyConsoleChip  = document.getElementById('stickyConsoleChip');
 const stickyGarantieChip = document.getElementById('stickyGarantieChip');
 const stickyRepairChip   = document.getElementById('stickyRepairChip');
@@ -161,14 +162,23 @@ function updateStickyBar() {
         if (state.garantie) {
             stickyGarantieName.textContent = state.garantie.label;
             stickyGarantieChip.classList.add('selected');
+            if (state.garantie.dagen === '180') {
+                stickyGarantieIcon.className = 'fa-solid fa-shield';
+                stickyGarantieChip.classList.remove('sticky-chip-garantie-90');
+                stickyGarantieChip.classList.add('sticky-chip-garantie-180');
+            } else {
+                stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
+                stickyGarantieChip.classList.remove('sticky-chip-garantie-180');
+                stickyGarantieChip.classList.add('sticky-chip-garantie-90');
+            }
             stickyTotal.textContent = '€ ' + (state.console.prijs + state.garantie.prijs) + ',-';
         } else {
             stickyGarantieName.textContent = 'Garantie kiezen →';
-            stickyGarantieChip.classList.remove('selected');
+            stickyGarantieChip.classList.remove('selected', 'sticky-chip-garantie-90', 'sticky-chip-garantie-180');
+            stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
             stickyTotal.textContent = '';
         }
     } else {
-        // Reparatie mode
         if (!state.repair) { stickyBar.classList.remove('visible'); return; }
         stickyBar.classList.add('visible');
         stickyConsoleName.textContent = state.repair.model;
