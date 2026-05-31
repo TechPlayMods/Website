@@ -2251,7 +2251,7 @@ footer {
 
 .rep-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     text-align: left;
     align-items: stretch;
@@ -2829,7 +2829,7 @@ nav a {
 =========================== */
 .rep-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     text-align: left;
     align-items: stretch;
@@ -3040,4 +3040,14 @@ footer {
         padding-bottom: 32px;
     }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ===========================
+   REPARATIE GRID — VASTE KOLOMMEN
+=========================== */
+@media (max-width: 900px) {
+    .rep-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+    .rep-grid { grid-template-columns: 1fr; }
 }
