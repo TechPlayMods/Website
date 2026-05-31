@@ -2880,3 +2880,124 @@ nav a {
 .rep-icon { flex-shrink: 0; }
 .rep-prijs { margin-left: auto; font-weight: 800; font-size: 1rem; white-space: nowrap; }
 .rep-select-btn { flex-shrink: 0; }
+
+/* ===========================
+   GARANTIE ICON KLEUREN IN SUMMARY
+=========================== */
+.summary-garantie-icon-90  { color: var(--primary) !important; }
+.summary-garantie-icon-180 { color: #f59e0b !important; }
+
+/* ===========================
+   FOOTER VERBETERD
+=========================== */
+footer {
+    padding: 60px 0 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg-dark);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+}
+
+.footer-logo-text {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.footer-tagline {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.footer-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+
+.footer-social-btn:hover { opacity: 0.85; transform: translateY(-1px); color: #fff; }
+.footer-social-tg { border-color: rgba(0,136,204,0.3); }
+.footer-social-tg:hover { background: #0088cc; border-color: #0088cc; }
+.footer-social-wa { border-color: rgba(37,211,102,0.3); }
+.footer-social-wa:hover { background: #25d366; border-color: #25d366; }
+.footer-social-rd { border-color: rgba(255,69,0,0.3); }
+.footer-social-rd:hover { background: #ff4500; border-color: #ff4500; }
+.footer-social-dc { border-color: rgba(88,101,242,0.3); }
+.footer-social-dc:hover { background: #5865f2; border-color: #5865f2; }
+
+.footer-nav-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.footer-nav-col a {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-nav-col a:hover { color: var(--primary); }
+
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+.footer-disclaimer {
+    font-size: 0.78rem;
+    color: #334155;
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-bottom: 32px;
+    }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
