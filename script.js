@@ -1,9 +1,10 @@
-// --- CAROUSEL ---
+// ============================================================
+// CAROUSEL
+// ============================================================
 const slides = document.querySelectorAll('.carousel-slide');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
 const dotsContainer = document.getElementById('carouselDots');
-
 let currentSlide = 0;
 const slideIntervalTime = 5000;
 let slideInterval;
@@ -15,7 +16,6 @@ slides.forEach((_, index) => {
     dot.addEventListener('click', () => { goToSlide(index); resetTimer(); });
     dotsContainer.appendChild(dot);
 });
-
 const dots = document.querySelectorAll('.dot');
 
 function updateSliders() {
@@ -24,7 +24,6 @@ function updateSliders() {
         dots[index].classList.toggle('active', index === currentSlide);
     });
 }
-
 function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateSliders(); }
 function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSliders(); }
 function goToSlide(index) { currentSlide = index; updateSliders(); }
@@ -45,14 +44,13 @@ startTimer();
 
 
 // ============================================================
-// GLOBAL STATE
+// UNIFIED STATE
 // ============================================================
 const state = {
-    type: 'modding',   // 'modding' | 'reparatie'
-    console: null,     // { model, label, prijs }
-    garantie: null,    // { dagen, label, prijs }
-    repair: null       // { model, naam, prijs }
+    console:  null,   // { model, label, prijs }
+    garantie: null,   // { dagen, label, prijs }
 };
+const selectedRepairs = new Map(); // naam → { model, naam, prijs }
 
 
 // ============================================================
@@ -71,48 +69,6 @@ document.querySelectorAll('.rep-tab').forEach(tab => {
 // ============================================================
 // REPARATIE KAART SELECTIE — multi-select, geen auto-scroll
 // ============================================================
-const selectedRepairs = new Map(); // key = naam, value = { model, naam, prijs }
-
-function updateRepairUI() {
-    const count = selectedRepairs.size;
-    const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
-
-    // Selected bar under the grid
-    const bar = document.getElementById('repSelectedBar');
-    if (count > 0) {
-        bar.style.display = '';
-        document.getElementById('repSelectedCount').textContent = count + (count === 1 ? ' reparatie geselecteerd' : ' reparaties geselecteerd');
-        document.getElementById('repSelectedTotal').textContent = '≈ € ' + total + ',-';
-
-        // Chips
-        const chips = document.getElementById('repSelectedChips');
-        chips.innerHTML = [...selectedRepairs.values()].map(r =>
-            `<span class="rep-chip">${r.naam.split('(')[0].trim()}</span>`
-        ).join('');
-    } else {
-        bar.style.display = 'none';
-    }
-
-    // Sticky bar
-    if (state.type === 'reparatie') {
-        if (count === 0) {
-            stickyBar.classList.remove('visible');
-        } else {
-            stickyBar.classList.add('visible');
-            const firstRepair = [...selectedRepairs.values()][0];
-            stickyConsoleChip.classList.add('selected');
-            stickyConsoleName.textContent = firstRepair.model;
-            stickyRepairChip.classList.add('selected');
-            stickyRepairName.textContent  = count === 1 ? firstRepair.naam.split('(')[0].trim() : count + ' reparaties';
-            stickyTotal.textContent       = '≈ € ' + total + ',-';
-        }
-    }
-
-    // Order summary panel
-    updateOrderSummary();
-    syncFormToState();
-}
-
 document.querySelectorAll('.rep-card').forEach(card => {
     card.addEventListener('click', () => {
         const naam  = card.dataset.repNaam;
@@ -120,255 +76,16 @@ document.querySelectorAll('.rep-card').forEach(card => {
         const prijs = parseInt(card.dataset.repPrijs);
 
         if (selectedRepairs.has(naam)) {
-            // Deselect
             selectedRepairs.delete(naam);
             card.classList.remove('geselecteerd');
-            card.querySelector('.rep-select-btn').innerHTML = 'Selecteer';
+            card.querySelector('.rep-select-btn').textContent = 'Selecteer';
         } else {
-            // Select — allow mixing but warn if different model
             selectedRepairs.set(naam, { model, naam, prijs });
             card.classList.add('geselecteerd');
             card.querySelector('.rep-select-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
         }
-
-        // Switch form to reparatie mode (no scroll)
-        setAanvraagType('reparatie');
-        updateRepairUI();
+        refreshAll();
     });
-});
-
-
-// ============================================================
-// AANVRAAG TYPE TOGGLE (modding / reparatie)
-// ============================================================
-function setAanvraagType(type) {
-    state.type = type;
-
-    document.querySelectorAll('.aanvraag-type-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.type === type);
-    });
-
-    document.getElementById('moddingFields').style.display  = type === 'modding'   ? '' : 'none';
-    document.getElementById('reparatieFields').style.display= type === 'reparatie' ? '' : 'none';
-
-    // Show/hide sticky garantie chip
-    const stickyGarantie    = document.getElementById('stickyGarantieChip');
-    const stickySep         = document.getElementById('stickySep');
-    const stickyRepairChip  = document.getElementById('stickyRepairChip');
-    const stickySepRepair   = document.getElementById('stickySepRepair');
-
-    if (type === 'modding') {
-        stickyGarantie.style.display   = '';
-        stickySep.style.display        = '';
-        stickyRepairChip.style.display = 'none';
-        stickySepRepair.style.display  = 'none';
-    } else {
-        stickyGarantie.style.display   = 'none';
-        stickySep.style.display        = 'none';
-        stickyRepairChip.style.display = '';
-        stickySepRepair.style.display  = '';
-    }
-
-    refreshAll();
-}
-
-document.querySelectorAll('.aanvraag-type-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        setAanvraagType(btn.dataset.type);
-    });
-});
-
-
-// ============================================================
-// STICKY BAR
-// ============================================================
-const stickyBar          = document.getElementById('stickySelection');
-const stickyConsoleName  = document.getElementById('stickyConsoleName');
-const stickyGarantieName = document.getElementById('stickyGarantieName');
-const stickyGarantieIcon = document.getElementById('stickyGarantieIcon');
-const stickyConsoleChip  = document.getElementById('stickyConsoleChip');
-const stickyGarantieChip = document.getElementById('stickyGarantieChip');
-const stickyRepairChip   = document.getElementById('stickyRepairChip');
-const stickyRepairName   = document.getElementById('stickyRepairName');
-const stickyTotal        = document.getElementById('stickyTotal');
-
-function updateStickyBar() {
-    if (state.type === 'modding') {
-        if (!state.console) { stickyBar.classList.remove('visible'); return; }
-        stickyBar.classList.add('visible');
-        stickyConsoleName.textContent = state.console.label;
-        stickyConsoleChip.classList.add('selected');
-        if (state.garantie) {
-            stickyGarantieName.textContent = state.garantie.label;
-            stickyGarantieChip.classList.add('selected');
-            if (state.garantie.dagen === '180') {
-                stickyGarantieIcon.className = 'fa-solid fa-shield';
-                stickyGarantieChip.classList.remove('sticky-chip-garantie-90');
-                stickyGarantieChip.classList.add('sticky-chip-garantie-180');
-            } else {
-                stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
-                stickyGarantieChip.classList.remove('sticky-chip-garantie-180');
-                stickyGarantieChip.classList.add('sticky-chip-garantie-90');
-            }
-            stickyTotal.textContent = '€ ' + (state.console.prijs + state.garantie.prijs) + ',-';
-        } else {
-            stickyGarantieName.textContent = 'Garantie kiezen →';
-            stickyGarantieChip.classList.remove('selected', 'sticky-chip-garantie-90', 'sticky-chip-garantie-180');
-            stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
-            stickyTotal.textContent = '';
-        }
-    } else {
-        if (selectedRepairs.size === 0) { stickyBar.classList.remove('visible'); return; }
-        const repairs = [...selectedRepairs.values()];
-        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
-        stickyBar.classList.add('visible');
-        stickyConsoleName.textContent = repairs[0].model;
-        stickyConsoleChip.classList.add('selected');
-        stickyRepairName.textContent  = repairs.length === 1 ? repairs[0].naam.split('(')[0].trim() : repairs.length + ' reparaties';
-        stickyRepairChip.classList.add('selected');
-        stickyTotal.textContent       = '≈ € ' + total + ',-';
-    }
-}
-
-
-// ============================================================
-// ORDER SUMMARY PANEL
-// ============================================================
-const summaryConsoleRow      = document.getElementById('summaryConsoleRow');
-const summaryConsoleName     = document.getElementById('summaryConsoleName');
-const summaryConsolePrice    = document.getElementById('summaryConsolePrice');
-const summaryPlaceholder     = document.getElementById('summaryPlaceholder');
-const summaryGarantieRow     = document.getElementById('summaryGarantieRow');
-const summaryGarantiePending = document.getElementById('summaryGarantiePending');
-const summaryGarantieName    = document.getElementById('summaryGarantieName');
-const summaryGarantiePrice   = document.getElementById('summaryGarantiePrice');
-const summaryRepairRow       = document.getElementById('summaryRepairRow');
-const summaryRepairName      = document.getElementById('summaryRepairName');
-const summaryRepairPrice     = document.getElementById('summaryRepairPrice');
-const summaryTotalWrap       = document.getElementById('summaryTotalWrap');
-const summaryTotal           = document.getElementById('summaryTotal');
-const summaryIncludes        = document.getElementById('summaryIncludes');
-const summaryIncludesList    = document.getElementById('summaryIncludesList');
-
-function updateOrderSummary() {
-    // Hide everything first
-    summaryConsoleRow.style.display      = 'none';
-    summaryGarantieRow.style.display     = 'none';
-    summaryGarantiePending.style.display = 'none';
-    summaryRepairRow.style.display       = 'none';
-    summaryTotalWrap.style.display       = 'none';
-    summaryIncludes.style.display        = 'none';
-    summaryPlaceholder.style.display     = '';
-
-    if (state.type === 'modding') {
-        if (!state.console) return;
-
-        summaryPlaceholder.style.display = 'none';
-        summaryConsoleRow.style.display  = '';
-        summaryConsoleName.textContent   = state.console.label;
-        summaryConsolePrice.textContent  = '€ ' + state.console.prijs + ',-';
-
-        if (!state.garantie) {
-            summaryGarantiePending.style.display = '';
-            return;
-        }
-
-        summaryGarantieRow.style.display    = '';
-        summaryGarantieName.textContent     = state.garantie.label;
-        summaryGarantiePrice.textContent    = state.garantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.garantie.prijs + ',-';
-        summaryGarantiePrice.style.color    = state.garantie.prijs > 0 ? '#f59e0b' : '';
-        summaryTotalWrap.style.display      = '';
-        summaryTotal.textContent            = '€ ' + (state.console.prijs + state.garantie.prijs) + ',-';
-        summaryIncludes.style.display       = '';
-        summaryIncludesList.innerHTML = `
-            <li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>
-            <li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>
-            <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND + EmuNAND)</li>
-            <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
-            <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>`;
-
-    } else {
-        // Reparatie
-        if (selectedRepairs.size === 0) return;
-
-        const repairs = [...selectedRepairs.values()];
-        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
-        const model   = repairs[0].model;
-
-        summaryPlaceholder.style.display = 'none';
-        summaryConsoleRow.style.display  = '';
-        summaryConsoleName.textContent   = model;
-        summaryConsolePrice.textContent  = '';
-
-        // Show each repair as a row
-        summaryRepairRow.style.display = 'none'; // hide the single-row element
-        // Insert dynamic rows before total
-        const existingDynRows = document.querySelectorAll('.summary-repair-dynamic');
-        existingDynRows.forEach(r => r.remove());
-
-        repairs.forEach(r => {
-            const row = document.createElement('div');
-            row.className = 'order-row order-row-repair summary-repair-dynamic';
-            row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
-            summaryTotalWrap.parentNode.insertBefore(row, summaryTotalWrap);
-        });
-
-        summaryTotalWrap.style.display  = '';
-        summaryTotal.textContent        = '≈ € ' + total + ',-';
-        summaryIncludes.style.display   = '';
-        summaryIncludesList.innerHTML = `
-            <li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>
-            <li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>
-            <li><i class="fa-solid fa-check"></i> Uitgebreid testen na reparatie</li>
-            <li><i class="fa-solid fa-check"></i> 30 dagen reparatiegarantie</li>`;
-    }
-}
-
-// Also sync form fields
-function syncFormToState() {
-    const select = document.getElementById('console');
-    if (state.console && select) select.value = state.console.model;
-    if (state.garantie) {
-        const radio = document.querySelector(`input[name="garantie"][value="${state.garantie.dagen}"]`);
-        if (radio) radio.checked = true;
-    }
-    // Sync reparatie form display
-    const repEmpty  = document.getElementById('repAanvraagEmpty');
-    const repFilled = document.getElementById('repAanvraagFilled');
-    if (selectedRepairs.size > 0) {
-        const repairs = [...selectedRepairs.values()];
-        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
-        repEmpty.style.display  = 'none';
-        repFilled.style.display = '';
-        document.getElementById('repFormModel').textContent = repairs[0].model;
-        document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
-        // Render individual repair rows
-        const itemsEl = document.getElementById('repFormItems');
-        itemsEl.innerHTML = repairs.map(r =>
-            `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`
-        ).join('');
-    } else {
-        repEmpty.style.display  = '';
-        repFilled.style.display = 'none';
-    }
-}
-
-function refreshAll() {
-    updateStickyBar();
-    updateOrderSummary();
-    syncFormToState();
-}
-
-// Clear repair selection
-document.getElementById('repAanvraagClear').addEventListener('click', () => {
-    selectedRepairs.clear();
-    document.querySelectorAll('.rep-card').forEach(c => {
-        c.classList.remove('geselecteerd');
-        c.querySelector('.rep-select-btn').textContent = 'Selecteer';
-    });
-    document.querySelectorAll('.summary-repair-dynamic').forEach(r => r.remove());
-    updateRepairUI();
-    refreshAll();
 });
 
 
@@ -391,23 +108,20 @@ document.querySelectorAll('.aanvragen-btn').forEach(btn => {
 
         state.console  = { model: btn.dataset.model, label: btn.dataset.label, prijs: parseInt(btn.dataset.prijs) };
         state.garantie = null;
-        state.type     = 'modding';
 
         document.querySelectorAll('.garantie-select-btn').forEach(b => {
             b.classList.remove('geselecteerd');
             b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
         });
 
-        setAanvraagType('modding');
         refreshAll();
-
         document.getElementById('garantie').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
 
 // ============================================================
-// GARANTIE CARD BUTTONS → select garantie, scroll to contact
+// GARANTIE CARD BUTTONS
 // ============================================================
 document.querySelectorAll('.garantie-select-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -417,7 +131,6 @@ document.querySelectorAll('.garantie-select-btn').forEach(btn => {
             b.classList.remove('geselecteerd');
             b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
         });
-
         btn.classList.add('geselecteerd');
         btn.innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
 
@@ -460,6 +173,261 @@ document.querySelectorAll('input[name="garantie"]').forEach(radio => {
 
 
 // ============================================================
+// REFRESH ALL
+// ============================================================
+function refreshAll() {
+    updateStickyBar();
+    updateOrderSummary();
+    updateFormBlocks();
+    updateRepairBar();
+}
+
+
+// ============================================================
+// FORM BLOCKS — show/hide garantie, show status labels
+// ============================================================
+function updateFormBlocks() {
+    const hasConsole  = !!state.console;
+    const hasGarantie = !!state.garantie;
+    const hasRepairs  = selectedRepairs.size > 0;
+
+    // Show garantie radio only after console chosen
+    document.getElementById('garantieFormGroup').style.display = hasConsole ? '' : 'none';
+    document.getElementById('moddingEmpty').style.display      = hasConsole ? 'none' : '';
+
+    // Sync select
+    if (state.console) consoleSelect.value = state.console.model;
+    if (state.garantie) {
+        const radio = document.querySelector(`input[name="garantie"][value="${state.garantie.dagen}"]`);
+        if (radio) radio.checked = true;
+    }
+
+    // Status badges
+    const moddingStatus   = document.getElementById('moddingStatus');
+    const reparatieStatus = document.getElementById('reparatieStatus');
+
+    if (hasConsole && hasGarantie) {
+        moddingStatus.textContent = '✓ ' + state.console.label + ' + ' + state.garantie.dagen + 'd garantie';
+        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
+    } else if (hasConsole) {
+        moddingStatus.textContent = state.console.label + ' — kies garantie';
+        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-partial';
+    } else {
+        moddingStatus.textContent = '';
+        moddingStatus.className   = 'aanvraag-block-status';
+    }
+
+    if (hasRepairs) {
+        const count = selectedRepairs.size;
+        const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
+        reparatieStatus.textContent = '✓ ' + count + (count === 1 ? ' reparatie' : ' reparaties') + ' — ≈ € ' + total + ',-';
+        reparatieStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
+    } else {
+        reparatieStatus.textContent = '';
+        reparatieStatus.className   = 'aanvraag-block-status';
+    }
+
+    // Repair form section
+    const repEmpty  = document.getElementById('repAanvraagEmpty');
+    const repFilled = document.getElementById('repAanvraagFilled');
+    if (hasRepairs) {
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
+        repEmpty.style.display  = 'none';
+        repFilled.style.display = '';
+        document.getElementById('repFormModel').textContent = repairs[0].model;
+        document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
+        document.getElementById('repFormItems').innerHTML = repairs.map(r =>
+            `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`
+        ).join('');
+    } else {
+        repEmpty.style.display  = '';
+        repFilled.style.display = 'none';
+    }
+}
+
+
+// ============================================================
+// REPAIR SELECTED BAR (under the repair grid)
+// ============================================================
+function updateRepairBar() {
+    const bar = document.getElementById('repSelectedBar');
+    if (!bar) return;
+    const count = selectedRepairs.size;
+    if (count === 0) { bar.style.display = 'none'; return; }
+    bar.style.display = '';
+    const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
+    document.getElementById('repSelectedCount').textContent = count + (count === 1 ? ' reparatie geselecteerd' : ' reparaties geselecteerd');
+    document.getElementById('repSelectedTotal').textContent = '≈ € ' + total + ',-';
+    document.getElementById('repSelectedChips').innerHTML = [...selectedRepairs.values()].map(r =>
+        `<span class="rep-chip">${r.naam.split('(')[0].trim()}</span>`
+    ).join('');
+}
+
+
+// ============================================================
+// STICKY BAR
+// ============================================================
+const stickyBar          = document.getElementById('stickySelection');
+const stickyConsoleName  = document.getElementById('stickyConsoleName');
+const stickyGarantieName = document.getElementById('stickyGarantieName');
+const stickyGarantieIcon = document.getElementById('stickyGarantieIcon');
+const stickyConsoleChip  = document.getElementById('stickyConsoleChip');
+const stickyGarantieChip = document.getElementById('stickyGarantieChip');
+const stickyRepairChip   = document.getElementById('stickyRepairChip');
+const stickyRepairName   = document.getElementById('stickyRepairName');
+const stickySep          = document.getElementById('stickySep');
+const stickySepRepair    = document.getElementById('stickySepRepair');
+const stickyTotal        = document.getElementById('stickyTotal');
+
+function updateStickyBar() {
+    const hasConsole  = !!state.console;
+    const hasGarantie = !!state.garantie;
+    const hasRepairs  = selectedRepairs.size > 0;
+
+    if (!hasConsole && !hasRepairs) {
+        stickyBar.classList.remove('visible');
+        return;
+    }
+    stickyBar.classList.add('visible');
+
+    // Console chip
+    if (hasConsole) {
+        stickyConsoleName.textContent = state.console.label;
+        stickyConsoleChip.classList.add('selected');
+    } else if (hasRepairs) {
+        stickyConsoleName.textContent = [...selectedRepairs.values()][0].model;
+        stickyConsoleChip.classList.add('selected');
+    } else {
+        stickyConsoleChip.classList.remove('selected');
+    }
+
+    // Garantie chip
+    if (hasConsole) {
+        stickySep.style.display = '';
+        stickyGarantieChip.style.display = '';
+        if (hasGarantie) {
+            stickyGarantieName.textContent = state.garantie.label;
+            stickyGarantieChip.classList.add('selected');
+            if (state.garantie.dagen === '180') {
+                stickyGarantieIcon.className = 'fa-solid fa-shield';
+                stickyGarantieChip.classList.remove('sticky-chip-garantie-90');
+                stickyGarantieChip.classList.add('sticky-chip-garantie-180');
+            } else {
+                stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
+                stickyGarantieChip.classList.remove('sticky-chip-garantie-180');
+                stickyGarantieChip.classList.add('sticky-chip-garantie-90');
+            }
+        } else {
+            stickyGarantieName.textContent = 'Garantie kiezen →';
+            stickyGarantieChip.classList.remove('selected', 'sticky-chip-garantie-90', 'sticky-chip-garantie-180');
+            stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
+        }
+    } else {
+        stickySep.style.display = 'none';
+        stickyGarantieChip.style.display = 'none';
+    }
+
+    // Repair chip
+    if (hasRepairs) {
+        stickySepRepair.style.display = '';
+        stickyRepairChip.style.display = '';
+        stickyRepairChip.classList.add('selected');
+        const count = selectedRepairs.size;
+        const first = [...selectedRepairs.values()][0];
+        stickyRepairName.textContent = count === 1 ? first.naam.split('(')[0].trim() : count + ' reparaties';
+    } else {
+        stickySepRepair.style.display = 'none';
+        stickyRepairChip.style.display = 'none';
+    }
+
+    // Total
+    let total = 0;
+    if (hasConsole) total += state.console.prijs;
+    if (hasGarantie) total += state.garantie.prijs;
+    selectedRepairs.forEach(r => total += r.prijs);
+    stickyTotal.textContent = (hasRepairs && !hasGarantie && !hasConsole ? '≈ ' : '') + '€ ' + total + ',-';
+}
+
+
+// ============================================================
+// ORDER SUMMARY PANEL
+// ============================================================
+function updateOrderSummary() {
+    const hasConsole  = !!state.console;
+    const hasGarantie = !!state.garantie;
+    const hasRepairs  = selectedRepairs.size > 0;
+    const hasAnything = hasConsole || hasRepairs;
+
+    document.getElementById('summaryPlaceholder').style.display    = hasAnything ? 'none' : '';
+    document.getElementById('summaryConsoleRow').style.display     = hasConsole ? '' : 'none';
+    document.getElementById('summaryGarantieRow').style.display    = hasGarantie ? '' : 'none';
+    document.getElementById('summaryGarantiePending').style.display= (hasConsole && !hasGarantie) ? '' : 'none';
+    document.getElementById('summaryTotalWrap').style.display      = hasAnything ? '' : 'none';
+    document.getElementById('summaryIncludes').style.display       = hasAnything ? '' : 'none';
+
+    if (hasConsole) {
+        document.getElementById('summaryConsoleName').textContent  = state.console.label;
+        document.getElementById('summaryConsolePrice').textContent = '€ ' + state.console.prijs + ',-';
+    }
+    if (hasGarantie) {
+        document.getElementById('summaryGarantieName').textContent  = state.garantie.label;
+        document.getElementById('summaryGarantiePrice').textContent = state.garantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.garantie.prijs + ',-';
+        document.getElementById('summaryGarantiePrice').style.color = state.garantie.prijs > 0 ? '#f59e0b' : '';
+        document.getElementById('summaryGarantieIcon').className    = state.garantie.dagen === '180' ? 'fa-solid fa-shield' : 'fa-solid fa-shield-halved';
+    }
+
+    // Dynamic repair rows
+    const repContainer = document.getElementById('summaryRepairRows');
+    repContainer.innerHTML = '';
+    selectedRepairs.forEach(r => {
+        const row = document.createElement('div');
+        row.className = 'order-row order-row-repair';
+        row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
+        repContainer.appendChild(row);
+    });
+
+    // Total
+    let total = 0;
+    if (hasConsole)  total += state.console.prijs;
+    if (hasGarantie) total += state.garantie.prijs;
+    selectedRepairs.forEach(r => total += r.prijs);
+    const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
+    document.getElementById('summaryTotal').textContent = prefix + '€ ' + total + ',-';
+
+    // Includes list
+    const includesList = document.getElementById('summaryIncludesList');
+    let items = [];
+    if (hasConsole) items = items.concat([
+        '<li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>',
+        '<li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>',
+        '<li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND + EmuNAND)</li>',
+        '<li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>',
+        '<li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>',
+    ]);
+    if (hasRepairs) items = items.concat([
+        '<li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>',
+        '<li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>',
+        '<li><i class="fa-solid fa-check"></i> 30 dagen reparatiegarantie</li>',
+    ]);
+    includesList.innerHTML = [...new Set(items)].join('');
+}
+
+
+// ============================================================
+// CLEAR REPAIR SELECTION
+// ============================================================
+document.getElementById('repAanvraagClear').addEventListener('click', () => {
+    selectedRepairs.clear();
+    document.querySelectorAll('.rep-card').forEach(c => {
+        c.classList.remove('geselecteerd');
+        c.querySelector('.rep-select-btn').textContent = 'Selecteer';
+    });
+    refreshAll();
+});
+
+
+// ============================================================
 // KANAAL & SUBMIT
 // ============================================================
 const kanaalIcons   = { telegram: 'fa-brands fa-telegram', whatsapp: 'fa-brands fa-whatsapp', reddit: 'fa-brands fa-reddit', discord: 'fa-brands fa-discord' };
@@ -475,13 +443,11 @@ document.querySelectorAll('.kanaal-btn').forEach(btn => {
         btn.classList.add('geselecteerd');
         document.getElementById('gekozenKanaal').value = btn.dataset.kanaal;
         document.getElementById('gekozenUrl').value    = btn.dataset.url;
-
         submitBtn.disabled = false;
         submitBtn.classList.remove('btn-submit-disabled');
         submitHint.classList.add('hidden');
         submitBtn.classList.remove('kleur-tg', 'kleur-wa', 'kleur-rd', 'kleur-dc');
         submitBtn.classList.add('kleur-' + kanaalKlassen[btn.dataset.kanaal]);
-
         const submitIcon = document.getElementById('submitIcon');
         if (submitIcon) submitIcon.remove();
     });
@@ -489,27 +455,26 @@ document.querySelectorAll('.kanaal-btn').forEach(btn => {
 
 document.getElementById('modForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
     const kanaal    = document.getElementById('gekozenKanaal').value;
     const url       = document.getElementById('gekozenUrl').value;
     const opmerking = document.getElementById('msg').value;
 
-    let bericht = '';
+    let bericht = 'Hoi! Ik wil een aanvraag doen 🎮\n';
 
-    if (state.type === 'modding') {
-        const garantie     = state.garantie || { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
-        const console_keuze= state.console ? state.console.label : consoleSelect.value;
-        bericht = `Hoi! Ik wil een modchip laten installeren 🎮\n\nConsole: ${console_keuze}\nGarantie: ${garantie.label}`;
+    if (state.console) {
+        const garantie = state.garantie || { label: '90 Dagen Garantie', prijs: 0 };
+        bericht += `\n🔧 Modchip Installatie\nConsole: ${state.console.label}\nGarantie: ${garantie.label}`;
         if (garantie.prijs > 0) bericht += ` (+ € ${garantie.prijs},-)`;
-    } else {
-        const repairs = [...selectedRepairs.values()];
-        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
-        const model   = repairs[0]?.model || '—';
-        const lijst   = repairs.map(r => `• ${r.naam} (€ ${r.prijs},-)`).join('\n');
-        bericht = `Hoi! Ik wil een reparatie aanvragen 🔧\n\nConsole: ${model}\nReparaties:\n${lijst}\n\nIndicatief totaal: ≈ € ${total},-`;
     }
 
-    if (opmerking) bericht += `\nOpmerking: ${opmerking}`;
+    if (selectedRepairs.size > 0) {
+        const repairs = [...selectedRepairs.values()];
+        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
+        bericht += `\n\n🛠 Reparatie\nConsole: ${repairs[0].model}\n` + repairs.map(r => `• ${r.naam} (€ ${r.prijs},-)`).join('\n');
+        bericht += `\nIndicatief totaal: ≈ € ${total},-`;
+    }
+
+    if (opmerking) bericht += `\n\nOpmerking: ${opmerking}`;
 
     let finalUrl = url;
     if (kanaal === 'telegram' || kanaal === 'whatsapp') {
@@ -517,16 +482,13 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
     }
 
     document.getElementById('modForm').classList.add('hidden');
-
     const successLink = document.getElementById('successLink');
     successLink.href  = finalUrl;
     successLink.className = 'btn-contact-large ' + kanaalKlassen[kanaal];
     document.getElementById('successIcon').className     = kanaalIcons[kanaal];
     document.getElementById('successKanaal').textContent = kanaalNamen[kanaal];
-
-    const successBox = document.getElementById('successMessage');
-    successBox.classList.remove('hidden');
-    successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('successMessage').classList.remove('hidden');
+    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
 
@@ -535,12 +497,10 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
 // ============================================================
 const hamburger = document.getElementById('hamburger');
 const mainNav   = document.getElementById('mainNav');
-
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mainNav.classList.toggle('open');
 });
-
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('open');
@@ -574,7 +534,6 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
 fadeEls.forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
 
 
@@ -583,13 +542,12 @@ fadeEls.forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
 // ============================================================
 function loadReviews() {
     const reviews = [
-        { naam: "Daan V.",  console: "Switch OLED", score: 5, tekst: "Mijn OLED werkt perfect. Netjes verpakt teruggestuurd, alles uitgelegd via Telegram. Echt een vakman." },
-        { naam: "Kevin M.", console: "Switch Lite",  score: 5, tekst: "Super snelle service. Binnen 2 dagen mijn Lite teruggestuurd met alles erop. Atmosphere werkte direct." },
-        { naam: "Sander R.",console: "Switch V2",    score: 5, tekst: "Twijfelde eerst, maar de foto's van het soldeerwerk overtuigden me. Chip zit er netjes in en alles werkt." },
-        { naam: "Luca B.",  console: "Switch OLED",  score: 5, tekst: "Communicatie was top, kreeg updates gedurende het hele proces. Switch werkt als een droom na de modchip." },
-        { naam: "Tim H.",   console: "Switch V1",    score: 5, tekst: "Goede prijs, nette afwerking en snel terug. Precies wat ik zocht. Aanrader voor iedereen." }
+        { naam: "Daan V.",   console: "Switch OLED", score: 5, tekst: "Mijn OLED werkt perfect. Netjes verpakt teruggestuurd, alles uitgelegd via Telegram. Echt een vakman." },
+        { naam: "Kevin M.",  console: "Switch Lite",  score: 5, tekst: "Super snelle service. Binnen 2 dagen mijn Lite teruggestuurd met alles erop. Atmosphere werkte direct." },
+        { naam: "Sander R.", console: "Switch V2",    score: 5, tekst: "Twijfelde eerst, maar de foto's van het soldeerwerk overtuigden me. Chip zit er netjes in en alles werkt." },
+        { naam: "Luca B.",   console: "Switch OLED",  score: 5, tekst: "Communicatie was top, kreeg updates gedurende het hele proces. Switch werkt als een droom na de modchip." },
+        { naam: "Tim H.",    console: "Switch V1",    score: 5, tekst: "Goede prijs, nette afwerking en snel terug. Precies wat ik zocht. Aanrader voor iedereen." }
     ];
-
     const grid = document.getElementById('reviewsGrid');
     if (!grid) return;
     grid.innerHTML = '';
@@ -599,16 +557,9 @@ function loadReviews() {
         ).join('');
         const card = document.createElement('div');
         card.classList.add('review-card', 'fade-in');
-        card.innerHTML = `
-            <div class="review-stars">${stars}</div>
-            <p>"${r.tekst}"</p>
-            <div class="review-author">
-                <span class="review-name">${r.naam}</span>
-                <span class="review-model">${r.console}</span>
-            </div>`;
+        card.innerHTML = `<div class="review-stars">${stars}</div><p>"${r.tekst}"</p><div class="review-author"><span class="review-name">${r.naam}</span><span class="review-model">${r.console}</span></div>`;
         grid.appendChild(card);
         setTimeout(() => card.classList.add('visible'), 50);
     });
 }
-
 loadReviews();
