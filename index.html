@@ -186,7 +186,6 @@
             <h2>Onze Reparatie Services</h2>
             <p class="section-subtitle">Kapotte Joy-Con, gebarsten scherm of slechte batterij? Selecteer één of meerdere reparaties en stuur ze mee in je aanvraag.</p>
 
-            <!-- Model tabs -->
             <div class="rep-tabs">
                 <button class="rep-tab active" data-model="v1v2">Switch V1 / V2</button>
                 <button class="rep-tab" data-model="lite">Switch Lite</button>
@@ -197,16 +196,93 @@
             <div class="rep-panel active" id="rep-v1v2">
                 <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25"><div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div><div class="rep-info"><span class="rep-naam">Joy-Con Drift <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Analoge stick vervanging — meest gevraagde reparatie</span></div><span class="rep-prijs">€ 25,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35"><div class="rep-icon"><i class="fa-solid fa-plug"></i></div><div class="rep-info"><span class="rep-naam">Oplaadpoort <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">USB-C poort vervangen</span></div><span class="rep-prijs">€ 35,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Batterij Vervanging" data-rep-prijs="40"><div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div><div class="rep-info"><span class="rep-naam">Batterij <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Capaciteit neemt af na verloop van tijd</span></div><span class="rep-prijs">€ 40,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45"><div class="rep-icon"><i class="fa-solid fa-box"></i></div><div class="rep-info"><span class="rep-naam">Behuizing <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Krassen, gebroken houder of achterkant vervangen</span></div><span class="rep-prijs">€ 45,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Batterij Vervanging" data-rep-prijs="40">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit neemt af na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 40,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Krassen, gebroken houder of achterkant vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-secondary"><i class="fa-solid fa-tag"></i> V1/V2 & OLED</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-model">V1/V2 & OLED</span>
+                            <span class="rep-naam">Joy-Con Drift</span>
+                            <span class="rep-desc">Analoge stick vervanging — meest gevraagde reparatie</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
                 <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch V1 / V2</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Scherm / LCD Vervanging" data-rep-prijs="75"><div class="rep-icon"><i class="fa-solid fa-display"></i></div><div class="rep-info"><span class="rep-naam">Scherm / LCD</span><span class="rep-desc">Gebarsten glas of defect display vervangen</span></div><span class="rep-prijs">€ 75,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Koeling (Ventilator + Thermal Paste)" data-rep-prijs="30"><div class="rep-icon"><i class="fa-solid fa-wind"></i></div><div class="rep-info"><span class="rep-naam">Koeling</span><span class="rep-desc">Ventilator reinigen/vervangen, thermal paste vernieuwen</span></div><span class="rep-prijs">€ 30,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Dock-Connector Vervanging" data-rep-prijs="35"><div class="rep-icon"><i class="fa-solid fa-tv"></i></div><div class="rep-info"><span class="rep-naam">Dock-Connector</span><span class="rep-desc">Schade door verkeerd gebruik of vallen</span></div><span class="rep-prijs">€ 35,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Scherm / LCD Vervanging" data-rep-prijs="75">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Scherm / LCD</span>
+                            <span class="rep-desc">Gebarsten glas of defect display vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs">€ 75,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Koeling (Ventilator + Thermal Paste)" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Koeling</span>
+                            <span class="rep-desc">Ventilator reinigen/vervangen, thermal paste vernieuwen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-wind"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Dock-Connector Vervanging" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Dock-Connector</span>
+                            <span class="rep-desc">Schade door verkeerd gebruik of vallen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-tv"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -214,16 +290,89 @@
             <div class="rep-panel" id="rep-lite">
                 <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35"><div class="rep-icon"><i class="fa-solid fa-plug"></i></div><div class="rep-info"><span class="rep-naam">Oplaadpoort <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">USB-C poort vervangen</span></div><span class="rep-prijs">€ 35,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Batterij Vervanging" data-rep-prijs="40"><div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div><div class="rep-info"><span class="rep-naam">Batterij <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Capaciteit verminderd na verloop van tijd</span></div><span class="rep-prijs">€ 40,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Behuizing Vervanging" data-rep-prijs="50"><div class="rep-icon"><i class="fa-solid fa-box"></i></div><div class="rep-info"><span class="rep-naam">Behuizing <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Valt vaker — portabel gebruik</span></div><span class="rep-prijs">€ 50,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Batterij Vervanging" data-rep-prijs="40">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit verminderd na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 40,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Behuizing Vervanging" data-rep-prijs="50">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Valt vaker door portabel gebruik</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 50,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
                 <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch Lite</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Analoge Stick Vervanging" data-rep-prijs="35"><div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div><div class="rep-info"><span class="rep-naam">Analoge Sticks</span><span class="rep-desc">Drift — sticks zitten vast in behuizing, iets bewerkelijker</span></div><span class="rep-prijs">€ 35,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Scherm Vervanging" data-rep-prijs="70"><div class="rep-icon"><i class="fa-solid fa-display"></i></div><div class="rep-info"><span class="rep-naam">Scherm</span><span class="rep-desc">Breekt sneller door portabel gebruik</span></div><span class="rep-prijs">€ 70,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Knoppenset (ABXY / D-pad / Triggers)" data-rep-prijs="25"><div class="rep-icon"><i class="fa-solid fa-circle-dot"></i></div><div class="rep-info"><span class="rep-naam">Knoppenset</span><span class="rep-desc">ABXY, D-pad of triggers vervangen</span></div><span class="rep-prijs">€ 25,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Luidspreker Vervanging" data-rep-prijs="30"><div class="rep-icon"><i class="fa-solid fa-volume-high"></i></div><div class="rep-info"><span class="rep-naam">Luidspreker</span><span class="rep-desc">Geluidsproblemen oplossen</span></div><span class="rep-prijs">€ 30,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Analoge Stick Vervanging" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Analoge Sticks</span>
+                            <span class="rep-desc">Drift — sticks zitten vast in behuizing, iets bewerkelijker</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Scherm Vervanging" data-rep-prijs="70">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Scherm</span>
+                            <span class="rep-desc">Breekt sneller door portabel gebruik</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs">€ 70,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Knoppenset (ABXY / D-pad / Triggers)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Knoppenset</span>
+                            <span class="rep-desc">ABXY, D-pad of triggers vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-circle-dot"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Luidspreker Vervanging" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Luidspreker</span>
+                            <span class="rep-desc">Geluidsproblemen oplossen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-volume-high"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -231,20 +380,97 @@
             <div class="rep-panel" id="rep-oled">
                 <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25"><div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div><div class="rep-info"><span class="rep-naam">Joy-Con Drift <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Analoge stick vervanging — zelfde probleem als V1/V2</span></div><span class="rep-prijs">€ 25,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35"><div class="rep-icon"><i class="fa-solid fa-plug"></i></div><div class="rep-info"><span class="rep-naam">Oplaadpoort <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">USB-C poort vervangen</span></div><span class="rep-prijs">€ 35,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Batterij Vervanging" data-rep-prijs="45"><div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div><div class="rep-info"><span class="rep-naam">Batterij <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Capaciteit neemt af na verloop van tijd</span></div><span class="rep-prijs">€ 45,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45"><div class="rep-icon"><i class="fa-solid fa-box"></i></div><div class="rep-info"><span class="rep-naam">Behuizing <span class="rep-badge-all">Alle modellen</span></span><span class="rep-desc">Krassen of gebroken achterkant vervangen</span></div><span class="rep-prijs">€ 45,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Batterij Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit neemt af na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Krassen of gebroken achterkant vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-secondary"><i class="fa-solid fa-tag"></i> V1/V2 & OLED</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-model">V1/V2 & OLED</span>
+                            <span class="rep-naam">Joy-Con Drift</span>
+                            <span class="rep-desc">Analoge stick vervanging — zelfde probleem als V1/V2</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
                 <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch OLED</p>
                 <div class="rep-grid">
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="OLED Scherm Vervanging" data-rep-prijs="120"><div class="rep-icon rep-icon-premium"><i class="fa-solid fa-display"></i></div><div class="rep-info"><span class="rep-naam">OLED Scherm</span><span class="rep-desc">Duurder onderdeel — prachtig beeld, kostbare vervanging</span></div><span class="rep-prijs rep-prijs-premium">€ 120,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Kickstand Vervanging" data-rep-prijs="20"><div class="rep-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="rep-info"><span class="rep-naam">Kickstand</span><span class="rep-desc">De bredere standaard kan breken bij vallen</span></div><span class="rep-prijs">€ 20,-</span><button class="rep-select-btn">Selecteer</button></div>
-                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Koeling (Thermal Paste + Ventilator)" data-rep-prijs="30"><div class="rep-icon"><i class="fa-solid fa-wind"></i></div><div class="rep-info"><span class="rep-naam">Koeling</span><span class="rep-desc">Thermal paste vernieuwen, ventilator reinigen</span></div><span class="rep-prijs">€ 30,-</span><button class="rep-select-btn">Selecteer</button></div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="OLED Scherm Vervanging" data-rep-prijs="120">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">OLED Scherm</span>
+                            <span class="rep-desc">Duurder onderdeel — prachtig beeld, kostbare vervanging</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon rep-icon-premium"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs rep-prijs-premium">€ 120,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Kickstand Vervanging" data-rep-prijs="20">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Kickstand</span>
+                            <span class="rep-desc">De bredere standaard kan breken bij vallen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                            <span class="rep-prijs">€ 20,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Koeling (Thermal Paste + Ventilator)" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Koeling</span>
+                            <span class="rep-desc">Thermal paste vernieuwen, ventilator reinigen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-wind"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Selected repairs summary -->
+            <!-- Selected repairs bar -->
             <div class="rep-selected-bar" id="repSelectedBar" style="display:none;">
                 <div class="rep-selected-bar-inner">
                     <div class="rep-selected-left">
@@ -633,72 +859,75 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2>Start Je Aanvraag</h2>
-            <p class="section-subtitle">Selecteer je consolemodel en kies via welk kanaal je contact wilt — dan wordt de aanvraagknop actief.</p>
-
-            <!-- Service type toggle -->
-            <div class="aanvraag-type-toggle">
-                <button class="aanvraag-type-btn active" id="typeBtnModding" data-type="modding">
-                    <i class="fa-solid fa-microchip"></i> Modchip Installatie
-                </button>
-                <button class="aanvraag-type-btn" id="typeBtnReparatie" data-type="reparatie">
-                    <i class="fa-solid fa-screwdriver-wrench"></i> Reparatie
-                </button>
-            </div>
+            <p class="section-subtitle">Jouw selecties worden automatisch meegenomen. Kies een kanaal en verstuur je aanvraag.</p>
 
             <div class="contact-layout">
                 <!-- LEFT: Form -->
                 <div class="contact-form-col">
                     <form id="modForm">
 
-                        <!-- MODDING fields -->
-                        <div id="moddingFields">
-                            <div class="form-group">
-                                <label for="console">Welke Switch heb je?</label>
-                                <select id="console" required>
-                                    <option value="" disabled selected>Kies je model...</option>
-                                    <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
-                                    <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
-                                    <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
-                                    <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
-                                </select>
+                        <!-- Modchip block — always visible, collapsible if nothing selected -->
+                        <div class="aanvraag-block" id="moddingBlock">
+                            <div class="aanvraag-block-header">
+                                <i class="fa-solid fa-microchip"></i>
+                                <span>Modchip Installatie</span>
+                                <span class="aanvraag-block-status" id="moddingStatus"></span>
                             </div>
-
-                            <div class="form-group">
-                                <label>Welke garantie wil je?</label>
-                                <div class="garantie-keuze">
-                                    <label class="garantie-radio-label" id="garantie-label-90">
-                                        <input type="radio" name="garantie" value="90" data-extra="0" checked>
-                                        <div class="garantie-radio-card">
-                                            <div class="garantie-radio-top">
-                                                <span class="garantie-radio-title"><i class="fa-solid fa-shield-halved"></i> 90 Dagen</span>
-                                                <span class="garantie-radio-prijs">Inbegrepen</span>
+                            <div class="aanvraag-block-body" id="moddingFields">
+                                <div class="form-group">
+                                    <label for="console">Welke Switch heb je?</label>
+                                    <select id="console">
+                                        <option value="" disabled selected>Kies je model...</option>
+                                        <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
+                                        <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
+                                        <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
+                                        <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="garantieFormGroup" style="display:none;">
+                                    <label>Welke garantie wil je?</label>
+                                    <div class="garantie-keuze">
+                                        <label class="garantie-radio-label" id="garantie-label-90">
+                                            <input type="radio" name="garantie" value="90" data-extra="0" checked>
+                                            <div class="garantie-radio-card">
+                                                <div class="garantie-radio-top">
+                                                    <span class="garantie-radio-title"><i class="fa-solid fa-shield-halved"></i> 90 Dagen</span>
+                                                    <span class="garantie-radio-prijs">Inbegrepen</span>
+                                                </div>
+                                                <p class="garantie-radio-desc">Standaard garantie bij elke mod</p>
                                             </div>
-                                            <p class="garantie-radio-desc">Standaard garantie bij elke mod</p>
-                                        </div>
-                                    </label>
-                                    <label class="garantie-radio-label" id="garantie-label-180">
-                                        <input type="radio" name="garantie" value="180" data-extra="20">
-                                        <div class="garantie-radio-card">
-                                            <div class="garantie-radio-top">
-                                                <span class="garantie-radio-title"><i class="fa-solid fa-shield"></i> 180 Dagen</span>
-                                                <span class="garantie-radio-prijs">+ € 20,-</span>
+                                        </label>
+                                        <label class="garantie-radio-label" id="garantie-label-180">
+                                            <input type="radio" name="garantie" value="180" data-extra="20">
+                                            <div class="garantie-radio-card">
+                                                <div class="garantie-radio-top">
+                                                    <span class="garantie-radio-title"><i class="fa-solid fa-shield"></i> 180 Dagen</span>
+                                                    <span class="garantie-radio-prijs">+ € 20,-</span>
+                                                </div>
+                                                <p class="garantie-radio-desc">Uitgebreide dekking — 6 maanden</p>
                                             </div>
-                                            <p class="garantie-radio-desc">Uitgebreide dekking — 6 maanden</p>
-                                        </div>
-                                    </label>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="aanvraag-block-empty" id="moddingEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Selecteer een console via de servicecards hierboven
                                 </div>
                             </div>
                         </div>
 
-                        <!-- REPARATIE fields -->
-                        <div id="reparatieFields" style="display:none;">
-                            <div class="rep-aanvraag-summary" id="repAanvraagSummary">
+                        <!-- Repair block — always visible -->
+                        <div class="aanvraag-block" id="reparatieBlock">
+                            <div class="aanvraag-block-header aanvraag-block-header-repair">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <span>Reparatie</span>
+                                <span class="aanvraag-block-status" id="reparatieStatus"></span>
+                            </div>
+                            <div class="aanvraag-block-body">
                                 <div class="rep-aanvraag-empty" id="repAanvraagEmpty">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                                    <p>Kies een reparatie hierboven om je aanvraag te starten</p>
+                                    <i class="fa-solid fa-arrow-up"></i> Selecteer reparaties via de sectie hierboven
                                     <a href="#reparatie" class="rep-aanvraag-link">Naar reparaties ↑</a>
                                 </div>
-                                <div class="rep-aanvraag-filled" id="repAanvraagFilled" style="display:none;">
+                                <div id="repAanvraagFilled" style="display:none;">
                                     <div class="rep-aanvraag-row">
                                         <span class="rep-aanvraag-label"><i class="fa-solid fa-gamepad"></i> Console</span>
                                         <span id="repFormModel">—</span>
@@ -739,7 +968,7 @@
                     <div id="successMessage" class="success-box hidden">
                         <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
                         <h3>Aanvraag Ontvangen!</h3>
-                        <p id="successText">Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen.</p>
+                        <p>Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen.</p>
                         <a href="#" id="successLink" target="_blank" class="btn-contact-large">
                             <i id="successIcon" class="fa-brands fa-telegram"></i>
                             <span id="successKanaal">Open kanaal</span>
@@ -756,46 +985,25 @@
                             <span>Jouw Overzicht</span>
                         </div>
 
-                        <!-- Console row — hidden until chosen -->
-                        <div class="order-row" id="summaryConsoleRow" style="display:none;">
-                            <div class="order-row-label">
-                                <i class="fa-solid fa-gamepad"></i>
-                                <span id="summaryConsoleName">—</span>
-                            </div>
-                            <span class="order-row-prijs" id="summaryConsolePrice">€ —</span>
-                        </div>
-
-                        <!-- Placeholder when nothing chosen yet -->
                         <div class="order-placeholder" id="summaryPlaceholder">
                             <i class="fa-regular fa-hand-pointer"></i>
-                            <p>Selecteer je service om je overzicht te zien</p>
+                            <p>Maak een selectie om je overzicht te zien</p>
                         </div>
 
-                        <!-- Garantie row — hidden until garantie chosen -->
+                        <div class="order-row" id="summaryConsoleRow" style="display:none;">
+                            <div class="order-row-label"><i class="fa-solid fa-microchip"></i><span id="summaryConsoleName">—</span></div>
+                            <span class="order-row-prijs" id="summaryConsolePrice"></span>
+                        </div>
                         <div class="order-row order-row-garantie" id="summaryGarantieRow" style="display:none;">
-                            <div class="order-row-label">
-                                <i class="fa-solid fa-shield-halved"></i>
-                                <span id="summaryGarantieName">90 Dagen Garantie</span>
-                            </div>
-                            <span class="order-row-prijs" id="summaryGarantiePrice">Inbegrepen</span>
+                            <div class="order-row-label"><i class="fa-solid fa-shield-halved" id="summaryGarantieIcon"></i><span id="summaryGarantieName">—</span></div>
+                            <span class="order-row-prijs" id="summaryGarantiePrice"></span>
                         </div>
-
-                        <!-- Pending garantie prompt -->
                         <div class="order-row-garantie-pending" id="summaryGarantiePending" style="display:none;">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            Kies nog een garantie ↑
+                            <i class="fa-solid fa-shield-halved"></i> Kies nog een garantie ↑
                         </div>
 
-                        <!-- Repair row -->
-                        <div class="order-row order-row-repair" id="summaryRepairRow" style="display:none;">
-                            <div class="order-row-label">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                                <span id="summaryRepairName">—</span>
-                            </div>
-                            <span class="order-row-prijs" id="summaryRepairPrice">€ —</span>
-                        </div>
+                        <div id="summaryRepairRows"></div>
 
-                        <!-- Divider + Total -->
                         <div class="order-total-wrap" id="summaryTotalWrap" style="display:none;">
                             <div class="order-divider"></div>
                             <div class="order-total-row">
@@ -805,16 +1013,9 @@
                             <p class="order-total-note"><i class="fa-solid fa-circle-info"></i> Betaling contant bij verzending</p>
                         </div>
 
-                        <!-- What's included -->
                         <div class="order-includes" id="summaryIncludes" style="display:none;">
-                            <p class="order-includes-title">Altijd inbegrepen:</p>
-                            <ul id="summaryIncludesList">
-                                <li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>
-                                <li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>
-                                <li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND + EmuNAND)</li>
-                                <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
-                                <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
-                            </ul>
+                            <p class="order-includes-title">Inbegrepen:</p>
+                            <ul id="summaryIncludesList"></ul>
                         </div>
                     </div>
                 </div>
