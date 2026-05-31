@@ -1,3003 +1,1063 @@
-/* ===========================
-   ROOT & RESET
-=========================== */
-:root {
-    --bg-dark: #0f1115;
-    --bg-card: #181b22;
-    --bg-section-alt: #12141a;
-    --primary: #00ff88;
-    --primary-hover: #00cc6e;
-    --primary-dim: rgba(0, 255, 136, 0.08);
-    --text-main: #f5f6f8;
-    --text-muted: #94a3b8;
-    --border: #262b35;
-    --radius: 8px;
-    --transition: 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    line-height: 1.6;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.small-container { max-width: 650px; }
-
-/* ===========================
-   HEADER
-=========================== */
-header {
-    background-color: rgba(15, 17, 21, 0.95);
-    border-bottom: 1px solid var(--border);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(8px);
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text-main);
-}
-
-.logo-icon-wrap {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-    overflow: visible;
-}
-
-.logo-chip {
-    font-size: 38px;
-    color: var(--primary);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.logo-iron {
-    font-size: 42px;
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    transform: translate(-20%, -50%) rotate(-40deg);
-    filter: drop-shadow(0 0 1.5px #fff);
-}
-
-.logo-text {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-    color: var(--text-main);
-}
-
-.logo-accent { color: var(--primary); }
-
-.footer-logo .logo-icon-wrap { width: 28px; height: 28px; }
-.footer-logo .logo-chip { font-size: 28px; }
-.footer-logo .logo-iron { font-size: 30px; top: 50%; left: 55%; transform: translate(-20%, -50%) rotate(-40deg); }
-.footer-logo .logo-text { font-size: 1.1rem; }
-
-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-left: 22px;
-    font-size: 0.95rem;
-    transition: color var(--transition);
-}
-
-nav a:hover { color: var(--text-main); }
-
-.btn-nav {
-    border: 1px solid var(--primary);
-    color: var(--primary) !important;
-    padding: 8px 18px;
-    border-radius: var(--radius);
-    font-weight: 600;
-    transition: background var(--transition), color var(--transition) !important;
-}
-
-.btn-nav:hover {
-    background: var(--primary);
-    color: #000 !important;
-}
-
-/* Hamburger */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background-color: var(--text-main);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* ===========================
-   HERO
-=========================== */
-.hero {
-    padding: 160px 0 100px;
-    background: radial-gradient(ellipse at 70% 10%, rgba(0, 255, 136, 0.07) 0%, transparent 55%),
-                radial-gradient(ellipse at 20% 80%, rgba(0, 255, 136, 0.04) 0%, transparent 40%);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-bg-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-}
-
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.2);
-    color: var(--primary);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-    animation: fadeInDown 0.6s ease both;
-}
-
-.hero h1 {
-    font-size: 3.4rem;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 20px;
-    animation: fadeInDown 0.7s ease 0.1s both;
-}
-
-.hero h1 .highlight { color: var(--primary); }
-
-.hero > .container > p {
-    color: var(--text-muted);
-    font-size: 1.15rem;
-    max-width: 680px;
-    margin: 0 auto 36px;
-    animation: fadeInDown 0.7s ease 0.2s both;
-}
-
-.hero-btns {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
-    animation: fadeInDown 0.7s ease 0.3s both;
-}
-
-.btn-primary {
-    background-color: var(--primary);
-    color: #000;
-    text-decoration: none;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,255,136,0.25);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--text-main);
-    text-decoration: none;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: border-color var(--transition), color var(--transition);
-}
-
-.btn-secondary:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    animation: fadeInDown 0.7s ease 0.4s both;
-}
-
-.stat { text-align: center; }
-.stat-num {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary);
-    line-height: 1;
-}
-.stat-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.stat-divider {
-    width: 1px;
-    height: 40px;
-    background: var(--border);
-}
-
-/* ===========================
-   TRUST BAR
-=========================== */
-.trust-bar {
-    background: var(--bg-section-alt);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 0;
-    overflow: hidden;
-}
-
-.trust-items {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-}
-
-.trust-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    white-space: nowrap;
-}
-
-.trust-item i { color: var(--primary); font-size: 0.9rem; }
-
-/* ===========================
-   SECTIONS GENERAL
-=========================== */
-h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    color: var(--text-muted);
-    margin-bottom: 50px;
-    font-size: 1rem;
-}
-
-/* ===========================
-   SERVICES
-=========================== */
-.services {
-    padding: 90px 0;
-    background-color: var(--bg-dark);
-    text-align: center;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 28px;
-}
-
-.card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 40px 30px 35px;
-    border-radius: var(--radius);
-    position: relative;
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(0,255,136,0.4);
-    box-shadow: 0 12px 40px rgba(0,255,136,0.08);
-}
-
-.card.popular {
-    border: 2px solid var(--primary);
-    box-shadow: 0 0 30px rgba(0,255,136,0.08);
-}
-
-.badge {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--primary);
-    color: #000;
-    padding: 5px 14px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.card-icon {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 16px;
-}
-
-.card h3 { font-size: 1.4rem; margin-bottom: 6px; }
-
-.price {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-    color: var(--text-main);
-}
-
-.price-sub {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-}
-
-.card ul {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 28px;
-    flex: 1;
-}
-
-.card ul li {
-    margin-bottom: 11px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-.card ul li i { color: var(--primary); margin-right: 8px; }
-
-.btn-card {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    padding: 11px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-}
-
-.btn-card:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.btn-card-primary {
-    background: var(--primary);
-    color: #000 !important;
-    border-color: var(--primary);
-}
-
-.btn-card-primary:hover {
-    background: var(--primary-hover);
-    color: #000 !important;
-    border-color: var(--primary-hover);
-}
-
-.services-note {
-    margin-top: 40px;
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 10px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.15);
-    border-radius: var(--radius);
-    padding: 14px 20px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-align: left;
-    max-width: 600px;
-}
-
-.services-note i { color: var(--primary); margin-top: 2px; flex-shrink: 0; }
-
-/* ===========================
-   PORTFOLIO CAROUSEL
-=========================== */
-.portfolio {
-    padding: 90px 0;
-    background-color: var(--bg-section-alt);
-    text-align: center;
-}
-
-.carousel-container {
-    position: relative;
-    max-width: 820px;
-    margin: 0 auto;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-}
-
-.carousel-slider {
-    position: relative;
-    height: 480px;
-    width: 100%;
-}
-
-.carousel-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-}
-
-.carousel-slide.active { opacity: 1; z-index: 1; }
-
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.8);
-    color: var(--primary);
-    padding: 14px 20px;
-    font-weight: 600;
-    font-size: 1rem;
-    border-top: 1px solid var(--border);
-    z-index: 2;
-    text-align: left;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(24, 27, 34, 0.85);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    transition: all var(--transition);
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-btn:hover {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-}
-
-.carousel-btn.prev { left: 14px; }
-.carousel-btn.next { right: 14px; }
-
-.carousel-dots {
-    padding: 14px 0;
-    background: var(--bg-card);
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    border-top: 1px solid var(--border);
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background: #334155;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background var(--transition), transform var(--transition);
-}
-
-.dot.active {
-    background: var(--primary);
-    box-shadow: 0 0 8px var(--primary);
-    transform: scale(1.3);
-}
-
-/* ===========================
-   REVIEWS
-=========================== */
-.reviews {
-    padding: 90px 0;
-    background-color: var(--bg-dark);
-    text-align: center;
-}
-
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.review-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 30px;
-    text-align: left;
-    transition: border-color var(--transition), transform var(--transition);
-}
-
-.review-card:hover {
-    border-color: rgba(0,255,136,0.3);
-    transform: translateY(-4px);
-}
-
-.review-stars {
-    color: #f59e0b;
-    margin-bottom: 14px;
-    font-size: 0.9rem;
-    display: flex;
-    gap: 3px;
-}
-
-.review-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-
-.review-author {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.review-name {
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.review-model {
-    font-size: 0.8rem;
-    color: var(--primary);
-    background: var(--primary-dim);
-    padding: 3px 10px;
-    border-radius: 20px;
-}
-
-/* ===========================
-   WERKWIJZE
-=========================== */
-.werkwijze {
-    padding: 90px 0;
-    background-color: var(--bg-section-alt);
-    text-align: center;
-}
-
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 32px;
-    margin-top: 50px;
-    position: relative;
-}
-
-.step {
-    position: relative;
-    padding: 30px 20px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color var(--transition);
-}
-
-.step:hover { border-color: rgba(0,255,136,0.3); }
-
-.step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: var(--primary-dim);
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    border-radius: 50%;
-    font-weight: 800;
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-}
-
-.step h4 { margin-bottom: 10px; font-size: 1.1rem; }
-.step p { color: var(--text-muted); font-size: 0.9rem; }
-
-/* ===========================
-   FAQ
-=========================== */
-.faq {
-    padding: 90px 0;
-    background: var(--bg-dark);
-}
-
-.faq .container { max-width: 800px; text-align: center; }
-
-.faq-list {
-    margin-top: 10px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.faq-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color var(--transition);
-}
-
-.faq-item.open { border-color: rgba(0,255,136,0.35); }
-
-.faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    color: var(--text-main);
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 20px 22px;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    transition: color var(--transition);
-}
-
-.faq-question:hover { color: var(--primary); }
-
-.faq-question i {
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-}
-
-.faq-item.open .faq-question i { transform: rotate(180deg); color: var(--primary); }
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.3s ease;
-}
-
-.faq-answer p {
-    padding: 0 22px 20px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.faq-item.open .faq-answer { max-height: 300px; }
-
-/* ===========================
-   CONTACT FORM
-=========================== */
-.contact {
-    padding: 90px 0;
-    background: var(--bg-section-alt);
-    text-align: center;
-}
-
-.contact > .container > p {
-    color: var(--text-muted);
-    margin-bottom: 36px;
-    font-size: 0.95rem;
-}
-
-form {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 40px;
-    border-radius: var(--radius);
-    text-align: left;
-}
-
-.form-group { margin-bottom: 22px; }
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-select, textarea {
-    width: 100%;
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 12px 14px;
-    border-radius: var(--radius);
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color var(--transition);
-    font-family: inherit;
-}
-
-select:focus, textarea:focus { border-color: var(--primary); }
-
-.btn-submit {
-    width: 100%;
-    background-color: var(--primary);
-    color: #000;
-    border: none;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.btn-submit:hover {
-    transform: translateY(-1px);
-    filter: brightness(0.88);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-.btn-submit.kleur-tg { background: #0088cc; color: #fff; }
-.btn-submit.kleur-wa { background: #25d366; color: #fff; }
-.btn-submit.kleur-rd { background: #ff4500; color: #fff; }
-.btn-submit.kleur-dc { background: #5865f2; color: #fff; }
-
-/* Success Box */
-.hidden { display: none !important; }
-
-.success-box {
-    background: var(--primary-dim);
-    border: 2px solid var(--primary);
-    padding: 44px 40px;
-    border-radius: var(--radius);
-    margin-top: 20px;
-    text-align: center;
-}
-
-.success-icon {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 16px;
-}
-
-.success-box h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-}
-
-.success-box p {
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-.btn-telegram {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #0088cc;
-    color: #fff;
-    text-decoration: none;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    font-weight: 700;
-    margin: 20px 0 14px;
-    transition: background var(--transition), transform var(--transition);
-}
-
-.btn-telegram:hover {
-    background-color: #006fa8;
-    transform: translateY(-2px);
-}
-
-.success-note {
-    font-size: 0.8rem !important;
-    color: rgba(148,163,184,0.7) !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 0 !important;
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-    padding: 50px 0 30px;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    background: var(--bg-dark);
-}
-
-.footer-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-
-.footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.3rem;
-    font-weight: 700;
-}
-
-.footer-tagline { color: var(--text-muted); font-size: 0.9rem; }
-
-.footer-links {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.footer-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.footer-links a:hover { color: var(--primary); }
-
-.footer-copy { font-size: 0.8rem; color: #475569; }
-
-/* ===========================
-   ANIMATIONS
-=========================== */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-@media (max-width: 768px) {
-    header .container {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding: 14px 0;
-    }
-
-    .hamburger { display: flex; }
-
-    #mainNav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        padding: 12px 0 10px;
-        border-top: 1px solid var(--border);
-        gap: 4px;
-        margin-top: 8px;
-    }
-
-    #mainNav.open { display: flex; }
-
-    #mainNav a {
-        margin: 0;
-        padding: 10px 8px;
-        border-radius: var(--radius);
-        text-align: center;
-        font-size: 1rem;
-    }
-
-    #mainNav .btn-nav { margin-top: 6px; }
-
-    .hero { padding: 130px 0 80px; }
-    .hero h1 { font-size: 2.2rem; }
-    .hero-stats { gap: 24px; }
-    .stat-divider { display: none; }
-
-    .trust-items { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; justify-items: start; }
-    .trust-item { white-space: normal; font-size: 0.82rem; }
-
-    .carousel-slider { height: 300px; }
-
-    .steps-grid { grid-template-columns: 1fr 1fr; }
-
-    form { padding: 24px 20px; }
-
-    .success-box { padding: 32px 20px; }
-
-    h2 { font-size: 1.8rem; }
-}
-
-@media (max-width: 480px) {
-    .hero h1 { font-size: 1.9rem; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .reviews-grid { grid-template-columns: 1fr; }
-    .hero-btns { flex-direction: column; align-items: center; }
-    .hero-btns a { width: 100%; justify-content: center; }
-}
-
-/* ===========================
-   OLED METHOD TAGS
-=========================== */
-.method-tag {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
-
-.method-standard {
-    background: rgba(0,255,136,0.1);
-    color: var(--primary);
-    border: 1px solid rgba(0,255,136,0.3);
-}
-
-.method-premium {
-    background: rgba(255, 160, 0, 0.1);
-    color: #ffaa00;
-    border: 1px solid rgba(255, 160, 0, 0.3);
-}
-
-.card-premium {
-    border: 2px solid #ffaa00 !important;
-    box-shadow: 0 0 30px rgba(255,160,0,0.08);
-}
-
-.card-premium:hover {
-    border-color: #ffaa00 !important;
-    box-shadow: 0 12px 40px rgba(255,160,0,0.12) !important;
-}
-
-.badge-premium {
-    background: linear-gradient(135deg, #ffaa00, #ff7700) !important;
-    color: #000 !important;
-}
-
-.btn-card-premium {
-    background: linear-gradient(135deg, #ffaa00, #ff7700);
-    color: #000 !important;
-    border-color: #ffaa00;
-}
-
-.btn-card-premium:hover {
-    background: linear-gradient(135deg, #ffcc00, #ff8800);
-    color: #000 !important;
-    border-color: #ffcc00;
-}
-
-/* ===========================
-   4-KOLOM GRID
-=========================== */
-.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 1100px) {
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-    .grid-4 { grid-template-columns: 1fr; }
-}
-
-/* ===========================
-   TOOLTIP
-=========================== */
-.tooltip-wrap {
-    position: relative;
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-}
-
-.tooltip-icon {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: color var(--transition);
-}
-
-.tooltip-icon:hover { color: var(--primary); }
-
-.tooltip-box {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e2330;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    line-height: 1.5;
-    padding: 10px 13px;
-    border-radius: 6px;
-    width: 220px;
-    z-index: 100;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    pointer-events: none;
-    white-space: normal;
-    font-style: normal;
-    font-weight: normal;
-}
-
-.tooltip-box::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: var(--border);
-}
-
-.tooltip-wrap:hover .tooltip-box,
-.tooltip-wrap:focus-within .tooltip-box {
-    display: block;
-}
-
-/* ===========================
-   SERVICES NOTES (dubbel)
-=========================== */
-.services-notes {
-    display: flex;
-    gap: 16px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.services-notes .services-note {
-    margin-top: 0;
-    flex: 1;
-    min-width: 260px;
-    max-width: 500px;
-}
-
-/* Oranje kruis voor nadeel */
-.fa-times.oker { color: #ffaa00 !important; }
-
-/* ===========================
-   GRATIS SERVICE SECTIE
-=========================== */
-.gratis-service {
-    background: linear-gradient(135deg, rgba(0,255,136,0.06) 0%, rgba(0,255,136,0.02) 100%);
-    border-top: 1px solid rgba(0,255,136,0.15);
-    border-bottom: 1px solid rgba(0,255,136,0.15);
-    padding: 50px 0;
-}
-
-.gratis-inner {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    background: var(--bg-card);
-    border: 1px solid rgba(0,255,136,0.25);
-    border-radius: var(--radius);
-    padding: 40px 44px;
-    box-shadow: 0 0 40px rgba(0,255,136,0.05);
-}
-
-.gratis-icon {
-    flex-shrink: 0;
-    width: 72px;
-    height: 72px;
-    background: var(--primary-dim);
-    border: 2px solid rgba(0,255,136,0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: var(--primary);
-}
-
-.gratis-content { text-align: left; }
-
-.gratis-label {
-    display: inline-block;
-    background: var(--primary);
-    color: #000;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 3px 12px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-
-.gratis-content h3 {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text-main);
-}
-
-.gratis-content p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin: 0;
-}
-
-.gratis-content strong { color: var(--primary); font-weight: 600; }
-
-@media (max-width: 600px) {
-    .gratis-inner {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 24px;
-    }
-    .gratis-content { text-align: center; }
-}
-
-.gratis-disclaimer {
-    margin-top: 14px !important;
-    font-size: 0.85rem !important;
-    color: #64748b !important;
-    border-top: 1px solid var(--border);
-    padding-top: 14px;
-    line-height: 1.6;
-}
-
-.gratis-disclaimer i {
-    color: #ffaa00;
-    margin-right: 6px;
-}
-
-.gratis-disclaimer strong { color: var(--text-muted) !important; font-weight: 600; }
-
-/* ===========================
-   KAMIKAZE KAART — ROOD
-=========================== */
-.card-kamikaze {
-    background: linear-gradient(145deg, #1a0808, #1f0d0d);
-    border: 2px solid #cc2200 !important;
-    box-shadow: 0 0 35px rgba(204, 34, 0, 0.15);
-}
-
-.card-kamikaze:hover {
-    border-color: #ff3300 !important;
-    box-shadow: 0 12px 40px rgba(255, 51, 0, 0.2) !important;
-    transform: translateY(-6px);
-}
-
-.card-kamikaze h3 { color: #f5f6f8; }
-
-.card-kamikaze .price { color: #f5f6f8; }
-
-.card-kamikaze .price-sub { color: rgba(255,255,255,0.4); }
-
-.card-kamikaze .method-tag.method-premium {
-    background: rgba(204, 34, 0, 0.15);
-    color: #ff6644;
-    border: 1px solid rgba(204, 34, 0, 0.4);
-}
-
-.card-kamikaze ul li {
-    color: rgba(255,255,255,0.6);
-}
-
-.card-kamikaze ul li i.fa-check {
-    color: var(--primary) !important;
-}
-
-.card-kamikaze ul li i.fa-times {
-    color: #ff4422 !important;
-}
-
-.card-kamikaze .badge-premium {
-    background: linear-gradient(135deg, #cc2200, #ff3300) !important;
-}
-
-.card-kamikaze .btn-card-premium {
-    background: linear-gradient(135deg, #cc2200, #ff3300);
-    border-color: #cc2200;
-    color: #fff !important;
-}
-
-.card-kamikaze .btn-card-premium:hover {
-    background: linear-gradient(135deg, #dd3300, #ff4411);
-    border-color: #dd3300;
-}
-
-.card-kamikaze .card-icon i {
-    color: #ff4422;
-}
-
-/* ===========================
-   ICONIFY ICONS IN CARDS
-=========================== */
-.card-icon iconify-icon {
-    font-size: 2.5rem;
-    color: var(--primary);
-}
-
-.card-kamikaze .card-icon iconify-icon {
-    color: #ff4422;
-}
-
-/* ===========================
-   ORANJE KAMIKAZE
-=========================== */
-.card-orange {
-    background: linear-gradient(145deg, #1a1000, #1f1500) !important;
-    border: 2px solid #cc6600 !important;
-    box-shadow: 0 0 35px rgba(204, 102, 0, 0.12) !important;
-}
-.card-orange:hover {
-    border-color: #ff8800 !important;
-    box-shadow: 0 12px 40px rgba(255, 136, 0, 0.18) !important;
-}
-.card-orange .method-tag.method-premium {
-    background: rgba(204, 102, 0, 0.15);
-    color: #ffaa44;
-    border: 1px solid rgba(204, 102, 0, 0.4);
-}
-.card-orange ul li { color: rgba(255,255,255,0.6); }
-.card-orange ul li i.fa-check { color: var(--primary) !important; }
-.card-orange ul li i.fa-times { color: #ff8833 !important; }
-.card-orange .badge-premium { background: linear-gradient(135deg, #cc6600, #ff8800) !important; }
-.card-orange .btn-card-premium {
-    background: linear-gradient(135deg, #cc6600, #ff8800);
-    border-color: #cc6600;
-    color: #fff !important;
-}
-.card-orange .btn-card-premium:hover {
-    background: linear-gradient(135deg, #dd7700, #ff9900);
-    border-color: #dd7700;
-}
-.card-orange .card-icon iconify-icon { color: #ff8833; }
-
-/* ===========================
-   DAT0 VS KAMIKAZE VERGELIJKING
-=========================== */
-.vergelijking {
-    padding: 90px 0;
-    background: var(--bg-section-alt);
-    text-align: center;
-}
-.verg-grid {
-    display: flex;
-    gap: 0;
-    align-items: stretch;
-    margin-bottom: 40px;
-}
-.verg-card {
-    flex: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px 28px;
-    text-align: left;
-}
-.verg-dat0 { border-top: 3px solid var(--primary); }
-.verg-kamikaze { border-top: 3px solid #ff8800; }
-.verg-vs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    flex-shrink: 0;
-}
-.verg-vs span {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 10px 14px;
-    border-radius: 50%;
-}
-.verg-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.verg-badge {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-.verg-badge-green { background: rgba(0,255,136,0.1); color: var(--primary); border: 1px solid rgba(0,255,136,0.3); }
-.verg-badge-orange { background: rgba(255,136,0,0.1); color: #ff8800; border: 1px solid rgba(255,136,0,0.3); }
-.verg-price { font-size: 1.4rem; font-weight: 800; color: var(--text-main); }
-.verg-how {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 20px;
-}
-.verg-how h4 {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.verg-how h4 i { color: var(--primary); }
-.verg-how p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
-.verg-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.verg-list li { font-size: 0.9rem; display: flex; align-items: flex-start; gap: 9px; }
-.verg-list li.pro { color: var(--text-muted); }
-.verg-list li.con { color: #64748b; }
-.verg-list li.pro i { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
-.verg-list li.con i { color: #ef4444; flex-shrink: 0; margin-top: 2px; }
-.verg-tabel-wrap { overflow-x: auto; margin-bottom: 28px; }
-.verg-tabel { width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; }
-.verg-tabel th, .verg-tabel td { padding: 12px 16px; border: 1px solid var(--border); }
-.verg-tabel thead tr { background: rgba(255,255,255,0.03); }
-.verg-tabel th { font-weight: 700; color: var(--text-main); }
-.verg-tabel td { color: var(--text-muted); }
-.verg-tabel tbody tr:hover { background: rgba(255,255,255,0.02); }
-.tabel-green { color: var(--primary); }
-.tabel-orange { color: #ff8800; }
-.verg-advies {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.2);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    text-align: left;
-}
-.verg-advies i { color: var(--primary); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-.verg-advies p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin: 0; }
-.verg-advies strong { color: var(--text-main); }
-
-/* ===========================
-   GARANTIE SECTIE
-=========================== */
-.garantie {
-    padding: 90px 0;
-    background: var(--bg-dark);
-    text-align: center;
-}
-.garantie-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-.garantie-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 36px 28px;
-    text-align: left;
-    position: relative;
-    transition: transform var(--transition), border-color var(--transition);
-}
-.garantie-card:hover { transform: translateY(-4px); }
-.garantie-basis { border-top: 3px solid var(--primary); }
-.garantie-premium { border: 2px solid #f59e0b; box-shadow: 0 0 30px rgba(245,158,11,0.08); }
-.garantie-info { border-top: 3px solid #475569; }
-.garantie-populair {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #f59e0b;
-    color: #000;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 20px;
-    white-space: nowrap;
-}
-.garantie-icon { font-size: 2rem; margin-bottom: 12px; }
-.garantie-basis .garantie-icon { color: var(--primary); }
-.garantie-premium .garantie-icon { color: #f59e0b; }
-.garantie-info .garantie-icon { color: #64748b; }
-.garantie-badge {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    background: rgba(0,255,136,0.1);
-    color: var(--primary);
-    border: 1px solid rgba(0,255,136,0.2);
-}
-.garantie-badge-gold { background: rgba(245,158,11,0.1); color: #f59e0b; border-color: rgba(245,158,11,0.3); }
-.garantie-badge-muted { background: rgba(71,85,105,0.2); color: #64748b; border-color: rgba(71,85,105,0.3); }
-.garantie-card h3 { font-size: 1.25rem; margin-bottom: 6px; }
-.garantie-prijs {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-}
-.garantie-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.garantie-card ul li { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 9px; }
-.garantie-card ul li i.fa-check { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
-.garantie-card ul li i.fa-times { color: #ef4444; flex-shrink: 0; margin-top: 2px; }
-.garantie-note { margin-top: 18px; font-size: 0.8rem; color: #64748b; font-style: italic; }
-
-@media (max-width: 900px) {
-    .verg-grid { flex-direction: column; }
-    .verg-vs { padding: 14px 0; }
-    .garantie-grid { grid-template-columns: 1fr; }
-}
-
-/* ===========================
-   REVIEW FORMULIER
-=========================== */
-.review-form-wrap {
-    margin-top: 50px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 36px 40px;
-    text-align: left;
-}
-
-.review-form-wrap h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.review-form-wrap h3 i { color: var(--primary); }
-
-.review-form-wrap > p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-}
-
-.review-form { display: flex; flex-direction: column; gap: 0; }
-
-.review-form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 22px;
-}
-
-.review-form .form-group { margin-bottom: 22px; }
-.review-form-row .form-group { margin-bottom: 0; }
-
-.review-form input[type="text"] {
-    width: 100%;
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 12px 14px;
-    border-radius: var(--radius);
-    font-size: 0.95rem;
-    outline: none;
-    font-family: inherit;
-    transition: border-color var(--transition);
-}
-
-.review-form input[type="text"]:focus { border-color: var(--primary); }
-
-/* Sterren picker */
-.star-picker {
-    display: flex;
-    gap: 6px;
-    margin-top: 6px;
-}
-
-.star-picker i {
-    font-size: 1.6rem;
-    color: #334155;
-    cursor: pointer;
-    transition: color 0.15s, transform 0.15s;
-}
-
-.star-picker i:hover,
-.star-picker i.active {
-    color: #f59e0b;
-    transform: scale(1.15);
-}
-
-.review-success {
-    margin-top: 16px;
-    background: rgba(0,255,136,0.07);
-    border: 1px solid rgba(0,255,136,0.25);
-    color: var(--primary);
-    padding: 14px 18px;
-    border-radius: var(--radius);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-@media (max-width: 600px) {
-    .review-form-row { grid-template-columns: 1fr; }
-    .review-form-wrap { padding: 24px 20px; }
-}
-
-/* ===========================
-   DISABLED SUBMIT KNOP
-=========================== */
-.btn-submit-disabled {
-    opacity: 0.4;
-    cursor: not-allowed !important;
-    transform: none !important;
-    box-shadow: none !important;
-}
-
-.submit-hint {
-    text-align: center;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-top: 10px;
-    transition: opacity 0.3s;
-}
-
-.submit-hint.hidden { display: none; }
-
-/* Success grote knop */
-.btn-contact-large {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border-radius: var(--radius);
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    margin: 20px 0 14px;
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.btn-contact-large:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
-.btn-contact-large.tg  { background: #0088cc; color: #fff; }
-.btn-contact-large.wa  { background: #25d366; color: #fff; }
-.btn-contact-large.rd  { background: #ff4500; color: #fff; }
-.btn-contact-large.dc  { background: #5865f2; color: #fff; }
-
-/* ===========================
-   KANAAL KEUZE KNOPPEN
-=========================== */
-.kanaal-keuze {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.kanaal-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: var(--radius);
-    font-size: 2rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
-    opacity: 0.65;
-    color: #fff;
-    width: 100%;
-}
-
-.kanaal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-.kanaal-btn.geselecteerd {
-    opacity: 1;
-    transform: translateY(-2px);
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
-}
-
-.kanaal-btn.btn-tg { background: #0088cc; }
-.kanaal-btn.btn-wa { background: #25d366; }
-.kanaal-btn.btn-rd { background: #ff4500; }
-.kanaal-btn.btn-dc { background: #5865f2; }
-
-@media (max-width: 480px) {
-    .kanaal-btn { font-size: 1.6rem; padding: 16px; }
-}
-
-/* ===========================
-   REVIEW CTA & CONTACT KNOPPEN
-=========================== */
-.review-cta { margin-top: 40px; }
-
-.review-cta-inner {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    background: linear-gradient(135deg, rgba(0,255,136,0.06), transparent);
-    border: 1px solid rgba(0,255,136,0.2);
-    border-left: 4px solid var(--primary);
-    border-radius: var(--radius);
-    padding: 32px 36px;
-}
-
-.review-cta-icon {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.25);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    color: var(--primary);
-}
-
-.review-cta-content h3 { font-size: 1.1rem; margin-bottom: 6px; }
-.review-cta-content > p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
-
-.contact-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
-}
-
-.contact-btns-center { justify-content: center; margin-top: 20px; }
-
-.btn-contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: var(--radius);
-    font-size: 2rem;
-    text-decoration: none;
-    transition: transform var(--transition), opacity var(--transition);
-    color: #fff !important;
-}
-
-.btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
-
-.btn-contact.btn-tg { background: #0088cc; }
-.btn-contact.btn-wa { background: #25d366; }
-.btn-contact.btn-rd { background: #ff4500; }
-.btn-contact.btn-dc { background: #5865f2; }
-
-.review-disclaimer {
-    margin-top: 14px;
-    font-size: 0.8rem;
-    color: #475569;
-    margin-bottom: 0;
-    line-height: 1.6;
-    text-align: left;
-}
-
-@media (max-width: 600px) {
-    .review-cta-inner {
-        flex-direction: column;
-        text-align: center;
-        padding: 24px 20px;
-    }
-    .review-disclaimer { text-align: center; }
-    .contact-btns { justify-content: center; }
-}
-
-/* ===========================
-   MICROSD BANNER
-=========================== */
-.microsd-banner {
-    background: linear-gradient(90deg, rgba(0,255,136,0.08) 0%, rgba(0,255,136,0.03) 100%);
-    border-top: 1px solid rgba(0,255,136,0.2);
-    border-bottom: 1px solid rgba(0,255,136,0.2);
-    padding: 18px 0;
-}
-.microsd-banner-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-.microsd-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-.microsd-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(0,255,136,0.12);
-    border: 1px solid rgba(0,255,136,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-.microsd-text p {
-    margin: 0 0 2px;
-    font-size: 0.95rem;
-    color: var(--text-main);
-}
-.microsd-text span {
-    font-size: 0.82rem;
-    color: #64748b;
-}
-.microsd-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--primary);
-    color: #000;
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 7px 16px;
-    border-radius: 20px;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-@media (max-width: 600px) {
-    .microsd-banner-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .microsd-badge { align-self: flex-start; }
-}
-
-/* ===========================
-   TIMELINE (WERKWIJZE)
-=========================== */
-.timeline {
-    position: relative;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 10px 0;
-}
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--primary), rgba(0,255,136,0.1));
-    transform: translateX(-50%);
-}
-.timeline-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0;
-    margin-bottom: 48px;
-    position: relative;
-}
-.timeline-item-right { flex-direction: row-reverse; }
-.timeline-icon {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--bg-card);
-    border: 2px solid var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 1.1rem;
-    z-index: 2;
-    flex-shrink: 0;
-    box-shadow: 0 0 16px rgba(0,255,136,0.2);
-}
-.timeline-icon-finish {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-    box-shadow: 0 0 24px rgba(0,255,136,0.4);
-}
-.timeline-card {
-    width: calc(50% - 48px);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 24px;
-    text-align: left;
-    transition: border-color var(--transition), box-shadow var(--transition);
-}
-.timeline-item:not(.timeline-item-right) .timeline-card { margin-right: auto; margin-left: 0; }
-.timeline-item-right .timeline-card { margin-left: auto; margin-right: 0; }
-.timeline-card:hover {
-    border-color: rgba(0,255,136,0.35);
-    box-shadow: 0 6px 24px rgba(0,255,136,0.07);
-}
-.timeline-step-badge {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    background: rgba(0,255,136,0.1);
-    color: var(--primary);
-    border: 1px solid rgba(0,255,136,0.2);
-}
-.timeline-step-badge-finish {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-}
-.timeline-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-.timeline-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-.timeline-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
-    color: #64748b;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 20px;
-}
-.timeline-tag i { font-size: 0.72rem; color: var(--text-muted); }
-.timeline-tag-green { color: var(--primary); border-color: rgba(0,255,136,0.25); background: rgba(0,255,136,0.05); }
-.timeline-tag-green i { color: var(--primary); }
-
-@media (max-width: 700px) {
-    .timeline::before { left: 20px; }
-    .timeline-item,
-    .timeline-item.timeline-item-right { flex-direction: column; padding-left: 56px; }
-    .timeline-icon { left: 0; top: 0; transform: none; width: 40px; height: 40px; font-size: 0.95rem; }
-    .timeline-card { width: 100%; margin: 0 !important; padding: 16px 18px; }
-    .timeline-card h4 { font-size: 0.97rem; }
-    .timeline-card p { font-size: 0.85rem; }
-}
-
-/* ===========================
-   STICKY SELECTION BAR
-=========================== */
-.sticky-selection {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    background: rgba(24, 27, 34, 0.97);
-    border-top: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-    padding: 10px 0;
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
-}
-.sticky-selection.visible { transform: translateY(0); }
-.sticky-selection-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-.sticky-chips {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-.sticky-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 7px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.03);
-    transition: all 0.25s;
-}
-.sticky-chip.selected { color: #0f1115; border-color: transparent; }
-.sticky-chip-console.selected { background: var(--primary); color: #000; }
-.sticky-chip-garantie.selected { background: #f59e0b; color: #000; }
-.sticky-chip i { font-size: 0.8rem; }
-.sticky-sep { color: #334155; font-size: 0.75rem; }
-.sticky-total {
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--primary);
-    white-space: nowrap;
-    min-width: 80px;
-    text-align: right;
-}
-
-/* ===========================
-   GARANTIE SELECTEER KNOP
-=========================== */
-.garantie-card { display: flex; flex-direction: column; }
-.garantie-card ul { flex: 1; }
-.garantie-select-btn {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    padding: 11px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: 20px;
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-}
-.garantie-select-btn:hover { border-color: var(--primary); color: var(--primary); }
-.garantie-select-btn.geselecteerd { background: var(--primary); color: #000 !important; border-color: var(--primary); }
-.garantie-premium .garantie-select-btn.geselecteerd { background: #f59e0b; border-color: #f59e0b; }
-.garantie-premium .garantie-select-btn:hover { border-color: #f59e0b; color: #f59e0b; }
-
-/* ===========================
-   SERVICE CARD SELECTIE
-=========================== */
-.card.geselecteerd {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 2px rgba(0,255,136,0.25) !important;
-}
-.card-orange.geselecteerd {
-    border-color: #f59e0b !important;
-    box-shadow: 0 0 0 2px rgba(245,158,11,0.25) !important;
-}
-.aanvragen-btn.geselecteerd { background: var(--primary); color: #000 !important; border-color: var(--primary); }
-.card-orange .aanvragen-btn.geselecteerd { background: #f59e0b; border-color: #f59e0b; }
-
-/* ===========================
-   CONTACT TWO-COLUMN LAYOUT
-=========================== */
-.contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 2rem;
-    align-items: start;
-}
-.contact-form-col { min-width: 0; }
-
-/* ===========================
-   GARANTIE RADIO CARDS (FORM)
-=========================== */
-.garantie-keuze {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-}
-.garantie-radio-label { cursor: pointer; display: block; }
-.garantie-radio-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.garantie-radio-card {
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 0.9rem 1rem;
-    background: rgba(255,255,255,0.03);
-    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-}
-.garantie-radio-label input:checked + .garantie-radio-card {
-    border-color: var(--primary);
-    background: rgba(0,255,136,0.07);
-    box-shadow: 0 0 0 3px rgba(0,255,136,0.12);
-}
-#garantie-label-180 input:checked + .garantie-radio-card {
-    border-color: #f59e0b;
-    background: rgba(245,158,11,0.08);
-    box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
-}
-.garantie-radio-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.3rem;
-}
-.garantie-radio-title { font-weight: 600; font-size: 0.9rem; }
-.garantie-radio-prijs { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
-#garantie-label-180 input:checked + .garantie-radio-card .garantie-radio-prijs { color: #f59e0b; font-weight: 600; }
-.garantie-radio-desc { font-size: 0.78rem; color: #64748b; margin: 0; line-height: 1.4; }
-
-/* ===========================
-   ORDER SUMMARY PANEL
-=========================== */
-.order-summary { position: sticky; top: 90px; }
-.order-summary-inner {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-}
-.order-summary-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 1rem 1.25rem;
-    background: rgba(0,255,136,0.07);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--primary);
-}
-.order-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 2.2rem 1.5rem;
-    color: #475569;
-    font-size: 0.85rem;
-    text-align: center;
-}
-.order-placeholder i { font-size: 1.4rem; }
-.order-placeholder p { margin: 0; }
-.order-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.9rem 1.25rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    gap: 0.5rem;
-    animation: summaryFadeIn 0.3s ease;
-}
-.order-row-label {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.88rem;
-    color: #cbd5e1;
-}
-.order-row-label i { color: var(--primary); font-size: 0.85rem; }
-.order-row-garantie .order-row-label i { color: #f59e0b; }
-.order-row-prijs { font-size: 0.88rem; font-weight: 600; color: #e2e8f0; white-space: nowrap; }
-.order-divider { height: 1px; background: rgba(255,255,255,0.10); margin: 0 1.25rem; }
-.order-total-wrap { padding: 0.75rem 0 0.25rem; }
-.order-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem 1.25rem;
-}
-.order-total-label { font-weight: 700; font-size: 1rem; color: #f1f5f9; }
-.order-total-price { font-weight: 700; font-size: 1.15rem; color: var(--primary); transition: color 0.25s; }
-.order-total-note { font-size: 0.75rem; color: #475569; padding: 0 1.25rem 0.75rem; margin: 0; display: flex; align-items: center; gap: 0.4rem; }
-.order-includes { padding: 0.75rem 1.25rem 1.1rem; border-top: 1px solid rgba(255,255,255,0.06); animation: summaryFadeIn 0.3s ease; }
-.order-includes-title { font-size: 0.78rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 0.5rem; }
-.order-includes ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
-.order-includes li { font-size: 0.8rem; color: #64748b; display: flex; align-items: center; gap: 0.5rem; }
-.order-includes li i { color: var(--primary); font-size: 0.7rem; }
-.order-row-garantie-pending {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.83rem;
-    color: #475569;
-    border-bottom: 1px dashed rgba(255,255,255,0.06);
-    animation: summaryFadeIn 0.3s ease;
-}
-.order-row-garantie-pending i { color: #f59e0b; }
-
-@keyframes summaryFadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 900px) {
-    .contact-layout { grid-template-columns: 1fr; }
-    .order-summary { position: static; order: -1; }
-    .garantie-keuze { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-    .sticky-chips { gap: 6px; }
-    .sticky-chip { font-size: 0.78rem; padding: 6px 10px; }
-    .sticky-sep { display: none; }
-}
-
-/* ===========================
-   REPARATIE SECTIE
-=========================== */
-.reparatie {
-    padding: 90px 0;
-    background: var(--bg-section-alt);
-    text-align: center;
-}
-
-.rep-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-}
-
-.rep-tab {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 10px 24px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
-}
-
-.rep-tab:hover { border-color: var(--primary); color: var(--primary); }
-.rep-tab.active { background: var(--primary); color: #000; border-color: var(--primary); }
-
-.rep-panel { display: none; }
-.rep-panel.active { display: block; }
-
-.rep-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-    text-align: left;
-}
-
-.rep-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-    cursor: pointer;
-}
-
-.rep-card:hover {
-    border-color: rgba(0,255,136,0.35);
-    box-shadow: 0 4px 16px rgba(0,255,136,0.06);
-    transform: translateY(-2px);
-}
-
-.rep-card.geselecteerd {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 2px rgba(0,255,136,0.2) !important;
-}
-
-.rep-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-
-.rep-icon-premium {
-    background: rgba(245,158,11,0.1);
-    border-color: rgba(245,158,11,0.25);
-    color: #f59e0b;
-}
-
-.rep-info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.rep-naam {
-    font-weight: 700;
-    font-size: 0.92rem;
-    color: var(--text-main);
-}
-
-.rep-desc {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-}
-
-.rep-prijs {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: var(--text-main);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.rep-prijs-premium { color: #f59e0b; }
-
-.rep-select-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: all var(--transition);
-}
-
-.rep-select-btn:hover { border-color: var(--primary); color: var(--primary); }
-.rep-card.geselecteerd .rep-select-btn {
-    background: var(--primary);
-    color: #000;
-    border-color: var(--primary);
-}
-
-.rep-note {
-    margin-top: 28px;
-    font-size: 0.85rem;
-    color: #475569;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-.rep-note i { color: var(--primary); }
-
-/* ===========================
-   AANVRAAG TYPE TOGGLE
-=========================== */
-.aanvraag-type-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 32px;
-}
-
-.aanvraag-type-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 2px solid var(--border);
-    color: var(--text-muted);
-    padding: 12px 24px;
-    border-radius: var(--radius);
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition);
-}
-
-.aanvraag-type-btn:hover { border-color: var(--primary); color: var(--primary); }
-.aanvraag-type-btn.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #000;
-}
-
-/* ===========================
-   REPARATIE AANVRAAG SUMMARY
-=========================== */
-.rep-aanvraag-summary {
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 22px;
-}
-
-.rep-aanvraag-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 32px 20px;
-    color: #475569;
-    text-align: center;
-}
-
-.rep-aanvraag-empty i { font-size: 1.8rem; color: #334155; }
-.rep-aanvraag-empty p { margin: 0; font-size: 0.88rem; }
-
-.rep-aanvraag-link {
-    display: inline-block;
-    margin-top: 4px;
-    font-size: 0.82rem;
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.rep-aanvraag-filled { padding: 0; }
-
-.rep-aanvraag-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 18px;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.88rem;
-    color: var(--text-main);
-}
-
-.rep-aanvraag-label {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    white-space: nowrap;
-}
-
-.rep-aanvraag-label i { color: var(--primary); font-size: 0.8rem; }
-
-.rep-aanvraag-total {
-    border-bottom: none;
-    font-weight: 700;
-}
-
-.rep-aanvraag-prijs {
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--primary);
-}
-
-.rep-aanvraag-clear {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-    background: none;
-    border: none;
-    border-top: 1px solid var(--border);
-    color: #475569;
-    font-size: 0.8rem;
-    padding: 10px;
-    cursor: pointer;
-    transition: color var(--transition);
-}
-
-.rep-aanvraag-clear:hover { color: #ef4444; }
-
-/* Repair chip in sticky bar */
-.sticky-chip-repair.selected { background: #3b82f6; color: #fff; }
-
-.order-row-repair .order-row-label i { color: #3b82f6; }
-
-@media (max-width: 600px) {
-    .rep-card { flex-wrap: wrap; }
-    .rep-select-btn { width: 100%; text-align: center; }
-    .aanvraag-type-toggle { flex-direction: column; align-items: stretch; }
-    .aanvraag-type-btn { justify-content: center; }
-}
-
-/* ===========================
-   GARANTIE CHIP VARIANTEN
-=========================== */
-.sticky-chip-garantie-90.selected  { background: var(--primary); color: #000; }
-.sticky-chip-garantie-180.selected { background: #f59e0b; color: #000; }
-
-/* ===========================
-   TYPOGRAFIE VERBETERINGEN
-=========================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-* { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-h1 {
-    font-size: 3.6rem;
-    font-weight: 900;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-}
-
-h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-}
-
-h3 { letter-spacing: -0.3px; }
-h4 { letter-spacing: -0.2px; }
-
-.section-subtitle {
-    font-size: 1.05rem;
-    font-weight: 400;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
-}
-
-.hero-badge {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.logo-text {
-    font-size: 1.4rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-}
-
-.btn-primary, .btn-secondary, .btn-nav, .btn-card, .btn-submit {
-    font-weight: 700;
-    letter-spacing: 0.01em;
-}
-
-.card h3 {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-}
-
-.price {
-    font-size: 2.4rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-}
-
-.price-sub {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-}
-
-.stat-num {
-    font-size: 2.2rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-}
-
-.trust-item {
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-}
-
-.faq-question {
-    font-size: 0.97rem;
-    font-weight: 600;
-    letter-spacing: -0.1px;
-}
-
-.faq-answer p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-}
-
-nav a {
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-}
-
-.timeline-card h4 {
-    font-size: 1.08rem;
-    font-weight: 800;
-    letter-spacing: -0.2px;
-}
-
-.rep-naam {
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: -0.1px;
-}
-
-.garantie-card h3 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
-}
-
-.sticky-chip {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-}
-
-.sticky-total {
-    font-size: 1.05rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-}
-
-.order-total-price {
-    font-size: 1.2rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-}
-
-.footer-tagline {
-    font-size: 0.88rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    color: var(--text-muted);
-}
-
-.footer-copy {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-}
-
-@media (max-width: 768px) {
-    h1 { font-size: 2.4rem; letter-spacing: -0.8px; }
-    h2 { font-size: 1.9rem; letter-spacing: -0.4px; }
-}
-@media (max-width: 480px) {
-    h1 { font-size: 2rem; letter-spacing: -0.5px; }
-}
-
-/* ===========================
-   REPARATIE GROEP LABELS
-=========================== */
-.rep-group-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--primary);
-    margin: 0 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(0,255,136,0.15);
-}
-.rep-group-label i { font-size: 0.75rem; }
-.rep-group-label-specific {
-    color: #94a3b8;
-    border-bottom-color: rgba(255,255,255,0.07);
-    margin-top: 28px;
-}
-
-.rep-badge-all {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 7px;
-    border-radius: 10px;
-    background: rgba(0,255,136,0.1);
-    color: var(--primary);
-    border: 1px solid rgba(0,255,136,0.2);
-    vertical-align: middle;
-    margin-left: 5px;
-    white-space: nowrap;
-}
-
-/* ===========================
-   REPARATIE SELECTED BAR
-=========================== */
-.rep-selected-bar {
-    margin-top: 28px;
-    background: rgba(0,255,136,0.05);
-    border: 1px solid rgba(0,255,136,0.2);
-    border-radius: var(--radius);
-    padding: 14px 20px;
-    animation: summaryFadeIn 0.3s ease;
-}
-.rep-selected-bar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-.rep-selected-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-.rep-selected-left > i { color: var(--primary); }
-.rep-selected-left > span {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text-main);
-    white-space: nowrap;
-}
-.rep-selected-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-.rep-chip {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background: rgba(0,255,136,0.12);
-    color: var(--primary);
-    border: 1px solid rgba(0,255,136,0.25);
-}
-.rep-selected-right {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-shrink: 0;
-}
-.rep-selected-total {
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: -0.3px;
-}
-.rep-selected-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--primary);
-    color: #000;
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 9px 18px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: background var(--transition), transform var(--transition);
-    white-space: nowrap;
-}
-.rep-selected-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-
-@media (max-width: 600px) {
-    .rep-selected-bar-inner { flex-direction: column; align-items: flex-start; }
-    .rep-selected-right { width: 100%; justify-content: space-between; }
-}
-
-/* ===========================
-   AANVRAAG BLOCKS (unified form)
-=========================== */
-.aanvraag-block {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-    overflow: hidden;
-}
-
-.aanvraag-block-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 20px;
-    background: rgba(0,255,136,0.05);
-    border-bottom: 1px solid var(--border);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--primary);
-}
-
-.aanvraag-block-header-repair {
-    background: rgba(59,130,246,0.05);
-    color: #60a5fa;
-}
-
-.aanvraag-block-status {
-    margin-left: auto;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--text-muted);
-}
-
-.aanvraag-block-status-done    { color: var(--primary); }
-.aanvraag-block-status-partial { color: #f59e0b; }
-
-.aanvraag-block-body { padding: 20px; }
-
-.aanvraag-block-empty {
-    font-size: 0.85rem;
-    color: #475569;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 0;
-}
-
-/* ===========================
-   REPARATIE KAART — nieuwe layout
-=========================== */
-.rep-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-    cursor: pointer;
-    text-align: left;
-}
-
-.rep-card:hover {
-    border-color: rgba(0,255,136,0.35);
-    box-shadow: 0 4px 16px rgba(0,255,136,0.06);
-    transform: translateY(-2px);
-}
-
-.rep-card.geselecteerd {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 2px rgba(0,255,136,0.2) !important;
-}
-
-.rep-card-top {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.rep-card-bottom {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.rep-badge-model {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 7px;
-    border-radius: 10px;
-    background: rgba(59,130,246,0.1);
-    color: #60a5fa;
-    border: 1px solid rgba(59,130,246,0.25);
-    width: fit-content;
-}
-
-.rep-group-label-secondary {
-    color: #60a5fa;
-    border-bottom-color: rgba(59,130,246,0.15);
-    margin-top: 28px;
-}
-
-.rep-icon { flex-shrink: 0; }
-.rep-prijs { margin-left: auto; font-weight: 800; font-size: 1rem; white-space: nowrap; }
-.rep-select-btn { flex-shrink: 0; }
-
-/* ===========================
-   GARANTIE ICON KLEUREN IN SUMMARY
-=========================== */
-.summary-garantie-icon-90  { color: var(--primary) !important; }
-.summary-garantie-icon-180 { color: #f59e0b !important; }
-
-/* ===========================
-   FOOTER VERBETERD
-=========================== */
-footer {
-    padding: 60px 0 0;
-    border-top: 1px solid var(--border);
-    background: var(--bg-dark);
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 48px;
-}
-
-.footer-logo-text {
-    font-size: 1.4rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    color: var(--text-main);
-    display: block;
-    margin-bottom: 12px;
-}
-
-.footer-tagline {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.footer-socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.footer-social-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    transition: all var(--transition);
-}
-
-.footer-social-btn:hover { opacity: 0.85; transform: translateY(-1px); color: #fff; }
-.footer-social-tg { border-color: rgba(0,136,204,0.3); }
-.footer-social-tg:hover { background: #0088cc; border-color: #0088cc; }
-.footer-social-wa { border-color: rgba(37,211,102,0.3); }
-.footer-social-wa:hover { background: #25d366; border-color: #25d366; }
-.footer-social-rd { border-color: rgba(255,69,0,0.3); }
-.footer-social-rd:hover { background: #ff4500; border-color: #ff4500; }
-.footer-social-dc { border-color: rgba(88,101,242,0.3); }
-.footer-social-dc:hover { background: #5865f2; border-color: #5865f2; }
-
-.footer-nav-col {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-nav-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-main);
-    margin-bottom: 4px;
-}
-
-.footer-nav-col a {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color var(--transition);
-}
-
-.footer-nav-col a:hover { color: var(--primary); }
-
-.footer-bottom {
-    border-top: 1px solid var(--border);
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.footer-copy {
-    font-size: 0.8rem;
-    color: #475569;
-}
-
-.footer-disclaimer {
-    font-size: 0.78rem;
-    color: #334155;
-}
-
-@media (max-width: 768px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding-bottom: 32px;
-    }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPlay Mods | Professionele Nintendo Switch Modchip Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+    <!-- Sticky Selection Bar -->
+    <div class="sticky-selection" id="stickySelection">
+        <div class="container sticky-selection-inner">
+            <div class="sticky-chips">
+                <div class="sticky-chip sticky-chip-console" id="stickyConsoleChip">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span id="stickyConsoleName">Console kiezen →</span>
+                </div>
+                <i class="fa-solid fa-chevron-right sticky-sep" id="stickySep"></i>
+                <div class="sticky-chip sticky-chip-garantie" id="stickyGarantieChip">
+                    <i class="fa-solid fa-shield-halved" id="stickyGarantieIcon"></i>
+                    <span id="stickyGarantieName">Garantie kiezen →</span>
+                </div>
+                <i class="fa-solid fa-chevron-right sticky-sep sticky-sep-repair" id="stickySepRepair" style="display:none;"></i>
+                <div class="sticky-chip sticky-chip-repair" id="stickyRepairChip" style="display:none;">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span id="stickyRepairName">Reparatie kiezen →</span>
+                </div>
+            </div>
+            <div class="sticky-total" id="stickyTotal"></div>
+        </div>
+    </div>
+
+    <!-- Header / Navigatie -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">TechPlay <span class="logo-accent">Mods</span></span>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu openen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="mainNav">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#reparatie" class="nav-link">Reparatie</a>
+                <a href="#garantie" class="nav-link">Garantie</a>
+                <a href="#portfolio" class="nav-link">Ons Werk</a>
+                <a href="#werkwijze" class="nav-link">Werkwijze</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#contact" class="btn-nav nav-link">Aanvraag Doen</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="container hero-content">
+            <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Specialist in micro-soldeerwerk sinds 2023</div>
+            <h1>Ontgrendel jouw<br><span class="highlight">Nintendo Switch</span></h1>
+            <p>Professionele Picofly RP2040 Zero modchip installatie. Uitgevoerd onder de microscoop — met chirurgische precisie. Geen risico's, geen gedoe. Alleen resultaat.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn-primary">Bekijk Prijzen <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#portfolio" class="btn-secondary">Ons Werk Bekijken</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Consoles gemod</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Slagingspercentage</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num">48u</span><span class="stat-label">Gemiddelde doorlooptijd</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vertrouwensbalk -->
+    <div class="trust-bar">
+        <div class="container trust-items">
+            <div class="trust-item"><i class="fa-solid fa-microscope"></i> Professioneel micro-soldeerwerk</div>
+            <div class="trust-item"><i class="fa-solid fa-rotate-left"></i> Originele console blijft intact</div>
+            <div class="trust-item"><i class="fa-solid fa-lock"></i> 100% anoniem contact</div>
+            <div class="trust-item"><i class="fa-solid fa-truck-fast"></i> Snel en veilig verzenden</div>
+            <div class="trust-item"><i class="fa-solid fa-star"></i> Gegarandeerde werking</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Onze Modding Services</h2>
+            <p class="section-subtitle">Elk model, elk budget — wij leveren altijd hetzelfde hoge niveau van precisie.</p>
+            
+            <div class="grid grid-4">
+                <div class="card">
+                    <div class="card-icon"><iconify-icon icon="game-icons:game-console"></iconify-icon></div>
+                    <h3>Switch V1 / V2</h3>
+                    <p class="price">€ 85,-</p>
+                    <p class="price-sub">Chip inbegrepen</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Inclusief Picofly RP2040 Zero chip</li>
+                        <li><i class="fa-solid fa-check"></i> Professioneel micro-soldeerwerk</li>
+                        <li><i class="fa-solid fa-check"></i> Geëmailleerd koper draad</li>
+                        <li><i class="fa-solid fa-check"></i> Soldermask op kwetsbare verbindingspunten</li>
+                        <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
+                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                    </ul>
+                    <a href="#garantie" class="btn-card aanvragen-btn" data-model="V1/V2" data-prijs="85" data-label="Switch V1 / V2">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="card popular">
+                    <div class="badge"><i class="fa-solid fa-fire"></i> Meest Gekozen</div>
+                    <div class="card-icon"><iconify-icon icon="game-icons:game-console"></iconify-icon></div>
+                    <h3>Switch OLED</h3>
+                    <div class="method-tag method-standard">DAT0 Adapter</div>
+                    <p class="price">€ 110,-</p>
+                    <p class="price-sub">Chip inbegrepen</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Inclusief Picofly RP2040 Zero chip</li>
+                        <li><i class="fa-solid fa-check"></i> Professioneel micro-soldeerwerk</li>
+                        <li><i class="fa-solid fa-check"></i> Geëmailleerd koper draad</li>
+                        <li><i class="fa-solid fa-check"></i> Soldermask op kwetsbare verbindingspunten</li>
+                        <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
+                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                        <li><i class="fa-solid fa-check"></i> DAT0-adapter onder de eMMC-chip</li>
+                    </ul>
+                    <a href="#garantie" class="btn-card btn-card-primary aanvragen-btn" data-model="OLED-DAT0" data-prijs="110" data-label="Switch OLED (DAT0)">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="card card-kamikaze card-orange">
+                    <div class="badge badge-premium"><i class="fa-solid fa-bolt"></i> Meest Geavanceerd</div>
+                    <div class="card-icon"><iconify-icon icon="game-icons:game-console"></iconify-icon></div>
+                    <h3>Switch OLED</h3>
+                    <div class="method-tag method-premium">Kamikaze</div>
+                    <p class="price">€ 130,-</p>
+                    <p class="price-sub">Chip inbegrepen</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Inclusief Picofly RP2040 Zero chip</li>
+                        <li><i class="fa-solid fa-check"></i> Professioneel micro-soldeerwerk</li>
+                        <li><i class="fa-solid fa-check"></i> Geëmailleerd koper draad</li>
+                        <li><i class="fa-solid fa-check"></i> Soldermask op kwetsbare verbindingspunten</li>
+                        <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
+                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                        <li><i class="fa-solid fa-check"></i> DAT0-punt direct verbonden</li>
+                    </ul>
+                    <a href="#garantie" class="btn-card btn-card-premium aanvragen-btn" data-model="OLED-Kamikaze" data-prijs="130" data-label="Switch OLED (Kamikaze)">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><iconify-icon icon="boxicons:handheld-alt-filled"></iconify-icon></div>
+                    <h3>Switch Lite</h3>
+                    <p class="price">€ 90,-</p>
+                    <p class="price-sub">Chip inbegrepen</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Inclusief Picofly RP2040 Zero chip</li>
+                        <li><i class="fa-solid fa-check"></i> Professioneel micro-soldeerwerk</li>
+                        <li><i class="fa-solid fa-check"></i> Geëmailleerd koper draad</li>
+                        <li><i class="fa-solid fa-check"></i> Soldermask op kwetsbare verbindingspunten</li>
+                        <li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>
+                        <li><i class="fa-solid fa-check"></i> Dual-boot setup</li>
+                        <li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>
+                    </ul>
+                    <a href="#garantie" class="btn-card aanvragen-btn" data-model="Lite" data-prijs="90" data-label="Switch Lite">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="services-notes">
+                <div class="services-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Twijfel je welk model je hebt? Stuur ons gewoon een berichtje — we helpen je kosteloos verder.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reparatie Section -->
+    <section id="reparatie" class="reparatie">
+        <div class="container">
+            <h2>Onze Reparatie Services</h2>
+            <p class="section-subtitle">Kapotte Joy-Con, gebarsten scherm of slechte batterij? Selecteer één of meerdere reparaties en stuur ze mee in je aanvraag.</p>
+
+            <div class="rep-tabs">
+                <button class="rep-tab active" data-model="v1v2">Switch V1 / V2</button>
+                <button class="rep-tab" data-model="lite">Switch Lite</button>
+                <button class="rep-tab" data-model="oled">Switch OLED</button>
+            </div>
+
+            <!-- V1/V2 -->
+            <div class="rep-panel active" id="rep-v1v2">
+                <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Batterij Vervanging" data-rep-prijs="40">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit neemt af na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 40,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Krassen, gebroken houder of achterkant vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-secondary"><i class="fa-solid fa-tag"></i> V1/V2 & OLED</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-model">V1/V2 & OLED</span>
+                            <span class="rep-naam">Joy-Con Drift</span>
+                            <span class="rep-desc">Analoge stick vervanging — meest gevraagde reparatie</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch V1 / V2</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Scherm / LCD Vervanging" data-rep-prijs="75">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Scherm / LCD</span>
+                            <span class="rep-desc">Gebarsten glas of defect display vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs">€ 75,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Koeling (Ventilator + Thermal Paste)" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Koeling</span>
+                            <span class="rep-desc">Ventilator reinigen/vervangen, thermal paste vernieuwen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-wind"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch V1 / V2" data-rep-naam="Dock-Connector Vervanging" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Dock-Connector</span>
+                            <span class="rep-desc">Schade door verkeerd gebruik of vallen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-tv"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lite -->
+            <div class="rep-panel" id="rep-lite">
+                <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Batterij Vervanging" data-rep-prijs="40">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit verminderd na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 40,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Behuizing Vervanging" data-rep-prijs="50">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Valt vaker door portabel gebruik</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 50,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch Lite</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Analoge Stick Vervanging" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Analoge Sticks</span>
+                            <span class="rep-desc">Drift — sticks zitten vast in behuizing, iets bewerkelijker</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Scherm Vervanging" data-rep-prijs="70">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Scherm</span>
+                            <span class="rep-desc">Breekt sneller door portabel gebruik</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs">€ 70,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Knoppenset (ABXY / D-pad / Triggers)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Knoppenset</span>
+                            <span class="rep-desc">ABXY, D-pad of triggers vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-circle-dot"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch Lite" data-rep-naam="Luidspreker Vervanging" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Luidspreker</span>
+                            <span class="rep-desc">Geluidsproblemen oplossen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-volume-high"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLED -->
+            <div class="rep-panel" id="rep-oled">
+                <p class="rep-group-label"><i class="fa-solid fa-layer-group"></i> Beschikbaar voor alle Switch modellen</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Oplaadpoort (USB-C)" data-rep-prijs="35">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Oplaadpoort</span>
+                            <span class="rep-desc">USB-C poort vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-plug"></i></div>
+                            <span class="rep-prijs">€ 35,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Batterij Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Batterij</span>
+                            <span class="rep-desc">Capaciteit neemt af na verloop van tijd</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-battery-half"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Behuizing Vervanging" data-rep-prijs="45">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-all">Alle modellen</span>
+                            <span class="rep-naam">Behuizing</span>
+                            <span class="rep-desc">Krassen of gebroken achterkant vervangen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-box"></i></div>
+                            <span class="rep-prijs">€ 45,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-secondary"><i class="fa-solid fa-tag"></i> V1/V2 & OLED</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Joy-Con Drift (Stick Vervanging)" data-rep-prijs="25">
+                        <div class="rep-card-top">
+                            <span class="rep-badge-model">V1/V2 & OLED</span>
+                            <span class="rep-naam">Joy-Con Drift</span>
+                            <span class="rep-desc">Analoge stick vervanging — zelfde probleem als V1/V2</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="rep-prijs">€ 25,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="rep-group-label rep-group-label-specific"><i class="fa-solid fa-tag"></i> Specifiek voor Switch OLED</p>
+                <div class="rep-grid">
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="OLED Scherm Vervanging" data-rep-prijs="120">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">OLED Scherm</span>
+                            <span class="rep-desc">Duurder onderdeel — prachtig beeld, kostbare vervanging</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon rep-icon-premium"><i class="fa-solid fa-display"></i></div>
+                            <span class="rep-prijs rep-prijs-premium">€ 120,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Kickstand Vervanging" data-rep-prijs="20">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Kickstand</span>
+                            <span class="rep-desc">De bredere standaard kan breken bij vallen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                            <span class="rep-prijs">€ 20,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                    <div class="rep-card" data-rep-model="Switch OLED" data-rep-naam="Koeling (Thermal Paste + Ventilator)" data-rep-prijs="30">
+                        <div class="rep-card-top">
+                            <span class="rep-naam">Koeling</span>
+                            <span class="rep-desc">Thermal paste vernieuwen, ventilator reinigen</span>
+                        </div>
+                        <div class="rep-card-bottom">
+                            <div class="rep-icon"><i class="fa-solid fa-wind"></i></div>
+                            <span class="rep-prijs">€ 30,-</span>
+                            <button class="rep-select-btn">Selecteer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selected repairs bar -->
+            <div class="rep-selected-bar" id="repSelectedBar" style="display:none;">
+                <div class="rep-selected-bar-inner">
+                    <div class="rep-selected-left">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span id="repSelectedCount">0 reparaties geselecteerd</span>
+                        <div class="rep-selected-chips" id="repSelectedChips"></div>
+                    </div>
+                    <div class="rep-selected-right">
+                        <span class="rep-selected-total" id="repSelectedTotal"></span>
+                        <a href="#contact" class="rep-selected-btn">Aanvraag starten <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="rep-note"><i class="fa-solid fa-circle-info"></i> Prijzen zijn indicatief. Definitieve prijs na inspectie. Twijfel je? Stuur een berichtje — we kijken gratis mee.</p>
+        </div>
+    </section>
+
+    <!-- microSD Banner -->
+    <div class="microsd-banner">
+        <div class="container microsd-banner-inner">
+            <div class="microsd-left">
+                <div class="microsd-icon"><i class="fa-solid fa-sd-card"></i></div>
+                <div class="microsd-text">
+                    <p><strong>Stuur je microSD-kaart mee</strong> — wij configureren hem gratis voor je.</p>
+                    <span>Wij raden minimaal 128GB (A1/A2) aan. 256GB of meer is nog fijner als je veel games wilt opslaan.</span>
+                </div>
+            </div>
+            <div class="microsd-badge"><i class="fa-solid fa-gift"></i> Gratis</div>
+        </div>
+    </div>
+
+    <!-- DAT0 vs Kamikaze Vergelijking -->
+    <section id="vergelijking" class="vergelijking">
+        <div class="container">
+            <h2>DAT0-Adapter vs Kamikaze</h2>
+            <p class="section-subtitle">Beide methoden installeren dezelfde chip — het verschil zit in hoe we bij het DAT0-signaal komen.</p>
+            <div class="verg-grid">
+                <div class="verg-card verg-dat0">
+                    <div class="verg-header">
+                        <span class="verg-badge verg-badge-green">DAT0-Adapter</span>
+                        <span class="verg-price">€ 110,-</span>
+                    </div>
+                    <div class="verg-how">
+                        <h4><i class="fa-solid fa-circle-question"></i> Hoe het werkt</h4>
+                        <p>Een dunne flexibele kabel wordt onder de eMMC-chip geschoven. Een pogo-pin (verend contactpuntje) legt druk op het DAT0-punt onder de chip — zonder te boren of slijpen.</p>
+                    </div>
+                    <ul class="verg-list">
+                        <li class="pro"><i class="fa-solid fa-check"></i> Moederbord blijft volledig intact</li>
+                        <li class="pro"><i class="fa-solid fa-check"></i> Geen boren of slijpen nodig</li>
+                        <li class="pro"><i class="fa-solid fa-check"></i> Herstelbaar als contact wegvalt</li>
+                        <li class="con"><i class="fa-solid fa-times"></i> Drukcontact kan losraken door hitte</li>
+                        <li class="con"><i class="fa-solid fa-times"></i> Oxidatie kan verbinding verslechteren</li>
+                        <li class="con"><i class="fa-solid fa-times"></i> Minder duurzaam op lange termijn</li>
+                    </ul>
+                </div>
+                <div class="verg-vs"><span>VS</span></div>
+                <div class="verg-card verg-kamikaze">
+                    <div class="verg-header">
+                        <span class="verg-badge verg-badge-orange">Kamikaze</span>
+                        <span class="verg-price">€ 130,-</span>
+                    </div>
+                    <div class="verg-how">
+                        <h4><i class="fa-solid fa-circle-question"></i> Hoe het werkt</h4>
+                        <p>Met een microscoop en een fijn slijptooltje wordt nauwkeurig door de pcb-lagen geslepen om het interne DAT0-spoor bloot te leggen. Vervolgens wordt er direct een draad op gesoldeerd.</p>
+                    </div>
+                    <ul class="verg-list">
+                        <li class="pro"><i class="fa-solid fa-check"></i> Permanente, vaste soldeerverbinding</li>
+                        <li class="pro"><i class="fa-solid fa-check"></i> Niet vatbaar voor oxidatie of hitte</li>
+                        <li class="pro"><i class="fa-solid fa-check"></i> Meest betrouwbaar op lange termijn</li>
+                        <li class="pro"><i class="fa-solid fa-check"></i> Uitgevoerd door professionele installateur</li>
+                        <li class="con"><i class="fa-solid fa-times"></i> Vereist microscoop & jarenlange ervaring</li>
+                        <li class="con"><i class="fa-solid fa-times"></i> Niet geschikt als doe-het-zelf</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="verg-tabel-wrap">
+                <table class="verg-tabel">
+                    <thead>
+                        <tr>
+                            <th>Kenmerk</th>
+                            <th><span class="tabel-green">DAT0-Adapter</span></th>
+                            <th><span class="tabel-orange">Kamikaze</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Moeilijkheidsgraad</td><td>Laag tot gemiddeld</td><td>Zeer hoog</td></tr>
+                        <tr><td>Risico op schade</td><td>Laag</td><td>Hoog (vereist expertise)</td></tr>
+                        <tr><td>Betrouwbaarheid</td><td>Wisselend</td><td>Zeer hoog (permanent)</td></tr>
+                        <tr><td>Duurzaamheid</td><td>Kan falen over tijd</td><td>Levenslang</td></tr>
+                        <tr><td>Prijs</td><td>€ 110,-</td><td>€ 130,-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="verg-advies">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Wij voeren <strong>beide methoden professioneel uit</strong>. Voor de beste lange-termijn betrouwbaarheid raden wij de Kamikaze-methode aan — uitgevoerd onder de microscoop met jaren ervaring in microsolderen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garantie Section -->
+    <section id="garantie" class="garantie">
+        <div class="container">
+            <h2>Garantie & Zekerheid</h2>
+            <p class="section-subtitle">Wij staan achter ons werk — met echte garantie, niet alleen een belofte.</p>
+            <div class="garantie-grid">
+                <div class="garantie-card garantie-basis">
+                    <div class="garantie-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="garantie-badge">Standaard</div>
+                    <h3>90 Dagen Garantie</h3>
+                    <p class="garantie-prijs">Inbegrepen bij elke mod</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Gratis reparatie bij installatiefout</li>
+                        <li><i class="fa-solid fa-check"></i> Volledige herinstallatie indien nodig</li>
+                        <li><i class="fa-solid fa-check"></i> Geldig bij normaal gebruik</li>
+                        <li><i class="fa-solid fa-check"></i> Snelle afhandeling via jouw voorkeurskanaal</li>
+                    </ul>
+                    <a href="#contact" class="btn-card garantie-select-btn" data-garantie="90" data-garantie-label="90 Dagen Garantie" data-garantie-prijs="0">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="garantie-card garantie-premium">
+                    <div class="garantie-populair">Aanbevolen</div>
+                    <div class="garantie-icon"><i class="fa-solid fa-shield"></i></div>
+                    <div class="garantie-badge garantie-badge-gold">Uitgebreid</div>
+                    <h3>180 Dagen Garantie</h3>
+                    <p class="garantie-prijs">+ € 20,- eenmalig</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Alles van de 90 dagen garantie</li>
+                        <li><i class="fa-solid fa-check"></i> Dubbele looptijd — 6 maanden dekking</li>
+                        <li><i class="fa-solid fa-check"></i> Prioriteit bij reparaties</li>
+                        <li><i class="fa-solid fa-check"></i> Ideaal voor de Kamikaze-methode</li>
+                    </ul>
+                    <a href="#contact" class="btn-card garantie-select-btn" data-garantie="180" data-garantie-label="180 Dagen Garantie" data-garantie-prijs="20">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="garantie-card garantie-info">
+                    <div class="garantie-icon"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="garantie-badge garantie-badge-muted">Voorwaarden</div>
+                    <h3>Wat valt eronder?</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Defecte soldeerverbinding</li>
+                        <li><i class="fa-solid fa-check"></i> Chip start niet op</li>
+                        <li><i class="fa-solid fa-check"></i> Software-configuratie problemen</li>
+                        <li><i class="fa-solid fa-times red"></i> Fysieke schade door de klant</li>
+                        <li><i class="fa-solid fa-times red"></i> Waterschade</li>
+                        <li><i class="fa-solid fa-times red"></i> Zelf geprobeerd te repareren</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gratis Extra Service -->
+    <section id="gratis" class="gratis-service">
+        <div class="container">
+            <div class="gratis-inner">
+                <div class="gratis-icon"><i class="fa-solid fa-gift"></i></div>
+                <div class="gratis-content">
+                    <span class="gratis-label">Gratis bij elke mod</span>
+                    <h3>Wij configureren jouw microSD-kaartje</h3>
+                    <p>Stuur je microSD-kaartje mee met je console en wij installeren <strong>Atmosphere</strong>, <strong>Hekate</strong> en alle benodigde sigpatches voor je — volledig klaar voor gebruik. Geen gedoe, direct opstarten.</p>
+                    <p class="gratis-disclaimer"><i class="fa-solid fa-triangle-exclamation"></i> Wij plaatsen <strong>geen games</strong> op de SD-kaart. De configuratie is uitsluitend bedoeld voor homebrew-software en het draaien van je eigen back-ups van legaal aangeschafte games.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Carousel Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Kwaliteit Onder De Microscoop</h2>
+            <p class="section-subtitle">Geen prutswerk. Elk soldeerverbinding wordt onder de microscoop uitgevoerd en geïnspecteerd.</p>
+            <div class="carousel-container">
+                <div class="carousel-slider" id="carouselSlider">
+                    <div class="carousel-slide active">
+                        <img src="images/frontside.jpg" alt="Modchip voorkant">
+                        <div class="slide-caption">Modchip voorkant</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/backside.jpg" alt="Modchip achterkant">
+                        <div class="slide-caption">Modchip achterkant</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/sp1sp2flex.jpg" alt="Flex kabel - SP1 en SP2">
+                        <div class="slide-caption">Flex kabel — SP1 en SP2</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/wirecpuflex.jpg" alt="Flex kabel - soldeerverbinding">
+                        <div class="slide-caption">Flex kabel — soldeerverbinding CPU</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/dat0wire.jpg" alt="DAT0-soldeerverbinding">
+                        <div class="slide-caption">DAT0 — haarfijn soldeerwerk</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/wirewithoutsoldermask.jpg" alt="CLK-soldeerverbinding zonder soldermask">
+                        <div class="slide-caption">CLK — zonder soldermask</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/wirewithsoldermask.jpg" alt="CLK-soldeerverbinding met soldermask">
+                        <div class="slide-caption">CLK — afgedekt met soldermask</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/3v3wire.jpg" alt="3V3-soldeerverbinding">
+                        <div class="slide-caption">3V3 — voedingsverbinding</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/rstwire.jpg" alt="RST-soldeerverbinding">
+                        <div class="slide-caption">RST — resetlijn verbinding</div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="carousel-btn next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>Wat Klanten Zeggen</h2>
+            <p class="section-subtitle">Eerlijke ervaringen van klanten die je voorgingen.</p>
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews worden geladen vanuit reviews.json -->
+            </div>
+            <div class="review-cta">
+                <div class="review-cta-inner">
+                    <div class="review-cta-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="review-cta-content">
+                        <h3>Tevreden over onze service?</h3>
+                        <p>Stuur je review via jouw voorkeurskanaal — wij plaatsen hem handmatig op de website.</p>
+                        <div class="contact-btns">
+                            <a href="https://t.me/JOUW_TELEGRAM" target="_blank" class="btn-contact btn-tg"><i class="fa-brands fa-telegram"></i></a>
+                            <a href="https://wa.me/JOUW_WHATSAPP" target="_blank" class="btn-contact btn-wa"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://reddit.com/u/JOUW_REDDIT" target="_blank" class="btn-contact btn-rd"><i class="fa-brands fa-reddit"></i></a>
+                            <a href="https://discord.com/users/JOUW_DISCORD" target="_blank" class="btn-contact btn-dc"><i class="fa-brands fa-discord"></i></a>
+                        </div>
+                        <p class="review-disclaimer">Reviews worden handmatig geverifieerd en geplaatst. Wij publiceren uitsluitend eerlijke ervaringen van echte klanten. Bij een negatieve beoordeling nemen wij eerst contact op om te kijken of wij het probleem gezamenlijk kunnen oplossen. Indien de klant na overleg nog steeds niet tevreden is, wordt de review ongewijzigd gepubliceerd.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Werkwijze Section -->
+    <section id="werkwijze" class="werkwijze">
+        <div class="container">
+            <h2>Hoe het werkt</h2>
+            <p class="section-subtitle">Van keuze tot klaar — in 5 simpele stappen. Geen gedoe, geen verrassingen.</p>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fa-solid fa-computer-mouse"></i></div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-step-badge">Stap 1</div>
+                        <h4>Kies je service & garantie</h4>
+                        <p>Selecteer hierboven je consolemodel en het gewenste garantieniveau. Je ziet direct de prijs — geen verborgen kosten.</p>
+                        <div class="timeline-tag"><i class="fa-solid fa-clock"></i> &lt; 1 minuut</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-icon"><i class="fa-brands fa-telegram"></i></div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-step-badge">Stap 2</div>
+                        <h4>Neem contact op</h4>
+                        <p>Stuur je aanvraag via Telegram, WhatsApp, Reddit of Discord. Wij bevestigen snel en sturen je het verzendadres (pakketkluis) toe.</p>
+                        <div class="timeline-tag"><i class="fa-solid fa-lock"></i> Anoniem & veilig</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fa-solid fa-box"></i></div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-step-badge">Stap 3</div>
+                        <h4>Stuur je console op</h4>
+                        <p>Verpak je console goed (noppenfolie) en doe het exacte bedrag in de doos. Stuur naar de pakketkluis — wij halen het daar op.</p>
+                        <div class="timeline-tag"><i class="fa-solid fa-euro-sign"></i> Betaling contant in pakket</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-right">
+                    <div class="timeline-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-step-badge">Stap 4</div>
+                        <h4>Installatie & testen</h4>
+                        <p>Wij installeren de Picofly RP2040 Zero chip onder de microscoop met chirurgische precisie. Daarna volgt een uitgebreide boot-test, software-check en EmuNAND-setup.</p>
+                        <div class="timeline-tag"><i class="fa-solid fa-stopwatch"></i> Klaar binnen 24 uur na ontvangst</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon timeline-icon-finish"><i class="fa-solid fa-rocket"></i></div>
+                    <div class="timeline-card">
+                        <div class="timeline-step-badge timeline-step-badge-finish">Stap 5</div>
+                        <h4>Terug & direct gamen</h4>
+                        <p>Je console wordt veilig teruggestuurd. Volledig geconfigureerd, getest en klaar voor gebruik — inclusief uitleg over de werking.</p>
+                        <div class="timeline-tag timeline-tag-green"><i class="fa-solid fa-circle-check"></i> Gemiddeld 3–5 werkdagen totaal</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Veelgestelde Vragen</h2>
+            <p class="section-subtitle">Alles wat je wil weten, op een rijtje.</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">Welk Switch-model heb ik eigenlijk? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Kijk op de achterkant van je console naar het modelnummer. V1 = HAC-001, V2 = HAC-001(-01), OLED = HEG-001, Lite = HDH-001. Weet je het niet zeker? Stuur ons gewoon een foto via jouw voorkeurskanaal.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is mijn garantie dan weg? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Ja, een hardware-modificatie verbreekt de fabrieksgarantie van Nintendo. De console werkt na de mod echter volledig normaal — en wij geven eigen garantie op onze installatie.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Kan ik gebanned worden op Nintendo Online? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>We installeren altijd een EmuNAND-setup. Dit houdt je gemodificeerde omgeving volledig gescheiden van je originele systeem. Zolang je online gaat via SysNAND (ongemodificeerd), is het risico op een ban minimaal.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Hoe lang duurt de hele procedure? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Na ontvangst van je console is de modding zelf klaar binnen 24 uur. Inclusief verzenden heen en terug reken je op gemiddeld 3–5 werkdagen.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Welke SD-kaart heb ik nodig? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>We raden minimaal een 128GB microSD aan (klasse A1 of A2). Een 256GB of groter is nog fijner als je veel games wilt opslaan. Wij configureren de kaart gratis als je deze meestuurt.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Hoe stuur ik mijn console op? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Je stuurt je console op naar een pakketkluis of pakketautomaat — wij geven je via jouw voorkeurskanaal de exacte locatie door. Wij halen het pakket daar op. Zorg dat de console goed verpakt is, bij voorkeur in de originele doos of met voldoende noppenfolie. Beschadiging tijdens transport valt buiten onze garantie.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Moet ik accessoires meesturen zoals de dock of controllers? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Nee, alleen de console zelf is nodig. Je hoeft geen dock, Joy-Cons, oplader of andere accessoires mee te sturen. Stuur optioneel wel je microSD-kaartje mee als je gratis software-configuratie wilt.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Hoe betaal ik? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Betaling gaat contant — je doet het exacte bedrag in de doos bij je console. Je betaalt dus vooraf voor het plaatsen van de modchip. Het geld wordt meegestuurd met de console naar de pakketkluis.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Mijn console is al eerder geopend geweest — is dat een probleem? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Voorafgaand aan de installatie voeren wij een technische inspectie uit. Indien wij gebreken vaststellen, informeren wij je direct via jouw voorkeurskanaal. Indien reparatie vereist is, sturen wij je een prijsopgave; na jouw goedkeuring verrekenen wij dit bedrag met het bijgevoegde contante geld. Vanwege kwaliteitswaarborging plaatsen wij geen modchip op consoles met dusdanige schade dat de betrouwbaarheid op lange termijn niet kan worden gegarandeerd.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Kan ik nog gewoon Nintendo games spelen na het plaatsen van de modchip? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Ja, absoluut. Wij installeren altijd een dual-boot setup met SysNAND en EmuNAND. Je SysNAND is je originele, ongemodificeerde omgeving — daar kun je gewoon je Nintendo games spelen en online gaan alsof er niets veranderd is. Je EmuNAND is de gemodificeerde omgeving voor homebrew en back-ups.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Wat is EmuNAND en waarom heb ik dat nodig? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>EmuNAND (Emulated NAND) is een virtuele kopie van het geheugen van je console, opgeslagen op je microSD-kaart. Alle homebrew en aanpassingen draaien uitsluitend in deze omgeving. Zo blijft je originele systeem (SysNAND) volledig schoon en onaangetast — ideaal om veilig online te blijven op Nintendo.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Moet ik mijn console updaten? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Wij raden aan om <strong>niet te updaten</strong> via de EmuNAND-omgeving, tenzij er nieuwe sigpatches beschikbaar zijn. Start je op in OFW (Original Firmware) — dat is het originele Nintendo-systeem zonder enige aanpassing — dan kun je wel gewoon updaten via Nintendo, want in OFW is er niets gemodificeerd en gedraag je je als een gewone Switch-gebruiker. Kort gezegd: updaten in OFW is veilig, updaten in EmuNAND alleen als je weet wat je doet.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Wat is OFW? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>OFW staat voor <strong>Original Firmware</strong> — dit is de standaard Nintendo-software zoals die op je console staat, zonder enige aanpassing. Wanneer je opstart via OFW gedraag je je als een volledig normale Switch-gebruiker. Er is geen spoor van een modchip of homebrew zichtbaar voor Nintendo. Dit is de omgeving die je gebruikt voor online spelen en officiële updates.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Werkt de modchip nog na een Nintendo software-update? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>De Picofly RP2040 Zero modchip werkt op hardwareniveau — een software-update van Nintendo kan de chip zelf niet uitschakelen. Wel kunnen updates ervoor zorgen dat sigpatches tijdelijk niet meer werken in EmuNAND, totdat de homebrew-community deze bijwerkt. Wij raden daarom aan om updates in EmuNAND even uit te stellen tot de community sigpatches heeft uitgebracht voor de nieuwe versie.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Kan ik de status van mijn console volgen? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Ja — wij houden je op de hoogte van elke stap via jouw voorkeurskanaal: ontvangst, inspectie, installatie en retourzending. Heb je een vraag tussendoor? Stuur gewoon een berichtje.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Welke homebrew apps zijn er beschikbaar? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Er is een grote homebrew-community actief voor de Nintendo Switch. Populaire toepassingen zijn onder andere emulators (zoals RetroArch voor klassieke spelletjes), mediaspelers, back-upbeheer via DBI, cheat-tools en veel meer. Na installatie heb je toegang tot de Homebrew Menu waar je zelf apps kunt toevoegen.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Intake Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Start Je Aanvraag</h2>
+            <p class="section-subtitle">Jouw selecties worden automatisch meegenomen. Kies een kanaal en verstuur je aanvraag.</p>
+
+            <div class="contact-layout">
+                <!-- LEFT: Form -->
+                <div class="contact-form-col">
+                    <form id="modForm">
+
+                        <!-- Modchip block — always visible, collapsible if nothing selected -->
+                        <div class="aanvraag-block" id="moddingBlock">
+                            <div class="aanvraag-block-header">
+                                <i class="fa-solid fa-microchip"></i>
+                                <span>Modchip Installatie</span>
+                                <span class="aanvraag-block-status" id="moddingStatus"></span>
+                            </div>
+                            <div class="aanvraag-block-body" id="moddingFields">
+                                <div class="form-group">
+                                    <label for="console">Welke Switch heb je?</label>
+                                    <select id="console">
+                                        <option value="" disabled selected>Kies je model...</option>
+                                        <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
+                                        <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
+                                        <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
+                                        <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="garantieFormGroup" style="display:none;">
+                                    <label>Welke garantie wil je?</label>
+                                    <div class="garantie-keuze">
+                                        <label class="garantie-radio-label" id="garantie-label-90">
+                                            <input type="radio" name="garantie" value="90" data-extra="0" checked>
+                                            <div class="garantie-radio-card">
+                                                <div class="garantie-radio-top">
+                                                    <span class="garantie-radio-title"><i class="fa-solid fa-shield-halved"></i> 90 Dagen</span>
+                                                    <span class="garantie-radio-prijs">Inbegrepen</span>
+                                                </div>
+                                                <p class="garantie-radio-desc">Standaard garantie bij elke mod</p>
+                                            </div>
+                                        </label>
+                                        <label class="garantie-radio-label" id="garantie-label-180">
+                                            <input type="radio" name="garantie" value="180" data-extra="20">
+                                            <div class="garantie-radio-card">
+                                                <div class="garantie-radio-top">
+                                                    <span class="garantie-radio-title"><i class="fa-solid fa-shield"></i> 180 Dagen</span>
+                                                    <span class="garantie-radio-prijs">+ € 20,-</span>
+                                                </div>
+                                                <p class="garantie-radio-desc">Uitgebreide dekking — 6 maanden</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="aanvraag-block-empty" id="moddingEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Selecteer een console via de servicecards hierboven
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Repair block — always visible -->
+                        <div class="aanvraag-block" id="reparatieBlock">
+                            <div class="aanvraag-block-header aanvraag-block-header-repair">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <span>Reparatie</span>
+                                <span class="aanvraag-block-status" id="reparatieStatus"></span>
+                            </div>
+                            <div class="aanvraag-block-body">
+                                <div class="rep-aanvraag-empty" id="repAanvraagEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Selecteer reparaties via de sectie hierboven
+                                    <a href="#reparatie" class="rep-aanvraag-link">Naar reparaties ↑</a>
+                                </div>
+                                <div id="repAanvraagFilled" style="display:none;">
+                                    <div class="rep-aanvraag-row">
+                                        <span class="rep-aanvraag-label"><i class="fa-solid fa-gamepad"></i> Console</span>
+                                        <span id="repFormModel">—</span>
+                                    </div>
+                                    <div id="repFormItems"></div>
+                                    <div class="rep-aanvraag-row rep-aanvraag-total">
+                                        <span class="rep-aanvraag-label">Indicatieve totaalprijs</span>
+                                        <span id="repFormPrijs" class="rep-aanvraag-prijs">—</span>
+                                    </div>
+                                    <button type="button" class="rep-aanvraag-clear" id="repAanvraagClear"><i class="fa-solid fa-xmark"></i> Selectie wissen</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Via welk kanaal wil je contact?</label>
+                            <div class="kanaal-keuze">
+                                <button type="button" class="kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM"><i class="fa-brands fa-telegram"></i></button>
+                                <button type="button" class="kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button type="button" class="kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT"><i class="fa-brands fa-reddit"></i></button>
+                                <button type="button" class="kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD"><i class="fa-brands fa-discord"></i></button>
+                            </div>
+                            <input type="hidden" id="gekozenKanaal" value="">
+                            <input type="hidden" id="gekozenUrl" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="msg">Vragen of opmerkingen (optioneel):</label>
+                            <textarea id="msg" rows="4" placeholder="Bijv. beschrijving van het probleem, welke SD-kaart je gebruikt, of andere vragen..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit btn-submit-disabled" id="submitBtn" disabled>
+                            <i id="submitIcon" class="fa-solid fa-lock"></i> Aanvraag Verzenden
+                        </button>
+                        <p class="submit-hint" id="submitHint">Kies eerst een contactkanaal hierboven</p>
+                    </form>
+
+                    <div id="successMessage" class="success-box hidden">
+                        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>Aanvraag Ontvangen!</h3>
+                        <p>Je aanvraag is geregistreerd. Klik hieronder om direct contact op te nemen.</p>
+                        <a href="#" id="successLink" target="_blank" class="btn-contact-large">
+                            <i id="successIcon" class="fa-brands fa-telegram"></i>
+                            <span id="successKanaal">Open kanaal</span>
+                        </a>
+                        <p class="success-note"><i class="fa-solid fa-lock"></i> Volledig anoniem en beveiligd</p>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Live Order Summary -->
+                <div class="order-summary" id="orderSummary">
+                    <div class="order-summary-inner">
+                        <div class="order-summary-header">
+                            <i class="fa-solid fa-receipt"></i>
+                            <span>Jouw Overzicht</span>
+                        </div>
+
+                        <div class="order-placeholder" id="summaryPlaceholder">
+                            <i class="fa-regular fa-hand-pointer"></i>
+                            <p>Maak een selectie om je overzicht te zien</p>
+                        </div>
+
+                        <div class="order-row" id="summaryConsoleRow" style="display:none;">
+                            <div class="order-row-label"><i class="fa-solid fa-microchip"></i><span id="summaryConsoleName">—</span></div>
+                            <span class="order-row-prijs" id="summaryConsolePrice"></span>
+                        </div>
+                        <div class="order-row order-row-garantie" id="summaryGarantieRow" style="display:none;">
+                            <div class="order-row-label"><i class="fa-solid fa-shield-halved" id="summaryGarantieIcon"></i><span id="summaryGarantieName">—</span></div>
+                            <span class="order-row-prijs" id="summaryGarantiePrice"></span>
+                        </div>
+                        <div class="order-row-garantie-pending" id="summaryGarantiePending" style="display:none;">
+                            <i class="fa-solid fa-shield-halved"></i> Kies nog een garantie ↑
+                        </div>
+
+                        <div id="summaryRepairRows"></div>
+
+                        <div class="order-total-wrap" id="summaryTotalWrap" style="display:none;">
+                            <div class="order-divider"></div>
+                            <div class="order-total-row">
+                                <span class="order-total-label">Totaal</span>
+                                <span class="order-total-price" id="summaryTotal">€ —</span>
+                            </div>
+                            <p class="order-total-note"><i class="fa-solid fa-circle-info"></i> Betaling contant bij verzending</p>
+                        </div>
+
+                        <div class="order-includes" id="summaryIncludes" style="display:none;">
+                            <p class="order-includes-title">Inbegrepen:</p>
+                            <ul id="summaryIncludesList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-logo-text">TechPlay <span class="logo-accent">Mods</span></span>
+                    <p class="footer-tagline">Professionele Nintendo Switch modchip installatie & reparatie — uitgevoerd onder de microscoop.</p>
+                    <div class="footer-socials">
+                        <a href="https://t.me/JOUW_TELEGRAM" target="_blank" class="footer-social-btn footer-social-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                        <a href="https://wa.me/JOUW_WHATSAPP" target="_blank" class="footer-social-btn footer-social-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://reddit.com/u/JOUW_REDDIT" target="_blank" class="footer-social-btn footer-social-rd"><i class="fa-brands fa-reddit"></i> Reddit</a>
+                        <a href="https://discord.com/users/JOUW_DISCORD" target="_blank" class="footer-social-btn footer-social-dc"><i class="fa-brands fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+                <div class="footer-nav-col">
+                    <p class="footer-nav-title">Services</p>
+                    <a href="#services">Modchip Installatie</a>
+                    <a href="#reparatie">Reparatie</a>
+                    <a href="#garantie">Garantie</a>
+                    <a href="#portfolio">Ons Werk</a>
+                </div>
+                <div class="footer-nav-col">
+                    <p class="footer-nav-title">Informatie</p>
+                    <a href="#werkwijze">Hoe het werkt</a>
+                    <a href="#faq">Veelgestelde vragen</a>
+                    <a href="#contact">Aanvraag doen</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2026 TechPlay Mods</p>
+                <p class="footer-disclaimer">Uitsluitend hardware-modificaties voor homebrew & eigen back-ups. Niet gelieerd aan Nintendo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
