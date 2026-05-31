@@ -374,7 +374,12 @@ function updateOrderSummary() {
         document.getElementById('summaryGarantieName').textContent  = state.garantie.label;
         document.getElementById('summaryGarantiePrice').textContent = state.garantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.garantie.prijs + ',-';
         document.getElementById('summaryGarantiePrice').style.color = state.garantie.prijs > 0 ? '#f59e0b' : '';
-        document.getElementById('summaryGarantieIcon').className    = state.garantie.dagen === '180' ? 'fa-solid fa-shield' : 'fa-solid fa-shield-halved';
+        const gIcon = document.getElementById('summaryGarantieIcon');
+        if (state.garantie.dagen === '180') {
+            gIcon.className = 'fa-solid fa-shield summary-garantie-icon-180';
+        } else {
+            gIcon.className = 'fa-solid fa-shield-halved summary-garantie-icon-90';
+        }
     }
 
     // Dynamic repair rows
