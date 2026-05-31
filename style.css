@@ -2241,8 +2241,13 @@ footer {
 .rep-tab:hover { border-color: var(--primary); color: var(--primary); }
 .rep-tab.active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-.rep-panel { display: none; }
+.rep-panel { display: none; animation: repPanelIn 0.2s ease; }
 .rep-panel.active { display: block; }
+
+@keyframes repPanelIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
 .rep-grid {
     display: grid;
@@ -2872,6 +2877,7 @@ nav a {
     font-size: 0.95rem;
     color: var(--text-main);
     letter-spacing: -0.1px;
+    min-height: 1.3em;
 }
 
 .rep-desc {
@@ -2879,13 +2885,16 @@ nav a {
     color: var(--text-muted);
     line-height: 1.5;
     flex: 1;
+    min-height: 2.4em;
 }
 
 .rep-card-bottom {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: auto;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
 }
 
 .rep-badge-model {
