@@ -3253,3 +3253,118 @@ footer {
     .rep-model-header { padding: 16px; }
     .rep-row-prijs { font-size: 0.88rem; }
 }
+
+/* ===========================
+   REPARATIE MODEL SNELKEUZE
+=========================== */
+.rep-model-jump {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.rep-jump-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text-main);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+}
+
+.rep-jump-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,255,136,0.08);
+    color: var(--text-main);
+}
+
+.rep-jump-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(0,255,136,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.rep-jump-icon-lite {
+    background: rgba(99,102,241,0.1);
+    border-color: rgba(99,102,241,0.25);
+    color: #818cf8;
+}
+
+.rep-jump-icon-oled {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.25);
+    color: #f59e0b;
+}
+
+.rep-jump-label {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.rep-jump-arrow {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Text links uitgelijnd in rijen */
+.rep-row-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+}
+
+.rep-row-naam {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.rep-row-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Verfijning model blocks */
+.rep-model-block {
+    scroll-margin-top: 90px;
+}
+
+.rep-model-header {
+    padding: 18px 24px;
+}
+
+.rep-row {
+    padding: 13px 24px;
+}
+
+@media (max-width: 600px) {
+    .rep-model-jump { grid-template-columns: 1fr; gap: 10px; }
+    .rep-jump-card { padding: 13px 16px; }
+}
