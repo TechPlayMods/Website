@@ -54,35 +54,22 @@ const selectedRepairs = new Map(); // naam → { model, naam, prijs }
 
 
 // ============================================================
-// REPARATIE TABS
+// REPARATIE RIJ SELECTIE — multi-select, geen tabs
 // ============================================================
-document.querySelectorAll('.rep-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.rep-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.rep-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('rep-' + tab.dataset.model).classList.add('active');
-    });
-});
-
-
-// ============================================================
-// REPARATIE KAART SELECTIE — multi-select, geen auto-scroll
-// ============================================================
-document.querySelectorAll('.rep-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const naam  = card.dataset.repNaam;
-        const model = card.dataset.repModel;
-        const prijs = parseInt(card.dataset.repPrijs);
+document.querySelectorAll('.rep-row').forEach(row => {
+    row.addEventListener('click', () => {
+        const naam  = row.dataset.repNaam;
+        const model = row.dataset.repModel;
+        const prijs = parseInt(row.dataset.repPrijs);
 
         if (selectedRepairs.has(naam)) {
             selectedRepairs.delete(naam);
-            card.classList.remove('geselecteerd');
-            card.querySelector('.rep-select-btn').textContent = 'Selecteer';
+            row.classList.remove('geselecteerd');
+            row.querySelector('.rep-row-btn').textContent = 'Selecteer';
         } else {
             selectedRepairs.set(naam, { model, naam, prijs });
-            card.classList.add('geselecteerd');
-            card.querySelector('.rep-select-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
+            row.classList.add('geselecteerd');
+            row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
         }
         refreshAll();
     });
@@ -424,9 +411,9 @@ function updateOrderSummary() {
 // ============================================================
 document.getElementById('repAanvraagClear').addEventListener('click', () => {
     selectedRepairs.clear();
-    document.querySelectorAll('.rep-card').forEach(c => {
-        c.classList.remove('geselecteerd');
-        c.querySelector('.rep-select-btn').textContent = 'Selecteer';
+    document.querySelectorAll('.rep-row').forEach(r => {
+        r.classList.remove('geselecteerd');
+        r.querySelector('.rep-row-btn').textContent = 'Selecteer';
     });
     refreshAll();
 });
@@ -530,7 +517,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 // ============================================================
 // SCROLL ANIMATIONS
 // ============================================================
-const fadeEls = document.querySelectorAll('.card, .step, .review-card, .faq-item, .trust-item, .hero-stats, .rep-card');
+const fadeEls = document.querySelectorAll('.card, .step, .review-card, .faq-item, .trust-item, .hero-stats, .rep-row');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
