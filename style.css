@@ -3051,3 +3051,205 @@ footer {
 @media (max-width: 560px) {
     .rep-grid { grid-template-columns: 1fr; }
 }
+
+/* ===========================
+   REPARATIE — NIEUWE RIJEN LAYOUT
+=========================== */
+.rep-model-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.rep-model-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+}
+
+.rep-model-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(0,255,136,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.rep-model-icon-lite {
+    background: rgba(99,102,241,0.1);
+    border-color: rgba(99,102,241,0.25);
+    color: #818cf8;
+}
+
+.rep-model-icon-oled {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.25);
+    color: #f59e0b;
+}
+
+.rep-model-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 2px;
+    letter-spacing: -0.2px;
+}
+
+.rep-model-sub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.rep-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.rep-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.rep-row:last-child { border-bottom: none; }
+
+.rep-row:hover { background: rgba(255,255,255,0.02); }
+
+.rep-row.geselecteerd {
+    background: rgba(0,255,136,0.05);
+    border-left: 3px solid var(--primary);
+    padding-left: 21px;
+}
+
+.rep-row-premium.geselecteerd {
+    background: rgba(245,158,11,0.05);
+    border-left-color: #f59e0b;
+}
+
+.rep-row-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(0,255,136,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.rep-row-icon-premium {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.2);
+    color: #f59e0b;
+}
+
+.rep-row-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.rep-row-naam {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.rep-row-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.rep-row-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.rep-row-tag-all {
+    background: rgba(0,255,136,0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0,255,136,0.2);
+}
+
+.rep-row-tag-shared {
+    background: rgba(59,130,246,0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.2);
+}
+
+.rep-row-prijs {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-main);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.rep-row-prijs-premium { color: #f59e0b; }
+
+.rep-row-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+
+.rep-row-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.rep-row.geselecteerd .rep-row-btn {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+}
+
+.rep-row-premium.geselecteerd .rep-row-btn {
+    background: #f59e0b;
+    border-color: #f59e0b;
+    color: #000;
+}
+
+@media (max-width: 600px) {
+    .rep-row { padding: 12px 16px; gap: 10px; }
+    .rep-row.geselecteerd { padding-left: 13px; }
+    .rep-row-btn { padding: 5px 10px; font-size: 0.75rem; }
+    .rep-model-header { padding: 16px; }
+    .rep-row-prijs { font-size: 0.88rem; }
+}
