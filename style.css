@@ -1367,7 +1367,7 @@ footer {
 =========================== */
 .vergelijking {
     padding: 90px 0;
-    background: var(--bg-section-alt);
+    background: var(--bg-dark);
     text-align: center;
 }
 .verg-grid {
