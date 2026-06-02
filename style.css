@@ -3605,3 +3605,68 @@ footer {
 #rep-v1v2-block .rep-row.geselecteerd { border-left-color: var(--primary); background: rgba(0,255,136,0.05); }
 #rep-lite-block  .rep-row.geselecteerd { border-left-color: #818cf8; background: rgba(129,140,248,0.06); }
 #rep-oled-block  .rep-row.geselecteerd { border-left-color: #f59e0b; background: rgba(245,158,11,0.06); }
+
+/* ===========================
+   REPARATIE ICONEN — GROOTTE GELIJK AAN SERVICES
+   + KLEUR: groen → geel → oranje
+=========================== */
+
+/* Lite: geel ipv blauw */
+:root {
+    --lite-color: #eab308;
+    --lite-color-dim: rgba(234,179,8,0.1);
+    --lite-color-border: rgba(234,179,8,0.25);
+}
+
+/* Jump card icons — zelfde grootte als service cards */
+.rep-jump-icon {
+    width: 64px;
+    height: 64px;
+}
+.rep-jump-icon iconify-icon,
+.rep-jump-icon i {
+    font-size: 2.5rem;
+}
+
+/* Model block header icons */
+.rep-model-icon {
+    width: 64px;
+    height: 64px;
+}
+.rep-model-icon iconify-icon,
+.rep-model-icon i {
+    font-size: 2.5rem;
+}
+
+/* V1/V2 — groen (ongewijzigd) */
+.rep-jump-icon-v1v2,
+.rep-model-icon-v1v2 {
+    background: var(--primary-dim);
+    border-color: rgba(0,255,136,0.25);
+    color: var(--primary);
+}
+.rep-jump-card.rep-jump-v1v2:hover { border-color: var(--primary); box-shadow: 0 6px 20px rgba(0,255,136,0.1); }
+
+/* Lite — geel */
+.rep-jump-icon-lite,
+.rep-model-icon-lite {
+    background: var(--lite-color-dim);
+    border-color: var(--lite-color-border);
+    color: var(--lite-color);
+}
+.rep-jump-card.rep-jump-lite:hover { border-color: var(--lite-color); box-shadow: 0 6px 20px rgba(234,179,8,0.1); }
+#rep-lite-block { border-top-color: var(--lite-color); }
+#rep-lite-block .rep-row-icon { background: var(--lite-color-dim); border-color: var(--lite-color-border); color: var(--lite-color); }
+#rep-lite-block .rep-row:hover { background: rgba(234,179,8,0.03); }
+#rep-lite-block .rep-row.geselecteerd { border-left-color: var(--lite-color); background: rgba(234,179,8,0.05); }
+#rep-lite-block .rep-row.geselecteerd .rep-row-btn { background: var(--lite-color); border-color: var(--lite-color); color: #000; }
+#rep-lite-block .rep-model-header { border-bottom-color: rgba(234,179,8,0.15); }
+
+/* OLED — oranje (ongewijzigd) */
+.rep-jump-icon-oled,
+.rep-model-icon-oled {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.25);
+    color: #f59e0b;
+}
+.rep-jump-card.rep-jump-oled:hover { border-color: #f59e0b; box-shadow: 0 6px 20px rgba(245,158,11,0.1); }
