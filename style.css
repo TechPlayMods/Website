@@ -3864,10 +3864,3 @@ footer {
 /* ===========================
    SECTIE SCHEIDING REPARATIE / VERGELIJKING
 =========================== */
-.reparatie {
-    border-bottom: 1px solid var(--border);
-}
-
-.vergelijking {
-    border-top: 1px solid var(--border);
-}
