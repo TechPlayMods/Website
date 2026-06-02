@@ -3495,3 +3495,113 @@ footer {
 #rep-oled-block  .rep-row.geselecteerd { background: rgba(245,158,11,0.06);  border-left-color: #f59e0b; }
 #rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #818cf8; border-color: #818cf8; color: #fff; }
 #rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #f59e0b; border-color: #f59e0b; color: #000; }
+
+/* ===========================
+   REPARATIE RIJ — LAYOUT FIX
+   [naam][prijs]
+   [beschrijving]
+=========================== */
+.rep-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 4px;
+}
+
+.rep-row-icon {
+    margin-top: 2px;
+}
+
+.rep-row-info {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: baseline;
+}
+
+.rep-row-naam {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.rep-row-desc {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: left;
+}
+
+.rep-row-prijs {
+    grid-column: 2;
+    grid-row: 1;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+/* Prijs zit nu in rep-row-info grid, geen losse span meer */
+
+.rep-row-btn {
+    align-self: center;
+    flex-shrink: 0;
+}
+
+/* ===========================
+   JUMP ICONS + MODEL ICONS GROTER
+=========================== */
+.rep-jump-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+}
+
+.rep-jump-icon iconify-icon {
+    font-size: 1.8rem;
+}
+
+.rep-model-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+}
+
+.rep-model-icon iconify-icon {
+    font-size: 1.8rem;
+}
+
+/* ===========================
+   KLEUR PER SECTIE — ROW ICONS
+=========================== */
+#rep-v1v2-block .rep-row-icon {
+    background: var(--primary-dim);
+    border-color: rgba(0,255,136,0.2);
+    color: var(--primary);
+}
+
+#rep-lite-block .rep-row-icon {
+    background: rgba(129,140,248,0.1);
+    border-color: rgba(129,140,248,0.25);
+    color: #818cf8;
+}
+
+#rep-oled-block .rep-row-icon {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.25);
+    color: #f59e0b;
+}
+
+/* Hover border kleur per sectie */
+#rep-v1v2-block .rep-row:hover { background: rgba(0,255,136,0.03); }
+#rep-lite-block  .rep-row:hover { background: rgba(129,140,248,0.03); }
+#rep-oled-block  .rep-row:hover { background: rgba(245,158,11,0.03); }
+
+/* Selecteer knop kleur per sectie */
+#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: var(--primary); border-color: var(--primary); color: #000; }
+#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #818cf8; border-color: #818cf8; color: #fff; }
+#rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #f59e0b; border-color: #f59e0b; color: #000; }
+
+/* Geselecteerde rij border kleur */
+#rep-v1v2-block .rep-row.geselecteerd { border-left-color: var(--primary); background: rgba(0,255,136,0.05); }
+#rep-lite-block  .rep-row.geselecteerd { border-left-color: #818cf8; background: rgba(129,140,248,0.06); }
+#rep-oled-block  .rep-row.geselecteerd { border-left-color: #f59e0b; background: rgba(245,158,11,0.06); }
