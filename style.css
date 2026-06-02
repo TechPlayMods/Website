@@ -2952,11 +2952,20 @@ footer {
 
 .footer-logo-text {
     font-size: 1.4rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-main);
     display: block;
     margin-bottom: 12px;
+}
+
+.footer-logo-text .logo-accent {
+    color: var(--primary);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-transform: none;
+    text-shadow: 0 0 18px rgba(0,255,136,0.45), 0 0 40px rgba(0,255,136,0.15);
 }
 
 .footer-tagline {
@@ -3725,8 +3734,8 @@ footer {
    TIMELINE SPLIT BLOCKS
 =========================== */
 .timeline-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     margin: 10px 0 14px;
 }
@@ -3860,5 +3869,5 @@ footer {
 }
 
 .vergelijking {
-    border-top: 3px solid var(--border);
+    border-top: 1px solid var(--border);
 }
