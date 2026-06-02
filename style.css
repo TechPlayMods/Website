@@ -3765,3 +3765,82 @@ footer {
 @media (max-width: 500px) {
     .timeline-split { grid-template-columns: 1fr; }
 }
+
+/* ===========================
+   MICROSD BANNER — MOBIEL FIX
+=========================== */
+@media (max-width: 600px) {
+    .microsd-banner { padding: 16px 0; }
+
+    .microsd-banner-inner {
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .microsd-left {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .microsd-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .microsd-text p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .microsd-text span {
+        font-size: 0.78rem;
+    }
+
+    .microsd-badge {
+        font-size: 0.82rem;
+        padding: 6px 14px;
+        align-self: flex-start;
+    }
+}
+
+/* ===========================
+   MICROSD BANNER — HERBOUWD
+=========================== */
+.microsd-banner-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+}
+
+.microsd-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.microsd-body p {
+    margin: 0 0 2px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.microsd-body span {
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+@media (max-width: 600px) {
+    .microsd-banner-inner {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .microsd-icon { flex-shrink: 0; }
+    .microsd-body { flex: 1; min-width: 0; }
+    .microsd-badge { width: 100%; justify-content: center; }
+}
