@@ -3844,3 +3844,14 @@ footer {
     .microsd-body { flex: 1; min-width: 0; }
     .microsd-badge { width: 100%; justify-content: center; }
 }
+
+/* ===========================
+   SECTIE SCHEIDING REPARATIE / VERGELIJKING
+=========================== */
+.reparatie {
+    border-bottom: 1px solid var(--border);
+}
+
+.vergelijking {
+    border-top: 3px solid var(--border);
+}
