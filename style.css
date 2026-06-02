@@ -92,13 +92,20 @@ header .container {
 }
 
 .logo-text {
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-main);
 }
 
-.logo-accent { color: var(--primary); }
+.logo-accent {
+    color: var(--primary);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-transform: none;
+    text-shadow: 0 0 18px rgba(0,255,136,0.45), 0 0 40px rgba(0,255,136,0.15);
+}
 
 .footer-logo .logo-icon-wrap { width: 28px; height: 28px; }
 .footer-logo .logo-chip { font-size: 28px; }
