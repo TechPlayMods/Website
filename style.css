@@ -2028,6 +2028,21 @@ footer {
     gap: 12px;
     flex-shrink: 0;
 }
+
+/* Price segment inside aanvraag button */
+.sticky-btn-price {
+    font-weight: 900;
+    letter-spacing: -0.3px;
+    opacity: 0.85;
+}
+.sticky-btn-divider {
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    background: rgba(0,0,0,0.3);
+    margin: 0 8px;
+    vertical-align: middle;
+}
 .sticky-total {
     font-size: 1rem;
     font-weight: 800;
@@ -2216,9 +2231,23 @@ footer {
     .garantie-keuze { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-    .sticky-chips { gap: 6px; }
+    .sticky-selection-inner {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .sticky-chips {
+        gap: 6px;
+        flex: 1 1 100%;
+    }
     .sticky-chip { font-size: 0.78rem; padding: 6px 10px; }
-    .sticky-sep { display: none; }
+    .sticky-right {
+        flex: 1 1 100%;
+        justify-content: flex-end;
+    }
+    .sticky-aanvraag-btn {
+        flex: 1;
+        justify-content: center;
+    }
 }
 
 /* ===========================
