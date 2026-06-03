@@ -288,26 +288,22 @@ function updateStickyBar() {
 
     if (!hasConsole && !hasRepairs) {
         stickyBar.classList.remove('visible');
+        // Clean up dynamic repair chips
+        document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
         return;
     }
     stickyBar.classList.add('visible');
 
-    // Console chip
+    // Console chip — only for modding
     if (hasConsole) {
+        stickyConsoleChip.style.display = '';
         stickyConsoleName.textContent = state.console.label;
         stickyConsoleChip.classList.add('selected');
-    } else if (hasRepairs) {
-        // Show all unique models from repairs
-        const models = [...new Set([...selectedRepairs.values()].map(r =>
-            r.model.replace('Nintendo Switch ', '').replace('Switch ', '')
-        ))];
-        stickyConsoleName.textContent = models.join(' + ');
-        stickyConsoleChip.classList.add('selected');
     } else {
-        stickyConsoleChip.classList.remove('selected');
+        stickyConsoleChip.style.display = 'none';
     }
 
-    // Garantie chip
+    // Garantie chip — only for modding
     if (hasConsole) {
         stickySep.style.display = '';
         stickyGarantieChip.style.display = '';
@@ -333,26 +329,22 @@ function updateStickyBar() {
         stickyGarantieChip.style.display = 'none';
     }
 
-    // Repair chips — one per model group
+    // Remove old dynamic repair chips
+    document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
+
+    // One chip per repair: "Lite › Oplaadpoort"
     if (hasRepairs) {
         stickySepRepair.style.display = '';
-        stickyRepairChip.style.display = '';
-        stickyRepairChip.classList.add('selected');
-
-        // Group by model
-        const byModel = new Map();
+        stickyRepairChip.style.display = 'none'; // hide template chip
+        const chipsContainer = document.querySelector('.sticky-chips');
         selectedRepairs.forEach(r => {
-            if (!byModel.has(r.model)) byModel.set(r.model, []);
-            byModel.get(r.model).push(r.naam.split('(')[0].trim());
+            const shortModel = r.model.replace('Nintendo Switch ', '').replace('Switch ', '');
+            const shortNaam  = r.naam.split('(')[0].trim();
+            const chip = document.createElement('div');
+            chip.className = 'sticky-chip sticky-chip-repair sticky-chip-repair-item selected';
+            chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${shortModel} › ${shortNaam}</span>`;
+            chipsContainer.appendChild(chip);
         });
-
-        // Build label: "Lite > Poort · OLED > Scherm, Batterij"
-        const parts = [];
-        byModel.forEach((names, model) => {
-            const shortModel = model.replace('Nintendo Switch ', '').replace('Switch ', '');
-            parts.push(shortModel + ' › ' + names.join(', '));
-        });
-        stickyRepairName.textContent = parts.join(' · ');
     } else {
         stickySepRepair.style.display = 'none';
         stickyRepairChip.style.display = 'none';
@@ -363,7 +355,8 @@ function updateStickyBar() {
     if (hasConsole) total += state.console.prijs;
     if (hasGarantie) total += state.garantie.prijs;
     selectedRepairs.forEach(r => total += r.prijs);
-    stickyTotal.textContent = (hasRepairs && !hasGarantie && !hasConsole ? '≈ ' : '') + '€ ' + total + ',-';
+    const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
+    stickyTotal.textContent = prefix + '€ ' + total + ',-';
 }
 
 
