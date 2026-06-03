@@ -1331,9 +1331,64 @@ footer {
 }
 
 /* ===========================
-   ORANJE KAMIKAZE
+   PAARSE LITE CARD
 =========================== */
-.card-orange {
+.card-lite {
+    background: linear-gradient(145deg, #130a1a, #1a0d24) !important;
+    border: 2px solid #a020c0 !important;
+    box-shadow: 0 0 35px rgba(160, 32, 192, 0.12) !important;
+}
+.card-lite:hover {
+    border-color: #e040fb !important;
+    box-shadow: 0 12px 40px rgba(224, 64, 251, 0.18) !important;
+}
+.card-lite .card-icon iconify-icon { color: #e040fb; }
+.card-lite ul li { color: rgba(255,255,255,0.6); }
+.card-lite ul li i.fa-check { color: var(--primary) !important; }
+.card-lite .btn-card {
+    border-color: #a020c0;
+    color: #e040fb;
+}
+.card-lite .btn-card:hover {
+    background: #e040fb;
+    border-color: #e040fb;
+    color: #fff !important;
+}
+.card-lite .btn-card.geselecteerd { background: #e040fb; border-color: #e040fb; color: #fff !important; }
+
+/* ===========================
+   ORANJE DAT0 CARD
+=========================== */
+.card-dat0 {
+    background: linear-gradient(145deg, #1a1000, #1f1500) !important;
+    border: 2px solid #cc6600 !important;
+    box-shadow: 0 0 35px rgba(204, 102, 0, 0.12) !important;
+}
+.card-dat0:hover {
+    border-color: #fb923c !important;
+    box-shadow: 0 12px 40px rgba(251, 146, 60, 0.18) !important;
+}
+.card-dat0 .card-icon iconify-icon { color: #fb923c; }
+.card-dat0 ul li { color: rgba(255,255,255,0.6); }
+.card-dat0 ul li i.fa-check { color: var(--primary) !important; }
+.card-dat0 .badge { background: linear-gradient(135deg, #cc6600, #fb923c); color: #000; }
+.card-dat0 .method-tag.method-standard {
+    background: rgba(251,146,60,0.12);
+    color: #fb923c;
+    border: 1px solid rgba(251,146,60,0.35);
+}
+.card-dat0 .btn-card-primary {
+    background: linear-gradient(135deg, #cc6600, #fb923c);
+    border-color: #cc6600;
+    color: #000 !important;
+}
+.card-dat0 .btn-card-primary:hover {
+    background: linear-gradient(135deg, #dd7700, #ff9940);
+    border-color: #dd7700;
+}
+.card-dat0 .btn-card-primary.geselecteerd { background: #fb923c; border-color: #fb923c; }
+
+
     background: linear-gradient(145deg, #1a1000, #1f1500) !important;
     border: 2px solid #cc6600 !important;
     box-shadow: 0 0 35px rgba(204, 102, 0, 0.12) !important;
@@ -1384,8 +1439,8 @@ footer {
     padding: 32px 28px;
     text-align: left;
 }
-.verg-dat0 { border-top: 3px solid var(--primary); }
-.verg-kamikaze { border-top: 3px solid #ff8800; }
+.verg-dat0 { border-top: 3px solid #fb923c; }
+.verg-kamikaze { border-top: 3px solid #ff3300; }
 .verg-vs {
     display: flex;
     align-items: center;
@@ -1416,8 +1471,8 @@ footer {
     padding: 4px 12px;
     border-radius: 20px;
 }
-.verg-badge-green { background: rgba(0,255,136,0.1); color: var(--primary); border: 1px solid rgba(0,255,136,0.3); }
-.verg-badge-orange { background: rgba(255,136,0,0.1); color: #ff8800; border: 1px solid rgba(255,136,0,0.3); }
+.verg-badge-green { background: rgba(251,146,60,0.1); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+.verg-badge-orange { background: rgba(255,51,0,0.1); color: #ff3300; border: 1px solid rgba(255,51,0,0.3); }
 .verg-price { font-size: 1.4rem; font-weight: 800; color: var(--text-main); }
 .verg-how {
     background: rgba(255,255,255,0.03);
@@ -1449,8 +1504,8 @@ footer {
 .verg-tabel th { font-weight: 700; color: var(--text-main); }
 .verg-tabel td { color: var(--text-muted); }
 .verg-tabel tbody tr:hover { background: rgba(255,255,255,0.02); }
-.tabel-green { color: var(--primary); }
-.tabel-orange { color: #ff8800; }
+.tabel-green { color: #fb923c; }
+.tabel-orange { color: #ff3300; }
 .verg-advies {
     display: flex;
     align-items: flex-start;
@@ -2501,6 +2556,13 @@ footer {
     font-size: 1rem;
     font-weight: 800;
     color: var(--primary);
+}
+
+.rep-aanvraag-prijs-small {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    white-space: nowrap;
 }
 
 .rep-aanvraag-clear {
