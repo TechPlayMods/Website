@@ -341,18 +341,18 @@ function updateStickyBar() {
         });
 
         const modelColors = {
-            'Switch V1 / V2':    { bg: '#00ff88', color: '#000' },
+            'Switch V1 / V2':          { bg: '#00ff88', color: '#000' },
             'Nintendo Switch V1 / V2': { bg: '#00ff88', color: '#000' },
-            'Switch Lite':       { bg: '#f59e0b', color: '#000' },
-            'Nintendo Switch Lite': { bg: '#f59e0b', color: '#000' },
-            'Switch OLED':       { bg: '#f59e0b', color: '#000' },
-            'Nintendo Switch OLED': { bg: '#f59e0b', color: '#000' },
+            'Switch Lite':             { bg: '#e040fb', color: '#fff' },
+            'Nintendo Switch Lite':    { bg: '#e040fb', color: '#fff' },
+            'Switch OLED':             { bg: '#fb923c', color: '#000' },
+            'Nintendo Switch OLED':    { bg: '#fb923c', color: '#000' },
         };
 
-        // V1/V2 = green, Lite = amber, OLED = amber-orange (slightly different)
+        // V1/V2 = green, Lite = pink/purple, OLED = orange
         const getColor = (model) => {
             if (model.includes('V1') || model.includes('V2')) return { bg: '#00ff88', color: '#000' };
-            if (model.includes('Lite')) return { bg: '#f59e0b', color: '#000' };
+            if (model.includes('Lite')) return { bg: '#e040fb', color: '#fff' };
             return { bg: '#fb923c', color: '#000' }; // OLED = orange
         };
 
@@ -373,7 +373,7 @@ function updateStickyBar() {
         const aanvraagBtn = document.createElement('a');
         aanvraagBtn.href = '#contact';
         aanvraagBtn.className = 'sticky-aanvraag-btn';
-        aanvraagBtn.innerHTML = 'Aanvraag <i class="fa-solid fa-arrow-right"></i>';
+        aanvraagBtn.dataset.isPriceBtn = 'true';
         stickyRight.appendChild(aanvraagBtn);
     } else {
         stickyRepairChip.style.display = 'none';
@@ -385,7 +385,17 @@ function updateStickyBar() {
     if (hasGarantie) total += state.garantie.prijs;
     selectedRepairs.forEach(r => total += r.prijs);
     const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
-    stickyTotal.textContent = prefix + '€ ' + total + ',-';
+    const totalStr = prefix + '€ ' + total + ',-';
+
+    // If aanvraag button exists, embed the price inside it and hide the separate total
+    const existingBtn = document.querySelector('.sticky-aanvraag-btn');
+    if (existingBtn) {
+        existingBtn.innerHTML = `<span class="sticky-btn-price">${totalStr}</span><span class="sticky-btn-divider"></span>Aanvraag <i class="fa-solid fa-arrow-right"></i>`;
+        stickyTotal.style.display = 'none';
+    } else {
+        stickyTotal.textContent = totalStr;
+        stickyTotal.style.display = '';
+    }
 }
 
 
