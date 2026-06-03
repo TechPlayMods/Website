@@ -50,7 +50,7 @@ const state = {
     console:  null,   // { model, label, prijs }
     garantie: null,   // { dagen, label, prijs }
 };
-const selectedRepairs = new Map(); // naam → { model, naam, prijs }
+const selectedRepairs = new Map(); // key = 'model||naam' → { model, naam, prijs }
 
 
 // ============================================================
@@ -62,12 +62,13 @@ document.querySelectorAll('.rep-row').forEach(row => {
         const model = row.dataset.repModel;
         const prijs = parseInt(row.dataset.repPrijs);
 
-        if (selectedRepairs.has(naam)) {
-            selectedRepairs.delete(naam);
+        const key = model + '||' + naam;
+        if (selectedRepairs.has(key)) {
+            selectedRepairs.delete(key);
             row.classList.remove('geselecteerd');
             row.querySelector('.rep-row-btn').textContent = 'Selecteer';
         } else {
-            selectedRepairs.set(naam, { model, naam, prijs });
+            selectedRepairs.set(key, { model, naam, prijs });
             row.classList.add('geselecteerd');
             row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
         }
@@ -214,7 +215,7 @@ function updateFormBlocks() {
         reparatieStatus.className   = 'aanvraag-block-status';
     }
 
-    // Repair form section
+    // Repair form section — grouped by model
     const repEmpty  = document.getElementById('repAanvraagEmpty');
     const repFilled = document.getElementById('repAanvraagFilled');
     if (hasRepairs) {
@@ -222,10 +223,23 @@ function updateFormBlocks() {
         const total   = repairs.reduce((s, r) => s + r.prijs, 0);
         repEmpty.style.display  = 'none';
         repFilled.style.display = '';
-        document.getElementById('repFormModel').textContent = repairs[0].model;
+
+        // Group by model
+        const byModel = new Map();
+        repairs.forEach(r => {
+            if (!byModel.has(r.model)) byModel.set(r.model, []);
+            byModel.get(r.model).push(r);
+        });
+
+        // Show first model in the "Console" row (or all if multiple)
+        const models = [...byModel.keys()];
+        document.getElementById('repFormModel').textContent = models.join(' + ');
         document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
-        document.getElementById('repFormItems').innerHTML = repairs.map(r =>
-            `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`
+
+        // Render rows grouped by model
+        document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
+            (byModel.size > 1 ? `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-label"><i class="fa-solid fa-gamepad"></i> ${model}</span></div>` : '') +
+            reps.map(r => `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`).join('')
         ).join('');
     } else {
         repEmpty.style.display  = '';
@@ -283,7 +297,11 @@ function updateStickyBar() {
         stickyConsoleName.textContent = state.console.label;
         stickyConsoleChip.classList.add('selected');
     } else if (hasRepairs) {
-        stickyConsoleName.textContent = [...selectedRepairs.values()][0].model;
+        // Show all unique models from repairs
+        const models = [...new Set([...selectedRepairs.values()].map(r =>
+            r.model.replace('Nintendo Switch ', '').replace('Switch ', '')
+        ))];
+        stickyConsoleName.textContent = models.join(' + ');
         stickyConsoleChip.classList.add('selected');
     } else {
         stickyConsoleChip.classList.remove('selected');
@@ -315,14 +333,26 @@ function updateStickyBar() {
         stickyGarantieChip.style.display = 'none';
     }
 
-    // Repair chip
+    // Repair chips — one per model group
     if (hasRepairs) {
         stickySepRepair.style.display = '';
         stickyRepairChip.style.display = '';
         stickyRepairChip.classList.add('selected');
-        const count = selectedRepairs.size;
-        const first = [...selectedRepairs.values()][0];
-        stickyRepairName.textContent = count === 1 ? first.naam.split('(')[0].trim() : count + ' reparaties';
+
+        // Group by model
+        const byModel = new Map();
+        selectedRepairs.forEach(r => {
+            if (!byModel.has(r.model)) byModel.set(r.model, []);
+            byModel.get(r.model).push(r.naam.split('(')[0].trim());
+        });
+
+        // Build label: "Lite > Poort · OLED > Scherm, Batterij"
+        const parts = [];
+        byModel.forEach((names, model) => {
+            const shortModel = model.replace('Nintendo Switch ', '').replace('Switch ', '');
+            parts.push(shortModel + ' › ' + names.join(', '));
+        });
+        stickyRepairName.textContent = parts.join(' · ');
     } else {
         stickySepRepair.style.display = 'none';
         stickyRepairChip.style.display = 'none';
@@ -369,15 +399,33 @@ function updateOrderSummary() {
         }
     }
 
-    // Dynamic repair rows
+    // Dynamic repair rows — grouped by model
     const repContainer = document.getElementById('summaryRepairRows');
     repContainer.innerHTML = '';
-    selectedRepairs.forEach(r => {
-        const row = document.createElement('div');
-        row.className = 'order-row order-row-repair';
-        row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
-        repContainer.appendChild(row);
-    });
+
+    if (hasRepairs) {
+        const byModel = new Map();
+        selectedRepairs.forEach(r => {
+            if (!byModel.has(r.model)) byModel.set(r.model, []);
+            byModel.get(r.model).push(r);
+        });
+
+        byModel.forEach((repairs, model) => {
+            // Model header row if multiple models
+            if (byModel.size > 1) {
+                const header = document.createElement('div');
+                header.className = 'order-row-model-header';
+                header.innerHTML = `<i class="fa-solid fa-gamepad"></i> ${model}`;
+                repContainer.appendChild(header);
+            }
+            repairs.forEach(r => {
+                const row = document.createElement('div');
+                row.className = 'order-row order-row-repair';
+                row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
+                repContainer.appendChild(row);
+            });
+        });
+    }
 
     // Total
     let total = 0;
@@ -460,9 +508,16 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
     }
 
     if (selectedRepairs.size > 0) {
-        const repairs = [...selectedRepairs.values()];
-        const total   = repairs.reduce((s, r) => s + r.prijs, 0);
-        bericht += `\n\n🛠 Reparatie\nConsole: ${repairs[0].model}\n` + repairs.map(r => `• ${r.naam} (€ ${r.prijs},-)`).join('\n');
+        const byModel = new Map();
+        selectedRepairs.forEach(r => {
+            if (!byModel.has(r.model)) byModel.set(r.model, []);
+            byModel.get(r.model).push(r);
+        });
+        const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
+        bericht += `\n\n🛠 Reparatie`;
+        byModel.forEach((repairs, model) => {
+            bericht += `\n${model}:\n` + repairs.map(r => `• ${r.naam} (€ ${r.prijs},-)`).join('\n');
+        });
         bericht += `\nIndicatief totaal: ≈ € ${total},-`;
     }
 
