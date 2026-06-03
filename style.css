@@ -3629,9 +3629,9 @@ footer {
 
 /* Lite: geel ipv blauw */
 :root {
-    --lite-color: #eab308;
-    --lite-color-dim: rgba(234,179,8,0.1);
-    --lite-color-border: rgba(234,179,8,0.25);
+    --lite-color: #f59e0b;
+    --lite-color-dim: rgba(245,158,11,0.1);
+    --lite-color-border: rgba(245,158,11,0.25);
 }
 
 /* Jump card icons — zelfde grootte als service cards */
@@ -3670,13 +3670,13 @@ footer {
     border-color: var(--lite-color-border);
     color: var(--lite-color);
 }
-.rep-jump-card.rep-jump-lite:hover { border-color: var(--lite-color); box-shadow: 0 6px 20px rgba(234,179,8,0.1); }
+.rep-jump-card.rep-jump-lite:hover { border-color: var(--lite-color); box-shadow: 0 6px 20px rgba(245,158,11,0.1); }
 #rep-lite-block { border-top-color: var(--lite-color); }
 #rep-lite-block .rep-row-icon { background: var(--lite-color-dim); border-color: var(--lite-color-border); color: var(--lite-color); }
-#rep-lite-block .rep-row:hover { background: rgba(234,179,8,0.03); }
-#rep-lite-block .rep-row.geselecteerd { border-left-color: var(--lite-color); background: rgba(234,179,8,0.05); }
+#rep-lite-block .rep-row:hover { background: rgba(245,158,11,0.03); }
+#rep-lite-block .rep-row.geselecteerd { border-left-color: var(--lite-color); background: rgba(245,158,11,0.05); }
 #rep-lite-block .rep-row.geselecteerd .rep-row-btn { background: var(--lite-color); border-color: var(--lite-color); color: #000; }
-#rep-lite-block .rep-model-header { border-bottom-color: rgba(234,179,8,0.15); }
+#rep-lite-block .rep-model-header { border-bottom-color: rgba(245,158,11,0.15); }
 
 /* OLED — oranje (ongewijzigd) */
 .rep-jump-icon-oled,
@@ -3893,4 +3893,28 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #475569;
+}
+
+/* ===========================
+   STICKY AANVRAAG KNOP
+=========================== */
+.sticky-aanvraag-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    background: var(--primary);
+    color: #000;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background var(--transition), transform var(--transition);
+    margin-left: 4px;
+}
+.sticky-aanvraag-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
 }
