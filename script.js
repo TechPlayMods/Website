@@ -289,7 +289,7 @@ function updateStickyBar() {
     if (!hasConsole && !hasRepairs) {
         stickyBar.classList.remove('visible');
         // Clean up dynamic repair chips
-        document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
+        document.querySelectorAll('.sticky-chip-repair-item, .sticky-aanvraag-btn').forEach(c => c.remove());
         return;
     }
     stickyBar.classList.add('visible');
@@ -329,22 +329,55 @@ function updateStickyBar() {
         stickyGarantieChip.style.display = 'none';
     }
 
-    // Remove old dynamic repair chips
-    document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
+    // Remove old dynamic repair chips and aanvraag btn
+    document.querySelectorAll('.sticky-chip-repair-item, .sticky-aanvraag-btn').forEach(c => c.remove());
 
-    // One chip per repair: "Lite › Oplaadpoort"
+    // One chip per model, with count if multiple repairs for that model
     if (hasRepairs) {
         stickySepRepair.style.display = '';
         stickyRepairChip.style.display = 'none'; // hide template chip
-        const chipsContainer = document.querySelector('.sticky-chips');
+
+        // Group by model
+        const byModel = new Map();
         selectedRepairs.forEach(r => {
-            const shortModel = r.model.replace('Nintendo Switch ', '').replace('Switch ', '');
-            const shortNaam  = r.naam.split('(')[0].trim();
+            if (!byModel.has(r.model)) byModel.set(r.model, []);
+            byModel.get(r.model).push(r.naam.split('(')[0].trim());
+        });
+
+        const modelColors = {
+            'Switch V1 / V2':    { bg: '#00ff88', color: '#000' },
+            'Nintendo Switch V1 / V2': { bg: '#00ff88', color: '#000' },
+            'Switch Lite':       { bg: '#f59e0b', color: '#000' },
+            'Nintendo Switch Lite': { bg: '#f59e0b', color: '#000' },
+            'Switch OLED':       { bg: '#f59e0b', color: '#000' },
+            'Nintendo Switch OLED': { bg: '#f59e0b', color: '#000' },
+        };
+
+        // V1/V2 = green, Lite = amber, OLED = amber-orange (slightly different)
+        const getColor = (model) => {
+            if (model.includes('V1') || model.includes('V2')) return { bg: '#00ff88', color: '#000' };
+            if (model.includes('Lite')) return { bg: '#f59e0b', color: '#000' };
+            return { bg: '#fb923c', color: '#000' }; // OLED = orange
+        };
+
+        const chipsContainer = document.querySelector('.sticky-chips');
+        byModel.forEach((names, model) => {
+            const shortModel = model.replace('Nintendo Switch ', '').replace('Switch ', '');
+            const label = names.length === 1 ? `${shortModel} › ${names[0]}` : `${shortModel} › ${names.length} reparaties`;
+            const { bg, color } = getColor(model);
             const chip = document.createElement('div');
-            chip.className = 'sticky-chip sticky-chip-repair sticky-chip-repair-item selected';
-            chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${shortModel} › ${shortNaam}</span>`;
+            chip.className = 'sticky-chip sticky-chip-repair-item';
+            chip.style.cssText = `background:${bg};color:${color};border-color:${bg};`;
+            chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${label}</span>`;
             chipsContainer.appendChild(chip);
         });
+
+        // Green aanvraag button
+        const aanvraagBtn = document.createElement('a');
+        aanvraagBtn.href = '#contact';
+        aanvraagBtn.className = 'sticky-aanvraag-btn';
+        aanvraagBtn.innerHTML = 'Aanvraag <i class="fa-solid fa-arrow-right"></i>';
+        chipsContainer.appendChild(aanvraagBtn);
     } else {
         stickySepRepair.style.display = 'none';
         stickyRepairChip.style.display = 'none';
