@@ -231,15 +231,18 @@ function updateFormBlocks() {
             byModel.get(r.model).push(r);
         });
 
-        // Show first model in the "Console" row (or all if multiple)
-        const models = [...byModel.keys()];
-        document.getElementById('repFormModel').textContent = models.join(' + ');
         document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
 
-        // Render rows grouped by model
+        // Device icon per model
+        const modelIcon = (model) => {
+            if (model.includes('Lite')) return 'fa-solid fa-mobile-screen';
+            return 'fa-solid fa-gamepad';
+        };
+
+        // Render rows grouped by model — always show model header
         document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
-            (byModel.size > 1 ? `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-label"><i class="fa-solid fa-gamepad"></i> ${model}</span></div>` : '') +
-            reps.map(r => `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> Reparatie</span><span>${r.naam.split('(')[0].trim()}</span></div>`).join('')
+            `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-label"><i class="${modelIcon(model)}"></i> ${model}</span></div>` +
+            reps.map(r => `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam.split('(')[0].trim()}</span><span class="rep-aanvraag-prijs-small">€ ${r.prijs},-</span></div>`).join('')
         ).join('');
     } else {
         repEmpty.style.display  = '';
@@ -367,14 +370,6 @@ function updateStickyBar() {
             chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${label}</span>`;
             chipsContainer.appendChild(chip);
         });
-
-        // Aanvraag button — append to sticky-right (next to price)
-        const stickyRight = document.querySelector('.sticky-right');
-        const aanvraagBtn = document.createElement('a');
-        aanvraagBtn.href = '#contact';
-        aanvraagBtn.className = 'sticky-aanvraag-btn';
-        aanvraagBtn.dataset.isPriceBtn = 'true';
-        stickyRight.appendChild(aanvraagBtn);
     } else {
         stickyRepairChip.style.display = 'none';
     }
@@ -387,15 +382,14 @@ function updateStickyBar() {
     const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
     const totalStr = prefix + '€ ' + total + ',-';
 
-    // If aanvraag button exists, embed the price inside it and hide the separate total
-    const existingBtn = document.querySelector('.sticky-aanvraag-btn');
-    if (existingBtn) {
-        existingBtn.innerHTML = `<span class="sticky-btn-price">${totalStr}</span><span class="sticky-btn-divider"></span>Aanvraag <i class="fa-solid fa-arrow-right"></i>`;
-        stickyTotal.style.display = 'none';
-    } else {
-        stickyTotal.textContent = totalStr;
-        stickyTotal.style.display = '';
-    }
+    // Always show aanvraag button with price embedded
+    const stickyRight = document.querySelector('.sticky-right');
+    const aanvraagBtn = document.createElement('a');
+    aanvraagBtn.href = '#contact';
+    aanvraagBtn.className = 'sticky-aanvraag-btn';
+    aanvraagBtn.innerHTML = `<span class="sticky-btn-price">${totalStr}</span><span class="sticky-btn-divider"></span>Aanvraag <i class="fa-solid fa-arrow-right"></i>`;
+    stickyRight.appendChild(aanvraagBtn);
+    stickyTotal.style.display = 'none';
 }
 
 
