@@ -241,7 +241,7 @@ function updateFormBlocks() {
 
         // Render rows grouped by model — always show model header
         document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
-            `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-label"><i class="${modelIcon(model)}"></i> ${model}</span></div>` +
+            `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-model-label">${model}</span></div>` +
             reps.map(r => `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam.split('(')[0].trim()}</span><span class="rep-aanvraag-prijs-small">€ ${r.prijs},-</span></div>`).join('')
         ).join('');
     } else {
@@ -441,7 +441,7 @@ function updateOrderSummary() {
             if (byModel.size > 1) {
                 const header = document.createElement('div');
                 header.className = 'order-row-model-header';
-                header.innerHTML = `<i class="fa-solid fa-gamepad"></i> ${model}`;
+                header.innerHTML = model;
                 repContainer.appendChild(header);
             }
             repairs.forEach(r => {
