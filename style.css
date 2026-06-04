@@ -1276,9 +1276,8 @@ footer {
 .card-kamikaze ul li { color: rgba(255,255,255,0.6); }
 .card-kamikaze ul li i.fa-check { color: var(--primary) !important; }
 .card-kamikaze ul li i.fa-times { color: #ef4444 !important; }
-.card-kamikaze h3 { color: var(--text-main); }
-.card-kamikaze .price { color: #ef4444; }
-.card-kamikaze .price-sub { color: var(--text-muted); }
+.card-kamikaze .price { color: var(--text-main); }
+.card-kamikaze .card-icon iconify-icon { color: #ef4444; }
 .card-kamikaze .badge-premium { background: linear-gradient(135deg, #b91c1c, #ef4444) !important; color: #fff !important; }
 .card-kamikaze .method-tag.method-premium {
     background: rgba(239, 68, 68, 0.1);
