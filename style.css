@@ -4112,3 +4112,32 @@ footer {
     padding: 5px 1rem 4px;
     background: rgba(255,255,255,0.015);
 }
+
+/* ===========================
+   SUMMARY ICON FIXES
+=========================== */
+/* Iconify chip icon in console row */
+.summary-chip-icon {
+    font-size: 1.15rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* Garantie shield icons groter */
+.order-row-garantie .order-row-label i,
+#summaryGarantieIcon,
+#summaryRepGarantieIcon {
+    font-size: 1.05rem !important;
+}
+
+/* Gap weghalen boven eerste model-header in reparatie sub-card */
+.summary-sub-card .order-row-model-header:first-of-type {
+    margin-top: 0;
+    border-top: none;
+}
+
+/* Eerste model-header direct na reparatie sub-card header: geen extra ruimte */
+#summaryRepairRows .order-row-model-header:first-child {
+    border-top: none;
+    margin-top: 0;
+}
