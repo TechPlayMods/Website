@@ -1301,27 +1301,27 @@ footer {
    PAARSE LITE CARD
 =========================== */
 .card-lite {
-    background: linear-gradient(145deg, #130a1a, #1a0d24) !important;
-    border: 2px solid #a020c0 !important;
+    background: linear-gradient(145deg, #0f1520, #131a24) !important;
+    border: 2px solid #64748b !important;
     box-shadow: 0 0 35px rgba(160, 32, 192, 0.12) !important;
 }
 .card-lite:hover {
-    border-color: #e040fb !important;
+    border-color: #e2e8f0 !important;
     box-shadow: 0 12px 40px rgba(224, 64, 251, 0.18) !important;
 }
-.card-lite .card-icon iconify-icon { color: #e040fb; }
+.card-lite .card-icon iconify-icon { color: #e2e8f0; }
 .card-lite ul li { color: rgba(255,255,255,0.6); }
 .card-lite ul li i.fa-check { color: var(--primary) !important; }
 .card-lite .btn-card {
-    border-color: #a020c0;
-    color: #e040fb;
+    border-color: #64748b;
+    color: #e2e8f0;
 }
 .card-lite .btn-card:hover {
-    background: #e040fb;
-    border-color: #e040fb;
-    color: #fff !important;
+    background: #e2e8f0;
+    border-color: #e2e8f0;
+    color: #0f1115 !important;
 }
-.card-lite .btn-card.geselecteerd { background: #e040fb; border-color: #e040fb; color: #fff !important; }
+.card-lite .btn-card.geselecteerd { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115 !important; }
 
 /* ===========================
    ORANJE DAT0 CARD
@@ -3524,9 +3524,9 @@ footer {
     font-size: 1.4rem;
 }
 .rep-jump-icon-lite {
-    background: rgba(224,64,251,0.1);
-    border-color: rgba(224,64,251,0.25);
-    color: #e040fb;
+    background: rgba(226,232,240,0.08);
+    border-color: rgba(226,232,240,0.2);
+    color: #e2e8f0;
     font-size: 1.4rem;
 }
 .rep-jump-icon-oled {
@@ -3537,7 +3537,7 @@ footer {
 }
 
 .rep-jump-card.rep-jump-v1v2:hover { border-color: var(--primary); box-shadow: 0 6px 20px rgba(0,255,136,0.1); }
-.rep-jump-card.rep-jump-lite:hover  { border-color: #e040fb; box-shadow: 0 6px 20px rgba(224,64,251,0.1); }
+.rep-jump-card.rep-jump-lite:hover  { border-color: #e2e8f0; box-shadow: 0 6px 20px rgba(226,232,240,0.08); }
 .rep-jump-card.rep-jump-oled:hover  { border-color: #fb923c; box-shadow: 0 6px 20px rgba(251,146,60,0.1); }
 
 /* Model block headers */
@@ -3548,9 +3548,9 @@ footer {
     font-size: 1.5rem;
 }
 .rep-model-icon-lite {
-    background: rgba(224,64,251,0.1);
-    border-color: rgba(224,64,251,0.25);
-    color: #e040fb;
+    background: rgba(226,232,240,0.08);
+    border-color: rgba(226,232,240,0.2);
+    color: #e2e8f0;
     font-size: 1.5rem;
 }
 .rep-model-icon-oled {
@@ -3561,18 +3561,18 @@ footer {
 }
 
 .rep-model-header-v1v2 { border-bottom-color: rgba(0,255,136,0.15); }
-.rep-model-header-lite  { border-bottom-color: rgba(224,64,251,0.15); }
+.rep-model-header-lite  { border-bottom-color: rgba(226,232,240,0.12); }
 .rep-model-header-oled  { border-bottom-color: rgba(251,146,60,0.15); }
 
 /* Block left border accent per model */
 #rep-v1v2-block { border-top: 2px solid var(--primary); }
-#rep-lite-block  { border-top: 2px solid #e040fb; }
+#rep-lite-block  { border-top: 2px solid #e2e8f0; }
 #rep-oled-block  { border-top: 2px solid #fb923c; }
 
 /* Selected row tint per model block */
-#rep-lite-block  .rep-row.geselecteerd { background: rgba(224,64,251,0.06); border-left-color: #e040fb; }
+#rep-lite-block  .rep-row.geselecteerd { background: rgba(226,232,240,0.05); border-left-color: #e2e8f0; }
 #rep-oled-block  .rep-row.geselecteerd { background: rgba(251,146,60,0.06);  border-left-color: #fb923c; }
-#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e040fb; border-color: #e040fb; color: #fff; }
+#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
 #rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #fb923c; border-color: #fb923c; color: #000; }
 
 /* ===========================
@@ -3659,9 +3659,9 @@ footer {
 }
 
 #rep-lite-block .rep-row-icon {
-    background: rgba(224,64,251,0.1);
-    border-color: rgba(224,64,251,0.25);
-    color: #e040fb;
+    background: rgba(226,232,240,0.08);
+    border-color: rgba(226,232,240,0.2);
+    color: #e2e8f0;
 }
 
 #rep-oled-block .rep-row-icon {
@@ -3672,17 +3672,17 @@ footer {
 
 /* Hover border kleur per sectie */
 #rep-v1v2-block .rep-row:hover { background: rgba(0,255,136,0.03); }
-#rep-lite-block  .rep-row:hover { background: rgba(224,64,251,0.03); }
+#rep-lite-block  .rep-row:hover { background: rgba(226,232,240,0.02); }
 #rep-oled-block  .rep-row:hover { background: rgba(251,146,60,0.03); }
 
 /* Selecteer knop kleur per sectie */
 #rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: var(--primary); border-color: var(--primary); color: #000; }
-#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e040fb; border-color: #e040fb; color: #fff; }
+#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
 #rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #fb923c; border-color: #fb923c; color: #000; }
 
 /* Geselecteerde rij border kleur */
 #rep-v1v2-block .rep-row.geselecteerd { border-left-color: var(--primary); background: rgba(0,255,136,0.05); }
-#rep-lite-block  .rep-row.geselecteerd { border-left-color: #e040fb; background: rgba(224,64,251,0.06); }
+#rep-lite-block  .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(226,232,240,0.05); }
 #rep-oled-block  .rep-row.geselecteerd { border-left-color: #fb923c; background: rgba(251,146,60,0.06); }
 
 /* ===========================
@@ -3692,9 +3692,9 @@ footer {
 
 /* Lite: bright purple/pink */
 :root {
-    --lite-color: #e040fb;
-    --lite-color-dim: rgba(224,64,251,0.1);
-    --lite-color-border: rgba(224,64,251,0.25);
+    --lite-color: #e2e8f0;
+    --lite-color-dim: rgba(226,232,240,0.08);
+    --lite-color-border: rgba(226,232,240,0.2);
 }
 
 /* Jump card icons — zelfde grootte als service cards */
@@ -3733,13 +3733,13 @@ footer {
     border-color: var(--lite-color-border);
     color: var(--lite-color);
 }
-.rep-jump-card.rep-jump-lite:hover { border-color: #e040fb; box-shadow: 0 6px 20px rgba(224,64,251,0.1); }
-#rep-lite-block { border-top-color: #e040fb; }
-#rep-lite-block .rep-row-icon { background: rgba(224,64,251,0.1); border-color: rgba(224,64,251,0.25); color: #e040fb; }
-#rep-lite-block .rep-row:hover { background: rgba(224,64,251,0.03); }
-#rep-lite-block .rep-row.geselecteerd { border-left-color: #e040fb; background: rgba(224,64,251,0.05); }
-#rep-lite-block .rep-row.geselecteerd .rep-row-btn { background: #e040fb; border-color: #e040fb; color: #fff; }
-#rep-lite-block .rep-model-header { border-bottom-color: rgba(224,64,251,0.15); }
+.rep-jump-card.rep-jump-lite:hover { border-color: #e2e8f0; box-shadow: 0 6px 20px rgba(226,232,240,0.08); }
+#rep-lite-block { border-top-color: #e2e8f0; }
+#rep-lite-block .rep-row-icon { background: rgba(226,232,240,0.08); border-color: rgba(226,232,240,0.2); color: #e2e8f0; }
+#rep-lite-block .rep-row:hover { background: rgba(226,232,240,0.02); }
+#rep-lite-block .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(226,232,240,0.04); }
+#rep-lite-block .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
+#rep-lite-block .rep-model-header { border-bottom-color: rgba(226,232,240,0.12); }
 
 /* OLED — oranje (ongewijzigd) */
 .rep-jump-icon-oled,
