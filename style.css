@@ -1264,31 +1264,31 @@ footer {
    KAMIKAZE KAART — ROOD
 =========================== */
 .card-kamikaze {
-    background: linear-gradient(145deg, #1f0505, #2a0808);
-    border: 2px solid #cc2200 !important;
-    box-shadow: 0 0 35px rgba(204, 34, 0, 0.2);
+    background: var(--bg-card);
+    border: 2px solid #e53e1e !important;
+    box-shadow: 0 0 30px rgba(229, 62, 30, 0.08);
 }
 
 .card-kamikaze:hover {
-    border-color: #ff3300 !important;
-    box-shadow: 0 12px 40px rgba(255, 51, 0, 0.28) !important;
+    border-color: #ff4422 !important;
+    box-shadow: 0 12px 40px rgba(229, 62, 30, 0.15) !important;
     transform: translateY(-6px);
 }
 
-.card-kamikaze h3 { color: #ff6644; }
+.card-kamikaze h3 { color: var(--text-main); }
 
-.card-kamikaze .price { color: #ff4422; }
+.card-kamikaze .price { color: #e53e1e; }
 
-.card-kamikaze .price-sub { color: rgba(255, 100, 70, 0.55); }
+.card-kamikaze .price-sub { color: var(--text-muted); }
 
 .card-kamikaze .method-tag.method-premium {
-    background: rgba(204, 34, 0, 0.2);
-    color: #ff6644;
-    border: 1px solid rgba(204, 34, 0, 0.5);
+    background: rgba(229, 62, 30, 0.1);
+    color: #e53e1e;
+    border: 1px solid rgba(229, 62, 30, 0.3);
 }
 
 .card-kamikaze ul li {
-    color: rgba(255, 180, 160, 0.7);
+    color: var(--text-muted);
 }
 
 .card-kamikaze ul li i.fa-check {
@@ -1296,27 +1296,28 @@ footer {
 }
 
 .card-kamikaze ul li i.fa-times {
-    color: #ff4422 !important;
+    color: #e53e1e !important;
 }
 
 .card-kamikaze .badge-premium {
-    background: linear-gradient(135deg, #cc2200, #ff3300) !important;
+    background: #e53e1e !important;
     color: #fff !important;
 }
 
 .card-kamikaze .btn-card-premium {
-    background: linear-gradient(135deg, #cc2200, #ff3300);
-    border-color: #cc2200;
+    background: #e53e1e;
+    border-color: #e53e1e;
     color: #fff !important;
 }
 
 .card-kamikaze .btn-card-premium:hover {
-    background: linear-gradient(135deg, #dd3300, #ff4411);
-    border-color: #dd3300;
+    background: #ff4422;
+    border-color: #ff4422;
+    color: #fff !important;
 }
 
 .card-kamikaze .card-icon i {
-    color: #ff4422;
+    color: #e53e1e;
 }
 
 /* ===========================
@@ -1328,7 +1329,7 @@ footer {
 }
 
 .card-kamikaze .card-icon iconify-icon {
-    color: #ff4422;
+    color: #e53e1e;
 }
 
 /* ===========================
