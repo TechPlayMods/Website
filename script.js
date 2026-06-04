@@ -463,13 +463,11 @@ function updateOrderSummary() {
         });
 
         byModel.forEach((repairs, model) => {
-            // Model header row if multiple models
-            if (byModel.size > 1) {
-                const header = document.createElement('div');
-                header.className = 'order-row-model-header';
-                header.innerHTML = model;
-                repContainer.appendChild(header);
-            }
+            // Altijd model header tonen — ook bij 1 model
+            const header = document.createElement('div');
+            header.className = 'order-row-model-header';
+            header.textContent = model;
+            repContainer.appendChild(header);
             repairs.forEach(r => {
                 const row = document.createElement('div');
                 row.className = 'order-row order-row-repair';
