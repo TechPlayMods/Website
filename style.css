@@ -2171,6 +2171,7 @@ footer {
     border: 1px solid var(--border);
     border-radius: 16px;
     overflow: hidden;
+    padding-bottom: 0.25rem;
 }
 .order-summary-header {
     display: flex;
@@ -4041,4 +4042,73 @@ footer {
 .summary-section-header i {
     font-size: 0.65rem;
     opacity: 0.7;
+}
+
+/* Reparatie sectie header in overzicht iets meer afstand van modchip sectie */
+#summaryReparatieSection .order-row-model-header:first-child {
+    margin-top: 4px;
+}
+
+/* ===========================
+   SUMMARY SUB-CARDS
+   Modchip & Reparatie elk eigen blok
+=========================== */
+
+.summary-sub-card {
+    margin: 0.75rem 0.85rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    animation: summaryFadeIn 0.3s ease;
+}
+.summary-sub-card:last-of-type {
+    margin-bottom: 0.25rem;
+}
+
+/* Rijen binnen sub-card: geen aparte border-bottom op de laatste */
+.summary-sub-card .order-row:last-child,
+.summary-sub-card .order-row-garantie:last-child {
+    border-bottom: none;
+}
+
+/* Sub-header — gekleurde balk bovenaan elk blok */
+.summary-sub-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Modchip: groen accent */
+.summary-sub-header-mod {
+    background: rgba(0,255,136,0.06);
+    border-bottom: 1px solid rgba(0,255,136,0.12);
+    color: var(--primary);
+}
+.summary-sub-header-mod i { color: var(--primary); }
+
+/* Reparatie: blauw accent */
+.summary-sub-header-rep {
+    background: rgba(59,130,246,0.07);
+    border-bottom: 1px solid rgba(59,130,246,0.15);
+    color: #60a5fa;
+}
+.summary-sub-header-rep i { color: #60a5fa; }
+
+/* Rijen in sub-card iets compacter */
+.summary-sub-card .order-row {
+    padding: 0.7rem 1rem;
+}
+.summary-sub-card .order-row-garantie-pending {
+    padding: 0.6rem 1rem;
+}
+
+/* Model-header binnen reparatie sub-card */
+.summary-sub-card .order-row-model-header {
+    padding: 5px 1rem 4px;
+    background: rgba(255,255,255,0.015);
 }
