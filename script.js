@@ -346,8 +346,8 @@ function updateStickyBar() {
         const modelColors = {
             'Switch V1 / V2':          { bg: '#00ff88', color: '#000' },
             'Nintendo Switch V1 / V2': { bg: '#00ff88', color: '#000' },
-            'Switch Lite':             { bg: '#e040fb', color: '#fff' },
-            'Nintendo Switch Lite':    { bg: '#e040fb', color: '#fff' },
+            'Switch Lite':             { bg: '#e2e8f0', color: '#0f1115' },
+            'Nintendo Switch Lite':    { bg: '#e2e8f0', color: '#0f1115' },
             'Switch OLED':             { bg: '#fb923c', color: '#000' },
             'Nintendo Switch OLED':    { bg: '#fb923c', color: '#000' },
         };
@@ -355,7 +355,7 @@ function updateStickyBar() {
         // V1/V2 = green, Lite = pink/purple, OLED = orange
         const getColor = (model) => {
             if (model.includes('V1') || model.includes('V2')) return { bg: '#00ff88', color: '#000' };
-            if (model.includes('Lite')) return { bg: '#e040fb', color: '#fff' };
+            if (model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
             return { bg: '#fb923c', color: '#000' }; // OLED = orange
         };
 
