@@ -2212,7 +2212,7 @@ footer {
     font-size: 0.88rem;
     color: #cbd5e1;
 }
-.order-row-label i { color: var(--primary); font-size: 0.85rem; }
+.order-row-label i { color: var(--primary); font-size: 1.20rem; }
 .order-row-garantie .order-row-label i { color: #f59e0b; }
 .order-row-prijs { font-size: 0.88rem; font-weight: 600; color: #e2e8f0; white-space: nowrap; }
 .order-divider { height: 1px; background: rgba(255,255,255,0.10); margin: 0 1.25rem; }
