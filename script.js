@@ -190,7 +190,7 @@ function renderRepModelUI() {
                 row.classList.add('geselecteerd');
                 row.querySelector('.rep-inline-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
                 if (!state.repGarantie) {
-                    state.repGarantie = { dagen: '90', label: '90 Dagen Garantie (reparatie)', prijs: 0 };
+                    state.repGarantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
                 }
             }
             refreshAll();
@@ -231,7 +231,7 @@ document.querySelectorAll('.rep-row').forEach(row => {
             row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
             // Standaard 90 dagen reparatiegarantie als nog niet gekozen
             if (!state.repGarantie) {
-                state.repGarantie = { dagen: '90', label: '90 Dagen Garantie (reparatie)', prijs: 0 };
+                state.repGarantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
             }
         }
         refreshAll();
@@ -331,7 +331,7 @@ document.querySelectorAll('input[name="rep_garantie"]').forEach(radio => {
     radio.addEventListener('change', () => {
         state.repGarantie = {
             dagen: radio.value,
-            label: radio.value === '90' ? '90 Dagen Garantie (reparatie)' : '180 Dagen Garantie (reparatie)',
+            label: radio.value === '90' ? '90 Dagen Garantie' : '180 Dagen Garantie',
             prijs: parseInt(radio.dataset.extra)
         };
         refreshAll();
