@@ -55,7 +55,164 @@ const selectedRepairs = new Map(); // key = 'model||naam' → { model, naam, pri
 
 
 // ============================================================
-// REPARATIE RIJ SELECTIE — multi-select, geen tabs
+// REPARATIE DATA
+// ============================================================
+const repairData = {
+    v1v2: {
+        label: 'Switch V1 / V2',
+        repairs: [
+            { naam: 'Oplaadpoort (USB-C)',                 prijs: 35 },
+            { naam: 'Batterij Vervanging',                 prijs: 40 },
+            { naam: 'Behuizing Vervanging',                prijs: 45 },
+            { naam: 'Joy-Con Drift (Stick Vervanging)',    prijs: 25 },
+            { naam: 'Scherm / LCD Vervanging',             prijs: 75 },
+            { naam: 'Koeling (Ventilator + Thermal Paste)',prijs: 30 },
+            { naam: 'Dock-Connector Vervanging',           prijs: 35 },
+        ]
+    },
+    lite: {
+        label: 'Switch Lite',
+        repairs: [
+            { naam: 'Oplaadpoort (USB-C)',                       prijs: 35 },
+            { naam: 'Batterij Vervanging',                       prijs: 40 },
+            { naam: 'Behuizing Vervanging',                      prijs: 50 },
+            { naam: 'Analoge Stick Vervanging',                  prijs: 35 },
+            { naam: 'Scherm Vervanging',                         prijs: 70 },
+            { naam: 'Knoppenset (ABXY / D-pad / Triggers)',      prijs: 25 },
+            { naam: 'Luidspreker Vervanging',                    prijs: 30 },
+        ]
+    },
+    oled: {
+        label: 'Switch OLED',
+        repairs: [
+            { naam: 'Oplaadpoort (USB-C)',                       prijs: 35 },
+            { naam: 'Batterij Vervanging',                       prijs: 45 },
+            { naam: 'Behuizing Vervanging',                      prijs: 45 },
+            { naam: 'Joy-Con Drift (Stick Vervanging)',          prijs: 25 },
+            { naam: 'OLED Scherm Vervanging',                    prijs: 120 },
+            { naam: 'Kickstand Vervanging',                      prijs: 20 },
+            { naam: 'Koeling (Thermal Paste + Ventilator)',      prijs: 30 },
+        ]
+    }
+};
+
+const activeRepModels = new Set(); // which models have been added to the form
+let activeRepTab = null;
+
+function buildRepairPanel(modelKey) {
+    const data = repairData[modelKey];
+    const model = data.label;
+    return `<div class="rep-inline-panel" id="rep-panel-${modelKey}">
+        ${data.repairs.map(r => {
+            const key = model + '||' + r.naam;
+            const selected = selectedRepairs.has(key);
+            return `<div class="rep-inline-row ${selected ? 'geselecteerd' : ''}" 
+                data-model="${model}" data-naam="${r.naam}" data-prijs="${r.prijs}" data-key="${key}">
+                <div class="rep-inline-info">
+                    <span class="rep-inline-naam">${r.naam.split('(')[0].trim()}</span>
+                    <span class="rep-inline-prijs">€ ${r.prijs},-</span>
+                </div>
+                <button type="button" class="rep-inline-btn">
+                    ${selected ? '<i class="fa-solid fa-check"></i> Geselecteerd' : 'Selecteer'}
+                </button>
+            </div>`;
+        }).join('')}
+    </div>`;
+}
+
+function renderRepModelUI() {
+    const tabsEl   = document.getElementById('repInlineTabs');
+    const panelsEl = document.getElementById('repInlinePanels');
+    const activeEl = document.getElementById('repActiveModels');
+
+    if (activeRepModels.size === 0) {
+        activeEl.style.display = 'none';
+        return;
+    }
+    activeEl.style.display = '';
+
+    // Tabs
+    tabsEl.innerHTML = [...activeRepModels].map(key => {
+        const colors = { v1v2: '#00ff88', lite: '#e2e8f0', oled: '#f59e0b' };
+        const color  = colors[key] || '#00ff88';
+        const isActive = key === activeRepTab;
+        return `<button type="button" class="rep-inline-tab ${isActive ? 'active' : ''}" 
+            data-key="${key}" style="${isActive ? `border-color:${color};color:${color}` : ''}">
+            ${repairData[key].label}
+            <span class="rep-inline-tab-remove" data-remove="${key}"><i class="fa-solid fa-xmark"></i></span>
+        </button>`;
+    }).join('');
+
+    // Panels
+    panelsEl.innerHTML = [...activeRepModels].map(key =>
+        `<div style="display:${key === activeRepTab ? '' : 'none'}">${buildRepairPanel(key)}</div>`
+    ).join('');
+
+    // Tab click
+    tabsEl.querySelectorAll('.rep-inline-tab').forEach(btn => {
+        btn.addEventListener('click', e => {
+            if (e.target.closest('.rep-inline-tab-remove')) return;
+            activeRepTab = btn.dataset.key;
+            renderRepModelUI();
+        });
+    });
+
+    // Remove tab
+    tabsEl.querySelectorAll('.rep-inline-tab-remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const key   = btn.dataset.remove;
+            const model = repairData[key].label;
+            // Remove all repairs for this model
+            [...selectedRepairs.keys()].forEach(k => {
+                if (k.startsWith(model + '||')) selectedRepairs.delete(k);
+            });
+            activeRepModels.delete(key);
+            if (activeRepTab === key) activeRepTab = [...activeRepModels][0] || null;
+            renderRepModelUI();
+            refreshAll();
+        });
+    });
+
+    // Repair row click
+    panelsEl.querySelectorAll('.rep-inline-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const key   = row.dataset.key;
+            const model = row.dataset.model;
+            const naam  = row.dataset.naam;
+            const prijs = parseInt(row.dataset.prijs);
+            if (selectedRepairs.has(key)) {
+                selectedRepairs.delete(key);
+                row.classList.remove('geselecteerd');
+                row.querySelector('.rep-inline-btn').textContent = 'Selecteer';
+            } else {
+                selectedRepairs.set(key, { model, naam, prijs });
+                row.classList.add('geselecteerd');
+                row.querySelector('.rep-inline-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
+                if (!state.repGarantie) {
+                    state.repGarantie = { dagen: '90', label: '90 Dagen Garantie (reparatie)', prijs: 0 };
+                }
+            }
+            refreshAll();
+        });
+    });
+}
+
+// Add model button
+document.getElementById('repModelAddBtn').addEventListener('click', () => {
+    const select = document.getElementById('repModelSelect');
+    const key    = select.value;
+    if (!key) return;
+    activeRepModels.add(key);
+    activeRepTab = key;
+    select.value = '';
+    document.getElementById('repAanvraagEmpty').style.display = 'none';
+    renderRepModelUI();
+});
+
+
+// ============================================================
+// REPARATIE RIJ SELECTIE — multi-select, geen tabs (sectie reparaties)
 // ============================================================
 document.querySelectorAll('.rep-row').forEach(row => {
     row.addEventListener('click', () => {
