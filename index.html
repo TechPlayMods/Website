@@ -917,7 +917,7 @@
                             </div>
                         </div>
 
-                        <!-- Repair block — always visible -->
+                        <!-- Repair block -->
                         <div class="aanvraag-block" id="reparatieBlock">
                             <div class="aanvraag-block-header aanvraag-block-header-repair">
                                 <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -925,10 +925,35 @@
                                 <span class="aanvraag-block-status" id="reparatieStatus"></span>
                             </div>
                             <div class="aanvraag-block-body">
-                                <div class="rep-aanvraag-empty" id="repAanvraagEmpty">
-                                    <i class="fa-solid fa-arrow-up"></i> Selecteer reparaties via de sectie hierboven
-                                    <a href="#reparatie" class="rep-aanvraag-link">Naar reparaties ↑</a>
+
+                                <!-- Step 1: Model dropdown -->
+                                <div class="form-group">
+                                    <label>Welke Switch wil je laten repareren?</label>
+                                    <div class="rep-model-dropdown-wrap">
+                                        <select id="repModelSelect">
+                                            <option value="" disabled selected>Kies een model...</option>
+                                            <option value="v1v2">Nintendo Switch V1 / V2</option>
+                                            <option value="lite">Nintendo Switch Lite</option>
+                                            <option value="oled">Nintendo Switch OLED</option>
+                                        </select>
+                                        <button type="button" class="rep-model-add-btn" id="repModelAddBtn">
+                                            <i class="fa-solid fa-plus"></i> Toevoegen
+                                        </button>
+                                    </div>
                                 </div>
+
+                                <!-- Active model tabs -->
+                                <div id="repActiveModels" style="display:none;">
+                                    <div class="rep-inline-tabs" id="repInlineTabs"></div>
+                                    <div id="repInlinePanels"></div>
+                                </div>
+
+                                <!-- Empty state -->
+                                <div class="rep-aanvraag-empty" id="repAanvraagEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Kies een model hierboven om reparaties te selecteren
+                                </div>
+
+                                <!-- Filled state -->
                                 <div id="repAanvraagFilled" style="display:none;">
                                     <div id="repFormItems"></div>
                                     <div class="rep-aanvraag-row rep-aanvraag-total">
@@ -1020,7 +1045,7 @@
                                 <span>Modchip Installatie</span>
                             </div>
                             <div class="order-row" id="summaryConsoleRow">
-                                <div class="order-row-label"><iconify-icon icon="icon-park-twotone:chip" class="summary-chip-icon"></iconify-icon><span id="summaryConsoleName">—</span></div>
+                                <div class="order-row-label"><i class="fa-solid fa-microchip"></i><span id="summaryConsoleName">—</span></div>
                                 <span class="order-row-prijs" id="summaryConsolePrice"></span>
                             </div>
                             <div class="order-row order-row-garantie" id="summaryGarantieRow">
