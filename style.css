@@ -4272,3 +4272,42 @@ footer {
 #summaryRepGarantieRow {
     border-top: 1px solid rgba(255,255,255,0.05);
 }
+
+/* ===========================
+   AANVRAAG SECTIE ICONEN — GROTER
+=========================== */
+
+/* Block headers: modchip & reparatie iconen */
+.aanvraag-block-header > i {
+    font-size: 1.15rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Jouw Overzicht header icoon */
+.order-summary-header > i {
+    font-size: 1.15rem;
+}
+
+/* Summary console/microchip icoon */
+.order-row-label > i,
+.order-row-label > .fa-microchip {
+    font-size: 1rem;
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Summary sub-header icoon */
+.summary-sub-header i {
+    font-size: 1rem;
+}
+
+/* Garantie pending icoon */
+.order-row-garantie-pending i {
+    font-size: 1rem;
+}
