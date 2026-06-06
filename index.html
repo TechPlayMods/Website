@@ -15,18 +15,14 @@
 
     <div class="sticky-selection" id="stickySelection">
         <div class="container sticky-selection-inner">
-            <div class="sticky-chips">
-                <div class="sticky-chip sticky-chip-console" id="stickyConsoleChip">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <span id="stickyConsoleName">Console kiezen →</span>
+            <div class="sticky-groups">
+                <div class="sticky-group" id="stickyGroupModchip" style="display:none;">
+                    <span class="sticky-group-label">Modchip</span>
+                    <div class="sticky-group-chips" id="stickyModchipChips"></div>
                 </div>
-                <div class="sticky-chip sticky-chip-garantie" id="stickyGarantieChip">
-                    <i class="fa-solid fa-shield-halved" id="stickyGarantieIcon"></i>
-                    <span id="stickyGarantieName">Garantie kiezen →</span>
-                </div>
-                <div class="sticky-chip sticky-chip-repair" id="stickyRepairChip" style="display:none;">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                    <span id="stickyRepairName">Reparatie kiezen →</span>
+                <div class="sticky-group" id="stickyGroupRepair" style="display:none;">
+                    <span class="sticky-group-label">Reparatie</span>
+                    <div class="sticky-group-chips" id="stickyRepairChips"></div>
                 </div>
             </div>
             <div class="sticky-right">
