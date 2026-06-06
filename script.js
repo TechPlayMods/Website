@@ -102,6 +102,7 @@ document.querySelectorAll('.aanvragen-btn').forEach(btn => {
         selectedConsoles.push({
             model: btn.dataset.model,
             label: btn.dataset.label,
+            method: btn.dataset.method || '',
             prijs: parseInt(btn.dataset.prijs)
         });
         // Default garantie als nog niet gekozen
@@ -160,6 +161,7 @@ document.getElementById('consoleAddBtn').addEventListener('click', () => {
     selectedConsoles.push({
         model: consoleSelect.value,
         label: opt.dataset.label || opt.text.split(' — ')[0],
+        method: opt.dataset.method || '',
         prijs: parseInt(opt.dataset.prijs)
     });
     if (!state.garantie) {
@@ -228,7 +230,7 @@ function updateFormBlocks() {
     listEl.innerHTML = selectedConsoles.map((c, i) =>
         `<div class="intake-console-item">
             <iconify-icon icon="${consoleIcon(c.model)}" class="intake-console-glyph"></iconify-icon>
-            <span class="intake-console-name">${c.label}</span>
+            <span class="intake-console-name">${c.label}${c.method ? ` <span class="intake-method-badge intake-method-${c.method.toLowerCase()}">${c.method}</span>` : ''}</span>
             <span class="intake-console-prijs">€ ${c.prijs},-</span>
             <button type="button" class="intake-console-remove" data-idx="${i}" aria-label="Verwijderen"><i class="fa-solid fa-xmark"></i></button>
         </div>`
@@ -471,17 +473,9 @@ function updateOrderSummary() {
     const consoleRows = document.getElementById('summaryConsoleRows');
     if (hasConsole) {
         consoleRows.innerHTML = selectedConsoles.map(c => {
-            const lbl = c.label;
-            let nameHtml;
-            if (lbl.includes('(')) {
-                const base = lbl.slice(0, lbl.indexOf('(')).trim();
-                const meth = lbl.slice(lbl.indexOf('(')).trim();
-                nameHtml = base + '<br><span class="summary-console-sub">' + meth + '</span>';
-            } else {
-                nameHtml = lbl;
-            }
+            const badge = c.method ? ` <span class="summary-method-badge summary-method-${c.method.toLowerCase()}">${c.method}</span>` : '';
             return `<div class="order-row">
-                <div class="order-row-label"><iconify-icon icon="${consoleIcon(c.model)}" class="summary-console-glyph"></iconify-icon><span>${nameHtml}</span></div>
+                <div class="order-row-label"><iconify-icon icon="${consoleIcon(c.model)}" class="summary-console-glyph"></iconify-icon><span>${c.label}${badge}</span></div>
                 <span class="order-row-prijs">€ ${c.prijs},-</span>
             </div>`;
         }).join('');
@@ -619,7 +613,8 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
         const garantie = state.garantie || { label: '90 Dagen Garantie', prijs: 0 };
         bericht += `\n🔧 Modchip Installatie`;
         selectedConsoles.forEach(c => {
-            bericht += `\n• ${c.label} (€ ${c.prijs},-)`;
+            const m = c.method ? ` (${c.method})` : '';
+            bericht += `\n• ${c.label}${m} (€ ${c.prijs},-)`;
         });
         bericht += `\nGarantie: ${garantie.label}`;
         if (garantie.prijs > 0) bericht += ` (+ € ${garantie.prijs},-)`;
