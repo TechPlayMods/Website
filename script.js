@@ -217,24 +217,24 @@ function updateFormBlocks() {
     const reparatieStatus = document.getElementById('reparatieStatus');
 
     if (hasConsole && hasGarantie) {
-        moddingStatus.textContent = '✓ ' + state.console.label + ' + ' + state.garantie.dagen + 'd garantie';
-        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
+        moddingStatus.textContent = '✓ ' + state.console.label + ' · ' + state.garantie.dagen + ' dagen garantie';
+        moddingStatus.className   = 'intake-header-sub intake-status-done';
     } else if (hasConsole) {
         moddingStatus.textContent = state.console.label + ' — kies garantie';
-        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-partial';
+        moddingStatus.className   = 'intake-header-sub intake-status-partial';
     } else {
         moddingStatus.textContent = '';
-        moddingStatus.className   = 'aanvraag-block-status';
+        moddingStatus.className   = 'intake-header-sub';
     }
 
     if (hasRepairs) {
         const count = selectedRepairs.size;
         const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
         reparatieStatus.textContent = '✓ ' + count + (count === 1 ? ' reparatie' : ' reparaties') + ' — ≈ € ' + total + ',-';
-        reparatieStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
+        reparatieStatus.className   = 'intake-header-sub intake-status-done';
     } else {
         reparatieStatus.textContent = '';
-        reparatieStatus.className   = 'aanvraag-block-status';
+        reparatieStatus.className   = 'intake-header-sub';
     }
 
     // Repair form section — grouped by model
