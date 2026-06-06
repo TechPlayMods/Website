@@ -4376,3 +4376,16 @@ footer {
 .intake-rep-item-name { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
 .intake-rep-item-name i { color: #60a5fa; font-size: 0.8rem; }
 .intake-rep-item-price { font-weight: 700; color: var(--text-main); white-space: nowrap; }
+
+/* Console icon + two-line name in summary */
+.summary-console-glyph {
+    font-size: 1.15rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+.summary-console-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+#summaryConsoleName { line-height: 1.35; }
