@@ -370,11 +370,15 @@ function updateStickyBar() {
     if (hasConsole) {
         stickyGroupModchip.style.display = '';
 
-        // Console badges — één per console, in modelkleur
-        selectedConsoles.forEach(c => {
+        // Console badges — bij 1 console de naam, bij meerdere een samenvatting
+        if (selectedConsoles.length === 1) {
+            const c = selectedConsoles[0];
             const col = modelColor(c.model);
             stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
-        });
+        } else {
+            const n = selectedConsoles.length;
+            stickyModchipChips.appendChild(makeChip(n + ' consoles', 'background:#00ff88;color:#000;border-color:#00ff88;'));
+        }
 
         // Garantie badge
         if (hasGarantie) {
@@ -391,19 +395,10 @@ function updateStickyBar() {
     if (hasRepairs) {
         stickyGroupRepair.style.display = '';
 
-        // Groepeer per model
-        const byModel = new Map();
-        selectedRepairs.forEach(r => {
-            if (!byModel.has(r.model)) byModel.set(r.model, []);
-            byModel.get(r.model).push(r);
-        });
-
-        byModel.forEach((items, model) => {
-            const count = items.length;
-            const label = count === 1 ? '1 reparatie' : count + ' reparaties';
-            const col = modelColor(model);
-            stickyRepairChips.appendChild(makeChip(label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
-        });
+        // Reparatie badge — totaal aantal als één badge
+        const repCount = selectedRepairs.size;
+        const repLabel = repCount === 1 ? '1 reparatie' : repCount + ' reparaties';
+        stickyRepairChips.appendChild(makeChip(repLabel, 'background:#3b82f6;color:#fff;border-color:#3b82f6;'));
 
         // Reparatie-garantie badge
         if (state.repGarantie) {
