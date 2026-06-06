@@ -4141,3 +4141,365 @@ footer {
     border-top: none;
     margin-top: 0;
 }
+
+/* ═══════════════════════════════════════════
+   START JE AANVRAAG — COMPLETE REBUILD
+═══════════════════════════════════════════ */
+
+/* Section header */
+.contact-section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ── Intake Blocks ── */
+.intake-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    transition: border-color 0.3s;
+}
+
+.intake-block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.intake-header-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(0,255,136,0.1);
+    border: 1px solid rgba(0,255,136,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.intake-header-icon-rep {
+    background: rgba(59,130,246,0.1);
+    border-color: rgba(59,130,246,0.2);
+    color: #60a5fa;
+}
+
+.intake-header-icon-kanaal {
+    background: rgba(139,92,246,0.1);
+    border-color: rgba(139,92,246,0.2);
+    color: #a78bfa;
+}
+
+.intake-header-icon-msg {
+    background: rgba(148,163,184,0.08);
+    border-color: rgba(148,163,184,0.15);
+    color: #94a3b8;
+}
+
+.intake-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.intake-header-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.1px;
+}
+
+.intake-header-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.intake-status-done    { color: var(--primary) !important; font-weight: 600; }
+.intake-status-partial { color: #f59e0b !important; font-weight: 600; }
+
+.intake-block-body {
+    padding: 20px;
+}
+
+.intake-field {
+    margin-bottom: 18px;
+}
+.intake-field:last-child { margin-bottom: 0; }
+
+.intake-field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+}
+
+/* ── Garantie cards — horizontal layout ── */
+.intake-garantie-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.intake-garantie-option {
+    cursor: pointer;
+    display: block;
+}
+
+.intake-garantie-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.intake-garantie-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-dark);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.intake-garantie-option input:checked + .intake-garantie-card {
+    border-color: var(--primary);
+    background: rgba(0,255,136,0.05);
+    box-shadow: 0 0 0 3px rgba(0,255,136,0.08);
+}
+
+#garantie-label-180 input:checked + .intake-garantie-card {
+    border-color: #f59e0b;
+    background: rgba(245,158,11,0.05);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.08);
+}
+
+.intake-garantie-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(0,255,136,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+#garantie-label-180 .intake-garantie-icon { background: rgba(245,158,11,0.08); color: #f59e0b; }
+#garantie-label-180 input:checked + .intake-garantie-card .intake-garantie-icon { color: #f59e0b; }
+
+.intake-garantie-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.intake-garantie-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.intake-garantie-desc {
+    font-size: 0.77rem;
+    color: var(--text-muted);
+}
+
+.intake-garantie-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Empty state ── */
+.intake-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 0 8px;
+    color: #475569;
+    font-size: 0.85rem;
+    text-align: center;
+}
+.intake-empty i { font-size: 1.1rem; color: #334155; }
+.intake-link {
+    font-size: 0.82rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* ── Repair form items ── */
+.rep-form-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 12px;
+}
+
+.rep-form-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.87rem;
+}
+.rep-form-item-row:last-child { border-bottom: none; }
+.rep-form-item-label { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+.rep-form-item-label i { color: #60a5fa; font-size: 0.8rem; }
+.rep-form-item-model {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+    padding: 2px 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+}
+.rep-form-item-prijs { font-weight: 700; color: var(--text-main); }
+
+.rep-form-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+}
+.rep-form-total-price {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--primary);
+}
+
+.intake-clear-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #475569;
+    font-size: 0.78rem;
+    cursor: pointer;
+    padding: 6px 0;
+    margin-top: 4px;
+    transition: color 0.2s;
+    font-family: inherit;
+}
+.intake-clear-btn:hover { color: #ef4444; }
+
+/* ── Kanaal buttons — with label ── */
+.intake-kanaal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.intake-kanaal-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    opacity: 0.65;
+    color: #fff;
+    width: 100%;
+    font-family: inherit;
+}
+.intake-kanaal-btn span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+.intake-kanaal-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.intake-kanaal-btn.geselecteerd {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+}
+
+/* ── Submit button ── */
+.intake-submit-btn {
+    width: 100%;
+    background: var(--primary);
+    color: #000;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    margin-top: 6px;
+}
+.intake-submit-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,255,136,0.25);
+}
+.intake-submit-btn.kleur-tg { background: #0088cc; color: #fff; }
+.intake-submit-btn.kleur-wa { background: #25d366; color: #fff; }
+.intake-submit-btn.kleur-rd { background: #ff4500; color: #fff; }
+.intake-submit-btn.kleur-dc { background: #5865f2; color: #fff; }
+
+/* ── Order summary header icon ── */
+.order-summary-header-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0,255,136,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* Summary sub-header icons */
+.summary-sub-header i {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .intake-kanaal-grid { grid-template-columns: repeat(2, 1fr); }
+    .intake-garantie-grid { gap: 8px; }
+    .intake-block-header { padding: 14px 16px; }
+    .intake-block-body { padding: 16px; }
+}
