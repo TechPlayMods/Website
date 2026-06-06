@@ -436,7 +436,21 @@ function updateOrderSummary() {
     document.getElementById('summaryIncludes').style.display           = hasAnything ? '' : 'none';
 
     if (hasConsole) {
-        document.getElementById('summaryConsoleName').textContent  = state.console.label;
+        // Naam netjes op twee regels: model bovenaan, (methode) eronder
+        const lbl = state.console.label;
+        const nameEl = document.getElementById('summaryConsoleName');
+        if (lbl.includes('(')) {
+            const base = lbl.slice(0, lbl.indexOf('(')).trim();
+            const meth = lbl.slice(lbl.indexOf('(')).trim();
+            nameEl.innerHTML = base + '<br><span class="summary-console-sub">' + meth + '</span>';
+        } else {
+            nameEl.textContent = lbl;
+        }
+        // Icoon: handheld voor Lite, anders game-console
+        const iconEl = document.getElementById('summaryConsoleIcon');
+        if (iconEl) {
+            iconEl.setAttribute('icon', state.console.model === 'Lite' ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console');
+        }
         document.getElementById('summaryConsolePrice').textContent = '€ ' + state.console.prijs + ',-';
     }
     if (hasGarantie) {
