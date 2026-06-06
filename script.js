@@ -217,24 +217,24 @@ function updateFormBlocks() {
     const reparatieStatus = document.getElementById('reparatieStatus');
 
     if (hasConsole && hasGarantie) {
-        moddingStatus.textContent = '✓ ' + state.console.label + ' · ' + state.garantie.dagen + ' dagen garantie';
-        moddingStatus.className   = 'intake-header-sub intake-status-done';
+        moddingStatus.textContent = '✓ ' + state.console.label + ' + ' + state.garantie.dagen + 'd garantie';
+        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
     } else if (hasConsole) {
         moddingStatus.textContent = state.console.label + ' — kies garantie';
-        moddingStatus.className   = 'intake-header-sub intake-status-partial';
+        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-partial';
     } else {
         moddingStatus.textContent = '';
-        moddingStatus.className   = 'intake-header-sub';
+        moddingStatus.className   = 'aanvraag-block-status';
     }
 
     if (hasRepairs) {
         const count = selectedRepairs.size;
         const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
         reparatieStatus.textContent = '✓ ' + count + (count === 1 ? ' reparatie' : ' reparaties') + ' — ≈ € ' + total + ',-';
-        reparatieStatus.className   = 'intake-header-sub intake-status-done';
+        reparatieStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
     } else {
         reparatieStatus.textContent = '';
-        reparatieStatus.className   = 'intake-header-sub';
+        reparatieStatus.className   = 'aanvraag-block-status';
     }
 
     // Repair form section — grouped by model
@@ -263,8 +263,8 @@ function updateFormBlocks() {
 
         // Render rows grouped by model — always show model header
         document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
-            `<div class="rep-aanvraag-row rep-aanvraag-model-header"><span class="rep-aanvraag-model-label">${model}</span></div>` +
-            reps.map(r => `<div class="rep-aanvraag-row"><span class="rep-aanvraag-label"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam.split('(')[0].trim()}</span><span class="rep-aanvraag-prijs-small">€ ${r.prijs},-</span></div>`).join('')
+            `<div class="intake-rep-model">${model}</div>` +
+            reps.map(r => `<div class="intake-rep-item"><span class="intake-rep-item-name"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam.split('(')[0].trim()}</span><span class="intake-rep-item-price">€ ${r.prijs},-</span></div>`).join('')
         ).join('');
     } else {
         repEmpty.style.display  = '';
