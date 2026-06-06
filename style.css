@@ -4545,3 +4545,10 @@ footer {
 .intake-console-namecol .intake-method-badge {
     margin-left: 0;
 }
+
+/* Iconify iconen in sticky-bar badges op juiste grootte */
+.sticky-chip iconify-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
