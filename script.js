@@ -355,8 +355,21 @@ function updateStickyBar() {
     if (hasConsole) {
         stickyConsoleChip.style.display = '';
         const n = selectedConsoles.length;
-        stickyConsoleName.textContent = n === 1 ? selectedConsoles[0].label : n + ' consoles';
-        stickyConsoleChip.classList.add('selected');
+        const iconEl = stickyConsoleChip.querySelector('i, iconify-icon');
+        if (n === 1) {
+            const c = selectedConsoles[0];
+            const icon = c.model === 'Lite' ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console';
+            const col = c.model === 'Lite' ? { bg: '#e2e8f0', color: '#0f1115' }
+                      : c.model.includes('OLED') ? { bg: '#fb923c', color: '#000' }
+                      : { bg: '#00ff88', color: '#000' };
+            stickyConsoleName.textContent = c.label;
+            stickyConsoleChip.style.cssText = `background:${col.bg};color:${col.color};border-color:${col.bg};`;
+            if (iconEl) iconEl.outerHTML = `<iconify-icon icon="${icon}"></iconify-icon>`;
+        } else {
+            stickyConsoleName.textContent = n + ' consoles';
+            stickyConsoleChip.style.cssText = 'background:#00ff88;color:#000;border-color:#00ff88;';
+            if (iconEl) iconEl.outerHTML = `<iconify-icon icon="game-icons:game-console"></iconify-icon>`;
+        }
     } else {
         stickyConsoleChip.style.display = 'none';
     }
@@ -366,23 +379,22 @@ function updateStickyBar() {
         stickyGarantieChip.style.display = '';
         if (hasGarantie) {
             stickyGarantieName.textContent = state.garantie.label;
-            stickyGarantieChip.classList.add('selected');
             if (state.garantie.dagen === '180') {
                 stickyGarantieIcon.className = 'fa-solid fa-shield';
-                stickyGarantieChip.classList.remove('sticky-chip-garantie-90');
-                stickyGarantieChip.classList.add('sticky-chip-garantie-180');
+                stickyGarantieChip.style.cssText = 'background:#f59e0b;color:#000;border-color:#f59e0b;';
             } else {
                 stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
-                stickyGarantieChip.classList.remove('sticky-chip-garantie-180');
-                stickyGarantieChip.classList.add('sticky-chip-garantie-90');
+                stickyGarantieChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
             }
         } else {
             stickyGarantieName.textContent = 'Garantie kiezen →';
-            stickyGarantieChip.classList.remove('selected', 'sticky-chip-garantie-90', 'sticky-chip-garantie-180');
             stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
+            stickyGarantieChip.style.cssText = '';
+            stickyGarantieChip.classList.remove('selected');
         }
     } else {
         stickyGarantieChip.style.display = 'none';
+        stickyGarantieChip.style.cssText = 'display:none;';
     }
 
     // Remove old dynamic repair chips and aanvraag btn
@@ -421,10 +433,11 @@ function updateStickyBar() {
             const count = names.length;
             const label = count === 1 ? '1 reparatie' : count + ' reparaties';
             const { bg, color } = getColor(model);
+            const icon = model.includes('Lite') ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console';
             const chip = document.createElement('div');
             chip.className = 'sticky-chip sticky-chip-repair-item';
             chip.style.cssText = `background:${bg};color:${color};border-color:${bg};`;
-            chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${label}</span>`;
+            chip.innerHTML = `<iconify-icon icon="${icon}"></iconify-icon><span>${label}</span>`;
             chipsContainer.appendChild(chip);
         });
 
