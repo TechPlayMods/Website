@@ -860,124 +860,119 @@
     <!-- Contact / Intake Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="contact-section-header">
+            <div class="intake-head">
                 <h2>Start Je Aanvraag</h2>
-                <p class="section-subtitle">Vul je gegevens in, kies een kanaal en verstuur — jouw selecties worden automatisch meegenomen.</p>
+                <p class="section-subtitle">Je selecties worden automatisch meegenomen. Kies een kanaal en verstuur.</p>
             </div>
 
             <div class="contact-layout">
-                <!-- ═══════════════════════════════════
-                     LEFT: FORM
-                ═══════════════════════════════════ -->
+                <!-- LEFT: Form -->
                 <div class="contact-form-col">
                     <form id="modForm">
 
-                        <!-- ── MODCHIP BLOCK ── -->
-                        <div class="intake-block" id="moddingBlock">
-                            <div class="intake-block-header intake-header-mod">
-                                <div class="intake-header-icon">
-                                    <i class="fa-solid fa-microchip"></i>
+                        <!-- STEP 1 — MODCHIP -->
+                        <div class="intake-step" id="moddingBlock">
+                            <div class="intake-step-head">
+                                <span class="intake-step-num">1</span>
+                                <div class="intake-step-titles">
+                                    <span class="intake-step-title">Modchip Installatie</span>
+                                    <span class="intake-step-status aanvraag-block-status" id="moddingStatus"></span>
                                 </div>
-                                <div class="intake-header-text">
-                                    <span class="intake-header-title">Modchip Installatie</span>
-                                    <span class="intake-header-sub" id="moddingStatus">Nog geen console geselecteerd</span>
-                                </div>
+                                <i class="fa-solid fa-microchip intake-step-glyph"></i>
                             </div>
-                            <div class="intake-block-body" id="moddingFields">
-                                <div class="intake-field">
-                                    <label for="console">Console model</label>
-                                    <select id="console">
-                                        <option value="" disabled selected>Kies je model...</option>
-                                        <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
-                                        <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
-                                        <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
-                                        <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
-                                    </select>
+                            <div class="intake-step-body" id="moddingFields">
+                                <div class="form-group">
+                                    <label for="console">Welke Switch heb je?</label>
+                                    <div class="intake-select-wrap">
+                                        <select id="console">
+                                            <option value="" disabled selected>Kies je model…</option>
+                                            <option value="V1/V2" data-prijs="85">Nintendo Switch V1 / V2 — € 85,-</option>
+                                            <option value="OLED-DAT0" data-prijs="110">Nintendo Switch OLED (DAT0 Adapter) — € 110,-</option>
+                                            <option value="OLED-Kamikaze" data-prijs="130">Nintendo Switch OLED (Kamikaze) — € 130,-</option>
+                                            <option value="Lite" data-prijs="90">Nintendo Switch Lite — € 90,-</option>
+                                        </select>
+                                        <i class="fa-solid fa-chevron-down intake-select-arrow"></i>
+                                    </div>
                                 </div>
-                                <div class="intake-field" id="garantieFormGroup" style="display:none;">
-                                    <label>Garantie op modchip</label>
-                                    <div class="intake-garantie-grid">
-                                        <label class="intake-garantie-option" id="garantie-label-90">
+                                <div class="form-group" id="garantieFormGroup" style="display:none;">
+                                    <label>Welke garantie wil je?</label>
+                                    <div class="intake-garantie">
+                                        <label class="intake-opt" id="garantie-label-90">
                                             <input type="radio" name="garantie" value="90" data-extra="0" checked>
-                                            <div class="intake-garantie-card">
-                                                <div class="intake-garantie-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                                                <div class="intake-garantie-info">
-                                                    <span class="intake-garantie-name">90 Dagen</span>
-                                                    <span class="intake-garantie-desc">Standaard — bij elke mod</span>
-                                                </div>
-                                                <span class="intake-garantie-price">Inbegrepen</span>
-                                            </div>
+                                            <span class="intake-opt-box">
+                                                <i class="fa-solid fa-shield-halved intake-opt-icon"></i>
+                                                <span class="intake-opt-main">
+                                                    <span class="intake-opt-name">90 Dagen</span>
+                                                    <span class="intake-opt-sub">Standaard, bij elke mod</span>
+                                                </span>
+                                                <span class="intake-opt-price">Inbegrepen</span>
+                                            </span>
                                         </label>
-                                        <label class="intake-garantie-option" id="garantie-label-180">
+                                        <label class="intake-opt" id="garantie-label-180">
                                             <input type="radio" name="garantie" value="180" data-extra="20">
-                                            <div class="intake-garantie-card">
-                                                <div class="intake-garantie-icon"><i class="fa-solid fa-shield"></i></div>
-                                                <div class="intake-garantie-info">
-                                                    <span class="intake-garantie-name">180 Dagen</span>
-                                                    <span class="intake-garantie-desc">Uitgebreid — 6 maanden</span>
-                                                </div>
-                                                <span class="intake-garantie-price">+ € 20,-</span>
-                                            </div>
+                                            <span class="intake-opt-box">
+                                                <i class="fa-solid fa-shield intake-opt-icon"></i>
+                                                <span class="intake-opt-main">
+                                                    <span class="intake-opt-name">180 Dagen</span>
+                                                    <span class="intake-opt-sub">Uitgebreid, 6 maanden</span>
+                                                </span>
+                                                <span class="intake-opt-price">+ € 20,-</span>
+                                            </span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="intake-empty" id="moddingEmpty">
-                                    <i class="fa-solid fa-arrow-up"></i>
-                                    <span>Selecteer een console via de servicecards hierboven</span>
+                                <div class="intake-hint" id="moddingEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Kies hierboven een console via de servicecards
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ── REPARATIE BLOCK ── -->
-                        <div class="intake-block" id="reparatieBlock">
-                            <div class="intake-block-header intake-header-rep">
-                                <div class="intake-header-icon intake-header-icon-rep">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <!-- STEP 2 — REPARATIE -->
+                        <div class="intake-step" id="reparatieBlock">
+                            <div class="intake-step-head">
+                                <span class="intake-step-num">2</span>
+                                <div class="intake-step-titles">
+                                    <span class="intake-step-title">Reparatie</span>
+                                    <span class="intake-step-status aanvraag-block-status" id="reparatieStatus"></span>
                                 </div>
-                                <div class="intake-header-text">
-                                    <span class="intake-header-title">Reparatie</span>
-                                    <span class="intake-header-sub" id="reparatieStatus">Nog geen reparatie geselecteerd</span>
-                                </div>
+                                <i class="fa-solid fa-screwdriver-wrench intake-step-glyph"></i>
                             </div>
-                            <div class="intake-block-body">
-                                <div class="intake-empty" id="repAanvraagEmpty">
-                                    <i class="fa-solid fa-arrow-up"></i>
-                                    <span>Selecteer reparaties via de sectie hierboven</span>
-                                    <a href="#reparatie" class="intake-link">Naar reparaties ↑</a>
+                            <div class="intake-step-body">
+                                <div class="intake-hint" id="repAanvraagEmpty">
+                                    <i class="fa-solid fa-arrow-up"></i> Selecteer reparaties via de sectie hierboven
+                                    <a href="#reparatie" class="rep-aanvraag-link">Naar reparaties ↑</a>
                                 </div>
                                 <div id="repAanvraagFilled" style="display:none;">
-                                    <div id="repFormItems" class="rep-form-items"></div>
-                                    <div class="rep-form-total">
+                                    <div id="repFormItems"></div>
+                                    <div class="intake-rep-total">
                                         <span>Indicatieve totaalprijs</span>
-                                        <span id="repFormPrijs" class="rep-form-total-price">—</span>
+                                        <span id="repFormPrijs" class="intake-rep-total-price">—</span>
                                     </div>
-                                    <button type="button" class="intake-clear-btn" id="repAanvraagClear">
-                                        <i class="fa-solid fa-xmark"></i> Selectie wissen
-                                    </button>
-                                    <div class="intake-field rep-garantie-group" id="repGarantieFormGroup" style="margin-top:16px;">
+                                    <button type="button" class="intake-clear" id="repAanvraagClear"><i class="fa-solid fa-xmark"></i> Selectie wissen</button>
+                                    <div class="form-group rep-garantie-group" id="repGarantieFormGroup">
                                         <label>Garantie op reparatie</label>
-                                        <div class="intake-garantie-grid">
-                                            <label class="intake-garantie-option">
+                                        <div class="intake-garantie">
+                                            <label class="intake-opt">
                                                 <input type="radio" name="rep_garantie" value="90" data-extra="0" checked>
-                                                <div class="intake-garantie-card">
-                                                    <div class="intake-garantie-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                                                    <div class="intake-garantie-info">
-                                                        <span class="intake-garantie-name">90 Dagen</span>
-                                                        <span class="intake-garantie-desc">Standaard — bij elke reparatie</span>
-                                                    </div>
-                                                    <span class="intake-garantie-price">Inbegrepen</span>
-                                                </div>
+                                                <span class="intake-opt-box">
+                                                    <i class="fa-solid fa-shield-halved intake-opt-icon"></i>
+                                                    <span class="intake-opt-main">
+                                                        <span class="intake-opt-name">90 Dagen</span>
+                                                        <span class="intake-opt-sub">Standaard, bij elke reparatie</span>
+                                                    </span>
+                                                    <span class="intake-opt-price">Inbegrepen</span>
+                                                </span>
                                             </label>
-                                            <label class="intake-garantie-option">
+                                            <label class="intake-opt">
                                                 <input type="radio" name="rep_garantie" value="180" data-extra="15">
-                                                <div class="intake-garantie-card">
-                                                    <div class="intake-garantie-icon"><i class="fa-solid fa-shield"></i></div>
-                                                    <div class="intake-garantie-info">
-                                                        <span class="intake-garantie-name">180 Dagen</span>
-                                                        <span class="intake-garantie-desc">Uitgebreid — 6 maanden</span>
-                                                    </div>
-                                                    <span class="intake-garantie-price">+ € 15,-</span>
-                                                </div>
+                                                <span class="intake-opt-box">
+                                                    <i class="fa-solid fa-shield intake-opt-icon"></i>
+                                                    <span class="intake-opt-main">
+                                                        <span class="intake-opt-name">180 Dagen</span>
+                                                        <span class="intake-opt-sub">Uitgebreid, 6 maanden</span>
+                                                    </span>
+                                                    <span class="intake-opt-price">+ € 15,-</span>
+                                                </span>
                                             </label>
                                         </div>
                                     </div>
@@ -985,60 +980,34 @@
                             </div>
                         </div>
 
-                        <!-- ── KANAAL BLOCK ── -->
-                        <div class="intake-block">
-                            <div class="intake-block-header intake-header-kanaal">
-                                <div class="intake-header-icon intake-header-icon-kanaal">
-                                    <i class="fa-solid fa-message"></i>
+                        <!-- STEP 3 — KANAAL -->
+                        <div class="intake-step">
+                            <div class="intake-step-head">
+                                <span class="intake-step-num">3</span>
+                                <div class="intake-step-titles">
+                                    <span class="intake-step-title">Contactkanaal</span>
+                                    <span class="intake-step-status">Kies hoe je contact wilt</span>
                                 </div>
-                                <div class="intake-header-text">
-                                    <span class="intake-header-title">Contactkanaal</span>
-                                    <span class="intake-header-sub">Kies hoe je contact wilt opnemen</span>
-                                </div>
+                                <i class="fa-solid fa-comment intake-step-glyph"></i>
                             </div>
-                            <div class="intake-block-body">
-                                <div class="intake-kanaal-grid">
-                                    <button type="button" class="intake-kanaal-btn kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM">
-                                        <i class="fa-brands fa-telegram"></i>
-                                        <span>Telegram</span>
-                                    </button>
-                                    <button type="button" class="intake-kanaal-btn kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP">
-                                        <i class="fa-brands fa-whatsapp"></i>
-                                        <span>WhatsApp</span>
-                                    </button>
-                                    <button type="button" class="intake-kanaal-btn kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT">
-                                        <i class="fa-brands fa-reddit"></i>
-                                        <span>Reddit</span>
-                                    </button>
-                                    <button type="button" class="intake-kanaal-btn kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD">
-                                        <i class="fa-brands fa-discord"></i>
-                                        <span>Discord</span>
-                                    </button>
+                            <div class="intake-step-body">
+                                <div class="intake-kanaal">
+                                    <button type="button" class="kanaal-btn intake-kanaal-btn btn-tg" data-kanaal="telegram" data-url="https://t.me/JOUW_TELEGRAM"><i class="fa-brands fa-telegram"></i><span>Telegram</span></button>
+                                    <button type="button" class="kanaal-btn intake-kanaal-btn btn-wa" data-kanaal="whatsapp" data-url="https://wa.me/JOUW_WHATSAPP"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></button>
+                                    <button type="button" class="kanaal-btn intake-kanaal-btn btn-rd" data-kanaal="reddit" data-url="https://reddit.com/u/JOUW_REDDIT"><i class="fa-brands fa-reddit"></i><span>Reddit</span></button>
+                                    <button type="button" class="kanaal-btn intake-kanaal-btn btn-dc" data-kanaal="discord" data-url="https://discord.com/users/JOUW_DISCORD"><i class="fa-brands fa-discord"></i><span>Discord</span></button>
                                 </div>
                                 <input type="hidden" id="gekozenKanaal" value="">
                                 <input type="hidden" id="gekozenUrl" value="">
+                                <div class="form-group" style="margin-top:18px;">
+                                    <label for="msg">Opmerkingen <span class="intake-optional">(optioneel)</span></label>
+                                    <textarea id="msg" rows="3" placeholder="Bijv. beschrijving van het probleem, welke SD-kaart je gebruikt…"></textarea>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- ── OPMERKINGEN ── -->
-                        <div class="intake-block">
-                            <div class="intake-block-header intake-header-msg">
-                                <div class="intake-header-icon intake-header-icon-msg">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </div>
-                                <div class="intake-header-text">
-                                    <span class="intake-header-title">Opmerkingen</span>
-                                    <span class="intake-header-sub">Optioneel — extra informatie</span>
-                                </div>
-                            </div>
-                            <div class="intake-block-body">
-                                <textarea id="msg" rows="3" placeholder="Bijv. beschrijving van het probleem, welke SD-kaart je gebruikt, of andere vragen..."></textarea>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="intake-submit-btn btn-submit-disabled" id="submitBtn" disabled>
-                            <i id="submitIcon" class="fa-solid fa-lock"></i>
-                            <span>Aanvraag Verzenden</span>
+                        <button type="submit" class="btn-submit btn-submit-disabled" id="submitBtn" disabled>
+                            <i id="submitIcon" class="fa-solid fa-lock"></i> Aanvraag Verzenden
                         </button>
                         <p class="submit-hint" id="submitHint">Kies eerst een contactkanaal hierboven</p>
                     </form>
@@ -1055,15 +1024,11 @@
                     </div>
                 </div>
 
-                <!-- ═══════════════════════════════════
-                     RIGHT: LIVE ORDER SUMMARY
-                ═══════════════════════════════════ -->
+                <!-- RIGHT: Live Order Summary -->
                 <div class="order-summary" id="orderSummary">
                     <div class="order-summary-inner">
                         <div class="order-summary-header">
-                            <div class="order-summary-header-icon">
-                                <i class="fa-solid fa-receipt"></i>
-                            </div>
+                            <i class="fa-solid fa-receipt"></i>
                             <span>Jouw Overzicht</span>
                         </div>
 
@@ -1079,17 +1044,11 @@
                                 <span>Modchip Installatie</span>
                             </div>
                             <div class="order-row" id="summaryConsoleRow">
-                                <div class="order-row-label">
-                                    <i class="fa-solid fa-gamepad"></i>
-                                    <span id="summaryConsoleName">—</span>
-                                </div>
+                                <div class="order-row-label"><i class="fa-solid fa-gamepad"></i><span id="summaryConsoleName">—</span></div>
                                 <span class="order-row-prijs" id="summaryConsolePrice"></span>
                             </div>
                             <div class="order-row order-row-garantie" id="summaryGarantieRow">
-                                <div class="order-row-label">
-                                    <i class="fa-solid fa-shield-halved" id="summaryGarantieIcon"></i>
-                                    <span id="summaryGarantieName">—</span>
-                                </div>
+                                <div class="order-row-label"><i class="fa-solid fa-shield-halved" id="summaryGarantieIcon"></i><span id="summaryGarantieName">—</span></div>
                                 <span class="order-row-prijs" id="summaryGarantiePrice"></span>
                             </div>
                             <div class="order-row-garantie-pending" id="summaryGarantiePending" style="display:none;">
@@ -1105,10 +1064,7 @@
                             </div>
                             <div id="summaryRepairRows"></div>
                             <div class="order-row order-row-garantie" id="summaryRepGarantieRow" style="display:none;">
-                                <div class="order-row-label">
-                                    <i class="fa-solid fa-shield-halved" id="summaryRepGarantieIcon"></i>
-                                    <span id="summaryRepGarantieName">—</span>
-                                </div>
+                                <div class="order-row-label"><i class="fa-solid fa-shield-halved" id="summaryRepGarantieIcon"></i><span id="summaryRepGarantieName">—</span></div>
                                 <span class="order-row-prijs" id="summaryRepGarantiePrice"></span>
                             </div>
                         </div>
