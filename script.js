@@ -356,19 +356,17 @@ function updateStickyBar() {
         stickyConsoleChip.style.display = '';
         const n = selectedConsoles.length;
         const iconEl = stickyConsoleChip.querySelector('i, iconify-icon');
+        if (iconEl) iconEl.remove();
         if (n === 1) {
             const c = selectedConsoles[0];
-            const icon = c.model === 'Lite' ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console';
             const col = c.model === 'Lite' ? { bg: '#e2e8f0', color: '#0f1115' }
                       : c.model.includes('OLED') ? { bg: '#fb923c', color: '#000' }
                       : { bg: '#00ff88', color: '#000' };
             stickyConsoleName.textContent = c.label;
             stickyConsoleChip.style.cssText = `background:${col.bg};color:${col.color};border-color:${col.bg};`;
-            if (iconEl) iconEl.outerHTML = `<iconify-icon icon="${icon}"></iconify-icon>`;
         } else {
             stickyConsoleName.textContent = n + ' consoles';
             stickyConsoleChip.style.cssText = 'background:#00ff88;color:#000;border-color:#00ff88;';
-            if (iconEl) iconEl.outerHTML = `<iconify-icon icon="game-icons:game-console"></iconify-icon>`;
         }
     } else {
         stickyConsoleChip.style.display = 'none';
@@ -377,18 +375,17 @@ function updateStickyBar() {
     // Garantie chip — only for modding
     if (hasConsole) {
         stickyGarantieChip.style.display = '';
+        const gIconEl = stickyGarantieChip.querySelector('i, iconify-icon');
+        if (gIconEl) gIconEl.remove();
         if (hasGarantie) {
             stickyGarantieName.textContent = state.garantie.label;
             if (state.garantie.dagen === '180') {
-                stickyGarantieIcon.className = 'fa-solid fa-shield';
                 stickyGarantieChip.style.cssText = 'background:#f59e0b;color:#000;border-color:#f59e0b;';
             } else {
-                stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
                 stickyGarantieChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
             }
         } else {
             stickyGarantieName.textContent = 'Garantie kiezen →';
-            stickyGarantieIcon.className = 'fa-solid fa-shield-halved';
             stickyGarantieChip.style.cssText = '';
             stickyGarantieChip.classList.remove('selected');
         }
@@ -433,11 +430,10 @@ function updateStickyBar() {
             const count = names.length;
             const label = count === 1 ? '1 reparatie' : count + ' reparaties';
             const { bg, color } = getColor(model);
-            const icon = model.includes('Lite') ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console';
             const chip = document.createElement('div');
             chip.className = 'sticky-chip sticky-chip-repair-item';
             chip.style.cssText = `background:${bg};color:${color};border-color:${bg};`;
-            chip.innerHTML = `<iconify-icon icon="${icon}"></iconify-icon><span>${label}</span>`;
+            chip.innerHTML = `<span>${label}</span>`;
             chipsContainer.appendChild(chip);
         });
 
@@ -451,8 +447,7 @@ function updateStickyBar() {
             } else {
                 rgChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
             }
-            const icon = is180 ? 'fa-shield' : 'fa-shield-halved';
-            rgChip.innerHTML = `<i class="fa-solid ${icon}"></i><span>${state.repGarantie.label}</span>`;
+            rgChip.innerHTML = `<span>${state.repGarantie.label}</span>`;
             chipsContainer.appendChild(rgChip);
         }
     } else {
