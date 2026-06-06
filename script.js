@@ -47,11 +47,20 @@ startTimer();
 // UNIFIED STATE
 // ============================================================
 const state = {
-    console:     null,   // { model, label, prijs }
-    garantie:    null,   // { dagen, label, prijs } — modchip garantie
+    garantie:    null,   // { dagen, label, prijs } — modchip garantie (geldt voor alle consoles)
     repGarantie: null,   // { dagen, label, prijs } — reparatie garantie
 };
+const selectedConsoles = [];       // [{ model, label, prijs }] — meerdere modchip consoles
 const selectedRepairs = new Map(); // key = 'model||naam' → { model, naam, prijs }
+
+// Helper: console icoon per model
+function consoleIcon(model) {
+    return model === 'Lite' ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console';
+}
+// Helper: totale modchip prijs
+function consolesTotal() {
+    return selectedConsoles.reduce((s, c) => s + c.prijs, 0);
+}
 
 
 // ============================================================
@@ -74,7 +83,7 @@ document.querySelectorAll('.rep-row').forEach(row => {
             row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
             // Standaard 90 dagen reparatiegarantie als nog niet gekozen
             if (!state.repGarantie) {
-                state.repGarantie = { dagen: '90', label: '90 Dagen Garantie (reparatie)', prijs: 0 };
+                state.repGarantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
             }
         }
         refreshAll();
@@ -89,24 +98,25 @@ document.querySelectorAll('.aanvragen-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        document.querySelectorAll('.aanvragen-btn').forEach(b => {
-            b.classList.remove('geselecteerd');
-            b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
-            b.closest('.card').classList.remove('geselecteerd');
+        // Voeg console toe (meerdere toegestaan, ook duplicaten)
+        selectedConsoles.push({
+            model: btn.dataset.model,
+            label: btn.dataset.label,
+            prijs: parseInt(btn.dataset.prijs)
         });
+        // Default garantie als nog niet gekozen
+        if (!state.garantie) {
+            state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
+        }
 
+        // Korte visuele bevestiging op de knop
         btn.classList.add('geselecteerd');
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
-        btn.closest('.card').classList.add('geselecteerd');
-
-        state.console  = { model: btn.dataset.model, label: btn.dataset.label, prijs: parseInt(btn.dataset.prijs) };
-        // Default: 90 dagen garantie standaard inbegrepen
-        state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
-
-        document.querySelectorAll('.garantie-select-btn').forEach(b => {
-            b.classList.remove('geselecteerd');
-            b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
-        });
+        const orig = btn.dataset.label;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Toegevoegd';
+        setTimeout(() => {
+            btn.classList.remove('geselecteerd');
+            btn.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
+        }, 1200);
 
         refreshAll();
         document.getElementById('garantie').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -144,20 +154,27 @@ document.querySelectorAll('.garantie-select-btn').forEach(btn => {
 // FORM — manual dropdown / radio sync
 // ============================================================
 const consoleSelect = document.getElementById('console');
-consoleSelect.addEventListener('change', () => {
+document.getElementById('consoleAddBtn').addEventListener('click', () => {
     const opt = consoleSelect.options[consoleSelect.selectedIndex];
-    if (consoleSelect.value) {
-        state.console = { model: consoleSelect.value, label: opt.text.split(' — ')[0], prijs: parseInt(opt.dataset.prijs) };
-        // Zet standaard 90 dagen als er nog geen modchip-garantie is
-        if (!state.garantie) {
-            state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
-        }
-    } else {
-        state.console = null;
-        state.garantie = null;
+    if (!consoleSelect.value) return;
+    selectedConsoles.push({
+        model: consoleSelect.value,
+        label: opt.dataset.label || opt.text.split(' — ')[0],
+        prijs: parseInt(opt.dataset.prijs)
+    });
+    if (!state.garantie) {
+        state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
     }
+    consoleSelect.value = '';
     refreshAll();
 });
+
+// Verwijder een console uit de lijst
+function removeConsole(index) {
+    selectedConsoles.splice(index, 1);
+    if (selectedConsoles.length === 0) state.garantie = null;
+    refreshAll();
+}
 
 document.querySelectorAll('input[name="garantie"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -174,7 +191,7 @@ document.querySelectorAll('input[name="rep_garantie"]').forEach(radio => {
     radio.addEventListener('change', () => {
         state.repGarantie = {
             dagen: radio.value,
-            label: radio.value === '90' ? '90 Dagen Garantie (reparatie)' : '180 Dagen Garantie (reparatie)',
+            label: radio.value === '90' ? '90 Dagen Garantie' : '180 Dagen Garantie',
             prijs: parseInt(radio.dataset.extra)
         };
         refreshAll();
@@ -197,16 +214,30 @@ function refreshAll() {
 // FORM BLOCKS — show/hide garantie, show status labels
 // ============================================================
 function updateFormBlocks() {
-    const hasConsole  = !!state.console;
+    const hasConsole  = selectedConsoles.length > 0;
     const hasGarantie = !!state.garantie;
     const hasRepairs  = selectedRepairs.size > 0;
 
-    // Show garantie radio only after console chosen
+    // Show garantie radio only after at least one console chosen
     document.getElementById('garantieFormGroup').style.display = hasConsole ? '' : 'none';
     document.getElementById('moddingEmpty').style.display      = hasConsole ? 'none' : '';
 
-    // Sync select
-    if (state.console) consoleSelect.value = state.console.model;
+    // Render console list in form
+    const listEl = document.getElementById('consoleList');
+    listEl.style.display = hasConsole ? '' : 'none';
+    listEl.innerHTML = selectedConsoles.map((c, i) =>
+        `<div class="intake-console-item">
+            <iconify-icon icon="${consoleIcon(c.model)}" class="intake-console-glyph"></iconify-icon>
+            <span class="intake-console-name">${c.label}</span>
+            <span class="intake-console-prijs">€ ${c.prijs},-</span>
+            <button type="button" class="intake-console-remove" data-idx="${i}" aria-label="Verwijderen"><i class="fa-solid fa-xmark"></i></button>
+        </div>`
+    ).join('');
+    listEl.querySelectorAll('.intake-console-remove').forEach(btn => {
+        btn.addEventListener('click', () => removeConsole(parseInt(btn.dataset.idx)));
+    });
+
+    // Sync garantie radio
     if (state.garantie) {
         const radio = document.querySelector(`input[name="garantie"][value="${state.garantie.dagen}"]`);
         if (radio) radio.checked = true;
@@ -217,10 +248,11 @@ function updateFormBlocks() {
     const reparatieStatus = document.getElementById('reparatieStatus');
 
     if (hasConsole && hasGarantie) {
-        moddingStatus.textContent = '✓ ' + state.console.label + ' + ' + state.garantie.dagen + 'd garantie';
+        const n = selectedConsoles.length;
+        moddingStatus.textContent = '✓ ' + n + (n === 1 ? ' console' : ' consoles') + ' · ' + state.garantie.dagen + 'd garantie';
         moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
     } else if (hasConsole) {
-        moddingStatus.textContent = state.console.label + ' — kies garantie';
+        moddingStatus.textContent = selectedConsoles.length + ' console(s) — kies garantie';
         moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-partial';
     } else {
         moddingStatus.textContent = '';
@@ -305,7 +337,7 @@ const stickyRepairName   = document.getElementById('stickyRepairName');
 const stickyTotal        = document.getElementById('stickyTotal');
 
 function updateStickyBar() {
-    const hasConsole  = !!state.console;
+    const hasConsole  = selectedConsoles.length > 0;
     const hasGarantie = !!state.garantie;
     const hasRepairs  = selectedRepairs.size > 0;
 
@@ -320,7 +352,8 @@ function updateStickyBar() {
     // Console chip — only for modding
     if (hasConsole) {
         stickyConsoleChip.style.display = '';
-        stickyConsoleName.textContent = state.console.label;
+        const n = selectedConsoles.length;
+        stickyConsoleName.textContent = n === 1 ? selectedConsoles[0].label : n + ' consoles';
         stickyConsoleChip.classList.add('selected');
     } else {
         stickyConsoleChip.style.display = 'none';
@@ -398,7 +431,7 @@ function updateStickyBar() {
 
     // Total
     let total = 0;
-    if (hasConsole) total += state.console.prijs;
+    if (hasConsole) total += consolesTotal();
     if (hasGarantie) total += state.garantie.prijs;
     if (state.repGarantie) total += state.repGarantie.prijs;
     selectedRepairs.forEach(r => total += r.prijs);
@@ -420,7 +453,7 @@ function updateStickyBar() {
 // ORDER SUMMARY PANEL
 // ============================================================
 function updateOrderSummary() {
-    const hasConsole     = !!state.console;
+    const hasConsole     = selectedConsoles.length > 0;
     const hasGarantie    = !!state.garantie;
     const hasRepairs     = selectedRepairs.size > 0;
     const hasRepGarantie = !!state.repGarantie;
@@ -429,30 +462,33 @@ function updateOrderSummary() {
     document.getElementById('summaryPlaceholder').style.display        = hasAnything ? 'none' : '';
     document.getElementById('summaryModchipSection').style.display     = hasConsole ? '' : 'none';
     document.getElementById('summaryReparatieSection').style.display   = hasRepairs ? '' : 'none';
-    document.getElementById('summaryConsoleRow').style.display         = hasConsole ? '' : 'none';
     document.getElementById('summaryGarantieRow').style.display        = hasGarantie ? '' : 'none';
     document.getElementById('summaryGarantiePending').style.display    = (hasConsole && !hasGarantie) ? '' : 'none';
     document.getElementById('summaryTotalWrap').style.display          = hasAnything ? '' : 'none';
     document.getElementById('summaryIncludes').style.display           = hasAnything ? '' : 'none';
 
+    // Render console rows
+    const consoleRows = document.getElementById('summaryConsoleRows');
     if (hasConsole) {
-        // Naam netjes op twee regels: model bovenaan, (methode) eronder
-        const lbl = state.console.label;
-        const nameEl = document.getElementById('summaryConsoleName');
-        if (lbl.includes('(')) {
-            const base = lbl.slice(0, lbl.indexOf('(')).trim();
-            const meth = lbl.slice(lbl.indexOf('(')).trim();
-            nameEl.innerHTML = base + '<br><span class="summary-console-sub">' + meth + '</span>';
-        } else {
-            nameEl.textContent = lbl;
-        }
-        // Icoon: handheld voor Lite, anders game-console
-        const iconEl = document.getElementById('summaryConsoleIcon');
-        if (iconEl) {
-            iconEl.setAttribute('icon', state.console.model === 'Lite' ? 'boxicons:handheld-alt-filled' : 'game-icons:game-console');
-        }
-        document.getElementById('summaryConsolePrice').textContent = '€ ' + state.console.prijs + ',-';
+        consoleRows.innerHTML = selectedConsoles.map(c => {
+            const lbl = c.label;
+            let nameHtml;
+            if (lbl.includes('(')) {
+                const base = lbl.slice(0, lbl.indexOf('(')).trim();
+                const meth = lbl.slice(lbl.indexOf('(')).trim();
+                nameHtml = base + '<br><span class="summary-console-sub">' + meth + '</span>';
+            } else {
+                nameHtml = lbl;
+            }
+            return `<div class="order-row">
+                <div class="order-row-label"><iconify-icon icon="${consoleIcon(c.model)}" class="summary-console-glyph"></iconify-icon><span>${nameHtml}</span></div>
+                <span class="order-row-prijs">€ ${c.prijs},-</span>
+            </div>`;
+        }).join('');
+    } else {
+        consoleRows.innerHTML = '';
     }
+
     if (hasGarantie) {
         document.getElementById('summaryGarantieName').textContent  = state.garantie.label;
         document.getElementById('summaryGarantiePrice').textContent = state.garantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.garantie.prijs + ',-';
@@ -506,7 +542,7 @@ function updateOrderSummary() {
 
     // Total
     let total = 0;
-    if (hasConsole)     total += state.console.prijs;
+    if (hasConsole)     total += consolesTotal();
     if (hasGarantie)    total += state.garantie.prijs;
     if (hasRepGarantie) total += state.repGarantie.prijs;
     selectedRepairs.forEach(r => total += r.prijs);
@@ -579,9 +615,13 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
 
     let bericht = 'Hoi! Ik wil een aanvraag doen 🎮\n';
 
-    if (state.console) {
+    if (selectedConsoles.length > 0) {
         const garantie = state.garantie || { label: '90 Dagen Garantie', prijs: 0 };
-        bericht += `\n🔧 Modchip Installatie\nConsole: ${state.console.label}\nGarantie: ${garantie.label}`;
+        bericht += `\n🔧 Modchip Installatie`;
+        selectedConsoles.forEach(c => {
+            bericht += `\n• ${c.label} (€ ${c.prijs},-)`;
+        });
+        bericht += `\nGarantie: ${garantie.label}`;
         if (garantie.prijs > 0) bericht += ` (+ € ${garantie.prijs},-)`;
     }
 
