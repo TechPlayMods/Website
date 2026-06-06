@@ -4542,3 +4542,27 @@ footer {
     color: #ef4444;
     border: 1px solid rgba(239,68,68,0.3);
 }
+
+/* ═══════════════════════════════════════════
+   NAAM + METHODE BADGE GESTAPELD (onder elkaar)
+═══════════════════════════════════════════ */
+.summary-console-namecol,
+.intake-console-namecol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+}
+.summary-console-namecol { font-size: 0.88rem; color: #cbd5e1; }
+.intake-console-namecol {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+/* Badge zonder inline-marge nu het op eigen regel staat */
+.summary-console-namecol .summary-method-badge,
+.intake-console-namecol .intake-method-badge {
+    margin-left: 0;
+}
