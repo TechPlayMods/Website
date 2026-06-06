@@ -329,132 +329,94 @@ function updateRepairBar() {
 // STICKY BAR
 // ============================================================
 const stickyBar          = document.getElementById('stickySelection');
-const stickyConsoleName  = document.getElementById('stickyConsoleName');
-const stickyGarantieName = document.getElementById('stickyGarantieName');
-const stickyGarantieIcon = document.getElementById('stickyGarantieIcon');
-const stickyConsoleChip  = document.getElementById('stickyConsoleChip');
-const stickyGarantieChip = document.getElementById('stickyGarantieChip');
-const stickyRepairChip   = document.getElementById('stickyRepairChip');
-const stickyRepairName   = document.getElementById('stickyRepairName');
 const stickyTotal        = document.getElementById('stickyTotal');
+const stickyGroupModchip = document.getElementById('stickyGroupModchip');
+const stickyGroupRepair  = document.getElementById('stickyGroupRepair');
+const stickyModchipChips = document.getElementById('stickyModchipChips');
+const stickyRepairChips  = document.getElementById('stickyRepairChips');
+
+// Kleur per model
+function modelColor(model) {
+    if (model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
+    if (model.includes('OLED')) return { bg: '#fb923c', color: '#000' };
+    return { bg: '#00ff88', color: '#000' };
+}
+// Maak een badge
+function makeChip(label, style) {
+    const chip = document.createElement('div');
+    chip.className = 'sticky-chip';
+    chip.style.cssText = style;
+    chip.innerHTML = `<span>${label}</span>`;
+    return chip;
+}
 
 function updateStickyBar() {
     const hasConsole  = selectedConsoles.length > 0;
     const hasGarantie = !!state.garantie;
     const hasRepairs  = selectedRepairs.size > 0;
 
+    // Clean up dynamic elements
+    document.querySelectorAll('.sticky-aanvraag-btn').forEach(c => c.remove());
+    stickyModchipChips.innerHTML = '';
+    stickyRepairChips.innerHTML = '';
+
     if (!hasConsole && !hasRepairs) {
         stickyBar.classList.remove('visible');
-        document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
-        document.querySelectorAll('.sticky-aanvraag-btn').forEach(c => c.remove());
         return;
     }
     stickyBar.classList.add('visible');
 
-    // Console chip — only for modding
+    // ── MODCHIP GROUP ──
     if (hasConsole) {
-        stickyConsoleChip.style.display = '';
-        const n = selectedConsoles.length;
-        const iconEl = stickyConsoleChip.querySelector('i, iconify-icon');
-        if (iconEl) iconEl.remove();
-        if (n === 1) {
-            const c = selectedConsoles[0];
-            const col = c.model === 'Lite' ? { bg: '#e2e8f0', color: '#0f1115' }
-                      : c.model.includes('OLED') ? { bg: '#fb923c', color: '#000' }
-                      : { bg: '#00ff88', color: '#000' };
-            stickyConsoleName.textContent = c.label;
-            stickyConsoleChip.style.cssText = `background:${col.bg};color:${col.color};border-color:${col.bg};`;
-        } else {
-            stickyConsoleName.textContent = n + ' consoles';
-            stickyConsoleChip.style.cssText = 'background:#00ff88;color:#000;border-color:#00ff88;';
-        }
-    } else {
-        stickyConsoleChip.style.display = 'none';
-    }
+        stickyGroupModchip.style.display = '';
 
-    // Garantie chip — only for modding
-    if (hasConsole) {
-        stickyGarantieChip.style.display = '';
-        const gIconEl = stickyGarantieChip.querySelector('i, iconify-icon');
-        if (gIconEl) gIconEl.remove();
+        // Console badges — één per console, in modelkleur
+        selectedConsoles.forEach(c => {
+            const col = modelColor(c.model);
+            stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+        });
+
+        // Garantie badge
         if (hasGarantie) {
-            stickyGarantieName.textContent = state.garantie.label;
-            if (state.garantie.dagen === '180') {
-                stickyGarantieChip.style.cssText = 'background:#f59e0b;color:#000;border-color:#f59e0b;';
-            } else {
-                stickyGarantieChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
-            }
-        } else {
-            stickyGarantieName.textContent = 'Garantie kiezen →';
-            stickyGarantieChip.style.cssText = '';
-            stickyGarantieChip.classList.remove('selected');
+            const style = state.garantie.dagen === '180'
+                ? 'background:#f59e0b;color:#000;border-color:#f59e0b;'
+                : 'background:transparent;color:var(--text-muted);border-color:var(--border);';
+            stickyModchipChips.appendChild(makeChip(state.garantie.label, style));
         }
     } else {
-        stickyGarantieChip.style.display = 'none';
-        stickyGarantieChip.style.cssText = 'display:none;';
+        stickyGroupModchip.style.display = 'none';
     }
 
-    // Remove old dynamic repair chips and aanvraag btn
-    document.querySelectorAll('.sticky-chip-repair-item').forEach(c => c.remove());
-    document.querySelectorAll('.sticky-aanvraag-btn').forEach(c => c.remove());
-
-    // One chip per model, with count if multiple repairs for that model
+    // ── REPARATIE GROUP ──
     if (hasRepairs) {
-        stickyRepairChip.style.display = 'none'; // hide template chip
+        stickyGroupRepair.style.display = '';
 
-        // Group by model
+        // Groepeer per model
         const byModel = new Map();
         selectedRepairs.forEach(r => {
             if (!byModel.has(r.model)) byModel.set(r.model, []);
-            byModel.get(r.model).push(r.naam.split('(')[0].trim());
+            byModel.get(r.model).push(r);
         });
 
-        const modelColors = {
-            'Switch V1 / V2':          { bg: '#00ff88', color: '#000' },
-            'Nintendo Switch V1 / V2': { bg: '#00ff88', color: '#000' },
-            'Switch Lite':             { bg: '#e2e8f0', color: '#0f1115' },
-            'Nintendo Switch Lite':    { bg: '#e2e8f0', color: '#0f1115' },
-            'Switch OLED':             { bg: '#fb923c', color: '#000' },
-            'Nintendo Switch OLED':    { bg: '#fb923c', color: '#000' },
-        };
-
-        // V1/V2 = green, Lite = pink/purple, OLED = orange
-        const getColor = (model) => {
-            if (model.includes('V1') || model.includes('V2')) return { bg: '#00ff88', color: '#000' };
-            if (model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
-            return { bg: '#fb923c', color: '#000' }; // OLED = orange
-        };
-
-        const chipsContainer = document.querySelector('.sticky-chips');
-        byModel.forEach((names, model) => {
-            const count = names.length;
+        byModel.forEach((items, model) => {
+            const count = items.length;
             const label = count === 1 ? '1 reparatie' : count + ' reparaties';
-            const { bg, color } = getColor(model);
-            const chip = document.createElement('div');
-            chip.className = 'sticky-chip sticky-chip-repair-item';
-            chip.style.cssText = `background:${bg};color:${color};border-color:${bg};`;
-            chip.innerHTML = `<span>${label}</span>`;
-            chipsContainer.appendChild(chip);
+            const col = modelColor(model);
+            stickyRepairChips.appendChild(makeChip(label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
         });
 
-        // Reparatie-garantie chip (zelfde stijl als modchip garantie)
+        // Reparatie-garantie badge
         if (state.repGarantie) {
-            const is180 = state.repGarantie.dagen === '180';
-            const rgChip = document.createElement('div');
-            rgChip.className = 'sticky-chip sticky-chip-repair-item';
-            if (is180) {
-                rgChip.style.cssText = 'background:#f59e0b;color:#000;border-color:#f59e0b;';
-            } else {
-                rgChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
-            }
-            rgChip.innerHTML = `<span>${state.repGarantie.label}</span>`;
-            chipsContainer.appendChild(rgChip);
+            const style = state.repGarantie.dagen === '180'
+                ? 'background:#f59e0b;color:#000;border-color:#f59e0b;'
+                : 'background:transparent;color:var(--text-muted);border-color:var(--border);';
+            stickyRepairChips.appendChild(makeChip(state.repGarantie.label, style));
         }
     } else {
-        stickyRepairChip.style.display = 'none';
+        stickyGroupRepair.style.display = 'none';
     }
 
-    // Total
+    // ── TOTAL + AANVRAAG KNOP ──
     let total = 0;
     if (hasConsole) total += consolesTotal();
     if (hasGarantie) total += state.garantie.prijs;
@@ -463,7 +425,6 @@ function updateStickyBar() {
     const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
     const totalStr = prefix + '€ ' + total + ',-';
 
-    // Always show aanvraag button with price embedded
     const stickyRight = document.querySelector('.sticky-right');
     const aanvraagBtn = document.createElement('a');
     aanvraagBtn.href = '#contact';
