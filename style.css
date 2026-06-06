@@ -4552,3 +4552,47 @@ footer {
     flex-shrink: 0;
     line-height: 1;
 }
+
+/* ═══════════════════════════════════════════
+   STICKY BAR — gegroepeerde badges (Modchip / Reparatie)
+═══════════════════════════════════════════ */
+.sticky-groups {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
+}
+.sticky-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sticky-group-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    opacity: 0.7;
+    white-space: nowrap;
+}
+.sticky-group-chips {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+/* Subtiele scheiding tussen de twee groepen */
+#stickyGroupRepair {
+    padding-left: 18px;
+    border-left: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+    .sticky-groups { gap: 10px; flex-direction: column; align-items: flex-start; }
+    #stickyGroupRepair { padding-left: 0; border-left: none; padding-top: 8px; border-top: 1px solid var(--border); width: 100%; }
+    .sticky-group { align-items: flex-start; }
+    .sticky-group-label { padding-top: 7px; }
+}
