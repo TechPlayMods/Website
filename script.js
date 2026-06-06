@@ -427,6 +427,21 @@ function updateStickyBar() {
             chip.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i><span>${label}</span>`;
             chipsContainer.appendChild(chip);
         });
+
+        // Reparatie-garantie chip (zelfde stijl als modchip garantie)
+        if (state.repGarantie) {
+            const is180 = state.repGarantie.dagen === '180';
+            const rgChip = document.createElement('div');
+            rgChip.className = 'sticky-chip sticky-chip-repair-item';
+            if (is180) {
+                rgChip.style.cssText = 'background:#f59e0b;color:#000;border-color:#f59e0b;';
+            } else {
+                rgChip.style.cssText = 'background:transparent;color:var(--text-muted);border-color:var(--border);';
+            }
+            const icon = is180 ? 'fa-shield' : 'fa-shield-halved';
+            rgChip.innerHTML = `<i class="fa-solid ${icon}"></i><span>${state.repGarantie.label}</span>`;
+            chipsContainer.appendChild(rgChip);
+        }
     } else {
         stickyRepairChip.style.display = 'none';
     }
