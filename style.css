@@ -4609,35 +4609,36 @@ footer {
 /* ── Verwijder-bubbel op sticky badges ── */
 .sticky-chip-wrap {
     display: inline-flex;
-    align-items: center;
+    align-items: stretch;
 }
 .sticky-chip {
     display: inline-flex;
     align-items: center;
     padding: 7px 14px;
 }
-/* Tekstbubbel die een kruis-bubbel naast zich heeft: extra rechterpadding voor de overlap */
+/* Tekstbubbel die een kruis-bubbel naast zich heeft: rechterkant recht */
 .sticky-chip.has-x {
-    padding-right: 22px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 13px;
 }
 .sticky-chip-x {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
     flex-shrink: 0;
-    border-radius: 50%;
+    width: 38px;
     border: none;
     background: #fff;
     cursor: pointer;
     padding: 0;
-    margin-left: -14px;
-    transition: background 0.2s, transform 0.2s;
+    /* recht links (naad), rond rechts */
+    border-radius: 0 20px 20px 0;
+    transition: background 0.2s;
 }
 .sticky-chip-x svg {
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
     display: block;
 }
-.sticky-chip-x:hover { background: #f1f5f9; transform: scale(1.08); }
+.sticky-chip-x:hover { background: #f1f5f9; }
