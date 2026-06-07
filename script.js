@@ -342,12 +342,42 @@ function modelColor(model) {
     return { bg: '#ec4899', color: '#fff' };
 }
 // Maak een badge
-function makeChip(label, style) {
+function makeChip(label, style, onRemove) {
     const chip = document.createElement('div');
     chip.className = 'sticky-chip';
     chip.style.cssText = style;
     chip.innerHTML = `<span>${label}</span>`;
+    if (onRemove) {
+        const x = document.createElement('button');
+        x.type = 'button';
+        x.className = 'sticky-chip-x';
+        x.setAttribute('aria-label', 'Verwijderen');
+        x.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        x.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); onRemove(); });
+        chip.appendChild(x);
+    }
     return chip;
+}
+
+// Verwijder-helpers
+function clearAllConsoles() {
+    selectedConsoles.length = 0;
+    state.garantie = null;
+    document.querySelectorAll('.aanvragen-btn').forEach(b => {
+        b.classList.remove('geselecteerd');
+        b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
+    });
+    refreshAll();
+}
+function clearAllRepairs() {
+    selectedRepairs.clear();
+    state.repGarantie = null;
+    document.querySelectorAll('.rep-row.geselecteerd, .rep-inline-row.geselecteerd').forEach(r => {
+        r.classList.remove('geselecteerd');
+        const btn = r.querySelector('.rep-row-btn, .rep-inline-btn');
+        if (btn) btn.textContent = 'Selecteer';
+    });
+    refreshAll();
 }
 
 function updateStickyBar() {
@@ -374,7 +404,7 @@ function updateStickyBar() {
         if (selectedConsoles.length === 1) {
             const c = selectedConsoles[0];
             const col = modelColor(c.model);
-            stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+            stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`, () => removeConsole(0)));
         } else {
             const n = selectedConsoles.length;
             // Zelfde model? → modelkleur. Mix? → groen
@@ -383,7 +413,7 @@ function updateStickyBar() {
             const col = uniqueModels.size === 1
                 ? modelColor(selectedConsoles[0].model)
                 : { bg: '#00ff88', color: '#000' };
-            stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+            stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllConsoles));
         }
 
         // Garantie badge
@@ -407,7 +437,7 @@ function updateStickyBar() {
             const r = [...selectedRepairs.values()][0];
             const col = modelColor(r.model);
             const naam = r.naam.split('(')[0].trim();
-            stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+            stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         } else {
             // Zelfde model? → modelkleur. Mix? → groen
             const uniqueModels = new Set([...selectedRepairs.values()].map(r =>
@@ -415,7 +445,7 @@ function updateStickyBar() {
             const col = uniqueModels.size === 1
                 ? modelColor([...selectedRepairs.values()][0].model)
                 : { bg: '#00ff88', color: '#000' };
-            stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+            stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         }
 
         // Reparatie-garantie badge
