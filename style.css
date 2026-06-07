@@ -4602,8 +4602,12 @@ footer {
 @media (max-width: 768px) {
     .sticky-groups { gap: 10px; flex-direction: column; align-items: flex-start; }
     #stickyGroupRepair { padding-left: 0; border-left: none; padding-top: 8px; border-top: 1px solid var(--border); width: 100%; }
-    .sticky-group { align-items: flex-start; }
-    .sticky-group-label { padding-top: 7px; }
+    .sticky-group { align-items: center; width: 100%; }
+    .sticky-group-label {
+        width: 78px;
+        flex-shrink: 0;
+    }
+    .sticky-group-chips { flex: 1; }
 }
 
 /* ── Verwijder-bubbel op sticky badges ── */
