@@ -1302,12 +1302,13 @@ footer {
 .card-lite ul li { color: rgba(255,255,255,0.6); }
 .card-lite ul li i.fa-check { color: var(--primary) !important; }
 .card-lite .btn-card {
-    border-color: #64748b;
-    color: #e2e8f0;
-}
-.card-lite .btn-card:hover {
     background: #e2e8f0;
     border-color: #e2e8f0;
+    color: #0f1115 !important;
+}
+.card-lite .btn-card:hover {
+    background: #cbd5e1;
+    border-color: #cbd5e1;
     color: #0f1115 !important;
 }
 .card-lite .btn-card.geselecteerd { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115 !important; }
@@ -4469,12 +4470,13 @@ footer {
 .card-v1v2 ul li { color: rgba(255,255,255,0.6); }
 .card-v1v2 ul li i.fa-check { color: #ec4899 !important; }
 .card-v1v2 .btn-card {
-    border-color: #9d2463;
-    color: #ec4899;
-}
-.card-v1v2 .btn-card:hover {
     background: #ec4899;
     border-color: #ec4899;
+    color: #fff !important;
+}
+.card-v1v2 .btn-card:hover {
+    background: #db2777;
+    border-color: #db2777;
     color: #fff !important;
 }
 .card-v1v2 .btn-card.geselecteerd { background: #ec4899; border-color: #ec4899; color: #fff !important; }
