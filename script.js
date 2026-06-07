@@ -339,7 +339,7 @@ const stickyRepairChips  = document.getElementById('stickyRepairChips');
 function modelColor(model) {
     if (model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
     if (model.includes('OLED')) return { bg: '#fb923c', color: '#000' };
-    return { bg: '#22d3ee', color: '#000' };
+    return { bg: '#ec4899', color: '#fff' };
 }
 // Maak een badge
 function makeChip(label, style) {
