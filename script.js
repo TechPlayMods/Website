@@ -423,12 +423,15 @@ function updateStickyBar() {
             stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllConsoles));
         }
 
-        // Garantie badge
+        // Garantie badge — schild + korte tekst
         if (hasGarantie) {
-            const style = state.garantie.dagen === '180'
+            const is180 = state.garantie.dagen === '180';
+            const style = is180
                 ? 'background:#f59e0b;color:#000;border-color:#f59e0b;'
                 : 'background:transparent;color:var(--text-muted);border-color:var(--border);';
-            stickyModchipChips.appendChild(makeChip(state.garantie.label, style));
+            const icon = is180 ? 'fa-shield' : 'fa-shield-halved';
+            const label = `<i class="fa-solid ${icon}" style="margin-right:6px;"></i>${state.garantie.dagen} dagen`;
+            stickyModchipChips.appendChild(makeChip(label, style));
         }
     } else {
         stickyGroupModchip.style.display = 'none';
@@ -455,12 +458,15 @@ function updateStickyBar() {
             stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         }
 
-        // Reparatie-garantie badge
+        // Reparatie-garantie badge — schild + korte tekst
         if (state.repGarantie) {
-            const style = state.repGarantie.dagen === '180'
+            const is180 = state.repGarantie.dagen === '180';
+            const style = is180
                 ? 'background:#f59e0b;color:#000;border-color:#f59e0b;'
                 : 'background:transparent;color:var(--text-muted);border-color:var(--border);';
-            stickyRepairChips.appendChild(makeChip(state.repGarantie.label, style));
+            const icon = is180 ? 'fa-shield' : 'fa-shield-halved';
+            const label = `<i class="fa-solid ${icon}" style="margin-right:6px;"></i>${state.repGarantie.dagen} dagen`;
+            stickyRepairChips.appendChild(makeChip(label, style));
         }
     } else {
         stickyGroupRepair.style.display = 'none';
