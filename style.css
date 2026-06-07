@@ -4307,25 +4307,29 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
-    padding: 14px 8px;
-    border-radius: 10px;
-    font-size: 1.5rem;
+    gap: 8px;
+    padding: 18px 8px;
+    border-radius: var(--radius);
+    font-size: 1.7rem;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
-    opacity: 0.6;
-    color: #fff;
+    transition: transform var(--transition), opacity var(--transition), box-shadow var(--transition);
+    opacity: 1;
+    color: #fff !important;
     width: 100%;
     font-family: inherit;
 }
 .intake-kanaal-btn span { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
-.intake-kanaal-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.intake-kanaal-btn:hover { transform: translateY(-2px); opacity: 0.9; }
 .intake-kanaal-btn.geselecteerd {
-    opacity: 1;
     transform: translateY(-2px);
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.18);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
 }
+/* Volle platformkleuren — zelfde als 'Wat Klanten Zeggen' */
+.intake-kanaal-btn.btn-tg { background: #0088cc; }
+.intake-kanaal-btn.btn-wa { background: #25d366; }
+.intake-kanaal-btn.btn-rd { background: #ff4500; }
+.intake-kanaal-btn.btn-dc { background: #5865f2; }
 
 .intake-optional { color: #64748b; font-weight: 400; text-transform: none; letter-spacing: 0; }
 
@@ -4472,27 +4476,27 @@ footer {
    SWITCH V1/V2 KAART — zelfde stijl als Lite, maar groen
 ═══════════════════════════════════════════ */
 .card-v1v2 {
-    background: linear-gradient(145deg, #0f1520, #131a24) !important;
-    border: 2px solid #1d6b47 !important;
-    box-shadow: 0 0 35px rgba(0, 255, 136, 0.12) !important;
+    background: linear-gradient(145deg, #0c1820, #0f1f28) !important;
+    border: 2px solid #0e7490 !important;
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.12) !important;
 }
 .card-v1v2:hover {
-    border-color: var(--primary) !important;
-    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.18) !important;
+    border-color: #22d3ee !important;
+    box-shadow: 0 12px 40px rgba(34, 211, 238, 0.18) !important;
 }
-.card-v1v2 .card-icon iconify-icon { color: var(--primary); }
+.card-v1v2 .card-icon iconify-icon { color: #22d3ee; }
 .card-v1v2 ul li { color: rgba(255,255,255,0.6); }
-.card-v1v2 ul li i.fa-check { color: var(--primary) !important; }
+.card-v1v2 ul li i.fa-check { color: #22d3ee !important; }
 .card-v1v2 .btn-card {
-    border-color: #1d6b47;
-    color: var(--primary);
+    border-color: #0e7490;
+    color: #22d3ee;
 }
 .card-v1v2 .btn-card:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: #22d3ee;
+    border-color: #22d3ee;
     color: #0f1115 !important;
 }
-.card-v1v2 .btn-card.geselecteerd { background: var(--primary); border-color: var(--primary); color: #0f1115 !important; }
+.card-v1v2 .btn-card.geselecteerd { background: #22d3ee; border-color: #22d3ee; color: #0f1115 !important; }
 
 /* ═══════════════════════════════════════════
    METHODE BADGES (DAT0 / Kamikaze) in formulier & overzicht
