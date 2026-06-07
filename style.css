@@ -4591,8 +4591,20 @@ footer {
 .sticky-group-chips {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 8px;
+}
+/* Selectie-knop (tekst + kruis) en garantie-bubbel even breed binnen de groep */
+.sticky-group-chips > .sticky-chip-wrap,
+.sticky-group-chips > .sticky-chip {
+    width: 100%;
+}
+.sticky-group-chips > .sticky-chip-wrap .sticky-chip:not(.has-x) {
+    flex: 1;
+    justify-content: center;
+}
+.sticky-group-chips > .sticky-chip:not(.has-x) {
+    justify-content: center;
 }
 /* Subtiele scheiding tussen de twee groepen */
 #stickyGroupRepair {
