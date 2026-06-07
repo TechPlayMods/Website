@@ -4605,3 +4605,28 @@ footer {
     .sticky-group { align-items: flex-start; }
     .sticky-group-label { padding-top: 7px; }
 }
+
+/* ── Verwijder-kruisje op sticky badges ── */
+.sticky-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.sticky-chip-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.18);
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.7rem;
+    padding: 0;
+    margin-left: 2px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+.sticky-chip-x:hover { background: rgba(0,0,0,0.35); }
