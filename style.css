@@ -4659,3 +4659,24 @@ footer {
     display: block;
 }
 .sticky-chip-x:hover { background: #f1f5f9; }
+
+/* ── Garantie categorie-labels (modchip / reparatie) ── */
+.garantie-cat-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.garantie-cat-label i {
+    font-size: 1.05rem;
+}
+.garantie-cat-label-rep {
+    color: #60a5fa;
+    margin-top: 44px;
+}
+.garantie-basis-rep { border-top-color: #60a5fa; }
