@@ -1401,17 +1401,24 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 0 22px;
     flex-shrink: 0;
 }
 .verg-vs span {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(145deg, #1d2330, #12151c);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 900;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
     border-radius: 50%;
+    box-shadow: 0 0 22px rgba(0,255,136,0.25), inset 0 0 12px rgba(0,255,136,0.08);
+    text-shadow: 0 0 12px rgba(0,255,136,0.4);
 }
 .verg-header {
     display: flex;
@@ -3630,14 +3637,10 @@ footer {
 #rep-lite-block  .rep-row:hover { background: rgba(255,255,255,0.02); }
 #rep-oled-block  .rep-row:hover { background: rgba(255,255,255,0.02); }
 
-/* Selecteer knop — uniform, subtiel (geen felle modelkleur) */
-#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn,
-#rep-lite-block  .rep-row.geselecteerd .rep-row-btn,
-#rep-oled-block  .rep-row.geselecteerd .rep-row-btn {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #000;
-}
+/* Selecteer knop — geselecteerd in eigen modelkleur */
+#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: #ec4899; border-color: #ec4899; color: #fff; }
+#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
+#rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #fb923c; border-color: #fb923c; color: #000; }
 
 /* Geselecteerde rij — subtiele neutrale highlight, model-accent alleen op linkerrand */
 #rep-v1v2-block .rep-row.geselecteerd { border-left-color: #ec4899; background: rgba(255,255,255,0.03); }
