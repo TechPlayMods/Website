@@ -2255,7 +2255,6 @@ footer {
     .sticky-right {
         flex: 1 1 100%;
         justify-content: flex-end;
-        padding-left: 88px;
     }
     .sticky-aanvraag-btn {
         flex: 1;
