@@ -343,20 +343,27 @@ function modelColor(model) {
 }
 // Maak een badge
 function makeChip(label, style, onRemove) {
-    const chip = document.createElement('div');
-    chip.className = 'sticky-chip';
-    chip.style.cssText = style;
-    chip.innerHTML = `<span>${label}</span>`;
+    // Wrapper houdt de tekstbubbel en het kruis-bubbeltje samen
+    const wrap = document.createElement('div');
+    wrap.className = 'sticky-chip-wrap';
+
+    const text = document.createElement('div');
+    text.className = 'sticky-chip';
+    text.style.cssText = style;
+    text.innerHTML = `<span>${label}</span>`;
+    wrap.appendChild(text);
+
     if (onRemove) {
+        text.classList.add('has-x');
         const x = document.createElement('button');
         x.type = 'button';
         x.className = 'sticky-chip-x';
         x.setAttribute('aria-label', 'Verwijderen');
-        x.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        x.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 5 L19 19 M19 5 L5 19" stroke="#dc2626" stroke-width="4.5" stroke-linecap="round"/></svg>';
         x.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); onRemove(); });
-        chip.appendChild(x);
+        wrap.appendChild(x);
     }
-    return chip;
+    return wrap;
 }
 
 // Verwijder-helpers
