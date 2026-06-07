@@ -4603,6 +4603,11 @@ footer {
     flex: 1;
     justify-content: center;
 }
+/* Selectie-knop met kruisje: tekstbubbel rekt mee, kruis-segment blijft rechts */
+.sticky-group-chips > .sticky-chip-wrap .sticky-chip.has-x {
+    flex: 1;
+    justify-content: center;
+}
 .sticky-group-chips > .sticky-chip:not(.has-x) {
     justify-content: center;
 }
