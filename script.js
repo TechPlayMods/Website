@@ -395,10 +395,16 @@ function updateStickyBar() {
     if (hasRepairs) {
         stickyGroupRepair.style.display = '';
 
-        // Reparatie badge — totaal aantal als één badge
+        // Reparatie badge — bij 1 de naam in modelkleur, bij meerdere een samenvatting
         const repCount = selectedRepairs.size;
-        const repLabel = repCount === 1 ? '1 reparatie' : repCount + ' reparaties';
-        stickyRepairChips.appendChild(makeChip(repLabel, 'background:#3b82f6;color:#fff;border-color:#3b82f6;'));
+        if (repCount === 1) {
+            const r = [...selectedRepairs.values()][0];
+            const col = modelColor(r.model);
+            const naam = r.naam.split('(')[0].trim();
+            stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
+        } else {
+            stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', 'background:#00ff88;color:#000;border-color:#00ff88;'));
+        }
 
         // Reparatie-garantie badge
         if (state.repGarantie) {
