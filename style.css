@@ -3201,25 +3201,9 @@ footer {
     border-left-color: #f59e0b;
 }
 
-.rep-row-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: var(--primary-dim);
-    border: 1px solid rgba(0,255,136,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 0.9rem;
-    flex-shrink: 0;
-}
 
-.rep-row-icon-premium {
-    background: rgba(245,158,11,0.1);
-    border-color: rgba(245,158,11,0.2);
-    color: #f59e0b;
-}
+
+
 
 .rep-row-info {
     flex: 1;
@@ -3571,9 +3555,7 @@ footer {
     row-gap: 4px;
 }
 
-.rep-row-icon {
-    margin-top: 2px;
-}
+
 
 .rep-row-info {
     flex: 1;
@@ -3637,38 +3619,30 @@ footer {
 /* ===========================
    KLEUR PER SECTIE — ROW ICONS
 =========================== */
-#rep-v1v2-block .rep-row-icon {
-    background: rgba(236,72,153,0.1);
-    border-color: rgba(236,72,153,0.2);
-    color: #ec4899;
-}
+#rep-v1v2-block 
 
-#rep-lite-block .rep-row-icon {
-    background: rgba(226,232,240,0.08);
-    border-color: rgba(226,232,240,0.2);
-    color: #e2e8f0;
-}
+#rep-lite-block 
 
-#rep-oled-block .rep-row-icon {
-    background: rgba(251,146,60,0.1);
-    border-color: rgba(251,146,60,0.25);
-    color: #fb923c;
-}
+#rep-oled-block 
 
 /* Hover border kleur per sectie */
-#rep-v1v2-block .rep-row:hover { background: rgba(236,72,153,0.03); }
-#rep-lite-block  .rep-row:hover { background: rgba(226,232,240,0.02); }
-#rep-oled-block  .rep-row:hover { background: rgba(251,146,60,0.03); }
+#rep-v1v2-block .rep-row:hover { background: rgba(255,255,255,0.02); }
+#rep-lite-block  .rep-row:hover { background: rgba(255,255,255,0.02); }
+#rep-oled-block  .rep-row:hover { background: rgba(255,255,255,0.02); }
 
-/* Selecteer knop kleur per sectie */
-#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: #ec4899; border-color: #ec4899; color: #fff; }
-#rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
-#rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #fb923c; border-color: #fb923c; color: #000; }
+/* Selecteer knop — uniform, subtiel (geen felle modelkleur) */
+#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn,
+#rep-lite-block  .rep-row.geselecteerd .rep-row-btn,
+#rep-oled-block  .rep-row.geselecteerd .rep-row-btn {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #000;
+}
 
-/* Geselecteerde rij border kleur */
-#rep-v1v2-block .rep-row.geselecteerd { border-left-color: #ec4899; background: rgba(236,72,153,0.05); }
-#rep-lite-block  .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(226,232,240,0.05); }
-#rep-oled-block  .rep-row.geselecteerd { border-left-color: #fb923c; background: rgba(251,146,60,0.06); }
+/* Geselecteerde rij — subtiele neutrale highlight, model-accent alleen op linkerrand */
+#rep-v1v2-block .rep-row.geselecteerd { border-left-color: #ec4899; background: rgba(255,255,255,0.03); }
+#rep-lite-block  .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(255,255,255,0.03); }
+#rep-oled-block  .rep-row.geselecteerd { border-left-color: #fb923c; background: rgba(255,255,255,0.03); }
 
 /* ===========================
    REPARATIE ICONEN — GROOTTE GELIJK AAN SERVICES
@@ -3720,7 +3694,7 @@ footer {
 }
 .rep-jump-card.rep-jump-lite:hover { border-color: #e2e8f0; box-shadow: 0 6px 20px rgba(226,232,240,0.08); }
 #rep-lite-block { border-top-color: #e2e8f0; }
-#rep-lite-block .rep-row-icon { background: rgba(226,232,240,0.08); border-color: rgba(226,232,240,0.2); color: #e2e8f0; }
+#rep-lite-block 
 #rep-lite-block .rep-row:hover { background: rgba(226,232,240,0.02); }
 #rep-lite-block .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(226,232,240,0.04); }
 #rep-lite-block .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
