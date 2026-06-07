@@ -377,7 +377,13 @@ function updateStickyBar() {
             stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
         } else {
             const n = selectedConsoles.length;
-            stickyModchipChips.appendChild(makeChip(n + ' consoles', 'background:#00ff88;color:#000;border-color:#00ff88;'));
+            // Zelfde model? → modelkleur. Mix? → groen
+            const uniqueModels = new Set(selectedConsoles.map(c =>
+                c.model.includes('Lite') ? 'lite' : c.model.includes('OLED') ? 'oled' : 'v1v2'));
+            const col = uniqueModels.size === 1
+                ? modelColor(selectedConsoles[0].model)
+                : { bg: '#00ff88', color: '#000' };
+            stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`));
         }
 
         // Garantie badge
@@ -403,7 +409,13 @@ function updateStickyBar() {
             const naam = r.naam.split('(')[0].trim();
             stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`));
         } else {
-            stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', 'background:#00ff88;color:#000;border-color:#00ff88;'));
+            // Zelfde model? → modelkleur. Mix? → groen
+            const uniqueModels = new Set([...selectedRepairs.values()].map(r =>
+                r.model.includes('Lite') ? 'lite' : r.model.includes('OLED') ? 'oled' : 'v1v2'));
+            const col = uniqueModels.size === 1
+                ? modelColor([...selectedRepairs.values()][0].model)
+                : { bg: '#00ff88', color: '#000' };
+            stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`));
         }
 
         // Reparatie-garantie badge
