@@ -64,31 +64,94 @@ function consolesTotal() {
 
 
 // ============================================================
-// REPARATIE RIJ SELECTIE — multi-select, geen tabs
+// REPARATIE SECTIE — geladen uit reparaties.json
 // ============================================================
-document.querySelectorAll('.rep-row').forEach(row => {
-    row.addEventListener('click', () => {
-        const naam  = row.dataset.repNaam;
-        const model = row.dataset.repModel;
-        const prijs = parseInt(row.dataset.repPrijs);
+const REP_COLORS = { lite:'#e2e8f0', v1v2:'#00ff88', oled:'#fb923c' };
 
-        const key = model + '||' + naam;
+function modelKeyFromLabel(label){
+    if(label.includes('Lite')) return 'lite';
+    if(label.includes('OLED')) return 'oled';
+    return 'v1v2';
+}
+
+function buildReparaties(modellen){
+    // Jump cards
+    const jump = document.getElementById('repModelJump');
+    jump.innerHTML = modellen.map(m=>`
+        <a href="#rep-${m.id}-block" class="rep-jump-card rep-jump-${m.id}">
+            <div class="rep-jump-icon rep-jump-icon-${m.id}"><iconify-icon icon="${m.icon}"></iconify-icon></div>
+            <span class="rep-jump-label">${m.label}</span>
+            <i class="fa-solid fa-arrow-down rep-jump-arrow"></i>
+        </a>`).join('');
+
+    // Model blokken
+    const blocks = document.getElementById('repModelBlocks');
+    blocks.innerHTML = modellen.map(m=>`
+        <div class="rep-model-block" id="rep-${m.id}-block">
+            <div class="rep-model-header rep-model-header-${m.id}">
+                <div class="rep-model-icon rep-model-icon-${m.id}"><iconify-icon icon="${m.icon}"></iconify-icon></div>
+                <div>
+                    <h3 class="rep-model-title">${m.label}</h3>
+                    <p class="rep-model-sub">${m.sub || ''}</p>
+                </div>
+            </div>
+            ${m.reparaties.map(r=>`
+                <div class="rep-row" data-rep-model="${m.label}" data-rep-naam="${r.naam}" data-rep-prijs="${r.prijs}">
+                    <div class="rep-row-info">
+                        <span class="rep-row-naam">${r.naam}</span>
+                        <span class="rep-row-prijs">€ ${r.prijs},-</span>
+                    </div>
+                    <button class="rep-row-btn">Selecteer</button>
+                </div>`).join('')}
+        </div>`).join('');
+
+    // Markeer reeds geselecteerde rijen (bij heropbouw)
+    syncRepRows();
+}
+
+// Event delegation voor reparatie-rijen
+document.addEventListener('click', (e) => {
+    const row = e.target.closest('.rep-row');
+    if (!row || !document.getElementById('repModelBlocks').contains(row)) return;
+
+    const naam  = row.dataset.repNaam;
+    const model = row.dataset.repModel;
+    const prijs = parseInt(row.dataset.repPrijs);
+    const key = model + '||' + naam;
+
+    if (selectedRepairs.has(key)) {
+        selectedRepairs.delete(key);
+        row.classList.remove('geselecteerd');
+        row.querySelector('.rep-row-btn').textContent = 'Selecteer';
+    } else {
+        selectedRepairs.set(key, { model, naam, prijs });
+        row.classList.add('geselecteerd');
+        row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
+        if (!state.repGarantie) {
+            state.repGarantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
+        }
+    }
+    refreshAll();
+});
+
+// Zet de juiste rijen op 'geselecteerd' na (her)opbouw
+function syncRepRows(){
+    document.querySelectorAll('#repModelBlocks .rep-row').forEach(row=>{
+        const key = row.dataset.repModel + '||' + row.dataset.repNaam;
         if (selectedRepairs.has(key)) {
-            selectedRepairs.delete(key);
-            row.classList.remove('geselecteerd');
-            row.querySelector('.rep-row-btn').textContent = 'Selecteer';
-        } else {
-            selectedRepairs.set(key, { model, naam, prijs });
             row.classList.add('geselecteerd');
             row.querySelector('.rep-row-btn').innerHTML = '<i class="fa-solid fa-check"></i> Geselecteerd';
-            // Standaard 90 dagen reparatiegarantie als nog niet gekozen
-            if (!state.repGarantie) {
-                state.repGarantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
-            }
         }
-        refreshAll();
     });
-});
+}
+
+// Laad reparaties.json
+fetch('reparaties.json')
+    .then(r => r.json())
+    .then(d => buildReparaties(d.modellen))
+    .catch(err => console.error('Kon reparaties.json niet laden:', err));
+
+
 
 
 // ============================================================
@@ -728,7 +791,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 // ============================================================
 // SCROLL ANIMATIONS
 // ============================================================
-const fadeEls = document.querySelectorAll('.card, .step, .review-card, .faq-item, .trust-item, .hero-stats, .rep-row');
+const fadeEls = document.querySelectorAll('.card, .step, .review-card, .faq-item, .trust-item, .hero-stats');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
