@@ -339,7 +339,7 @@ const stickyRepairChips  = document.getElementById('stickyRepairChips');
 function modelColor(model) {
     if (model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
     if (model.includes('OLED')) return { bg: '#fb923c', color: '#000' };
-    return { bg: '#ec4899', color: '#fff' };
+    return { bg: '#00ff88', color: '#000' };
 }
 // Maak een badge
 function makeChip(label, style, onRemove) {
@@ -414,12 +414,12 @@ function updateStickyBar() {
             stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`, () => removeConsole(0)));
         } else {
             const n = selectedConsoles.length;
-            // Zelfde model? → modelkleur. Mix? → groen
+            // Zelfde model? → modelkleur. Mix? → blauw/cyaan
             const uniqueModels = new Set(selectedConsoles.map(c =>
                 c.model.includes('Lite') ? 'lite' : c.model.includes('OLED') ? 'oled' : 'v1v2'));
             const col = uniqueModels.size === 1
                 ? modelColor(selectedConsoles[0].model)
-                : { bg: '#00ff88', color: '#000' };
+                : { bg: '#22d3ee', color: '#000' };
             stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllConsoles));
         }
 
@@ -449,12 +449,12 @@ function updateStickyBar() {
             const naam = r.naam.split('(')[0].trim();
             stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         } else {
-            // Zelfde model? → modelkleur. Mix? → groen
+            // Zelfde model? → modelkleur. Mix? → blauw/cyaan
             const uniqueModels = new Set([...selectedRepairs.values()].map(r =>
                 r.model.includes('Lite') ? 'lite' : r.model.includes('OLED') ? 'oled' : 'v1v2'));
             const col = uniqueModels.size === 1
                 ? modelColor([...selectedRepairs.values()][0].model)
-                : { bg: '#00ff88', color: '#000' };
+                : { bg: '#22d3ee', color: '#000' };
             stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         }
 
