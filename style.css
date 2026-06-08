@@ -3141,10 +3141,16 @@ footer {
 .rep-model-header {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    background: rgba(255,255,255,0.02);
+    gap: 14px;
+    padding: 16px 22px;
     border-bottom: 1px solid var(--border);
+}
+.rep-model-header-count {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .rep-model-icon {
@@ -3162,9 +3168,9 @@ footer {
 }
 
 .rep-model-icon-lite {
-    background: rgba(99,102,241,0.1);
-    border-color: rgba(99,102,241,0.25);
-    color: #818cf8;
+    background: rgba(226,232,240,0.12);
+    border-color: rgba(226,232,240,0.25);
+    color: #e2e8f0;
 }
 
 .rep-model-icon-oled {
@@ -3174,17 +3180,22 @@ footer {
 }
 
 .rep-model-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin: 0 0 2px;
-    letter-spacing: -0.2px;
+    font-size: 1.08rem;
+    font-weight: 800;
+    margin: 0 0 1px;
+    letter-spacing: -0.3px;
 }
 
 .rep-model-sub {
-    font-size: 0.82rem;
-    color: var(--text-muted);
+    font-size: 0.8rem;
+    color: #64748b;
     margin: 0;
 }
+
+/* Gekleurde header-band per model */
+.rep-model-header-lite  { background: linear-gradient(90deg, rgba(226,232,240,0.08), transparent); }
+.rep-model-header-v1v2  { background: linear-gradient(90deg, rgba(0,255,136,0.08), transparent); }
+.rep-model-header-oled  { background: linear-gradient(90deg, rgba(245,158,11,0.08), transparent); }
 
 .rep-list {
     display: flex;
