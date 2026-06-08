@@ -3325,11 +3325,56 @@ footer {
 }
 
 @media (max-width: 600px) {
-    .rep-row { padding: 12px 16px; gap: 10px; }
+    /* Header gestapeld op mobiel */
+    .rep-model-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        padding: 16px;
+    }
+    .rep-model-header > div:not(.rep-model-icon) {
+        flex: none;
+    }
+    .rep-model-header-count {
+        margin-left: 0;
+    }
+
+    /* Rij: naam links, prijs als chip rechts, knop verborgen, hele rij klikbaar */
+    .rep-row {
+        padding: 14px 16px;
+        gap: 10px;
+        align-items: center;
+    }
     .rep-row.geselecteerd { padding-left: 13px; }
-    .rep-row-btn { padding: 5px 10px; font-size: 0.75rem; }
-    .rep-model-header { padding: 16px; }
-    .rep-row-prijs { font-size: 0.88rem; }
+    .rep-row-info {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+    }
+    .rep-row-naam {
+        font-size: 0.88rem;
+        font-weight: 600;
+        flex: 1;
+    }
+    .rep-row-prijs {
+        flex-shrink: 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid var(--border);
+        padding: 5px 12px;
+        border-radius: 16px;
+    }
+    /* Knop verbergen — hele rij is klikbaar */
+    .rep-row-btn { display: none; }
+
+    /* Geselecteerde rij: prijschip krijgt modelkleur-tint */
+    #rep-lite-block  .rep-row.geselecteerd .rep-row-prijs { background: rgba(226,232,240,0.18); border-color: #e2e8f0; color: #e2e8f0; }
+    #rep-v1v2-block  .rep-row.geselecteerd .rep-row-prijs { background: rgba(0,255,136,0.18); border-color: #00ff88; color: #00ff88; }
+    #rep-oled-block  .rep-row.geselecteerd .rep-row-prijs { background: rgba(245,158,11,0.18); border-color: #fb923c; color: #fb923c; }
 }
 
 /* ===========================
