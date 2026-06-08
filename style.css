@@ -3145,6 +3145,10 @@ footer {
     padding: 16px 22px;
     border-bottom: 1px solid var(--border);
 }
+.rep-model-header > div:not(.rep-model-icon) {
+    flex: 1;
+    text-align: center;
+}
 .rep-model-header-count {
     margin-left: auto;
     font-size: 0.75rem;
