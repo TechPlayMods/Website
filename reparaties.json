@@ -14,7 +14,7 @@
         { "naam": "Joy-Con drift herstellen", "prijs": 25 },
         { "naam": "Scherm (LCD) vervangen", "prijs": 70 },
         { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 }
+        { "naam": "Luidspreker vervangen", "prijs": 30 },
         { "naam": "Koelpasta vervangen", "prijs": 30 }
       ]
     },
@@ -32,7 +32,7 @@
         { "naam": "Joy-Con drift herstellen", "prijs": 25 },
         { "naam": "Scherm (LCD) vervangen", "prijs": 70 },
         { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 }
+        { "naam": "Luidspreker vervangen", "prijs": 30 },
         { "naam": "Koelpasta vervangen", "prijs": 30 }
       ]
     },
@@ -50,7 +50,7 @@
         { "naam": "Joy-Con drift herstellen", "prijs": 25 },
         { "naam": "Scherm (LCD) vervangen", "prijs": 70 },
         { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 }
+        { "naam": "Luidspreker vervangen", "prijs": 30 },
         { "naam": "Koelpasta vervangen", "prijs": 30 }
       ]
     }
