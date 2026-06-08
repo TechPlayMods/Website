@@ -3293,7 +3293,7 @@ footer {
 
 .rep-row-btn:hover { border-color: var(--primary); color: var(--primary); }
 /* Per-model hover kleuren */
-#rep-v1v2-block .rep-row-btn:hover { border-color: #ec4899; color: #ec4899; }
+#rep-v1v2-block .rep-row-btn:hover { border-color: #00ff88; color: #00ff88; }
 #rep-lite-block  .rep-row-btn:hover { border-color: #e2e8f0; color: #e2e8f0; }
 #rep-oled-block  .rep-row-btn:hover { border-color: #fb923c; color: #fb923c; }
 
@@ -3502,9 +3502,9 @@ footer {
 
 /* Jump cards */
 .rep-jump-icon-v1v2 {
-    background: rgba(236,72,153,0.1);
-    border-color: rgba(236,72,153,0.25);
-    color: #ec4899;
+    background: rgba(0,255,136,0.1);
+    border-color: rgba(0,255,136,0.25);
+    color: #00ff88;
     font-size: 1.4rem;
 }
 .rep-jump-icon-lite {
@@ -3520,7 +3520,7 @@ footer {
     font-size: 1.4rem;
 }
 
-.rep-jump-card.rep-jump-v1v2:hover { border-color: #ec4899; box-shadow: 0 6px 20px rgba(236,72,153,0.1); }
+.rep-jump-card.rep-jump-v1v2:hover { border-color: #00ff88; box-shadow: 0 6px 20px rgba(0,255,136,0.1); }
 .rep-jump-card.rep-jump-lite:hover  { border-color: #e2e8f0; box-shadow: 0 6px 20px rgba(226,232,240,0.08); }
 .rep-jump-card.rep-jump-oled:hover  { border-color: #fb923c; box-shadow: 0 6px 20px rgba(251,146,60,0.1); }
 
@@ -3544,12 +3544,12 @@ footer {
     font-size: 1.5rem;
 }
 
-.rep-model-header-v1v2 { border-bottom-color: rgba(236,72,153,0.15); }
+.rep-model-header-v1v2 { border-bottom-color: rgba(0,255,136,0.15); }
 .rep-model-header-lite  { border-bottom-color: rgba(226,232,240,0.12); }
 .rep-model-header-oled  { border-bottom-color: rgba(251,146,60,0.15); }
 
 /* Block left border accent per model */
-#rep-v1v2-block { border-top: 2px solid #ec4899; }
+#rep-v1v2-block { border-top: 2px solid #00ff88; }
 #rep-lite-block  { border-top: 2px solid #e2e8f0; }
 #rep-oled-block  { border-top: 2px solid #fb923c; }
 
@@ -3646,12 +3646,12 @@ footer {
 #rep-oled-block  .rep-row:hover { background: rgba(255,255,255,0.02); }
 
 /* Selecteer knop — geselecteerd in eigen modelkleur */
-#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: #ec4899; border-color: #ec4899; color: #fff; }
+#rep-v1v2-block .rep-row.geselecteerd .rep-row-btn { background: #00ff88; border-color: #00ff88; color: #0f1115; }
 #rep-lite-block  .rep-row.geselecteerd .rep-row-btn { background: #e2e8f0; border-color: #e2e8f0; color: #0f1115; }
 #rep-oled-block  .rep-row.geselecteerd .rep-row-btn { background: #fb923c; border-color: #fb923c; color: #000; }
 
 /* Geselecteerde rij — subtiele neutrale highlight, model-accent alleen op linkerrand */
-#rep-v1v2-block .rep-row.geselecteerd { border-left-color: #ec4899; background: rgba(255,255,255,0.03); }
+#rep-v1v2-block .rep-row.geselecteerd { border-left-color: #00ff88; background: rgba(255,255,255,0.03); }
 #rep-lite-block  .rep-row.geselecteerd { border-left-color: #e2e8f0; background: rgba(255,255,255,0.03); }
 #rep-oled-block  .rep-row.geselecteerd { border-left-color: #fb923c; background: rgba(255,255,255,0.03); }
 
@@ -3690,11 +3690,11 @@ footer {
 /* V1/V2 — groen (ongewijzigd) */
 .rep-jump-icon-v1v2,
 .rep-model-icon-v1v2 {
-    background: rgba(236,72,153,0.1);
-    border-color: rgba(236,72,153,0.25);
-    color: #ec4899;
+    background: rgba(0,255,136,0.1);
+    border-color: rgba(0,255,136,0.25);
+    color: #00ff88;
 }
-.rep-jump-card.rep-jump-v1v2:hover { border-color: #ec4899; box-shadow: 0 6px 20px rgba(236,72,153,0.1); }
+.rep-jump-card.rep-jump-v1v2:hover { border-color: #00ff88; box-shadow: 0 6px 20px rgba(0,255,136,0.1); }
 
 /* Lite — geel */
 .rep-jump-icon-lite,
@@ -4465,28 +4465,28 @@ footer {
    SWITCH V1/V2 KAART — zelfde stijl als Lite, maar groen
 ═══════════════════════════════════════════ */
 .card-v1v2 {
-    background: linear-gradient(145deg, #1a0e16, #1f111b) !important;
-    border: 2px solid #9d2463 !important;
-    box-shadow: 0 0 35px rgba(236, 72, 153, 0.12) !important;
+    background: linear-gradient(145deg, #0c1a14, #0f1f17) !important;
+    border: 2px solid #1d6b47 !important;
+    box-shadow: 0 0 35px rgba(0, 255, 136, 0.12) !important;
 }
 .card-v1v2:hover {
-    border-color: #ec4899 !important;
-    box-shadow: 0 12px 40px rgba(236, 72, 153, 0.18) !important;
+    border-color: #00ff88 !important;
+    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.18) !important;
 }
-.card-v1v2 .card-icon iconify-icon { color: #ec4899; }
+.card-v1v2 .card-icon iconify-icon { color: #00ff88; }
 .card-v1v2 ul li { color: rgba(255,255,255,0.6); }
-.card-v1v2 ul li i.fa-check { color: #ec4899 !important; }
+.card-v1v2 ul li i.fa-check { color: #00ff88 !important; }
 .card-v1v2 .btn-card {
-    background: #ec4899;
-    border-color: #ec4899;
-    color: #fff !important;
+    background: #00ff88;
+    border-color: #00ff88;
+    color: #0f1115 !important;
 }
 .card-v1v2 .btn-card:hover {
-    background: #db2777;
-    border-color: #db2777;
-    color: #fff !important;
+    background: #00cc6e;
+    border-color: #00cc6e;
+    color: #0f1115 !important;
 }
-.card-v1v2 .btn-card.geselecteerd { background: #ec4899; border-color: #ec4899; color: #fff !important; }
+.card-v1v2 .btn-card.geselecteerd { background: #00ff88; border-color: #00ff88; color: #0f1115 !important; }
 
 /* ═══════════════════════════════════════════
    METHODE BADGES (DAT0 / Kamikaze) in formulier & overzicht
