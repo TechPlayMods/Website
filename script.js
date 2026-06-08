@@ -419,7 +419,7 @@ function updateStickyBar() {
                 c.model.includes('Lite') ? 'lite' : c.model.includes('OLED') ? 'oled' : 'v1v2'));
             const col = uniqueModels.size === 1
                 ? modelColor(selectedConsoles[0].model)
-                : { bg: '#22d3ee', color: '#000' };
+                : { bg: '#3b82f6', color: '#fff' };
             stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllConsoles));
         }
 
@@ -454,7 +454,7 @@ function updateStickyBar() {
                 r.model.includes('Lite') ? 'lite' : r.model.includes('OLED') ? 'oled' : 'v1v2'));
             const col = uniqueModels.size === 1
                 ? modelColor([...selectedRepairs.values()][0].model)
-                : { bg: '#22d3ee', color: '#000' };
+                : { bg: '#3b82f6', color: '#fff' };
             stickyRepairChips.appendChild(makeChip(repCount + ' reparaties', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         }
 
