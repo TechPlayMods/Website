@@ -404,6 +404,20 @@ function modelColor(model) {
     if (model.includes('OLED')) return { bg: '#fb923c', color: '#000' };
     return { bg: '#00ff88', color: '#000' };
 }
+// Console-kleur op basis van methode: Kamikaze = rood, DAT0 = oranje
+function consoleColor(c) {
+    if (c.method === 'Kamikaze') return { bg: '#ef4444', color: '#fff' };
+    if (c.method === 'DAT0')     return { bg: '#fb923c', color: '#000' };
+    if (c.model.includes('Lite')) return { bg: '#e2e8f0', color: '#0f1115' };
+    return { bg: '#00ff88', color: '#000' }; // V1/V2
+}
+// Unieke variant-sleutel per console (model + methode)
+function consoleVariant(c) {
+    if (c.method === 'Kamikaze') return 'kamikaze';
+    if (c.method === 'DAT0')     return 'dat0';
+    if (c.model.includes('Lite')) return 'lite';
+    return 'v1v2';
+}
 // Maak een badge
 function makeChip(label, style, onRemove) {
     // Wrapper houdt de tekstbubbel en het kruis-bubbeltje samen
@@ -473,15 +487,14 @@ function updateStickyBar() {
         // Console badges — bij 1 console de naam, bij meerdere een samenvatting
         if (selectedConsoles.length === 1) {
             const c = selectedConsoles[0];
-            const col = modelColor(c.model);
+            const col = consoleColor(c);
             stickyModchipChips.appendChild(makeChip(c.label, `background:${col.bg};color:${col.color};border-color:${col.bg};`, () => removeConsole(0)));
         } else {
             const n = selectedConsoles.length;
-            // Zelfde model? → modelkleur. Mix? → blauw/cyaan
-            const uniqueModels = new Set(selectedConsoles.map(c =>
-                c.model.includes('Lite') ? 'lite' : c.model.includes('OLED') ? 'oled' : 'v1v2'));
-            const col = uniqueModels.size === 1
-                ? modelColor(selectedConsoles[0].model)
+            // Zelfde variant (model + methode)? → die kleur. Mix? → blauw
+            const uniqueVariants = new Set(selectedConsoles.map(consoleVariant));
+            const col = uniqueVariants.size === 1
+                ? consoleColor(selectedConsoles[0])
                 : { bg: '#3b82f6', color: '#fff' };
             stickyModchipChips.appendChild(makeChip(n + ' consoles', `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllConsoles));
         }
