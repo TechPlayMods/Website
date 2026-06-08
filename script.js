@@ -94,6 +94,7 @@ function buildReparaties(modellen){
                     <h3 class="rep-model-title">${m.label}</h3>
                     <p class="rep-model-sub">${m.sub || ''}</p>
                 </div>
+                <span class="rep-model-header-count">${m.reparaties.length} reparaties</span>
             </div>
             ${m.reparaties.map(r=>`
                 <div class="rep-row" data-rep-model="${m.label}" data-rep-naam="${r.naam}" data-rep-prijs="${r.prijs}">
