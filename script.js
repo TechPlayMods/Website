@@ -298,7 +298,7 @@ function updateFormBlocks() {
         // Render rows grouped by model — always show model header
         document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
             `<div class="intake-rep-model">${model}</div>` +
-            reps.map(r => `<div class="intake-rep-item"><span class="intake-rep-item-name"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam.split('(')[0].trim()}</span><span class="intake-rep-item-price">€ ${r.prijs},-</span></div>`).join('')
+            reps.map(r => `<div class="intake-rep-item"><span class="intake-rep-item-name"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam}</span><span class="intake-rep-item-price">€ ${r.prijs},-</span></div>`).join('')
         ).join('');
     } else {
         repEmpty.style.display  = '';
@@ -320,7 +320,7 @@ function updateRepairBar() {
     document.getElementById('repSelectedCount').textContent = count + (count === 1 ? ' reparatie geselecteerd' : ' reparaties geselecteerd');
     document.getElementById('repSelectedTotal').textContent = '≈ € ' + total + ',-';
     document.getElementById('repSelectedChips').innerHTML = [...selectedRepairs.values()].map(r =>
-        `<span class="rep-chip">${r.naam.split('(')[0].trim()}</span>`
+        `<span class="rep-chip">${r.naam}</span>`
     ).join('');
 }
 
@@ -446,7 +446,7 @@ function updateStickyBar() {
         if (repCount === 1) {
             const r = [...selectedRepairs.values()][0];
             const col = modelColor(r.model);
-            const naam = r.naam.split('(')[0].trim();
+            const naam = r.naam;
             stickyRepairChips.appendChild(makeChip(naam, `background:${col.bg};color:${col.color};border-color:${col.bg};`, clearAllRepairs));
         } else {
             // Zelfde model? → modelkleur. Mix? → blauw/cyaan
@@ -555,7 +555,7 @@ function updateOrderSummary() {
             repairs.forEach(r => {
                 const row = document.createElement('div');
                 row.className = 'order-row order-row-repair';
-                row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam.split('(')[0].trim()}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
+                row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
                 repContainer.appendChild(row);
             });
         });
