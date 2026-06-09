@@ -92,7 +92,7 @@ function buildReparaties(modellen){
                 <div class="rep-model-icon rep-model-icon-${m.id}"><iconify-icon icon="${m.icon}"></iconify-icon></div>
                 <div>
                     <h3 class="rep-model-title">${m.label}</h3>
-                    <p class="rep-model-sub">${m.sub || ''}</p>
+                    ${m.sub ? `<p class="rep-model-sub">${m.sub}</p>` : ''}
                 </div>
                 <span class="rep-model-header-count">${m.reparaties.length} reparaties</span>
             </div>
