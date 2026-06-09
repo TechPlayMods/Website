@@ -3,55 +3,142 @@
     {
       "id": "lite",
       "label": "Switch Lite",
-      "sub": "Handheld only — geen afneembare Joy-Cons",
       "icon": "boxicons:handheld-alt-filled",
       "reparaties": [
-        { "naam": "Oplaadpoort vervangen", "prijs": 35 },
-        { "naam": "Batterij vervangen", "prijs": 40 },
-        { "naam": "Behuizing vervangen", "prijs": 50 },
-        { "naam": "Analoge joysticks vervangen", "prijs": 35 },
-        { "naam": "Hall effect joysticks plaatsen", "prijs": 45 },
-        { "naam": "Joy-Con drift herstellen", "prijs": 25 },
-        { "naam": "Scherm (LCD) vervangen", "prijs": 70 },
-        { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 },
-        { "naam": "Koelpasta vervangen", "prijs": 30 }
+        {
+          "naam": "Oplaadpoort vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Batterij vervangen",
+          "prijs": 40
+        },
+        {
+          "naam": "Behuizing vervangen",
+          "prijs": 50
+        },
+        {
+          "naam": "Analoge joysticks vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Hall effect joysticks plaatsen",
+          "prijs": 45
+        },
+        {
+          "naam": "Joy-Con drift herstellen",
+          "prijs": 25
+        },
+        {
+          "naam": "Scherm (LCD) vervangen",
+          "prijs": 70
+        },
+        {
+          "naam": "Knoppenset vervangen",
+          "prijs": 25
+        },
+        {
+          "naam": "Luidspreker vervangen",
+          "prijs": 30
+        },
+        {
+          "naam": "Koelpasta vervangen",
+          "prijs": 30
+        }
       ]
     },
     {
       "id": "v1v2",
       "label": "Switch V1 / V2",
-      "sub": "Origineel model — meest voorkomende reparaties",
       "icon": "game-icons:game-console",
       "reparaties": [
-        { "naam": "Oplaadpoort vervangen", "prijs": 35 },
-        { "naam": "Batterij vervangen", "prijs": 40 },
-        { "naam": "Behuizing vervangen", "prijs": 50 },
-        { "naam": "Analoge joysticks vervangen", "prijs": 35 },
-        { "naam": "Hall effect joysticks plaatsen", "prijs": 45 },
-        { "naam": "Joy-Con drift herstellen", "prijs": 25 },
-        { "naam": "Scherm (LCD) vervangen", "prijs": 70 },
-        { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 },
-        { "naam": "Koelpasta vervangen", "prijs": 30 }
+        {
+          "naam": "Oplaadpoort vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Batterij vervangen",
+          "prijs": 40
+        },
+        {
+          "naam": "Behuizing vervangen",
+          "prijs": 50
+        },
+        {
+          "naam": "Analoge joysticks vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Hall effect joysticks plaatsen",
+          "prijs": 45
+        },
+        {
+          "naam": "Joy-Con drift herstellen",
+          "prijs": 25
+        },
+        {
+          "naam": "Scherm (LCD) vervangen",
+          "prijs": 70
+        },
+        {
+          "naam": "Knoppenset vervangen",
+          "prijs": 25
+        },
+        {
+          "naam": "Luidspreker vervangen",
+          "prijs": 30
+        },
+        {
+          "naam": "Koelpasta vervangen",
+          "prijs": 30
+        }
       ]
     },
     {
       "id": "oled",
       "label": "Switch OLED",
-      "sub": "Nieuwste model — groter OLED scherm",
       "icon": "game-icons:game-console",
       "reparaties": [
-        { "naam": "Oplaadpoort vervangen", "prijs": 35 },
-        { "naam": "Batterij vervangen", "prijs": 40 },
-        { "naam": "Behuizing vervangen", "prijs": 50 },
-        { "naam": "Analoge joysticks vervangen", "prijs": 35 },
-        { "naam": "Hall effect joysticks plaatsen", "prijs": 45 },
-        { "naam": "Joy-Con drift herstellen", "prijs": 25 },
-        { "naam": "Scherm (OLED) vervangen", "prijs": 120 },
-        { "naam": "Knoppenset vervangen", "prijs": 25 },
-        { "naam": "Luidspreker vervangen", "prijs": 30 },
-        { "naam": "Koelpasta vervangen", "prijs": 30 }
+        {
+          "naam": "Oplaadpoort vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Batterij vervangen",
+          "prijs": 40
+        },
+        {
+          "naam": "Behuizing vervangen",
+          "prijs": 50
+        },
+        {
+          "naam": "Analoge joysticks vervangen",
+          "prijs": 35
+        },
+        {
+          "naam": "Hall effect joysticks plaatsen",
+          "prijs": 45
+        },
+        {
+          "naam": "Joy-Con drift herstellen",
+          "prijs": 25
+        },
+        {
+          "naam": "Scherm (OLED) vervangen",
+          "prijs": 120
+        },
+        {
+          "naam": "Knoppenset vervangen",
+          "prijs": 25
+        },
+        {
+          "naam": "Luidspreker vervangen",
+          "prijs": 30
+        },
+        {
+          "naam": "Koelpasta vervangen",
+          "prijs": 30
+        }
       ]
     }
   ]
