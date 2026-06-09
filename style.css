@@ -3841,11 +3841,14 @@ footer {
 .timeline-split-label {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+.timeline-split-label i {
+    font-size: 1.56rem;
 }
 
 .timeline-split-mod .timeline-split-label { color: var(--primary); }
