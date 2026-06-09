@@ -4710,3 +4710,9 @@ footer {
     display: block;
 }
 .sticky-chip-x:hover { background: #f1f5f9; }
+
+
+/* Vergelijkingstabel verbergen op mobiel (telefoon), zichtbaar vanaf tablet */
+@media (max-width: 600px) {
+    .verg-tabel-wrap { display: none; }
+}
