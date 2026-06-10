@@ -781,11 +781,16 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
     const headerH = document.querySelector('header')?.offsetHeight || 70;
 
     function onScroll() {
+        const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
         let current = '';
-        sections.forEach(id => {
-            const el = document.getElementById(id);
-            if (el && window.scrollY >= el.offsetTop - headerH - 10) current = id;
-        });
+        if (atBottom) {
+            current = 'contact';
+        } else {
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && window.scrollY >= el.offsetTop - headerH - 10) current = id;
+            });
+        }
         navLinks.forEach(a => {
             const href = a.getAttribute('href');
             a.classList.toggle('active', href === '#' + current);
