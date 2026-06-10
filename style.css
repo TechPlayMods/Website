@@ -126,6 +126,11 @@ nav a.active { color: var(--primary); }
     color: #000 !important;
 }
 
+.btn-nav.active {
+    background: var(--primary);
+    color: #000 !important;
+}
+
 /* Hamburger */
 .hamburger {
     display: none;
