@@ -776,7 +776,7 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
 // SCROLL SPY
 // ============================================================
 (function () {
-    const sections = ['services', 'reparatie', 'garantie', 'portfolio', 'werkwijze', 'faq', 'contact'];
+    const sections = ['services', 'garantie', 'vergelijking', 'reparatie', 'gratis', 'portfolio', 'reviews', 'werkwijze', 'faq', 'contact'];
     const navLinks = document.querySelectorAll('nav a.nav-link:not(.btn-nav)');
     const headerH = document.querySelector('header')?.offsetHeight || 70;
 
