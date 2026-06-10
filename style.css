@@ -110,6 +110,7 @@ nav a {
 }
 
 nav a:hover { color: var(--text-main); }
+nav a.active { color: var(--primary); }
 
 .btn-nav {
     border: 1px solid var(--primary);
@@ -1930,7 +1931,7 @@ footer {
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     z-index: 2;
     flex-shrink: 0;
     box-shadow: 0 0 16px rgba(0,255,136,0.2);
@@ -1995,7 +1996,7 @@ footer {
     .timeline::before { left: 20px; }
     .timeline-item,
     .timeline-item.timeline-item-right { flex-direction: column; padding-left: 56px; }
-    .timeline-icon { left: 0; top: 0; transform: none; width: 40px; height: 40px; font-size: 1.2rem; }
+    .timeline-icon { left: 0; top: 0; transform: none; width: 40px; height: 40px; font-size: 0.95rem; }
     .timeline-card { width: 100%; margin: 0 !important; padding: 16px 18px; }
     .timeline-card h4 { font-size: 0.97rem; }
     .timeline-card p { font-size: 0.85rem; }
