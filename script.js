@@ -777,7 +777,7 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
 // ============================================================
 (function () {
     const sections = ['services', 'garantie', 'vergelijking', 'reparatie', 'gratis', 'portfolio', 'reviews', 'werkwijze', 'faq', 'contact'];
-    const navLinks = document.querySelectorAll('nav a.nav-link:not(.btn-nav)');
+    const navLinks = document.querySelectorAll('nav a.nav-link');
 
     function onScroll() {
         const headerH = document.querySelector('header')?.offsetHeight || 70;
