@@ -773,6 +773,31 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
 
 
 // ============================================================
+// SCROLL SPY
+// ============================================================
+(function () {
+    const sections = ['services', 'reparatie', 'garantie', 'portfolio', 'werkwijze', 'faq', 'contact'];
+    const navLinks = document.querySelectorAll('nav a.nav-link:not(.btn-nav)');
+    const headerH = document.querySelector('header')?.offsetHeight || 70;
+
+    function onScroll() {
+        let current = '';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= el.offsetTop - headerH - 10) current = id;
+        });
+        navLinks.forEach(a => {
+            const href = a.getAttribute('href');
+            a.classList.toggle('active', href === '#' + current);
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+
+
+// ============================================================
 // HAMBURGER MENU
 // ============================================================
 const hamburger = document.getElementById('hamburger');
