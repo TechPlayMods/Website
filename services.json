@@ -1,0 +1,110 @@
+{
+  "services": [
+    {
+      "id": "lite",
+      "cardClass": "card-lite",
+      "icon": "boxicons:handheld-alt-filled",
+      "titel": "Switch Lite",
+      "prijs": 90,
+      "prijsSub": "Chip inbegrepen",
+      "badge": null,
+      "methodTag": null,
+      "features": [
+        "Inclusief Picofly RP2040 Zero chip",
+        "Professioneel micro-soldeerwerk",
+        "Geëmailleerd koper draad",
+        "Soldermask op kwetsbare verbindingspunten",
+        "Vervanging thermal paste",
+        "Dual-boot setup",
+        "Gratis software-configuratie"
+      ],
+      "btnClass": "",
+      "data": {
+        "model": "Lite",
+        "prijs": "90",
+        "label": "Switch Lite",
+        "method": ""
+      }
+    },
+    {
+      "id": "v1v2",
+      "cardClass": "card-v1v2",
+      "icon": "game-icons:game-console",
+      "titel": "Switch V1 / V2",
+      "prijs": 85,
+      "prijsSub": "Chip inbegrepen",
+      "badge": null,
+      "methodTag": null,
+      "features": [
+        "Inclusief Picofly RP2040 Zero chip",
+        "Professioneel micro-soldeerwerk",
+        "Geëmailleerd koper draad",
+        "Soldermask op kwetsbare verbindingspunten",
+        "Vervanging thermal paste",
+        "Dual-boot setup",
+        "Gratis software-configuratie"
+      ],
+      "btnClass": "",
+      "data": {
+        "model": "V1/V2",
+        "prijs": "85",
+        "label": "Switch V1 / V2",
+        "method": ""
+      }
+    },
+    {
+      "id": "oled-dat0",
+      "cardClass": "popular card-dat0",
+      "icon": "game-icons:game-console",
+      "titel": "Switch OLED",
+      "prijs": 110,
+      "prijsSub": "Chip inbegrepen",
+      "badge": { "tekst": "Meest Gekozen", "icon": "fa-solid fa-fire", "class": "" },
+      "methodTag": { "tekst": "DAT0 Adapter", "class": "method-standard" },
+      "features": [
+        "Inclusief Picofly RP2040 Zero chip",
+        "Professioneel micro-soldeerwerk",
+        "Geëmailleerd koper draad",
+        "Soldermask op kwetsbare verbindingspunten",
+        "Vervanging thermal paste",
+        "Dual-boot setup",
+        "Gratis software-configuratie",
+        "DAT0-adapter onder de eMMC-chip"
+      ],
+      "btnClass": "btn-card-primary",
+      "data": {
+        "model": "OLED-DAT0",
+        "prijs": "110",
+        "label": "Switch OLED",
+        "method": "DAT0"
+      }
+    },
+    {
+      "id": "oled-kamikaze",
+      "cardClass": "card-kamikaze",
+      "icon": "game-icons:game-console",
+      "titel": "Switch OLED",
+      "prijs": 130,
+      "prijsSub": "Chip inbegrepen",
+      "badge": { "tekst": "Meest Geavanceerd", "icon": "fa-solid fa-bolt", "class": "badge-premium" },
+      "methodTag": { "tekst": "Kamikaze", "class": "method-premium" },
+      "features": [
+        "Inclusief Picofly RP2040 Zero chip",
+        "Professioneel micro-soldeerwerk",
+        "Geëmailleerd koper draad",
+        "Soldermask op kwetsbare verbindingspunten",
+        "Vervanging thermal paste",
+        "Dual-boot setup",
+        "Gratis software-configuratie",
+        "DAT0-punt direct verbonden"
+      ],
+      "btnClass": "btn-card-premium",
+      "data": {
+        "model": "OLED-Kamikaze",
+        "prijs": "130",
+        "label": "Switch OLED",
+        "method": "Kamikaze"
+      }
+    }
+  ]
+}
