@@ -153,39 +153,78 @@ fetch('reparaties.json')
     .catch(err => console.error('Kon reparaties.json niet laden:', err));
 
 
+// ============================================================
+// SERVICE CARDS — geladen uit services.json
+// ============================================================
+function buildServices(services) {
+    const grid = document.getElementById('servicesGrid');
+    if (!grid) return;
+
+    grid.innerHTML = services.map(s => {
+        const badge = s.badge
+            ? `<div class="badge ${s.badge.class || ''}"><i class="${s.badge.icon}"></i> ${s.badge.tekst}</div>`
+            : '';
+        const methodTag = s.methodTag
+            ? `<div class="method-tag ${s.methodTag.class || ''}">${s.methodTag.tekst}</div>`
+            : '';
+        const features = s.features
+            .map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`)
+            .join('');
+        const btnClass = ['btn-card', s.btnClass, 'aanvragen-btn'].filter(Boolean).join(' ');
+
+        return `
+            <div class="card ${s.cardClass || ''}">
+                ${badge}
+                <div class="card-icon"><iconify-icon icon="${s.icon}"></iconify-icon></div>
+                <h3>${s.titel}</h3>
+                ${methodTag}
+                <p class="price">€ ${s.prijs},-</p>
+                <p class="price-sub">${s.prijsSub}</p>
+                <ul>${features}</ul>
+                <a href="#garantie" class="${btnClass}" data-model="${s.data.model}" data-prijs="${s.data.prijs}" data-label="${s.data.label}" data-method="${s.data.method}">Selecteer <i class="fa-solid fa-arrow-right"></i></a>
+            </div>`;
+    }).join('');
+}
+
+// Laad services.json
+fetch('services.json')
+    .then(r => r.json())
+    .then(d => buildServices(d.services))
+    .catch(err => console.error('Kon services.json niet laden:', err));
+
+
 
 
 // ============================================================
 // SERVICE CARD BUTTONS → select console, scroll to garantie
 // ============================================================
-document.querySelectorAll('.aanvragen-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.aanvragen-btn');
+    if (!btn) return;
+    e.preventDefault();
 
-        // Voeg console toe (meerdere toegestaan, ook duplicaten)
-        selectedConsoles.push({
-            model: btn.dataset.model,
-            label: btn.dataset.label,
-            method: btn.dataset.method || '',
-            prijs: parseInt(btn.dataset.prijs)
-        });
-        // Default garantie als nog niet gekozen
-        if (!state.garantie) {
-            state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
-        }
-
-        // Korte visuele bevestiging op de knop
-        btn.classList.add('geselecteerd');
-        const orig = btn.dataset.label;
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Toegevoegd';
-        setTimeout(() => {
-            btn.classList.remove('geselecteerd');
-            btn.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
-        }, 1200);
-
-        refreshAll();
-        document.getElementById('garantie').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Voeg console toe (meerdere toegestaan, ook duplicaten)
+    selectedConsoles.push({
+        model: btn.dataset.model,
+        label: btn.dataset.label,
+        method: btn.dataset.method || '',
+        prijs: parseInt(btn.dataset.prijs)
     });
+    // Default garantie als nog niet gekozen
+    if (!state.garantie) {
+        state.garantie = { dagen: '90', label: '90 Dagen Garantie', prijs: 0 };
+    }
+
+    // Korte visuele bevestiging op de knop
+    btn.classList.add('geselecteerd');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Toegevoegd';
+    setTimeout(() => {
+        btn.classList.remove('geselecteerd');
+        btn.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
+    }, 1200);
+
+    refreshAll();
+    document.getElementById('garantie').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 
@@ -770,36 +809,6 @@ document.getElementById('modForm').addEventListener('submit', function(e) {
     document.getElementById('successMessage').classList.remove('hidden');
     document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
-
-
-// ============================================================
-// SCROLL SPY
-// ============================================================
-(function () {
-    const sections = ['services', 'garantie', 'vergelijking', 'reparatie', 'gratis', 'portfolio', 'reviews', 'werkwijze', 'faq', 'contact'];
-    const navLinks = document.querySelectorAll('nav a.nav-link');
-
-    function onScroll() {
-        const headerH = document.querySelector('header')?.offsetHeight || 70;
-        const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
-        let current = '';
-        if (atBottom) {
-            current = 'contact';
-        } else {
-            sections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el && window.scrollY >= el.offsetTop - headerH - 10) current = id;
-            });
-        }
-        navLinks.forEach(a => {
-            const href = a.getAttribute('href');
-            a.classList.toggle('active', href === '#' + current);
-        });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-})();
 
 
 // ============================================================
