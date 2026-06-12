@@ -1976,6 +1976,22 @@ footer {
 .timeline-tag i { font-size: 0.72rem; color: var(--text-muted); }
 .timeline-tag-green { color: var(--primary); border-color: rgba(0,255,136,0.25); background: rgba(0,255,136,0.05); }
 .timeline-tag-green i { color: var(--primary); }
+.timeline-tag-warn { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.07); }
+.timeline-tag-warn i { color: #fbbf24; }
+.timeline-backup {
+    display: flex;
+    gap: 8px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    background: rgba(251,191,36,0.07);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin: 4px 0 10px;
+}
+.timeline-backup i { color: #fbbf24; margin-top: 2px; flex-shrink: 0; }
+.timeline-backup strong { color: #fbbf24; }
 
 @media (max-width: 700px) {
     .timeline::before { left: 20px; }
