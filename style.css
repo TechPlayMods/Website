@@ -1980,7 +1980,8 @@ footer {
 .timeline-tag-warn i { color: #fbbf24; }
 .timeline-backup {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 5px;
     font-size: 0.82rem;
     line-height: 1.5;
     color: var(--text-muted);
@@ -1990,8 +1991,15 @@ footer {
     padding: 10px 12px;
     margin: 4px 0 10px;
 }
-.timeline-backup i { color: #fbbf24; margin-top: 2px; flex-shrink: 0; }
-.timeline-backup strong { color: #fbbf24; }
+.timeline-backup-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #fbbf24;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+.timeline-backup-title i { font-size: 0.9rem; }
 
 @media (max-width: 700px) {
     .timeline::before { left: 20px; }
