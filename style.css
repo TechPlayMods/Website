@@ -1907,8 +1907,8 @@ footer {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: var(--bg-card);
     border: 2px solid var(--primary);
@@ -1916,7 +1916,7 @@ footer {
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     z-index: 2;
     flex-shrink: 0;
     box-shadow: 0 0 16px rgba(0,255,136,0.2);
@@ -1996,7 +1996,7 @@ footer {
     .timeline::before { left: 20px; }
     .timeline-item,
     .timeline-item.timeline-item-right { flex-direction: column; padding-left: 56px; }
-    .timeline-icon { left: 0; top: 0; transform: none; width: 40px; height: 40px; font-size: 0.95rem; }
+    .timeline-icon { left: 0; top: 0; transform: none; width: 46px; height: 46px; font-size: 1.3rem; }
     .timeline-card { width: 100%; margin: 0 !important; padding: 16px 18px; }
     .timeline-card h4 { font-size: 0.97rem; }
     .timeline-card p { font-size: 0.85rem; }
