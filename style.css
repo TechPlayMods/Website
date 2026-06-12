@@ -1979,11 +1979,9 @@ footer {
 .timeline-tag-warn { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.07); }
 .timeline-tag-warn i { color: #fbbf24; }
 .timeline-backup {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    display: block;
     font-size: 0.82rem;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--text-muted);
     background: rgba(251,191,36,0.07);
     border: 1px solid rgba(251,191,36,0.25);
@@ -1991,15 +1989,8 @@ footer {
     padding: 10px 12px;
     margin: 4px 0 10px;
 }
-.timeline-backup-title {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: #fbbf24;
-    font-weight: 700;
-    font-size: 0.85rem;
-}
-.timeline-backup-title i { font-size: 0.9rem; }
+.timeline-backup i { color: #fbbf24; margin-right: 4px; }
+.timeline-backup strong { color: #fbbf24; }
 
 @media (max-width: 700px) {
     .timeline::before { left: 20px; }
