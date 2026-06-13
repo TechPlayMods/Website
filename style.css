@@ -1341,6 +1341,7 @@ footer {
 .card-dat0 .btn-card-primary.geselecteerd { background: #fb923c; border-color: #fb923c; }
 
 
+.card-orange {
     background: linear-gradient(145deg, #1a1000, #1f1500) !important;
     border: 2px solid #cc6600 !important;
     box-shadow: 0 0 35px rgba(204, 102, 0, 0.12) !important;
