@@ -4740,3 +4740,131 @@ footer {
 @media (max-width: 600px) {
     .verg-tabel-wrap { display: none; }
 }
+
+
+/* =========================================================================
+   ###  PIP-BOY / FALLOUT THEMA  ###
+   Toegevoegd als losse module. Elk effect staat in een eigen blok met
+   een AAN/UIT-schakelaar. Wil je een effect weghalen? Verwijder dan het
+   hele blok van dat effect. Niets hierboven in dit bestand is gewijzigd.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1) CRT SCANLINES + VIGNET  (overlay over de hele pagina)
+   UITZETTEN: verwijder dit hele blok, of zet 'display:none' op body::after.
+   Subtiel gehouden zodat tekst leesbaar blijft.
+   ------------------------------------------------------------------------- */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;            /* klikt 'door' de overlay heen */
+    /* Scanlijntjes */
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(0, 255, 136, 0.035) 0px,
+            rgba(0, 255, 136, 0.035) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    /* Subtiele flikker van de buis */
+    animation: crtFlicker 4.5s infinite steps(60);
+    mix-blend-mode: screen;
+}
+
+/* Donkere hoeken (CRT-buis vignet) — aparte laag zodat blend-mode klopt */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9997;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0, 0, 0, 0.35) 100%
+    );
+}
+
+@keyframes crtFlicker {
+    0%, 100% { opacity: 1; }
+    96%      { opacity: 1; }
+    97%      { opacity: 0.92; }
+    98%      { opacity: 1; }
+    99%      { opacity: 0.96; }
+}
+
+/* Respecteer gebruikers die 'verminderde beweging' aan hebben staan */
+@media (prefers-reduced-motion: reduce) {
+    body::after { animation: none; }
+}
+
+
+/* -------------------------------------------------------------------------
+   2) FOSFOR-GLOW op groene tekst  (terminal-gloed)
+   UITZETTEN: verwijder dit blok.
+   ------------------------------------------------------------------------- */
+.hero h1 .highlight,
+.stat-num,
+.hero-badge,
+.logo-accent,
+.price {
+    text-shadow:
+        0 0 4px rgba(0, 255, 136, 0.35),
+        0 0 12px rgba(0, 255, 136, 0.20);
+}
+
+/* De gradient-tekst van "Nintendo Switch" gebruikt -webkit-text-fill:transparent,
+   waardoor text-shadow niet zichtbaar is. Daarom een drop-shadow filter i.p.v. shadow. */
+.hero h1 .highlight {
+    text-shadow: none;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.25));
+}
+
+
+/* -------------------------------------------------------------------------
+   3) MONO TERMINAL-FONT op accenten
+   Alleen op cijfers/labels/badges — NIET op lopende tekst (leesbaarheid).
+   UITZETTEN: verwijder dit blok.
+   ------------------------------------------------------------------------- */
+.stat-num,
+.hero-badge,
+.hero-badge-text,
+.price,
+.price-sub,
+.verg-price,
+.timeline-step-badge,
+.badge,
+.method-tag {
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    letter-spacing: 0.02em;
+}
+
+/* Stats iets ruimer laten ademen met het mono-font */
+.stat-num {
+    letter-spacing: 0.04em;
+}
+
+
+/* -------------------------------------------------------------------------
+   4) TERMINAL-CURSOR knippert achter de hero-subtitel  (optioneel sausje)
+   UITZETTEN: verwijder dit blok.
+   ------------------------------------------------------------------------- */
+.hero > .container > p::after {
+    content: "_";
+    color: var(--primary);
+    font-family: 'Share Tech Mono', monospace;
+    margin-left: 4px;
+    animation: termBlink 1.1s steps(1) infinite;
+}
+@keyframes termBlink {
+    0%, 50%   { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero > .container > p::after { animation: none; }
+}
+
+/* ===========================  EINDE PIP-BOY THEMA  =========================== */
