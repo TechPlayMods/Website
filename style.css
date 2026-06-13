@@ -195,7 +195,13 @@ nav a:hover { color: var(--text-main); }
     animation: fadeInDown 0.7s ease 0.1s both;
 }
 
-.hero h1 .highlight { color: var(--primary); }
+.hero h1 .highlight {
+    background: linear-gradient(100deg, #00ff88 0%, #00ff88 22%, #e2e8f0 42%, #fb923c 66%, #ef4444 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
 
 .hero > .container > p {
     color: var(--text-muted);
