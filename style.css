@@ -968,13 +968,17 @@ footer {
     .hero { padding: 130px 0 80px; }
     .hero h1 { font-size: 2.2rem; }
     .hero-badge {
-        align-items: flex-start;
+        align-items: center;
         text-align: left;
         line-height: 1.35;
         padding: 8px 16px;
         max-width: 90%;
     }
-    .hero-badge i { margin-top: 2px; }
+    .hero-badge i {
+        margin-top: 0;
+        flex-shrink: 0;
+        font-size: 0.95rem;
+    }
     .hero-stats { gap: 24px; }
     .stat-divider { display: none; }
 
