@@ -187,6 +187,12 @@ nav a:hover { color: var(--text-main); }
     animation: fadeInDown 0.6s ease both;
 }
 
+.hero-badge-icon {
+    width: 2em;
+    height: 2em;
+    flex-shrink: 0;
+}
+
 .hero h1 {
     font-size: 3.4rem;
     font-weight: 800;
@@ -980,10 +986,15 @@ footer {
         padding: 8px 16px;
         max-width: 90%;
     }
-    .hero-badge i {
+    .hero-badge i,
+    .hero-badge-icon {
         margin-top: 0;
         flex-shrink: 0;
         font-size: 0.95rem;
+    }
+    .hero-badge-icon {
+        width: 2em;
+        height: 2em;
     }
     .hero-stats { gap: 24px; }
     .stat-divider { display: none; }
