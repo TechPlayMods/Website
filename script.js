@@ -673,7 +673,8 @@ function updateOrderSummary() {
     document.getElementById('summaryGarantieRow').style.display        = hasGarantie ? '' : 'none';
     document.getElementById('summaryGarantiePending').style.display    = (hasConsole && !hasGarantie) ? '' : 'none';
     document.getElementById('summaryTotalWrap').style.display          = hasAnything ? '' : 'none';
-    document.getElementById('summaryIncludes').style.display           = hasAnything ? '' : 'none';
+    document.getElementById('summaryModchipIncludes').style.display    = hasConsole ? '' : 'none';
+    document.getElementById('summaryReparatieIncludes').style.display  = hasRepairs ? '' : 'none';
 
     // Render console rows
     const consoleRows = document.getElementById('summaryConsoleRows');
@@ -747,22 +748,24 @@ function updateOrderSummary() {
     const prefix = hasRepairs && (!hasConsole || !hasGarantie) ? '≈ ' : '';
     document.getElementById('summaryTotal').textContent = prefix + '€ ' + total + ',-';
 
-    // Includes list
-    const includesList = document.getElementById('summaryIncludesList');
-    let items = [];
-    if (hasConsole) items = items.concat([
-        '<li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>',
-        '<li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>',
-        '<li><i class="fa-solid fa-check"></i> Dual-boot setup (SysNAND + EmuNAND)</li>',
-        '<li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>',
-        '<li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>',
-    ]);
-    if (hasRepairs) items = items.concat([
-        '<li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>',
-        '<li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>',
-        '<li><i class="fa-solid fa-check"></i> Standaard 90 dagen garantie op reparatie</li>',
-    ]);
-    includesList.innerHTML = [...new Set(items)].join('');
+    // Includes lists — apart per dienst
+    if (hasConsole) {
+        document.getElementById('summaryModchipIncludesList').innerHTML = [
+            '<li><i class="fa-solid fa-check"></i> Picofly RP2040 Zero chip</li>',
+            '<li><i class="fa-solid fa-check"></i> Micro-soldeerwerk onder microscoop</li>',
+            '<li><i class="fa-solid fa-check"></i> Vervanging thermal paste</li>',
+            '<li><i class="fa-solid fa-check"></i> Gratis software-configuratie</li>',
+            '<li><i class="fa-solid fa-check"></i> Dual-boot setup</li>',
+            '<li><i class="fa-solid fa-check"></i> Standaard 90 dagen garantie</li>',
+        ].join('');
+    }
+    if (hasRepairs) {
+        document.getElementById('summaryReparatieIncludesList').innerHTML = [
+            '<li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>',
+            '<li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>',
+            '<li><i class="fa-solid fa-check"></i> Standaard 90 dagen garantie</li>',
+        ].join('');
+    }
 }
 
 
