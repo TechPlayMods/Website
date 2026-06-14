@@ -3566,6 +3566,114 @@ footer {
     flex-shrink: 0;
 }
 
+/* ===========================
+   REPARATIE — model tabs (klikbaar, geen anchor)
+=========================== */
+.rep-model-tab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-main);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.rep-model-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.rep-tab-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.rep-tab-status {
+    font-size: 0.72rem;
+    color: #64748b;
+    font-weight: 500;
+}
+.rep-tab-arrow {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+.rep-model-tab:hover .rep-tab-arrow { transform: translateX(3px); }
+
+/* Actieve tab — accentkleur per model */
+.rep-model-tab.active.rep-model-tab-lite  { border-color: #e2e8f0; background: rgba(226,232,240,0.06); }
+.rep-model-tab.active.rep-model-tab-v1v2  { border-color: #00ff88; background: rgba(0,255,136,0.06); }
+.rep-model-tab.active.rep-model-tab-oled  { border-color: #fb923c; background: rgba(251,146,60,0.06); }
+.rep-model-tab.active .rep-tab-status { color: var(--text-main); }
+.rep-model-tab.active.rep-model-tab-lite  .rep-tab-status::before { content: "✓ "; color: #e2e8f0; }
+.rep-model-tab.active.rep-model-tab-v1v2  .rep-tab-status::before { content: "✓ "; color: #00ff88; }
+.rep-model-tab.active.rep-model-tab-oled  .rep-tab-status::before { content: "✓ "; color: #fb923c; }
+.rep-model-tab.active .rep-tab-status { font-size: 0; }
+.rep-model-tab.active .rep-tab-status::after { content: "Geselecteerd"; font-size: 0.72rem; }
+
+/* ===========================
+   REPARATIE — categorie-groepen
+=========================== */
+.rep-cat-group:not(:first-child) { border-top: 1px solid var(--border); }
+
+.rep-cat-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px 24px;
+}
+.rep-cat-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    background: var(--primary-dim);
+    border: 1px solid rgba(0,255,136,0.2);
+    color: var(--primary);
+}
+.rep-cat-naam {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+/* Categorie-band + icoon kleuren per model */
+.rep-cat-header-lite { background: rgba(226,232,240,0.04); }
+.rep-cat-header-v1v2 { background: rgba(0,255,136,0.04); }
+.rep-cat-header-oled { background: rgba(251,146,60,0.04); }
+.rep-cat-header-lite .rep-cat-naam { color: #e2e8f0; }
+.rep-cat-header-v1v2 .rep-cat-naam { color: #00ff88; }
+.rep-cat-header-oled .rep-cat-naam { color: #fb923c; }
+.rep-cat-icon-lite { background: rgba(226,232,240,0.1); border-color: rgba(226,232,240,0.22); color: #e2e8f0; }
+.rep-cat-icon-v1v2 { background: rgba(0,255,136,0.1); border-color: rgba(0,255,136,0.22); color: #00ff88; }
+.rep-cat-icon-oled { background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.22); color: #fb923c; }
+
+/* Reparatie-rijen iets inspringen onder de categorie */
+.rep-cat-group .rep-row { padding-left: 65px; }
+.rep-cat-group .rep-row.geselecteerd { padding-left: 62px; }
+
+/* Lege staat — nog geen model gekozen */
+.rep-empty-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+}
+.rep-empty-prompt i { font-size: 1.4rem; color: var(--primary); }
+.rep-empty-prompt p { margin: 0; font-size: 0.92rem; max-width: 360px; }
+
+
 /* Text links uitgelijnd in rijen */
 .rep-row-info {
     flex: 1;
@@ -3610,6 +3718,10 @@ footer {
 @media (max-width: 600px) {
     .rep-model-jump { grid-template-columns: 1fr; gap: 10px; }
     .rep-jump-card { padding: 13px 16px; }
+    .rep-model-tab { padding: 13px 16px; }
+    .rep-cat-group .rep-row { padding-left: 18px; }
+    .rep-cat-group .rep-row.geselecteerd { padding-left: 15px; }
+    .rep-cat-header { padding-left: 16px; padding-right: 16px; }
 }
 
 /* ===========================
