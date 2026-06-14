@@ -4189,7 +4189,7 @@ footer {
    ORDER SUMMARY MODEL HEADER
 =========================== */
 .order-row-model-header {
-    padding: 8px 1.25rem 5px;
+    padding: 7px 1.25rem;
     font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -4197,7 +4197,13 @@ footer {
     color: #94a3b8;
     background: rgba(255,255,255,0.02);
     border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-left: 3px solid transparent;
+    text-align: left;
 }
+/* Variant A — kleur-band per model */
+.order-row-model-header-lite { color: #e2e8f0; background: rgba(226,232,240,0.06); border-left-color: #e2e8f0; }
+.order-row-model-header-v1v2 { color: #00ff88; background: rgba(0,255,136,0.07); border-left-color: #00ff88; }
+.order-row-model-header-oled { color: #fb923c; background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
 
 .rep-aanvraag-model-header {
     background: rgba(255,255,255,0.02);
@@ -4365,8 +4371,7 @@ footer {
 
 /* Model-header binnen reparatie sub-card */
 .summary-sub-card .order-row-model-header {
-    padding: 5px 1rem 4px;
-    background: rgba(255,255,255,0.015);
+    padding: 6px 1rem;
 }
 
 /* ===========================
