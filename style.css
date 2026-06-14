@@ -2310,6 +2310,7 @@ footer {
     font-size: 0.95rem;
     color: var(--primary);
 }
+.order-summary-header i { font-size: 1.25rem; }
 .order-placeholder {
     display: flex;
     flex-direction: column;
@@ -4804,9 +4805,16 @@ footer {
 }
 
 /* ═══════════════════════════════════════════
-   NAAM + METHODE BADGE GESTAPELD (onder elkaar)
+   NAAM + METHODE BADGE
 ═══════════════════════════════════════════ */
-.summary-console-namecol,
+.summary-console-namecol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+}
 .intake-console-namecol {
     display: flex;
     flex-direction: column;
@@ -4821,7 +4829,7 @@ footer {
     font-weight: 600;
     color: var(--text-main);
 }
-/* Badge zonder inline-marge nu het op eigen regel staat */
+/* Badge: naast de naam geen extra inspringing nodig */
 .summary-console-namecol .summary-method-badge,
 .intake-console-namecol .intake-method-badge {
     margin-left: 0;
