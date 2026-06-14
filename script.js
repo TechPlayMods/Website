@@ -760,7 +760,7 @@ function updateOrderSummary() {
     if (hasRepairs) items = items.concat([
         '<li><i class="fa-solid fa-check"></i> Inspectie & diagnose</li>',
         '<li><i class="fa-solid fa-check"></i> Originele kwaliteitsonderdelen</li>',
-        '<li><i class="fa-solid fa-check"></i> ' + ((state.repGarantie && state.repGarantie.dagen) || '90') + ' dagen reparatiegarantie</li>',
+        '<li><i class="fa-solid fa-check"></i> Standaard 90 dagen garantie op reparatie</li>',
     ]);
     includesList.innerHTML = [...new Set(items)].join('');
 }
