@@ -721,7 +721,7 @@ function updateOrderSummary() {
             repairs.forEach(r => {
                 const row = document.createElement('div');
                 row.className = 'order-row order-row-repair';
-                row.innerHTML = `<div class="order-row-label"><i class="fa-solid fa-screwdriver-wrench"></i><span>${r.naam}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
+                row.innerHTML = `<div class="order-row-label"><span>${r.naam}</span></div><span class="order-row-prijs">€ ${r.prijs},-</span>`;
                 repContainer.appendChild(row);
             });
         });
