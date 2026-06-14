@@ -713,7 +713,7 @@ function updateOrderSummary() {
         byModel.forEach((repairs, model) => {
             // Altijd model header tonen — ook bij 1 model
             const header = document.createElement('div');
-            header.className = 'order-row-model-header';
+            header.className = 'order-row-model-header order-row-model-header-' + modelKeyFromLabel(model);
             header.textContent = model;
             repContainer.appendChild(header);
             repairs.forEach(r => {
