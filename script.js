@@ -932,3 +932,73 @@ function loadReviews() {
     });
 }
 loadReviews();
+
+
+// ============================================================
+// GRATIS TOAST — verschijnt 1x bij scrollen naar services
+// ============================================================
+(function () {
+    const servicesSection = document.getElementById('services');
+    if (!servicesSection) return;
+
+    let shown = false;
+
+    function showGratisToast() {
+        if (shown) return;
+        shown = true;
+
+        const toast = document.createElement('div');
+        toast.className = 'gratis-toast';
+        toast.setAttribute('role', 'status');
+        toast.innerHTML = `
+            <button type="button" class="gratis-toast-close" aria-label="Sluiten">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="gratis-toast-icon"><i class="fa-solid fa-gift"></i></div>
+            <div class="gratis-toast-body">
+                <span class="gratis-toast-label">Gratis bij elke mod</span>
+                <span class="gratis-toast-title">Wij configureren jouw microSD-kaartje</span>
+            </div>`;
+        document.body.appendChild(toast);
+
+        // In-animatie
+        requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('visible')));
+
+        let hideTimer;
+        function dismiss() {
+            clearTimeout(hideTimer);
+            toast.classList.remove('visible');
+            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+            setTimeout(() => toast.remove(), 700); // vangnet
+        }
+
+        toast.querySelector('.gratis-toast-close').addEventListener('click', dismiss);
+        hideTimer = setTimeout(dismiss, 6000);
+    }
+
+    // Trigger pas nadat de gebruiker echt naar services scrollt.
+    // Als de sectie al bij het laden in beeld staat, wachten we tot
+    // de gebruiker minstens een stukje gescrold heeft.
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && window.scrollY > 50) {
+                showGratisToast();
+                obs.disconnect();
+            }
+        });
+    }, { threshold: 0.2 });
+
+    obs.observe(servicesSection);
+
+    // Vangnet: als de observer door schermhoogte niet afvuurt,
+    // toon de toast zodra de gebruiker voorbij de top van services scrollt.
+    function scrollFallback() {
+        const rect = servicesSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.6 && rect.bottom > 0 && window.scrollY > 50) {
+            showGratisToast();
+            obs.disconnect();
+            window.removeEventListener('scroll', scrollFallback);
+        }
+    }
+    window.addEventListener('scroll', scrollFallback, { passive: true });
+})();
