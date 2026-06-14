@@ -882,3 +882,59 @@ function loadReviews() {
     });
 }
 loadReviews();
+
+
+// ============================================================
+// GRATIS TOAST — verschijnt 1x bij scrollen naar services
+// ============================================================
+(function () {
+    const servicesSection = document.getElementById('services');
+    if (!servicesSection) return;
+
+    let shown = false;
+
+    function showGratisToast() {
+        if (shown) return;
+        shown = true;
+
+        const toast = document.createElement('div');
+        toast.className = 'gratis-toast';
+        toast.setAttribute('role', 'status');
+        toast.innerHTML = `
+            <button type="button" class="gratis-toast-close" aria-label="Sluiten">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="gratis-toast-icon"><i class="fa-solid fa-gift"></i></div>
+            <div class="gratis-toast-body">
+                <span class="gratis-toast-label">Gratis bij elke mod</span>
+                <span class="gratis-toast-title">Wij configureren jouw microSD-kaartje</span>
+            </div>`;
+        document.body.appendChild(toast);
+
+        // In-animatie
+        requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('visible')));
+
+        let hideTimer;
+        function dismiss() {
+            clearTimeout(hideTimer);
+            toast.classList.remove('visible');
+            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+            // Vangnet als transitionend niet vuurt
+            setTimeout(() => toast.remove(), 700);
+        }
+
+        toast.querySelector('.gratis-toast-close').addEventListener('click', dismiss);
+        hideTimer = setTimeout(dismiss, 6000);
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                showGratisToast();
+                obs.disconnect();
+            }
+        });
+    }, { threshold: 0.25 });
+
+    obs.observe(servicesSection);
+})();
