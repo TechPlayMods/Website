@@ -74,39 +74,89 @@ function modelKeyFromLabel(label){
     return 'v1v2';
 }
 
-function buildReparaties(modellen){
-    // Jump cards
+// Reparatie-data, bewaard na laden
+let repModellen   = [];
+let repCategorieen = [];
+let repActiveModel = null;   // gekozen model-id (lite/v1v2/oled), null = nog niets gekozen
+
+// Resolve placeholder-velden (__SCHERM__) naar de waarde van het actieve model
+function resolveReparatie(r, model){
+    if (r.naam === '__SCHERM__') return { naam: model.scherm.naam, prijs: model.scherm.prijs };
+    return { naam: r.naam, prijs: r.prijs };
+}
+
+function buildReparaties(data){
+    repModellen    = data.modellen;
+    repCategorieen = data.categorieen;
+
+    // Aantal reparaties per model (alle categorieën samen)
+    const repCount = repCategorieen.reduce((s, c) => s + c.reparaties.length, 0);
+
+    // Model-keuze (tabs) — geen standaard actief
     const jump = document.getElementById('repModelJump');
-    jump.innerHTML = modellen.map(m=>`
-        <a href="#rep-${m.id}-block" class="rep-jump-card rep-jump-${m.id}">
+    jump.innerHTML = repModellen.map(m=>`
+        <button type="button" class="rep-model-tab rep-model-tab-${m.id}" data-model-id="${m.id}">
             <div class="rep-jump-icon rep-jump-icon-${m.id}"><iconify-icon icon="${m.icon}"></iconify-icon></div>
-            <span class="rep-jump-label">${m.label}</span>
-            <i class="fa-solid fa-arrow-down rep-jump-arrow"></i>
-        </a>`).join('');
+            <span class="rep-tab-text">
+                <span class="rep-jump-label">${m.label}</span>
+                <span class="rep-tab-status">${repCount} reparaties · tik om te kiezen</span>
+            </span>
+            <i class="fa-solid fa-chevron-right rep-tab-arrow"></i>
+        </button>`).join('');
 
-    // Model blokken
+    jump.querySelectorAll('.rep-model-tab').forEach(tab=>{
+        tab.addEventListener('click', ()=> selectRepModel(tab.dataset.modelId));
+    });
+
+    renderRepList();
+}
+
+// Kies een model en render de lijst opnieuw
+function selectRepModel(id){
+    repActiveModel = id;
+    document.querySelectorAll('.rep-model-tab').forEach(t=>{
+        t.classList.toggle('active', t.dataset.modelId === id);
+    });
+    renderRepList();
+}
+
+// Render de categorie-lijst voor het actieve model
+function renderRepList(){
     const blocks = document.getElementById('repModelBlocks');
-    blocks.innerHTML = modellen.map(m=>`
-        <div class="rep-model-block" id="rep-${m.id}-block">
-            <div class="rep-model-header rep-model-header-${m.id}">
-                <div class="rep-model-icon rep-model-icon-${m.id}"><iconify-icon icon="${m.icon}"></iconify-icon></div>
-                <div>
-                    <h3 class="rep-model-title">${m.label}</h3>
-                    ${m.sub ? `<p class="rep-model-sub">${m.sub}</p>` : ''}
-                </div>
-                <span class="rep-model-header-count">${m.reparaties.length} reparaties</span>
-            </div>
-            ${m.reparaties.map(r=>`
-                <div class="rep-row" data-rep-model="${m.label}" data-rep-naam="${r.naam}" data-rep-prijs="${r.prijs}">
-                    <div class="rep-row-info">
-                        <span class="rep-row-naam">${r.naam}</span>
-                        <span class="rep-row-prijs">€ ${r.prijs},-</span>
-                    </div>
-                    <button class="rep-row-btn">Selecteer</button>
-                </div>`).join('')}
-        </div>`).join('');
 
-    // Markeer reeds geselecteerde rijen (bij heropbouw)
+    if (!repActiveModel){
+        blocks.innerHTML = `
+            <div class="rep-empty-prompt">
+                <i class="fa-solid fa-arrow-up"></i>
+                <p>Kies eerst je Switch-model hierboven om de reparaties en prijzen te zien.</p>
+            </div>`;
+        return;
+    }
+
+    const model = repModellen.find(m=>m.id === repActiveModel);
+
+    blocks.innerHTML = `
+        <div class="rep-model-block rep-model-block-${model.id}" id="rep-${model.id}-block">
+            ${repCategorieen.map(cat=>`
+                <div class="rep-cat-group">
+                    <div class="rep-cat-header rep-cat-header-${model.id}">
+                        <span class="rep-cat-icon rep-cat-icon-${model.id}"><i class="${cat.icon}"></i></span>
+                        <span class="rep-cat-naam">${cat.naam}</span>
+                    </div>
+                    ${cat.reparaties.map(raw=>{
+                        const r = resolveReparatie(raw, model);
+                        return `
+                        <div class="rep-row" data-rep-model="${model.label}" data-rep-naam="${r.naam}" data-rep-prijs="${r.prijs}">
+                            <div class="rep-row-info">
+                                <span class="rep-row-naam">${r.naam}</span>
+                            </div>
+                            <span class="rep-row-prijs">€ ${r.prijs},-</span>
+                            <button class="rep-row-btn">Selecteer</button>
+                        </div>`;
+                    }).join('')}
+                </div>`).join('')}
+        </div>`;
+
     syncRepRows();
 }
 
@@ -149,7 +199,7 @@ function syncRepRows(){
 // Laad reparaties.json
 fetch('reparaties.json')
     .then(r => r.json())
-    .then(d => buildReparaties(d.modellen))
+    .then(d => buildReparaties(d))
     .catch(err => console.error('Kon reparaties.json niet laden:', err));
 
 
@@ -882,59 +932,3 @@ function loadReviews() {
     });
 }
 loadReviews();
-
-
-// ============================================================
-// GRATIS TOAST — verschijnt 1x bij scrollen naar services
-// ============================================================
-(function () {
-    const servicesSection = document.getElementById('services');
-    if (!servicesSection) return;
-
-    let shown = false;
-
-    function showGratisToast() {
-        if (shown) return;
-        shown = true;
-
-        const toast = document.createElement('div');
-        toast.className = 'gratis-toast';
-        toast.setAttribute('role', 'status');
-        toast.innerHTML = `
-            <button type="button" class="gratis-toast-close" aria-label="Sluiten">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="gratis-toast-icon"><i class="fa-solid fa-gift"></i></div>
-            <div class="gratis-toast-body">
-                <span class="gratis-toast-label">Gratis bij elke mod</span>
-                <span class="gratis-toast-title">Wij configureren jouw microSD-kaartje</span>
-            </div>`;
-        document.body.appendChild(toast);
-
-        // In-animatie
-        requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('visible')));
-
-        let hideTimer;
-        function dismiss() {
-            clearTimeout(hideTimer);
-            toast.classList.remove('visible');
-            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
-            // Vangnet als transitionend niet vuurt
-            setTimeout(() => toast.remove(), 700);
-        }
-
-        toast.querySelector('.gratis-toast-close').addEventListener('click', dismiss);
-        hideTimer = setTimeout(dismiss, 6000);
-    }
-
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                showGratisToast();
-                obs.disconnect();
-            }
-        });
-    }, { threshold: 0.25 });
-
-    obs.observe(servicesSection);
-})();
