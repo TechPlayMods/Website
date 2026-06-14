@@ -681,7 +681,7 @@ function updateOrderSummary() {
         consoleRows.innerHTML = selectedConsoles.map(c => {
             const badge = c.method ? `<span class="summary-method-badge summary-method-${c.method.toLowerCase()}">${c.method}</span>` : '';
             return `<div class="order-row">
-                <div class="order-row-label"><iconify-icon icon="${consoleIcon(c.model)}" class="summary-console-glyph"></iconify-icon><span class="summary-console-namecol">${c.label}${badge}</span></div>
+                <div class="order-row-label"><span class="summary-console-namecol">${c.label}${badge}</span></div>
                 <span class="order-row-prijs">€ ${c.prijs},-</span>
             </div>`;
         }).join('');
@@ -690,15 +690,12 @@ function updateOrderSummary() {
     }
 
     if (hasGarantie) {
-        document.getElementById('summaryGarantieName').textContent  = state.garantie.label;
+        const gName = document.getElementById('summaryGarantieName');
+        gName.textContent = state.garantie.label;
+        gName.style.color = state.garantie.dagen === '180' ? '#f59e0b' : '#00ff88';
+        gName.style.fontWeight = '700';
         document.getElementById('summaryGarantiePrice').textContent = state.garantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.garantie.prijs + ',-';
         document.getElementById('summaryGarantiePrice').style.color = state.garantie.prijs > 0 ? '#f59e0b' : '';
-        const gIcon = document.getElementById('summaryGarantieIcon');
-        if (state.garantie.dagen === '180') {
-            gIcon.className = 'fa-solid fa-shield summary-garantie-icon-180';
-        } else {
-            gIcon.className = 'fa-solid fa-shield-halved summary-garantie-icon-90';
-        }
     }
 
     // Dynamic repair rows — grouped by model
@@ -731,11 +728,12 @@ function updateOrderSummary() {
     const repGarantieRow = document.getElementById('summaryRepGarantieRow');
     if (hasRepairs && hasRepGarantie) {
         repGarantieRow.style.display = '';
-        document.getElementById('summaryRepGarantieName').textContent  = state.repGarantie.label;
+        const rgName = document.getElementById('summaryRepGarantieName');
+        rgName.textContent = state.repGarantie.label;
+        rgName.style.color = state.repGarantie.dagen === '180' ? '#f59e0b' : '#00ff88';
+        rgName.style.fontWeight = '700';
         document.getElementById('summaryRepGarantiePrice').textContent = state.repGarantie.prijs === 0 ? 'Inbegrepen' : '+ € ' + state.repGarantie.prijs + ',-';
         document.getElementById('summaryRepGarantiePrice').style.color = state.repGarantie.prijs > 0 ? '#f59e0b' : '';
-        const rgIcon = document.getElementById('summaryRepGarantieIcon');
-        rgIcon.className = state.repGarantie.dagen === '180' ? 'fa-solid fa-shield summary-garantie-icon-180' : 'fa-solid fa-shield-halved summary-garantie-icon-90';
     } else {
         repGarantieRow.style.display = 'none';
     }
