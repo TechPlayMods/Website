@@ -4475,11 +4475,11 @@ footer {
 .intake-step-body .form-group:last-child { margin-bottom: 0; }
 
 /* ═══════════════════════════════════════════
-   GEKLEURDE AANVRAAG-CONTAINERS (kleuren van services)
-   1 = Zilver/Wit · 2 = Groen · 3 = Oranje
+   GEKLEURDE AANVRAAG-CONTAINERS
+   1 = Wit · 2 = Lichtgroen · 3 = Groen
 ═══════════════════════════════════════════ */
 
-/* 1 — Modchip Installatie : Zilver / Wit */
+/* 1 — Modchip Installatie : Wit */
 #moddingBlock {
     background: linear-gradient(145deg, #0f1520, #131a24) !important;
     border: 2px solid #64748b !important;
@@ -4492,31 +4492,31 @@ footer {
 }
 #moddingBlock .intake-step-glyph { color: #e2e8f0; opacity: 0.55; }
 
-/* 2 — Reparatie : Groen */
+/* 2 — Reparatie : Lichtgroen */
 #reparatieBlock {
+    background: linear-gradient(145deg, #101f17, #13251c) !important;
+    border: 2px solid #5fbf8b !important;
+    box-shadow: 0 0 35px rgba(134, 239, 172, 0.10) !important;
+}
+#reparatieBlock .intake-step-head { border-bottom-color: rgba(134, 239, 172, 0.22); }
+#reparatieBlock .intake-step-num {
+    border-color: #86efac;
+    color: #86efac;
+}
+#reparatieBlock .intake-step-glyph { color: #86efac; opacity: 0.55; }
+
+/* 3 — Contactkanaal : Groen */
+#contactBlock {
     background: linear-gradient(145deg, #0c1a14, #0f1f17) !important;
     border: 2px solid #1d6b47 !important;
     box-shadow: 0 0 35px rgba(0, 255, 136, 0.10) !important;
 }
-#reparatieBlock .intake-step-head { border-bottom-color: rgba(0, 255, 136, 0.22); }
-#reparatieBlock .intake-step-num {
+#contactBlock .intake-step-head { border-bottom-color: rgba(0, 255, 136, 0.22); }
+#contactBlock .intake-step-num {
     border-color: #00ff88;
     color: #00ff88;
 }
-#reparatieBlock .intake-step-glyph { color: #00ff88; opacity: 0.55; }
-
-/* 3 — Contactkanaal : Oranje */
-#contactBlock {
-    background: linear-gradient(145deg, #1a1000, #1f1500) !important;
-    border: 2px solid #cc6600 !important;
-    box-shadow: 0 0 35px rgba(204, 102, 0, 0.10) !important;
-}
-#contactBlock .intake-step-head { border-bottom-color: rgba(251, 146, 60, 0.22); }
-#contactBlock .intake-step-num {
-    border-color: #fb923c;
-    color: #fb923c;
-}
-#contactBlock .intake-step-glyph { color: #fb923c; opacity: 0.55; }
+#contactBlock .intake-step-glyph { color: #00ff88; opacity: 0.55; }
 
 /* Select with custom arrow */
 .intake-select-wrap { position: relative; }
