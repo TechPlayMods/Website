@@ -4492,18 +4492,18 @@ footer {
 }
 #moddingBlock .intake-step-glyph { color: #e2e8f0; opacity: 0.55; }
 
-/* 2 — Reparatie : Lichtgroen */
+/* 2 — Reparatie : Zacht salie */
 #reparatieBlock {
-    background: linear-gradient(145deg, #101f17, #13251c) !important;
-    border: 2px solid #5fbf8b !important;
-    box-shadow: 0 0 35px rgba(134, 239, 172, 0.10) !important;
+    background: linear-gradient(145deg, #101c16, #13231b) !important;
+    border: 2px solid #5f8f6f !important;
+    box-shadow: 0 0 35px rgba(159, 217, 176, 0.10) !important;
 }
-#reparatieBlock .intake-step-head { border-bottom-color: rgba(134, 239, 172, 0.22); }
+#reparatieBlock .intake-step-head { border-bottom-color: rgba(159, 217, 176, 0.22); }
 #reparatieBlock .intake-step-num {
-    border-color: #86efac;
-    color: #86efac;
+    border-color: #9fd9b0;
+    color: #9fd9b0;
 }
-#reparatieBlock .intake-step-glyph { color: #86efac; opacity: 0.55; }
+#reparatieBlock .intake-step-glyph { color: #9fd9b0; opacity: 0.55; }
 
 /* 3 — Contactkanaal : Groen */
 #contactBlock {
