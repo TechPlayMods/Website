@@ -4623,24 +4623,31 @@ footer {
 /* Repair items inside intake form */
 .intake-rep-model {
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #64748b;
-    padding: 10px 0 6px;
-    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+    padding: 7px 12px;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-left: 3px solid transparent;
 }
+/* Kleur-band per model — identiek aan het overzicht */
+.intake-rep-model-lite { color: #e2e8f0; background: rgba(226,232,240,0.06); border-left-color: #e2e8f0; }
+.intake-rep-model-v1v2 { color: #00ff88; background: rgba(0,255,136,0.07); border-left-color: #00ff88; }
+.intake-rep-model-oled { color: #fb923c; background: rgba(251,146,60,0.08); border-left-color: #fb923c; }
+
 .intake-rep-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 0.9rem 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     font-size: 0.88rem;
 }
-.intake-rep-item-name { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
-.intake-rep-item-name i { color: #60a5fa; font-size: 0.8rem; }
-.intake-rep-item-price { font-weight: 700; color: var(--text-main); white-space: nowrap; }
+.intake-rep-item-name { color: #cbd5e1; }
+.intake-rep-item-price { font-size: 0.88rem; font-weight: 600; color: #e2e8f0; white-space: nowrap; }
 
 /* Console icon + two-line name in summary */
 .summary-console-glyph {
@@ -4708,10 +4715,8 @@ footer {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 14px;
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    padding: 0.9rem 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .intake-console-glyph {
     font-size: 1.3rem;
@@ -4720,15 +4725,15 @@ footer {
 }
 .intake-console-name {
     flex: 1;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: var(--text-main);
+    color: #cbd5e1;
     min-width: 0;
 }
 .intake-console-prijs {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text-main);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #e2e8f0;
     white-space: nowrap;
 }
 .intake-console-remove {
@@ -4822,17 +4827,18 @@ footer {
 }
 .intake-console-namecol {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
     min-width: 0;
 }
 .summary-console-namecol { font-size: 0.88rem; color: #cbd5e1; }
 .intake-console-namecol {
     flex: 1;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: var(--text-main);
+    color: #cbd5e1;
 }
 /* Badge: naast de naam geen extra inspringing nodig */
 .summary-console-namecol .summary-method-badge,
