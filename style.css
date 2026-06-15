@@ -4474,6 +4474,50 @@ footer {
 .intake-step-body { padding: 20px; }
 .intake-step-body .form-group:last-child { margin-bottom: 0; }
 
+/* ═══════════════════════════════════════════
+   GEKLEURDE AANVRAAG-CONTAINERS (kleuren van services)
+   1 = Zilver/Wit · 2 = Groen · 3 = Oranje
+═══════════════════════════════════════════ */
+
+/* 1 — Modchip Installatie : Zilver / Wit */
+#moddingBlock {
+    background: linear-gradient(145deg, #0f1520, #131a24) !important;
+    border: 2px solid #64748b !important;
+    box-shadow: 0 0 35px rgba(226, 232, 240, 0.10) !important;
+}
+#moddingBlock .intake-step-head { border-bottom-color: rgba(226, 232, 240, 0.22); }
+#moddingBlock .intake-step-num {
+    border-color: #e2e8f0;
+    color: #e2e8f0;
+}
+#moddingBlock .intake-step-glyph { color: #e2e8f0; opacity: 0.55; }
+
+/* 2 — Reparatie : Groen */
+#reparatieBlock {
+    background: linear-gradient(145deg, #0c1a14, #0f1f17) !important;
+    border: 2px solid #1d6b47 !important;
+    box-shadow: 0 0 35px rgba(0, 255, 136, 0.10) !important;
+}
+#reparatieBlock .intake-step-head { border-bottom-color: rgba(0, 255, 136, 0.22); }
+#reparatieBlock .intake-step-num {
+    border-color: #00ff88;
+    color: #00ff88;
+}
+#reparatieBlock .intake-step-glyph { color: #00ff88; opacity: 0.55; }
+
+/* 3 — Contactkanaal : Oranje */
+#contactBlock {
+    background: linear-gradient(145deg, #1a1000, #1f1500) !important;
+    border: 2px solid #cc6600 !important;
+    box-shadow: 0 0 35px rgba(204, 102, 0, 0.10) !important;
+}
+#contactBlock .intake-step-head { border-bottom-color: rgba(251, 146, 60, 0.22); }
+#contactBlock .intake-step-num {
+    border-color: #fb923c;
+    color: #fb923c;
+}
+#contactBlock .intake-step-glyph { color: #fb923c; opacity: 0.55; }
+
 /* Select with custom arrow */
 .intake-select-wrap { position: relative; }
 .intake-select-wrap select {
