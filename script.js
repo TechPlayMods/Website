@@ -382,7 +382,6 @@ function updateFormBlocks() {
     listEl.style.display = hasConsole ? '' : 'none';
     listEl.innerHTML = selectedConsoles.map((c, i) =>
         `<div class="intake-console-item">
-            <iconify-icon icon="${consoleIcon(c.model)}" class="intake-console-glyph"></iconify-icon>
             <span class="intake-console-namecol">${c.label}${c.method ? `<span class="intake-method-badge intake-method-${c.method.toLowerCase()}">${c.method}</span>` : ''}</span>
             <span class="intake-console-prijs">€ ${c.prijs},-</span>
             <button type="button" class="intake-console-remove" data-idx="${i}" aria-label="Verwijderen"><i class="fa-solid fa-xmark"></i></button>
@@ -442,16 +441,10 @@ function updateFormBlocks() {
 
         document.getElementById('repFormPrijs').textContent = '≈ € ' + total + ',-';
 
-        // Device icon per model
-        const modelIcon = (model) => {
-            if (model.includes('Lite')) return 'fa-solid fa-mobile-screen';
-            return 'fa-solid fa-gamepad';
-        };
-
-        // Render rows grouped by model — always show model header
+        // Render rows grouped by model — always show model header (zelfde stijl als overzicht)
         document.getElementById('repFormItems').innerHTML = [...byModel.entries()].map(([model, reps]) =>
-            `<div class="intake-rep-model">${model}</div>` +
-            reps.map(r => `<div class="intake-rep-item"><span class="intake-rep-item-name"><i class="fa-solid fa-screwdriver-wrench"></i> ${r.naam}</span><span class="intake-rep-item-price">€ ${r.prijs},-</span></div>`).join('')
+            `<div class="intake-rep-model intake-rep-model-${modelKeyFromLabel(model)}">${model}</div>` +
+            reps.map(r => `<div class="intake-rep-item"><span class="intake-rep-item-name">${r.naam}</span><span class="intake-rep-item-price">€ ${r.prijs},-</span></div>`).join('')
         ).join('');
     } else {
         repEmpty.style.display  = '';
