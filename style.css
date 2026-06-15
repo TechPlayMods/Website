@@ -4461,6 +4461,7 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.intake-step-status:empty { display: none; }
 .aanvraag-block-status-done    { color: var(--primary); font-weight: 600; }
 .aanvraag-block-status-partial { color: #f59e0b; font-weight: 600; }
 
