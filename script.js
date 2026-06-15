@@ -401,24 +401,12 @@ function updateFormBlocks() {
     const moddingStatus   = document.getElementById('moddingStatus');
     const reparatieStatus = document.getElementById('reparatieStatus');
 
-    if (hasConsole && hasGarantie) {
-        const n = selectedConsoles.length;
-        moddingStatus.textContent = '✓ ' + n + (n === 1 ? ' console' : ' consoles') + ' · ' + state.garantie.dagen + 'd garantie';
-        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
-    } else if (hasConsole) {
-        moddingStatus.textContent = selectedConsoles.length + ' console(s) — kies garantie';
-        moddingStatus.className   = 'aanvraag-block-status aanvraag-block-status-partial';
-    } else {
+    if (moddingStatus) {
         moddingStatus.textContent = '';
         moddingStatus.className   = 'aanvraag-block-status';
     }
 
-    if (hasRepairs) {
-        const count = selectedRepairs.size;
-        const total = [...selectedRepairs.values()].reduce((s, r) => s + r.prijs, 0);
-        reparatieStatus.textContent = '✓ ' + count + (count === 1 ? ' reparatie' : ' reparaties') + ' — ≈ € ' + total + ',-';
-        reparatieStatus.className   = 'aanvraag-block-status aanvraag-block-status-done';
-    } else {
+    if (reparatieStatus) {
         reparatieStatus.textContent = '';
         reparatieStatus.className   = 'aanvraag-block-status';
     }
