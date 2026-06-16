@@ -861,6 +861,46 @@ document.querySelectorAll('.nav-link').forEach(link => {
 
 
 // ============================================================
+// SCROLL-SPY — markeer actieve navbar-link per sectie
+// ============================================================
+(function navScrollSpy() {
+    const navLinks = [...document.querySelectorAll('#mainNav .nav-link')];
+    // Koppel elke link aan zijn sectie via de #hash
+    const map = navLinks
+        .map(link => {
+            const id = (link.getAttribute('href') || '').replace('#', '');
+            const section = id ? document.getElementById(id) : null;
+            return section ? { link, section } : null;
+        })
+        .filter(Boolean);
+    if (!map.length) return;
+
+    function setActive(link) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
+    }
+
+    function onScroll() {
+        const offset = 120; // ongeveer de header-hoogte
+        const pos = window.scrollY + offset;
+        let current = null;
+        for (const { link, section } of map) {
+            if (section.offsetTop <= pos) current = link;
+        }
+        // Onderaan de pagina: forceer laatste sectie (Aanvraag Doen)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 4) {
+            current = map[map.length - 1].link;
+        }
+        setActive(current);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+})();
+
+
+// ============================================================
 // FAQ ACCORDION
 // ============================================================
 document.querySelectorAll('.faq-question').forEach(btn => {
