@@ -2380,7 +2380,7 @@ footer {
 
 @media (max-width: 900px) {
     .contact-layout { grid-template-columns: 1fr; }
-    .order-summary { position: static; }
+    .order-summary { position: static; order: -1; }
     .garantie-keuze { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
