@@ -125,6 +125,20 @@ nav a:hover { color: var(--text-main); }
     color: #000 !important;
 }
 
+/* Active nav state (scroll-spy) — link wordt groen */
+nav a.nav-link.active {
+    color: var(--primary);
+}
+/* De 'Aanvraag Doen'-knop vult helemaal groen wanneer actief */
+.btn-nav.nav-link.active {
+    background: var(--primary);
+    color: #000 !important;
+}
+
+/* Logo klikbaar zonder eigen link-styling */
+.logo-link { text-decoration: none; color: inherit; cursor: pointer; }
+.footer-logo-text .logo-link { display: inline; }
+
 /* Hamburger */
 .hamburger {
     display: none;
