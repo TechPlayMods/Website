@@ -1695,26 +1695,9 @@ footer {
 .sectie-eyebrow-rep { background: rgba(56,160,255,0.1); color: #38a0ff; border: 1px solid rgba(56,160,255,0.3); }
 
 /* ===========================
-   GARANTIE OP REPARATIE — blauw accent
+   GARANTIE OP REPARATIE — identiek aan modchip, alleen blauw bubbeltje
 =========================== */
 .garantie-rep { background: var(--bg-dark); }
-.garantie-rep .garantie-basis { border-top: 3px solid #38a0ff; }
-.garantie-rep .garantie-basis .garantie-icon { color: #38a0ff; }
-.garantie-rep .garantie-basis .garantie-badge {
-    background: rgba(56,160,255,0.1);
-    color: #38a0ff;
-    border-color: rgba(56,160,255,0.25);
-}
-.garantie-rep .garantie-card ul li i.fa-check { color: #38a0ff; }
-.garantie-rep-btn {
-    border: 1px solid #38a0ff;
-    color: #38a0ff !important;
-    background: transparent;
-}
-.garantie-rep-btn:hover {
-    background: #38a0ff;
-    color: #000 !important;
-}
 
 @media (max-width: 900px) {
     .verg-grid { flex-direction: column; }
