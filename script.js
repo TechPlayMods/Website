@@ -285,7 +285,14 @@ document.querySelectorAll('.garantie-select-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        document.querySelectorAll('.garantie-select-btn').forEach(b => {
+        // Knoppen in de reparatie-garantie sectie hebben geen data-garantie:
+        // die scrollen alleen naar de aanvraag, zonder de modchip-garantie te zetten.
+        if (!btn.dataset.garantie) {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
+
+        document.querySelectorAll('.garantie-select-btn[data-garantie]').forEach(b => {
             b.classList.remove('geselecteerd');
             b.innerHTML = 'Selecteer <i class="fa-solid fa-arrow-right"></i>';
         });
