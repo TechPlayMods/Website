@@ -881,11 +881,11 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
 
     function onScroll() {
-        const offset = 120; // ongeveer de header-hoogte
-        const pos = window.scrollY + offset;
+        const offset = 140; // net onder de header
         let current = null;
         for (const { link, section } of map) {
-            if (section.offsetTop <= pos) current = link;
+            const top = section.getBoundingClientRect().top;
+            if (top <= offset) current = link;
         }
         // Onderaan de pagina: forceer laatste sectie (Aanvraag Doen)
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 4) {
